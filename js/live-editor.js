@@ -21,6 +21,7 @@ window.LiveEditor = Backbone.View.extend({
         OUTPUT_FRAME: "#output-frame",
         OUTPUT_DIV: "#output",
         ALL_OUTPUT: "#output, #output-frame",
+        STOP_BUTTON: "#stop-code",
         RESTART_BUTTON: "#restart-code",
         GUTTER_ERROR: ".ace_error",
         ERROR_BUDDY_HAPPY: ".error-buddy-happy",
@@ -242,6 +243,9 @@ window.LiveEditor = Backbone.View.extend({
         // Handle the restart button
         $el.delegate(this.dom.RESTART_BUTTON, "click",
             this.restartCode.bind(this));
+
+	$el.delegate(this.dom.STOP_BUTTON, "click",
+	    this.stopCode.bind(this));
 
         this.handleMessagesBound = this.handleMessages.bind(this);
         $(window).on("message", this.handleMessagesBound);
@@ -1310,6 +1314,13 @@ window.LiveEditor = Backbone.View.extend({
      */
     restartCode: function() {
         this.postFrame({ restart: true });
+    },
+
+    /*
+     * Stop the code in the output frame.
+     */
+    stopCode: function() {
+	this.postFrame({ stop: true });
     },
 
     /*

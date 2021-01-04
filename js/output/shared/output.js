@@ -155,6 +155,11 @@ window.LiveEditorOutput = Backbone.View.extend({
             this.restart();
         }
 
+	// Stop the output.
+	if (data.stop) {
+	  this.output.toggle();
+	}
+
         // Keep track of recording state
         if (data.recording != null) {
             this.recording = data.recording;
