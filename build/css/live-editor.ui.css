@@ -402,3 +402,43 @@
     opacity: 0;
     z-index: 880;
 }
+h1 {
+  display: inline-block;
+  max-width: 50%;
+}
+.float-right {
+  float: right;
+  margin: 4px;
+}
+.clear {
+  clear: both;
+}
+.help {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 70%;
+  padding: 10px;
+  border: solid 2px #eee;
+  background: #f0f0f0;
+  height: 80%;
+  z-index: 3;
+}
+.relative {
+  position: relative;
+  width: 100%;
+}
+.close {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 5px;
+  margin: 5px;
+  font-size: 20pt;
+}
+.message {
+  width: 70%;
+  padding: 10px;
+  border: solid 2px #eee;
+}
+[v-cloak] { display: none; }

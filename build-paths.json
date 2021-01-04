@@ -122,7 +122,8 @@
             "build/tmpl/live-editor.js",
             "js/ui/canvas.js",
             "js/ui/record.js",
-            "js/live-editor.js"
+            "js/live-editor.js",
+	    "js/app.js"
         ]
     },
     "workers_pjs": [
@@ -168,7 +169,8 @@
         ],
         "ui": [
             "css/ui/tipbar.css",
-            "css/ui/style.css"
+            "css/ui/style.css",
+	    "css/ui/app.css"
         ],
         "output": [
             "css/output/style.css"
