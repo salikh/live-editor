@@ -1,0 +1,46 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Live Editor Output</title>
+    <link rel="stylesheet" href="css/live-editor.output.css"/>
+</head>
+<body>
+    <div id="live-editor-output"></div>
+
+    <script src="js/live-editor.core_deps.js"></script>
+    <script src="js/live-editor.shared.js"></script>
+    <script src="js/live-editor.output_pjs_deps.js"></script>
+    <script src="js/live-editor.output.js"></script>
+    <script src="js/live-editor.output_pjs.js"></script>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
+<script>
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  var firebaseConfig = {
+    apiKey: "AIzaSyD0HiZaFVLpX9BQp94wTsHejuNY7VTjfLs",
+    authDomain: "processingjs-2021.firebaseapp.com",
+    databaseURL: "https://processingjs-2021-default-rtdb.firebaseio.com",
+    projectId: "processingjs-2021",
+    storageBucket: "processingjs-2021.appspot.com",
+    messagingSenderId: "400788665369",
+    appId: "1:400788665369:web:36bba85250bc5c29fda688",
+    measurementId: "G-WCXHG83DPB"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+    <script>
+    new LiveEditorOutput({
+        el: $("#live-editor-output")[0]
+    });
+    </script>
+</script>
+</body>
+</html>

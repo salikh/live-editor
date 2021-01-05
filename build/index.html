@@ -23,7 +23,7 @@
 <body>
     <div id='app'>
       <table class='layout'><tr>
-	<td style='width: 15em;'><h1>Processing.js</h1></td>
+	<td style='width: 15em;'><h1 class='top-h1'>Processing.js</h1></td>
 	<td>
 	  <button id='new' v-on:click='new_program()'>New</button>
 	</td>
@@ -46,12 +46,14 @@
 	</div>
 	<pre>{{ message }}</pre>
       </div>
-      <div class='help' v-if='help_on' v-cloak>
+      <div class='help-pane' v-if='help_on' v-cloak>
 	<div class='relative'>
 	  <a class='close-icon' v-on:click='help(false)'>&#x2715;</a>
+	  <help-div>
+	    <h2>Help</h2>
+	    Help did not load correctly...
+	  </help-div>
 	</div>
-	<h2>Help</h2>
-	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
       </div>
       <div class='clear'></div>
     </div>

@@ -2337,13 +2337,15 @@ if (typeof exports !== "undefined") {
 var data = {
   name: null,
   help_on: false,
+  help_page: 'ref-intro',
   message: null,
   fullname: null,
   uid: null,
   original_code: window.localStorage['test-code'],
   original_name: null,
   original_uid: null,
-  name_error: false
+  name_error: false,
+  ref: {}
 };
 
 function parseFragment() {
@@ -2529,7 +2531,48 @@ function updateRegularly() {
   save();
 }
 
+Vue.component('help-div', Vue.extend({
+  data: data,
+  mounted: function mounted() {
+    var div = undefined;
+    if (data.help_page in data.ref) {
+      div = data.ref[data.help_page];
+    } else {
+      div = data.ref['ref-intro'];
+    }
+    this.$el.appendChild(div);
+    var $el = this.$el;
+    var clickHandler = function clickHandler(e) {
+      var href = e.target.getAttribute('href');
+      if (href.match('^#ref-(.*)')) {
+        e.preventDefault();
+        var ref = href.substr(1);
+        Vue.set(data, 'help_page', ref);
+        updateFragment('help', ref.substr(4));
+        window.console.log(ref);
+        var _div = undefined;
+        if (ref in data.ref) {
+          _div = data.ref[ref];
+        } else {
+          _div = data.ref['ref-intro'];
+        }
+        var prev = $el.lastChild;
+        if (_div != prev) {
+          $el.removeChild(prev);
+          $el.appendChild(_div);
+          $($el).find('a').off('click');
+          $($el).find('a').click(clickHandler);
+        }
+      }
+    };
+    $($el).find('a').off('click');
+    $($el).find('a').click(clickHandler);
+  },
+  template: '<div id="help-div"><a href="#ref-intro">Top</a> <a href="#ref-index">Index</a></div>'
+}));
+
 window.addEventListener('load', function () {
+  window.data = data;
   window.app = new Vue({
     el: '#app',
     data: data,
@@ -2599,6 +2642,9 @@ window.addEventListener('load', function () {
   } else if ('load' in params) {
     loadSource(params['load']);
   }
+  if ('help' in params) {
+    data.help_page = 'ref-' + params['help'];
+  }
   window.setInterval(updateRegularly, 5000);
   /*
   // TODO(salikh): Implement help on hover.
@@ -2617,6 +2663,12 @@ window.addEventListener('load', function () {
   }).then(function (html) {
     var parser = new DOMParser();
     var doc = parser.parseFromString(html, 'text/html');
-    window.console.log(doc);
+    //window.console.log(doc);
+    var refElements = doc.getElementsByClassName('ref');
+    for (var i = 0; i < refElements.length; i++) {
+      var refElt = refElements[i];
+      data.ref[refElt.id] = refElt;
+    }
+    window.console.log('Loaded ' + Object.keys(data.ref).length + ' help articles.');
   });
 });

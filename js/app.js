@@ -1,6 +1,7 @@
 var data = {
   name: null,
   help_on: false,
+  help_page: 'ref-intro',
   message: null,
   fullname: null,
   uid: null,
@@ -8,6 +9,7 @@ var data = {
   original_name: null,
   original_uid: null,
   name_error: false,
+  ref: {},
 };
 
 function parseFragment() {
@@ -194,7 +196,48 @@ function updateRegularly() {
   save();
 }
 
+Vue.component('help-div', Vue.extend({
+  data: data,
+  mounted() {
+    let div;
+    if (data.help_page in data.ref) {
+      div = data.ref[data.help_page];
+    } else {
+      div = data.ref['ref-intro'];
+    }
+    this.$el.appendChild(div);
+    let $el = this.$el;
+    let clickHandler = function(e) {
+      const href = e.target.getAttribute('href');
+      if (href.match('^#ref-(.*)')) {
+	e.preventDefault();
+	let ref = href.substr(1);
+	Vue.set(data, 'help_page', ref);
+	updateFragment('help', ref.substr(4));
+	window.console.log(ref);
+	let div;
+	if (ref in data.ref) {
+	  div = data.ref[ref];
+	} else {
+	  div = data.ref['ref-intro'];
+	}
+	let prev = $el.lastChild;
+	if (div != prev)  {
+	  $el.removeChild(prev);
+	  $el.appendChild(div);
+	  $($el).find('a').off("click");
+	  $($el).find('a').click(clickHandler);
+	}
+      }
+    }
+    $($el).find('a').off("click");
+    $($el).find('a').click(clickHandler);
+  },
+  template: '<div id="help-div"><a href="#ref-intro">Top</a> <a href="#ref-index">Index</a></div>',
+}));
+
 window.addEventListener('load', function() {
+  window.data = data;
   window.app = new Vue({
     el: "#app",
     data: data,
@@ -265,6 +308,9 @@ window.addEventListener('load', function() {
   } else if ('load' in params) {
     loadSource(params['load']);
   }
+  if ('help' in params) {
+    data.help_page = 'ref-' + params['help'];
+  }
   window.setInterval(updateRegularly, 5000);
   /*
   // TODO(salikh): Implement help on hover.
@@ -283,6 +329,12 @@ window.addEventListener('load', function() {
     .then(html => {
       const parser = new DOMParser();
       const doc = parser.parseFromString(html, "text/html");
-      window.console.log(doc);
+      //window.console.log(doc);
+      const refElements = doc.getElementsByClassName('ref');
+      for (let i = 0; i < refElements.length; i++) {
+	const refElt = refElements[i];
+	data.ref[refElt.id] = refElt;
+      }
+      window.console.log('Loaded ' + Object.keys(data.ref).length + ' help articles.');
     });
 })
