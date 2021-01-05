@@ -12,50 +12,6 @@ var data = {
   ref: {},
 };
 
-function parseFragment() {
-  var params = {};
-  var parts = window.location.hash.substring(1).split('&');
-  for (var i = 0; i < parts.length; i++) {
-    var part = parts[i];
-    if (part == '') continue;
-    var pieces = part.split('=');
-    if (pieces.length == 1) {
-      params[''] = decodeURIComponent(part);
-      continue;
-    }
-    params[pieces[0]] = decodeURIComponent(pieces[1]);
-  }
-  return params;
-}
-
-/**
- * Update the fragment hash with a new key-value pair.
- * If value is null, removes that part from the fragment hash.
- * If key is empty string, sets the hash to that value.
- * @param {string} key
- * @param {?string} value
- */
-function updateFragment(key, value) {
-  var params = parseFragment();
-  if (value == null) {
-    delete params[key];
-  } else {
-    params[key] = value;
-  }
-  var hash = "";
-  for (key in params) {
-    if (hash.length > 0) {
-      hash = hash + '&';
-    }
-    if (key != "") {
-      hash = hash + encodeURIComponent(key) + '=' + encodeURIComponent(params[key]);
-    } else {
-      hash = hash + encodeURIComponent(params[key]);
-    }
-  }
-  window.location.hash = hash;
-}
-
 /**
  * Generates a new random id in base62.
  */
@@ -71,7 +27,7 @@ function generateBase62ID(numchars) {
 function loadNamed(name) {
   firebase.database().ref('/shared/' + name).once('value').then(function(snapshot) {
     if (snapshot.val() === null) {
-      window.console.error('did not find ' + id);
+      window.console.error('did not find ' + name);
       return;
     }
     window.liveEditor.editor.text(snapshot.val().code);
@@ -233,7 +189,7 @@ Vue.component('help-div', Vue.extend({
     $($el).find('a').off("click");
     $($el).find('a').click(clickHandler);
   },
-  template: '<div id="help-div"><a href="#ref-intro">Top</a> <a href="#ref-index">Index</a></div>',
+  template: '<div id="help-div"><a href="#ref-intro">Top</a> <a href="#ref-index">Index</a> <a href="docs.html" target="_blank">One-page</a></div>',
 }));
 
 window.addEventListener('load', function() {
@@ -262,6 +218,25 @@ window.addEventListener('load', function() {
       },
       clear_message: function() {
 	data.message = null;
+      },
+      fullscreen: function() {
+	let fragment;
+	let params = parseFragment();
+	if (data.name) {
+	  fragment = '#' + data.name;
+	} else if ('' in params) {
+	  fragment = '#' + params[''];
+	} else if ('id' in params) {
+	  fragment = '#id=' + params['id'];
+	} else if ('load' in params) {
+	  fragment = '#id=' + params['load'];
+	} else {
+	  data.message = 'The sketch is not saved yet.'
+	  window.console.error(data.message);
+	  return;
+	}
+	let win = window.open('play.html' + fragment, '_blank');
+	win.focus();
       },
       login: function() {
 	let provider = new firebase.auth.GoogleAuthProvider();
@@ -337,4 +312,14 @@ window.addEventListener('load', function() {
       }
       window.console.log('Loaded ' + Object.keys(data.ref).length + ' help articles.');
     });
+  document.addEventListener('keydown', function(e) {
+    let keyCode = e.keyCode || e.which;
+    if (e.key === 'Escape' && data.help_on) {
+      e.preventDefault();
+      Vue.set(data, 'help_on', false);
+    } else if (keyCode == 112 && !data.help_on) {
+      e.preventDefault();
+      Vue.set(data, 'help_on', true);
+    }
+  });
 })

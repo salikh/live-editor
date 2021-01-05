@@ -2849,6 +2849,7 @@ window.PJSOutput = Backbone.View.extend({
 
         // Trigger the setting of the canvas size immediately
         this.setDimensions();
+        this.$canvas[0].focus();
     },
 
     /**

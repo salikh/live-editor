@@ -30,6 +30,7 @@
 	<td>
 	  <input type='text' :disabled='!fullname' size='20' :placeholder='!fullname ? "Log in to save as..." : "Program name"' v-model='name' v-bind:class='{error: name_error}' v-on:keydown='name_change()'>
 	  <button id='save' :disabled='!fullname' v-on:click='save()'>Save as</button>
+	  <button v-on:click='fullscreen()'>Fullscreen</button>
 	</td>
 	<td>
 	  <button id='login' v-on:click='login()'
