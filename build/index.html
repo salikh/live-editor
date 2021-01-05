@@ -22,21 +22,33 @@
 </head>
 <body>
     <div id='app'>
-      <h1>Processing.js</h1>
-      <button class='float-right' id='help' v-on:click='help(true)'>Help</button>
-      <button class='float-right' id='help' v-on:click='login()' v-if='!name' v-cloak>Login</button>
-      <button class='float-right' id='help' v-on:click='logout()' v-if='name' v-cloak>Logout</button>
-      <div class='float-right' v-if='name' v-cloak>Logged in as {{name}}</div>
-      <button class='float-right' id='save' v-on:click='save()'>Save</button>
+      <table class='layout'><tr>
+	<td style='width: 15em;'><h1>Processing.js</h1></td>
+	<td>
+	  <button id='new' v-on:click='new_program()'>New</button>
+	</td>
+	<td>
+	  <input type='text' :disabled='!fullname' size='20' :placeholder='!fullname ? "Log in to save as..." : "Program name"' v-model='name' v-bind:class='{error: name_error}' v-on:keydown='name_change()'>
+	  <button id='save' :disabled='!fullname' v-on:click='save()'>Save as</button>
+	</td>
+	<td>
+	  <button id='login' v-on:click='login()'
+	    v-if='!fullname' v-cloak>Login</button>
+	  <div v-if='fullname' v-cloak>Logged in as {{fullname}} (<a v-on:click='logout()' v-cloak>Logout</a>)</div>
+	</td>
+	<td class='right'>
+	  <button id='help' v-on:click='help(true)'>Help</button>
+	</td>
+      </tr></table>
       <div class='message' v-if='message' v-cloak>
 	<div class='relative'>
-	  <div class='close' v-on:click='clear_message()'>&#x2715;</div>
+	  <a class='close-icon' v-on:click='clear_message()'>&#x2715;</a>
 	</div>
 	<pre>{{ message }}</pre>
       </div>
       <div class='help' v-if='help_on' v-cloak>
 	<div class='relative'>
-	  <div class='close' v-on:click='help(false)'>&#x2715;</div>
+	  <a class='close-icon' v-on:click='help(false)'>&#x2715;</a>
 	</div>
 	<h2>Help</h2>
 	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.

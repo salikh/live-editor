@@ -24,13 +24,17 @@ h1 {
   position: relative;
   width: 100%;
 }
-.close {
+.close-icon {
   position: fixed;
   top: 20px;
   right: 20px;
   padding: 5px;
   margin: 5px;
   font-size: 20pt;
+  text-decoration: none;
+}
+.close-icon:hover {
+  background-color: #ddd;
 }
 .message {
   width: 70%;
@@ -38,3 +42,17 @@ h1 {
   border: solid 2px #eee;
 }
 [v-cloak] { display: none; }
+.layout {
+  border-collapse: collapse;
+  border: 0;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+.right {
+  text-align: right;
+}
+.error {
+  border: solid 2px red;
+  color: red;
+}
