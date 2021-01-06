@@ -1,11 +1,11 @@
 var data = {
   name: null,
   help_on: false,
-  help_page: 'ref-intro',
+  help_page: 'ref-help',
   message: null,
   fullname: null,
   uid: null,
-  original_code: window.localStorage["test-code"],
+  original_code: 'rect(10, 20, 100, 100);',
   original_name: null,
   original_uid: null,
   name_error: false,
@@ -152,6 +152,80 @@ function updateRegularly() {
   save();
 }
 
+function addProcessingIframes($el) {
+  $($el).find('code.language-prerender, code.language-render').
+      each(function(i, code) {
+    //console.log(code);
+    var pre = code.parentNode;
+    if ($(code).hasClass('language-prerender')) {
+      $(pre).addClass('prerender');
+    } else {
+      $(pre).addClass('render');
+    }
+    var source = ($(code).text());
+    //code[0].style.border = 'solid 2px red';
+    $(pre).find('iframe').remove();
+    // Add a fresh iframe.
+    var iframe = (document.createElement("iframe"));
+    // Create the iframe HTML.
+    var iframeHtml = '<!DOCTYPE html>\n' +
+      '<body style="height: 100%; margin: 0; overflow: hidden;">'+
+      '<canvas id="pjs"></canvas>'+
+      '<script src="js/live-editor.core_deps.js"></script>'+
+      '<script src="js/live-editor.shared.js"></script>'+
+      '<script src="js/live-editor.output_pjs_deps.js"></script>'+
+      '<script>'+
+      'var sketchProc = function(processingInstance) { with(processingInstance) {'+
+      source+
+      '}};'+
+      'var canvas = document.getElementById("pjs");'+
+      'var processingInstance = new Processing(canvas, sketchProc);'+
+      '</script>'+
+      '</body>';
+    pre.appendChild(iframe);
+    if ($(code).hasClass('language-render')) {
+      // Hide the code for code blocks marked with 'render'.
+      $(code).hide();
+    }
+    var contentWindow = /** @type {!Window} */(iframe.contentWindow);
+    contentWindow.document.open();
+    contentWindow.document.write(iframeHtml);
+    contentWindow.document.close();
+    var m = source.match(/[\r\n \t]*size[ \t]*\([ \t]*([0-9]+)[ \t]*,[ \t]*([0-9]+)[, \t]/);
+    if (m) {
+      iframe.style.height = '' + m[2] + 'px';
+      iframe.style.width = '' + m[1] + 'px';
+      $(pre).css('min-height', '' + (parseInt(m[2], 10) + 16) + 'px');
+    } else {
+      iframe.style.height = '100px';
+      iframe.style.width = '100px';
+      $(pre).css('min-height', '116px');
+    }
+    iframe.style.borderStyle = 'solid';
+    console.log("created a prerender iframe");
+  });
+}
+
+function resetHiddenSnippets($el) {
+  $($el).find('pre').each(function(index, preElt) {
+    let code = $(preElt).find('code.language-hidden');
+    if (code.length == 1) {
+      let $buttons = $(preElt).find('button');
+      let showButton = $buttons[0];
+      let loadButton = $buttons[1];
+      $(showButton).show();
+      $(loadButton).hide();
+      $(code).hide();
+      $(showButton).off("click");
+      $(showButton).click(function(ev) {
+	$(showButton).hide();
+	$(code).show();
+	$(loadButton).show();
+      });
+    }
+  });
+}
+
 Vue.component('help-div', Vue.extend({
   data: data,
   mounted() {
@@ -159,10 +233,12 @@ Vue.component('help-div', Vue.extend({
     if (data.help_page in data.ref) {
       div = data.ref[data.help_page];
     } else {
-      div = data.ref['ref-intro'];
+      div = data.ref['ref-help'];
     }
     this.$el.appendChild(div);
     let $el = this.$el;
+    // Vue component is recreated at each render, so the jquery manipulations
+    // should be set up at component DOM creation.
     let clickHandler = function(e) {
       const href = e.target.getAttribute('href');
       if (href.match('^#ref-(.*)')) {
@@ -175,7 +251,7 @@ Vue.component('help-div', Vue.extend({
 	if (ref in data.ref) {
 	  div = data.ref[ref];
 	} else {
-	  div = data.ref['ref-intro'];
+	  div = data.ref['ref-help'];
 	}
 	let prev = $el.lastChild;
 	if (div != prev)  {
@@ -183,13 +259,20 @@ Vue.component('help-div', Vue.extend({
 	  $el.appendChild(div);
 	  $($el).find('a').off("click");
 	  $($el).find('a').click(clickHandler);
+	  addProcessingIframes($el);
+	  resetHiddenSnippets($el);
 	}
       }
     }
+    // Reset the link click handlers.
     $($el).find('a').off("click");
     $($el).find('a').click(clickHandler);
+    // Reset the hide/show handler.
+    resetHiddenSnippets($el);
+    // Add rendered iframes.
+    addProcessingIframes($el);
   },
-  template: '<div id="help-div"><a href="#ref-intro">Top</a> <a href="#ref-index">Index</a> <a href="docs.html" target="_blank">One-page</a></div>',
+  template: '<div id="help-div"><a href="#ref-help">Top</a> <a href="#ref-index">Index</a> <a href="docs.html" target="_blank">One-page</a></div>',
 }));
 
 window.addEventListener('load', function() {
@@ -206,15 +289,18 @@ window.addEventListener('load', function() {
       },
       save: save,
       new_program: function() {
+	window.open('#', '_blank');
+	/*
 	updateFragment('id', null);
 	updateFragment('load', null);
 	updateFragment('', null);
-	let code = 'rect(10, 20, 200, 300);'
+	let code = 'rect(10, 20, 100, 100);'
 	window.liveEditor.editor.text(code);
 	data.original_code = code;
 	data.original_name = null;
 	data.original_uid = null;
 	data.name = null;
+	*/
       },
       clear_message: function() {
 	data.message = null;
@@ -299,19 +385,54 @@ window.addEventListener('load', function() {
     //Vue.set(data, 'message', token.value);
   });
   */
+  // Load the documentation.
   fetch('docs.html')
     .then(response => response.text()) 
     .then(html => {
       const parser = new DOMParser();
       const doc = parser.parseFromString(html, "text/html");
       //window.console.log(doc);
-      const refElements = doc.getElementsByClassName('ref');
+      const refElements = $(doc).find('div.section');
       for (let i = 0; i < refElements.length; i++) {
 	const refElt = refElements[i];
 	data.ref[refElt.id] = refElt;
+	// Add code loading button.
+	$(refElt).find('pre').each(function(index, elt) {
+	  let code = $(elt).find('code.language-example, code.language-prerender, code.language-hidden');
+	  if (code.length == 1) {
+	    let source = code.text();
+	    var button = document.createElement("button");
+	    $(button).text('読み込む');
+	    $(button).click(function(ev) {
+	      ev.preventDefault();
+	      window.liveEditor.editor.text(source);
+	      // Avoid autosaving unless there were changes.
+	      data.original_code = source;
+	      // Forget the previous program id.
+	      updateFragment('id', null);
+	      updateFragment('load', null);
+	      updateFragment('', null);
+	    });
+	    $(elt).prepend($('<br>'));
+	    $(elt).prepend(button);
+	  }
+	  if ($(code).hasClass('language-hidden')) {
+	    // Add show button to the parent <pre>.
+	    var $loadButton = $(elt).find('button');
+	    var button = document.createElement('button');
+	    $(button).text('表示');
+	    $(button).click(function(ev) {
+	      $(button).hide();
+	      $(code).show();
+	      $loadButton.show();
+	    });
+	    $(elt).prepend(button);
+	  }
+	});
       }
       window.console.log('Loaded ' + Object.keys(data.ref).length + ' help articles.');
     });
+  // Dismiss help on 'Esc' key.
   document.addEventListener('keydown', function(e) {
     let keyCode = e.keyCode || e.which;
     if (e.key === 'Escape' && data.help_on) {

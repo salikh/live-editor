@@ -418,11 +418,12 @@
   top: 30px;
   right: 20px;
   width: 70%;
-  padding: 2px;
+  padding: 10px;
   border: solid 2px #ddd;
   background: #f0f0f0;
   height: 80%;
   z-index: 3;
+  overflow: scroll;
 }
 .relative {
   position: relative;
@@ -459,4 +460,30 @@
 .error {
   border: solid 2px red;
   color: red;
+}
+pre {
+  border: solid 1px #AAA;
+  margin: 10px;
+  padding: 4px;
+  background-color: #ffffff;
+}
+pre.prerender {
+  position: relative;
+}
+pre.prerender iframe {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border-style: solid;
+}
+pre.render {
+  width: 100%;
+  text-align: center;
+  background: none;
+  border: none;
+  margin: 4px;
+  padding: none;
+}
+p > code {
+  color: green;
 }

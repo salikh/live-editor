@@ -2337,11 +2337,11 @@ if (typeof exports !== "undefined") {
 var data = {
   name: null,
   help_on: false,
-  help_page: "ref-intro",
+  help_page: 'ref-help',
   message: null,
   fullname: null,
   uid: null,
-  original_code: window.localStorage["test-code"],
+  original_code: 'rect(10, 20, 100, 100);',
   original_name: null,
   original_uid: null,
   name_error: false,
@@ -2352,8 +2352,8 @@ var data = {
  * Generates a new random id in base62.
  */
 function generateBase62ID(numchars) {
-  var base62 = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghipqrstuvwxyz";
-  var ret = "";
+  var base62 = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghipqrstuvwxyz';
+  var ret = '';
   for (var i = 0; i < numchars; i++) {
     ret = ret + base62[Math.floor(Math.random() * base62.length)];
   }
@@ -2361,9 +2361,9 @@ function generateBase62ID(numchars) {
 }
 
 function loadNamed(name) {
-  firebase.database().ref("/shared/" + name).once("value").then(function (snapshot) {
+  firebase.database().ref('/shared/' + name).once('value').then(function (snapshot) {
     if (snapshot.val() === null) {
-      window.console.error("did not find " + name);
+      window.console.error('did not find ' + name);
       return;
     }
     window.liveEditor.editor.text(snapshot.val().code);
@@ -2373,13 +2373,13 @@ function loadNamed(name) {
     if (snapshot.val().uid == data.uid) {
       data.name = name;
     }
-  })["catch"](function (error) {
-    window.console.error("could not load named program " + name, error);
+  })['catch'](function (error) {
+    window.console.error('could not load named program ' + name, error);
   });
 }
 
 function clearMessage() {
-  Vue.set(data, "message", null);
+  Vue.set(data, 'message', null);
 }
 
 /** Stores the source code by name */
@@ -2387,91 +2387,91 @@ function saveNamed(name, code) {
   clearMessage();
   // Should not happen as 'Save' button is disabled in UI.
   if (firebase.auth().currentUser.uid == null) {
-    window.console.error("Not logged in");
+    window.console.error('Not logged in');
     return;
   }
-  firebase.database().ref("/shared/" + name).once("value").then(function (snapshot) {
+  firebase.database().ref('/shared/' + name).once('value').then(function (snapshot) {
     if (snapshot.val() != null && snapshot.val().uid != data.uid) {
-      data.message = "Name " + name + " is already taken";
-      window.console.error("Name " + name + " is already taken");
+      data.message = 'Name ' + name + ' is already taken';
+      window.console.error('Name ' + name + ' is already taken');
       data.name_error = true;
       return;
     }
     var updates = {};
-    updates["/shared/" + name] = {
+    updates['/shared/' + name] = {
       code: code,
       time: firebase.database.ServerValue.TIMESTAMP,
       uid: firebase.auth().currentUser.uid
     };
     firebase.database().ref().update(updates).then(function () {
-      updateFragment("load", null);
-      updateFragment("id", null);
-      updateFragment("", name);
+      updateFragment('load', null);
+      updateFragment('id', null);
+      updateFragment('', name);
       data.original_code = code;
       data.original_name = name;
       data.original_uid = firebase.auth().currentUser.uid;
       data.name_error = false;
-      window.console.log("Saved named: " + name);
-    })["catch"](function (error) {
-      window.console.error("Could not save " + name, error);
-      data.message = "Unable to save project: " + error;
+      window.console.log('Saved named: ' + name);
+    })['catch'](function (error) {
+      window.console.error('Could not save ' + name, error);
+      data.message = 'Unable to save project: ' + error;
     });
   });
 }
 
 /** Loads the source code by id */
 function loadSource(id) {
-  firebase.database().ref("/code/" + id).once("value").then(function (snapshot) {
+  firebase.database().ref('/code/' + id).once('value').then(function (snapshot) {
     if (snapshot.val() === null) {
-      window.console.error("did not find " + id);
+      window.console.error('did not find ' + id);
       return;
     }
     window.liveEditor.editor.text(snapshot.val().code);
     data.original_code = snapshot.val().code;
-  })["catch"](function (error) {
-    window.console.error("could not load " + id, error);
+  })['catch'](function (error) {
+    window.console.error('could not load ' + id, error);
   });
 }
 
 /** Stores the source code by id */
 function saveSource(id, code) {
   var updates = {};
-  updates["/code/" + id] = {
+  updates['/code/' + id] = {
     code: code,
     time: firebase.database.ServerValue.TIMESTAMP,
     uid: firebase.auth().currentUser && firebase.auth().currentUser.uid
   };
   firebase.database().ref().update(updates).then(function () {
-    updateFragment("load", null);
-    updateFragment("", null);
-    updateFragment("id", id);
+    updateFragment('load', null);
+    updateFragment('', null);
+    updateFragment('id', id);
     data.original_code = code;
     data.original_name = null;
     data.original_uid = null;
-    window.console.log("Saved " + id);
-  })["catch"](function (error) {
-    window.console.error("could not save " + id, error);
-    data.message = "Unable to save project: " + error;
+    window.console.log('Saved ' + id);
+  })['catch'](function (error) {
+    window.console.error('could not save ' + id, error);
+    data.message = 'Unable to save project: ' + error;
   });
 }
 
 function save() {
   var code = window.liveEditor.editor.text();
   if (code == data.original_code && (data.name == data.original_name || !data.name)) {
-    window.console.log("no changes");
+    window.console.log('no changes');
     return;
   }
   var params = parseFragment();
   if (data.name) {
     saveNamed(data.name, code);
-  } else if ("" in params && data.original_uid == data.uid) {
-    data.name = params[""];
+  } else if ('' in params && data.original_uid == data.uid) {
+    data.name = params[''];
     saveNamed(data.name, code);
   } else {
-    window.console.log("original_uid", data.original_uid, "uid", data.uid);
+    window.console.log('original_uid', data.original_uid, 'uid', data.uid);
     var id = undefined;
-    if ("id" in params) {
-      id = params["id"];
+    if ('id' in params) {
+      id = params['id'];
     } else {
       id = generateBase62ID(5);
     }
@@ -2487,50 +2487,121 @@ function updateRegularly() {
   save();
 }
 
-Vue.component("help-div", Vue.extend({
+function addProcessingIframes($el) {
+  $($el).find('code.language-prerender, code.language-render').each(function (i, code) {
+    //console.log(code);
+    var pre = code.parentNode;
+    if ($(code).hasClass('language-prerender')) {
+      $(pre).addClass('prerender');
+    } else {
+      $(pre).addClass('render');
+    }
+    var source = $(code).text();
+    //code[0].style.border = 'solid 2px red';
+    $(pre).find('iframe').remove();
+    // Add a fresh iframe.
+    var iframe = document.createElement('iframe');
+    // Create the iframe HTML.
+    var iframeHtml = '<!DOCTYPE html>\n' + '<body style="height: 100%; margin: 0; overflow: hidden;">' + '<canvas id="pjs"></canvas>' + '<script src="js/live-editor.core_deps.js"></script>' + '<script src="js/live-editor.shared.js"></script>' + '<script src="js/live-editor.output_pjs_deps.js"></script>' + '<script>' + 'var sketchProc = function(processingInstance) { with(processingInstance) {' + source + '}};' + 'var canvas = document.getElementById("pjs");' + 'var processingInstance = new Processing(canvas, sketchProc);' + '</script>' + '</body>';
+    pre.appendChild(iframe);
+    if ($(code).hasClass('language-render')) {
+      // Hide the code for code blocks marked with 'render'.
+      $(code).hide();
+    }
+    var contentWindow = iframe.contentWindow;
+    contentWindow.document.open();
+    contentWindow.document.write(iframeHtml);
+    contentWindow.document.close();
+    var m = source.match(/[\r\n \t]*size[ \t]*\([ \t]*([0-9]+)[ \t]*,[ \t]*([0-9]+)[, \t]/);
+    if (m) {
+      iframe.style.height = '' + m[2] + 'px';
+      iframe.style.width = '' + m[1] + 'px';
+      $(pre).css('min-height', '' + (parseInt(m[2], 10) + 16) + 'px');
+    } else {
+      iframe.style.height = '100px';
+      iframe.style.width = '100px';
+      $(pre).css('min-height', '116px');
+    }
+    iframe.style.borderStyle = 'solid';
+    console.log('created a prerender iframe');
+  });
+}
+
+function resetHiddenSnippets($el) {
+  $($el).find('pre').each(function (index, preElt) {
+    var code = $(preElt).find('code.language-hidden');
+    if (code.length == 1) {
+      (function () {
+        var $buttons = $(preElt).find('button');
+        var showButton = $buttons[0];
+        var loadButton = $buttons[1];
+        $(showButton).show();
+        $(loadButton).hide();
+        $(code).hide();
+        $(showButton).off('click');
+        $(showButton).click(function (ev) {
+          $(showButton).hide();
+          $(code).show();
+          $(loadButton).show();
+        });
+      })();
+    }
+  });
+}
+
+Vue.component('help-div', Vue.extend({
   data: data,
   mounted: function mounted() {
     var div = undefined;
     if (data.help_page in data.ref) {
       div = data.ref[data.help_page];
     } else {
-      div = data.ref["ref-intro"];
+      div = data.ref['ref-help'];
     }
     this.$el.appendChild(div);
     var $el = this.$el;
+    // Vue component is recreated at each render, so the jquery manipulations
+    // should be set up at component DOM creation.
     var clickHandler = function clickHandler(e) {
-      var href = e.target.getAttribute("href");
-      if (href.match("^#ref-(.*)")) {
+      var href = e.target.getAttribute('href');
+      if (href.match('^#ref-(.*)')) {
         e.preventDefault();
         var ref = href.substr(1);
-        Vue.set(data, "help_page", ref);
-        updateFragment("help", ref.substr(4));
+        Vue.set(data, 'help_page', ref);
+        updateFragment('help', ref.substr(4));
         window.console.log(ref);
         var _div = undefined;
         if (ref in data.ref) {
           _div = data.ref[ref];
         } else {
-          _div = data.ref["ref-intro"];
+          _div = data.ref['ref-help'];
         }
         var prev = $el.lastChild;
         if (_div != prev) {
           $el.removeChild(prev);
           $el.appendChild(_div);
-          $($el).find("a").off("click");
-          $($el).find("a").click(clickHandler);
+          $($el).find('a').off('click');
+          $($el).find('a').click(clickHandler);
+          addProcessingIframes($el);
+          resetHiddenSnippets($el);
         }
       }
     };
-    $($el).find("a").off("click");
-    $($el).find("a").click(clickHandler);
+    // Reset the link click handlers.
+    $($el).find('a').off('click');
+    $($el).find('a').click(clickHandler);
+    // Reset the hide/show handler.
+    resetHiddenSnippets($el);
+    // Add rendered iframes.
+    addProcessingIframes($el);
   },
-  template: "<div id=\"help-div\"><a href=\"#ref-intro\">Top</a> <a href=\"#ref-index\">Index</a> <a href=\"docs.html\" target=\"_blank\">One-page</a></div>"
+  template: '<div id="help-div"><a href="#ref-help">Top</a> <a href="#ref-index">Index</a> <a href="docs.html" target="_blank">One-page</a></div>'
 }));
 
-window.addEventListener("load", function () {
+window.addEventListener('load', function () {
   window.data = data;
   window.app = new Vue({
-    el: "#app",
+    el: '#app',
     data: data,
     methods: {
       help: function help(help_on) {
@@ -2541,15 +2612,18 @@ window.addEventListener("load", function () {
       },
       save: save,
       new_program: function new_program() {
-        updateFragment("id", null);
-        updateFragment("load", null);
-        updateFragment("", null);
-        var code = "rect(10, 20, 200, 300);";
+        window.open('#', '_blank');
+        /*
+        updateFragment('id', null);
+        updateFragment('load', null);
+        updateFragment('', null);
+        let code = 'rect(10, 20, 100, 100);'
         window.liveEditor.editor.text(code);
         data.original_code = code;
         data.original_name = null;
         data.original_uid = null;
         data.name = null;
+        */
       },
       clear_message: function clear_message() {
         data.message = null;
@@ -2558,19 +2632,19 @@ window.addEventListener("load", function () {
         var fragment = undefined;
         var params = parseFragment();
         if (data.name) {
-          fragment = "#" + data.name;
-        } else if ("" in params) {
-          fragment = "#" + params[""];
-        } else if ("id" in params) {
-          fragment = "#id=" + params["id"];
-        } else if ("load" in params) {
-          fragment = "#id=" + params["load"];
+          fragment = '#' + data.name;
+        } else if ('' in params) {
+          fragment = '#' + params[''];
+        } else if ('id' in params) {
+          fragment = '#id=' + params['id'];
+        } else if ('load' in params) {
+          fragment = '#id=' + params['load'];
         } else {
-          data.message = "The sketch is not saved yet.";
+          data.message = 'The sketch is not saved yet.';
           window.console.error(data.message);
           return;
         }
-        var win = window.open("play.html" + fragment, "_blank");
+        var win = window.open('play.html' + fragment, '_blank');
         win.focus();
       },
       login: function login() {
@@ -2586,9 +2660,9 @@ window.addEventListener("load", function () {
           if (data.original_uid == data.uid && data.original_name) {
             data.name = data.original_name;
           }
-        })["catch"](function (error) {
+        })['catch'](function (error) {
           window.console.log(error);
-          data.message = "Error logging in: " + error.message;
+          data.message = 'Error logging in: ' + error.message;
           data.fullname = null;
           data.uid = null;
         });
@@ -2597,9 +2671,9 @@ window.addEventListener("load", function () {
         firebase.auth().signOut().then(function () {
           data.fullname = null;
           data.uid = null;
-        })["catch"](function (error) {
+        })['catch'](function (error) {
           window.console.log(error);
-          data.message = "Error logging out: " + error.message;
+          data.message = 'Error logging out: ' + error.message;
           data.fullname = null;
           data.uid = null;
         });
@@ -2607,18 +2681,18 @@ window.addEventListener("load", function () {
     }
   });
   var params = parseFragment();
-  if ("" in params) {
-    loadNamed(params[""]);
-    if ("id" in params) updateFragment("id", null);
-    if ("load" in params) updateFragment("load", null);
-  } else if ("id" in params) {
-    loadSource(params["id"]);
-    if ("load" in params) updateFragment("load", null);
-  } else if ("load" in params) {
-    loadSource(params["load"]);
+  if ('' in params) {
+    loadNamed(params['']);
+    if ('id' in params) updateFragment('id', null);
+    if ('load' in params) updateFragment('load', null);
+  } else if ('id' in params) {
+    loadSource(params['id']);
+    if ('load' in params) updateFragment('load', null);
+  } else if ('load' in params) {
+    loadSource(params['load']);
   }
-  if ("help" in params) {
-    data.help_page = "ref-" + params["help"];
+  if ('help' in params) {
+    data.help_page = 'ref-' + params['help'];
   }
   window.setInterval(updateRegularly, 5000);
   /*
@@ -2633,27 +2707,68 @@ window.addEventListener("load", function () {
     //Vue.set(data, 'message', token.value);
   });
   */
-  fetch("docs.html").then(function (response) {
+  // Load the documentation.
+  fetch('docs.html').then(function (response) {
     return response.text();
   }).then(function (html) {
     var parser = new DOMParser();
-    var doc = parser.parseFromString(html, "text/html");
+    var doc = parser.parseFromString(html, 'text/html');
     //window.console.log(doc);
-    var refElements = doc.getElementsByClassName("ref");
+    var refElements = $(doc).find('div.section');
     for (var i = 0; i < refElements.length; i++) {
       var refElt = refElements[i];
       data.ref[refElt.id] = refElt;
+      // Add code loading button.
+      $(refElt).find('pre').each(function (index, elt) {
+        var code = $(elt).find('code.language-example, code.language-prerender, code.language-hidden');
+        if (code.length == 1) {
+          var button;
+
+          (function () {
+            var source = code.text();
+            button = document.createElement('button');
+
+            $(button).text('読み込む');
+            $(button).click(function (ev) {
+              ev.preventDefault();
+              window.liveEditor.editor.text(source);
+              // Avoid autosaving unless there were changes.
+              data.original_code = source;
+              // Forget the previous program id.
+              updateFragment('id', null);
+              updateFragment('load', null);
+              updateFragment('', null);
+            });
+            $(elt).prepend($('<br>'));
+            $(elt).prepend(button);
+          })();
+        }
+        if ($(code).hasClass('language-hidden')) {
+          // Add show button to the parent <pre>.
+          var $loadButton = $(elt).find('button');
+          var button = document.createElement('button');
+          $(button).text('表示');
+          $(button).click(function (ev) {
+            $(button).hide();
+            $(code).show();
+            $loadButton.show();
+          });
+          $(elt).prepend(button);
+        }
+      });
     }
-    window.console.log("Loaded " + Object.keys(data.ref).length + " help articles.");
+    window.console.log('Loaded ' + Object.keys(data.ref).length + ' help articles.');
   });
-  document.addEventListener("keydown", function (e) {
+  // Dismiss help on 'Esc' key.
+  document.addEventListener('keydown', function (e) {
     var keyCode = e.keyCode || e.which;
-    if (e.key === "Escape" && data.help_on) {
+    if (e.key === 'Escape' && data.help_on) {
       e.preventDefault();
-      Vue.set(data, "help_on", false);
+      Vue.set(data, 'help_on', false);
     } else if (keyCode == 112 && !data.help_on) {
       e.preventDefault();
-      Vue.set(data, "help_on", true);
+      Vue.set(data, 'help_on', true);
     }
   });
 });
+/** @type {!Window} */

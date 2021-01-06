@@ -49,6 +49,12 @@ At this point you can make a fresh build, using [Gulp](http://gulpjs.com/):
 
 If you have an issue with "this.merge" is undefined, then `rm -rf node_modules/gulp-handlebars/node_modules/handlebars`.
 
+To rebuild documentation from the `docs.md` file, run
+
+    go run go/render-markdown/render-markdown.go \
+      --input_md_file="docs.md" \
+      --output_html_file="build/docs.html"
+
 ## Testing
 
 The tests are in the `/tests` folder. They use Mocha/Chai/Sinon. Gulp typically runs the tests when relevant files change, but you can explicitly run the tests with:

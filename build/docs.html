@@ -1,114 +1,6305 @@
-<!DOCTYPE html>
-<title>Processing.js documentation</title>
-<div id='ref-intro' class='ref'>
-  <h1>Processing.js documentation</h1>
-  Welcome to the documentation.
-  <ul>
-    <li><a href='#ref-figures'>Functions to draw figures</li>
-    <li><a href='#ref-index'>Index</a></li>
-  </ul>
-</div>
-<div id='ref-line()' class='ref'>
-  <h1>line() &mdash; Draw straight line segment</h1>
-  <pre>
+<html><head><meta charset="UTF-8"/></head><body><div id="ref-help" class="section"><h1>Processing.js 冬季ワークショップ</h1>
+
+<ul>
+<li><a href="#ref-PJSStep0">はじめに</a></li>
+<li><a href="#ref-PJSStep1">Step 1: キャンバスと図形</a></li>
+<li><a href="#ref-PJSStep2">Step 2: 色</a></li>
+<li><a href="#ref-PJSStep3">Step 3: アニメーション</a></li>
+<li><a href="#ref-PJSStep4">Step 4: マウスの使い方</a></li>
+<li><a href="#ref-PJSStep5">Step 5: キーボードの使い方</a></li>
+<li><a href="#ref-PJSStep6">Step 6: シミュレーション</a></li>
+<li><a href="#ref-PJSStep7">Step 7: 画像と音</a></li>
+<li><a href="#ref-PJSStep8">Step 8: ゲームサンプル</a></li>
+<li><a href="http://bit.ly/survey-8-26">アンケート</a></li>
+<li>ヘルプ
+
+<ul>
+<li><a href="#ref-index">索引</a></li>
+<li><a href="#ref-Tools">ツール</a></li>
+<li><a href="#ref-Demos">デモ</a></li>
+<li><a href="#ref-Games">ゲーム</a></li>
+<li><a href="#ref-ImageLibrary">画像リスト</a></li>
+<li><a href="#ref-SoundLibrary">音のリスト</a></li>
+</ul></li>
+</ul>
+
+</div><div id="ref-PJSStep0" class="section"><h1>はじめに</h1>
+
+<p>このワークショップの目的は、皆さんにプログラミングを体験していただき、コンピューターサイエンスは誰でも気軽に楽しめるものだということを知っていただくことです。そこで、本日は皆さんに簡単なゲームを作っていただきます。</p>
+
+<p>今回はProcessingというプログラミング言語を使います。今回は本ワークショップ専用のページを使いますが、Processingには長い歴史があり、他の人の作ったプログラムがたくさんあります。</p>
+
+<p>プログラムに何か問題があると赤い波線が出てきます。この場合、プログラムの修正が必要です。何が問題なのか分からないときは、マウスを近づけると英語での説明が現れます。不明な点があれば、社員に遠慮なく質問してください。</p>
+
+<p><img src="images/oh-noes.png" alt="oh-noes"/></p>
+
+<p>ワークショップ中に出ているサンプルプログラムは全てヘルプに含まれています。タイピングが難しい場合や、いちいち入力していると講義に追い付けなくなりそうな場合は、ヘルプからサンプルを読み込むことができます。</p>
+
+<p><img src="images/sketch-load.png" alt="images/sketch-load.png"/></p>
+
+<p>プログラムを編集しながら別のサンプルを試したいときは、ブラウザで新しいタブを作ってみましょう。[ 新規作成 ]
+ボタンをクリックすると新しいタブが開きます。元のタブに戻ると、編集してきたプログラムを継続できます。</p>
+
+<p><img src="images/new-sketch-button-highlight.png" alt="images/new-sketch-button-highlight.png"/></p>
+
+<p>プログラムの中に現れる単語や関数が分からないときは、ヘルプを使ってみましょう。</p>
+
+<p><img src="images/help-button-highlight.png" alt="images/help-button-highlight.png"/></p>
+
+<p>次は<a href="#ref-PJSStep1">ステップ1</a>へ。</p>
+
+</div><div id="ref-PJSStep1" class="section"><h1>ステップ１: キャンバスと図形</h1>
+
+<p>コンピューターグラフィックでは、x座標は数学と同じように右に向かって増えますが、y座標は普通の数学と反対で下に向かって増えます。</p>
+
+<pre><code class="language-render">function arrow(x1, y1, x2, y2) {
   line(x1, y1, x2, y2);
-  </pre>
-  <h2>See also</h2>
-  <ul>
-    <li><a href='#ref-figures'>Functions to draw figures</li>
-    <li><a href='#ref-stroke()'>stroke()</a> to set the line color</li>
-    <li><a href='#ref-strokeWeight()'>strokeWeight()</a> to set the line width</li>
-    <li><a href='#ref-noStroke()'>noStroke()</a> to set figure outlines invisible</li>
-    <li><a href='#ref-strokeCap()'>strokeCap()</a> to set the shape of line ending</li>
-  </ul>
-</div>
-<div id='ref-draw()' class='ref'>
-  <h1>draw() &mdash; The main animation loop</h1>
-  <code>draw()</code> is a function that the user should define in their program to enable
-  animation.
-  <pre>
-  function draw() {
-    // Draw something here, for example:
-    rect(10, 10, 100, 100);
-  } 
-  </pre>
-</div>
-<div id='ref-figures' class='ref'>
-  <h1>Functions to draw figures</h1>
-  <ul>
-    <li><a href='#ref-line()'>line()</a></li>
-    <li><a href='#ref-rect()'>rect()</a></li>
-    <li><a href='#ref-ellipse()'>ellipse()</a></li>
-    <li>NOTE: There is not a special function to draw circles, use <a href='#ref-ellipse()'>ellipse()</a> for that.
-    <li><a href='#ref-bezier()'>bezier()</a></li>
-  </ul>
-</div>
-<div id='ref-stroke()' class='ref'>
-  <h1>stroke() &mdash; Set the color of the line strokes</h1>
-  <pre>
-    stroke(100, 200, 200);
-    strokeWeight(10);
-    line(10, 40, 90, 60);
-  </pre>
-  <h2>Seel also</h2>
-  <ul>
-    <li><a href='#ref-line()'>line()</a></li>
-    <li><a href='#ref-ellipse()'>ellipse()</a></li>
-    <li><a href='#ref-strokeWeight()'>strokeWeight()</a></li>
-    <li><a href='#ref-point()'>point()</a></li>
-    <li><a href='#ref-figures'>Functions to draw figures</li>
-    <li><a href='#ref-bezier()'>bezier()</a></li>
-  </ul>
-</div>
-<div id='ref-strokeWeight()' class='ref'>
-  <h1>strokeWeight() &mdash; Set the thickness of the line strokes</h1>
-  <pre>
-    stroke(100, 200, 200);
-    strokeWeight(10);
-    line(10, 40, 90, 60);
-  </pre>
-  <h2>Seel also</h2>
-  <ul>
-    <li><a href='#ref-line()'>line()</a></li>
-    <li><a href='#ref-stroke()'>stroke()</a></li>
-    <li><a href='#ref-ellipse()'>ellipse()</a></li>
-    <li><a href='#ref-figures'>Functions to draw figures</li>
-    <li><a href='#ref-bezier()'>bezier()</a></li>
-  </ul>
-</div>
-<div id='ref-point()' class='ref'>
-  <h1>point() &mdash; Draw a single point</h1>
-  <pre>
-    strokeWeight(10);
-    point(50, 40);
-  </pre>
-  <h2>Seel also</h2>
-  <ul>
-    <li><a href='#ref-stroke()'>stroke()</a></li>
-    <li><a href='#ref-strokeWeight()'>strokeWeight()</a></li>
-    <li><a href='#ref-figures'>Functions to draw figures</a></li>
-  </ul>
-</div>
-<div id='ref-rect()' class='ref'>
-  <h1>rect() &mdash; Draw an upright rectangle</h1>
-  <pre>
-    rect(10, 20, 100, 50);
-  </pre>
-  <h2>Seel also</h2>
-  <ul>
-    <li><a href='#ref-stroke()'>stroke()</a></li>
-    <li><a href='#ref-strokeWeight()'>strokeWeight()</a></li>
-    <li><a href='#ref-figures'>Functions to draw figures</a></li>
-  </ul>
-</div>
-<div id='ref-index' class='ref'>
-  <h1>Help index</h1>
-  <ul>
-    <li><a href='#ref-draw()'>draw()</li>
-    <li><a href='#ref-figures'>Functions to draw figures</li>
-    <li><a href='#ref-stroke()'>stroke()</a> to set the line color</li>
-    <li><a href='#ref-strokeWeight()'>strokeWeight()</a> to set the line width</li>
-    <li><a href='#ref-noStroke()'>noStroke()</a> to set figure outlines invisible</li>
-    <li><a href='#ref-strokeCap()'>strokeCap()</a> to set the shape of line ending</li>
-  </ul>
-</div>
+  var x = x2-x1;
+  var y = y2-y1;
+  var l = sqrt(x*x+y*y);
+  x = x / l * 10;
+  y = y / l * 10;
+  alpha = PI/4;
+  line(x2, y2, x2 - x*cos(alpha) + y*sin(alpha), y2 - x*sin(alpha) - y*cos(alpha));
+  line(x2, y2, x2 - x*cos(-alpha) + y*sin(-alpha), y2 - x*sin(-alpha) - y*cos(-alpha));
+}
+
+arrow(10, 20, width-10, 20);
+arrow(20, 10, 20, height-10);
+fill(0);
+text(&#34;(0,0)&#34;, 1, 11);
+text(&#34;x&#34;, width-20, 37);
+text(&#34;y&#34;, 30, height-15);
+</code></pre>
+
+<pre><code class="language-example">fill(0,0,0);
+textSize(15);
+text(&#34;width: &#34; + width, 10, 50);
+text(&#34;height: &#34; + height, 10, 80);
+</code></pre>
+
+<p>座標の数字を使って様々な図形を描けます。 よく使うのはrect(), ellipse(), line()です。</p>
+
+<p><img src="images/rect.png" alt="images/rect.png"/>
+<img src="images/ellipse.png" alt="images/ellipse.png"/>
+<img src="images/line.png" alt="images/line.png"/></p>
+
+<p>例えば、こちらのプログラムを打ってみましょう。</p>
+
+<pre><code class="language-prerender">rect(10, 10, 80, 40);
+ellipse(50, 75, 80, 40);
+line(10, 60, 90, 90);
+</code></pre>
+
+<p>実行してみましょう。キャンバスに右のような絵が出てきたでしょうか？
+プログラムを構成する一つ一つの行は命令といいます。Processingでは、各命令は必ずセミコロン(;)で終わらなければいけません。</p>
+
+<p>それでは、今習ったことを使ってみましょう。</p>
+
+<p><strong>問題１</strong>: 雪だるまを描きましょう。 例に限らず、好きなような形の雪だるまにしましょう。</p>
+
+<p>例として以下の雪だるまいかがでしょうか。</p>
+
+<pre><code class="language-render">// Snowman
+size(300, 300, &#34;2D&#34;);
+ellipse(150, 250, 100, 100);
+ellipse(150, 170, 80, 80);
+ellipse(150, 110, 60, 60);
+</code></pre>
+
+<pre><code class="language-hidden">// Snowman1
+ellipse(150, 250, 100, 100);
+ellipse(150, 170, 80, 80);
+ellipse(150, 110, 60, 60);
+</code></pre>
+
+<p>次は、<a href="#ref-PJSStep2">ステップ2</a>へ。</p>
+
+</div><div id="ref-PJSStep2" class="section"><h1>ステップ2: 色</h1>
+
+<p>今までの絵は白黒でしたが、それではつまらないので、色を加えてみましょう。ProcessingではRGBまたはRGBAカラーモデルを採用しています。RGBはR=Red
+(赤)、G=Green (緑)、B=Blue (青)から成り立っています。次の図はRGBのカラーミックスのイメージです。</p>
+
+<pre><code class="language-render">function posToColor(x, y) {
+  if (x &lt; width/2 &amp;&amp; y &lt; height/2) {
+    return color((width/2-x)/width*512, (height/2-y)/height*512, 0);
+  } else if (x &lt; width/2) {
+    return color(220);
+  } else if (y &lt; height/2) {
+    return color(0, (height/2-y)/height*512, (x-width/2)/width*512);
+  } else {
+    return color((y-height/2)/height*512, 0, (x-width/2)/width*512);
+  }
+}
+
+size(200, 200, &#34;2D&#34;);
+
+for (var x = 0; x &lt; width; x++) {
+  for (var y = 0; y &lt; height; y++) {
+    set(x, y, posToColor(x, y));
+  }
+}
+
+fill(255);
+textSize(height/20);
+text(&#34;(255,0,0)&#34;, 5, height/2-5);
+fill(0);
+textAlign(LEFT, TOP);
+text(&#34;(255,255,0)&#34;, 5, 2);
+textAlign(RIGHT, TOP);
+text(&#34;(0,255,255)&#34;, width-5, 2);
+textAlign(CENTER, TOP);
+text(&#34;(0,255,0)&#34;, width/2, 2);
+textAlign(LEFT, BASELINE);
+fill(255);
+text(&#34;(0,0,0)&#34;, width/2+2, height/2-2);
+textAlign(RIGHT, BASELINE);
+text(&#34;(0,0,255)&#34;, width-2, height/2);
+fill(0);
+textAlign(LEFT, BOTTOM);
+text(&#34;(255,0,0)&#34;, width/2+2, height-2);
+textAlign(RIGHT, BOTTOM);
+text(&#34;(255,0,255)&#34;, width-2, height-2);
+</code></pre>
+
+<p>自分のお好みの色選ぶときに<a href="#ref-ColorTool">色ツール</a>を使ってみてください。</p>
+
+<p>色の設定は２つあります。各図形を描くときは外線や内部を別々の色で塗ります。外線の色は<code>stroke()</code>で設定し、内部の色は<code>fill()</code>で設定します。</p>
+
+<p>例えば、こちらのプログラムを打って実行してみましょう。</p>
+
+<pre><code class="language-prerender">fill(0, 255, 0);  // 内部の色は緑
+stroke(0, 0, 255);  // 端の色は青
+ellipse(50, 50, 80, 80);
+</code></pre>
+
+<p>右側にあるの絵のようになりましたか？
+このプログラムの中に出てくる、<code>//</code>から始まる文章は、コメントと呼びます。コンピューターはコメントを無視するので、プログラムについて説明を入れたいときに便利です。</p>
+
+<p>RGBAカラーモデルはRGBに加えてA=Alpha(透明度)を設定します。例えば、中を塗らない楕円を描くために使えます：</p>
+
+<pre><code class="language-prerender">fill(0, 0, 0, 0);  // アルファは0だから、内部を塗らない
+ellipse(50, 50, 80, 80);
+</code></pre>
+
+<p>色を使わないで、明るさだけの設定するときに3つの数は同じなので、略できます:
+<code>fill(50);</code>は<code>fill(50,50,50);</code>と同じ意味で、グレー色を設定します。また、<code>fill(60,60,60,150);</code>は
+<code>fill(60,150);</code>と同じ意味です。</p>
+
+<p>図形を塗りつぶしたくないときに<code>noFill();</code>も使えます。端を描かないように<code>noStroke();</code>を使えます。</p>
+
+<p>では、雪だるまに色を加えましょう。</p>
+
+<p><strong>問題２</strong>：前に作った雪だるまに色をつけたり、アイテムをあげたりしてみましょう。</p>
+
+<pre><code class="language-hidden">// Snowman2Color
+strokeWeight(5);
+stroke(255, 100, 100);
+ellipse(150, 250, 100, 100);
+stroke(100, 255, 100);
+ellipse(150, 170, 80, 80);
+stroke(100, 100, 255);
+ellipse(150, 110, 60, 60);
+</code></pre>
+
+<p>次は<a href="#ref-PJSStep3">ステップ3</a>へ。</p>
+
+</div><div id="ref-PJSStep3" class="section"><h1>ステップ3: アニメーション</h1>
+
+<p>今日のワークショップの目的は皆さんに自分で簡単なゲームを作ってもらうことなので、単に図形を描くだけでは足りません。図形を動かしてみましょう。</p>
+
+<p>そのためには、同じプログラムを何回も繰り返し実行する必要があります。Processingにはアニメーションを作るのための仕組みがすでに含まれています。</p>
+
+<p>一回だけ実行したいプログラムの部分は<code>void setup() { ... }</code> の中に書き、何回も繰り返しで実行したい部分は<code>void draw() {
+... }</code>の中に書くと、簡単なアニメーションを作れます。 このように<code>{}</code>で囲ったプログラムの部分は「関数」といいます。</p>
+
+<p><img src="images/execute-diagram.png" alt="images/execute-diagram.png"/></p>
+
+<p>いくつかの例を見てみましょう。</p>
+
+<pre><code class="language-example">void setup() {
+  textSize(50); // 文字を大きくする
+  fill(0);      // 文字を黒にする
+}
+
+void draw() {
+  text(frameCount, 10, 50);
+}
+</code></pre>
+
+<p>早すぎて何が起きたかよくわかりません。実行をもう少し遅くするには<code>frameRate()</code>が便利です。<code>draw()</code>を一回実行されたときに一つのフレームとして考えると、フレーム・レートは一秒あたり何回<code>draw()</code>が呼ばれるかを示します。</p>
+
+<pre><code class="language-example">void setup() {
+  textSize(50);
+  fill(0);
+  frameRate(1);
+}
+
+void draw() {
+  text(frameCount, 10, 50);
+}
+</code></pre>
+
+<p>今回は分かりやすくなりましたね。同じところに連続で１、２、３などの数字を表示します。<code>frameCount</code>は毎回フレーム番号を表しています。<code>draw()</code>の実行ごとに違う数が表示されます。</p>
+
+<p>番号がはっきり見えるようにしましょう。新しい番号を見せる前にキャンバスを消すことで、新しい番号がはっきり見えます。キャンバスを消すためには<code>background()</code>を使います。<code>background()</code>には前と同様にRGBの形式色を指定できます。</p>
+
+<pre><code class="language-example">void setup() {
+  textSize(50);
+  fill(0);
+  frameRate(1);
+}
+
+void draw() {
+  background(200);  // キャンバスをグレーに塗りつぶす
+  text(frameCount, 10, 50);
+}
+</code></pre>
+
+<p>この例で出てきた<code>frameCount</code>は変数といいます。</p>
+
+<p><strong>問題３</strong>:
+<code>draw()</code>や<code>frameCount</code>や図形の命令を使って好きなように雪だるまのアニメーションを作りましょう。何か分からないことがあったら質問してください。</p>
+
+<pre><code class="language-hidden">// Snowman3Animated
+void setup() {
+  size(300, 300);
+}
+
+void draw() {
+  background(220);
+  var x = 150, y = 170;
+  strokeWeight(5);
+  stroke(255, 100, 100);
+  ellipse(x, y+80, 100, 100);
+  stroke(100, 255, 100);
+  ellipse(x-5*cos(frameCount/18), y, 80, 80);
+  stroke(100, 100, 255);
+  ellipse(x+5*sin(frameCount/18), y-60, 60, 60);
+}
+</code></pre>
+
+<p>次は<a href="#ref-PJSStep4">ステップ4</a>へ。</p>
+
+</div><div id="ref-PJSStep4" class="section"><h1>ステップ4: マウスの使い方</h1>
+
+<p>ゲームを作るにはユーザーからの入力を処理する必要があります。まずはマウスを使ってみましょう。プログラムの実行中にマウスがキャンバスの中に入ると、<code>mouseX</code>と<code>mouseY</code>の変数にマウスの位置が設定されます。</p>
+
+<pre><code class="language-prerender">void draw() {
+  background(255);  // 白
+  ellipse(mouseX, mouseY, 10, 10);
+}
+</code></pre>
+
+<p>マウスをキャンバス内で動かしてみましょう。丸がマウスについてくるのがわかるでしょう。</p>
+
+<p>では、ユーザーがマウスをクリックしたらキャンバスを黒くしてみましょう。
+ユーザーがマウスをクリックしたことに反応するためには、<code>mousePressed()</code>関数を定義します。この関数は、マウスのボタンが押されたときに呼ばれます。次のプログラムを実行して、マウスをキャンバス内でクリックすると、一瞬だけキャンバスが黒くなります。</p>
+
+<pre><code class="language-prerender">void draw() {
+  background(255);  // 白
+  ellipse(mouseX, mouseY, 10, 10);
+  frameRate(10);
+}
+
+void mousePressed() {
+  background(0);  // 黒
+}
+</code></pre>
+
+<p>なぜキャンバスが黒のままにならないのでしょうか。それは、<code>draw()</code>関数が繰り返し実行され、<code>draw()</code>の中にキャンバスを白く塗りつぶす命令<code>background(255)</code>が入っているからです。</p>
+
+<p>マウスをクリックした後、キャンバスを一瞬だけではなくずっと黒にするには、どうすればいいでしょうか。</p>
+
+<p>ここでは変数が役に立ちます。ただ、前と違って、Processingの標準の変数ではなくて、自分で新しい変数を作ります。変数を作るには、<code>var c =
+255;</code>のような文をプログラムに追加します。この中で<code>int</code>は変数の型を表しています：整数(integerの略)。 <code>=
+255</code>は変数の値を指定しています。<code>c</code>は変数の名前です。マウスがクリックされたときに<code>mousePressed()</code>が呼ばれるので、その中で変数の値を変えることができます。
+<code>c = 0;</code>は変数に新しい値(<code>0</code>)を与えます。</p>
+
+<pre><code class="language-prerender">var c = 255;
+
+void draw() {
+  background(c);
+  ellipse(mouseX, mouseY, 10, 10);
+  frameRate(10);
+}
+
+void mousePressed() {
+  c = 0;
+}
+</code></pre>
+
+<p>ここでは、プログラムの実行を始めた時に変数cが作られて、最初の値は255になっています。変数の値は255なので、<code>background(c);</code>はキャンバスを白く塗りつぶします。ユーザがマウスをクリックすると、<code>mousePressed()</code>が呼ばれて、変数cの値が0になります。その後は、<code>background(c);</code>という命令はキャンバスを黒く塗りつぶすことになります。</p>
+
+<p><strong>問題4</strong>: 雪だるまをマウスと一緒に動かしてみましょう。</p>
+
+<pre><code class="language-hidden">// SnowmanMouse
+void setup() {
+  size(300, 300);
+}
+
+void draw() {
+  background(220);
+  ellipse(mouseX, mouseY+80, 100, 100);
+  ellipse(mouseX, mouseY, 80, 80);
+  ellipse(mouseX, mouseY-60, 60, 60);
+}
+</code></pre>
+
+<p>次は<a href="#ref-PJSStep5">ステップ5</a>へ。</p>
+
+</div><div id="ref-PJSStep5" class="section"><h1>ステップ5: キーボードの使い方</h1>
+
+<p>ゲーム機には普通マウスはついてないので、キーパッドで遊ぶことが多いでしょう。では、ゲーム機のようにキーボードを使って遊べるようにするにはどうすればいいでしょう。</p>
+
+<p>Processingでは、キーボードの使い方はマウスととても似ています。キーボードのボタンが押されるたびに<code>keyPressed()</code>関数が呼ばれます。次の例を見ましょう。その関数の中に<code>keyCode</code>を参照すれば、押されたキーが分かります。次のプログラムは丸を描いています。実行したら、キャンバス内をクリックして、左右の矢印キーを押してみましょう。</p>
+
+<pre><code class="language-prerender">var x = 50;
+
+void draw() {
+  background(220);
+  ellipse(x, 50, 30, 30);
+}
+
+void keyPressed() {
+  if (keyCode == LEFT) {
+    x = x - 5;
+  }
+  if (keyCode == RIGHT) {
+      x = x + 5;
+  }
+}
+</code></pre>
+
+<p><strong>問題5</strong>: 雪だるまをキーボードの左右矢印キーで動かしてみましょう。</p>
+
+<pre><code class="language-hidden">// SnowmanKeyboard
+
+var x = 150;
+
+void setup() {
+  size(300, 300);
+}
+
+void draw() {
+  background(220);
+  ellipse(x, 250, 100, 100);
+  ellipse(x, 170, 80, 80);
+  ellipse(x, 110, 60, 60);
+}
+
+void keyPressed() {
+  if (keyCode == LEFT) {
+    x = x - 5;
+  }
+  if (keyCode == RIGHT) {
+      x = x + 5;
+  }
+}
+</code></pre>
+
+<p>次は<a href="#ref-PJSStep6">ステップ6</a>へ。</p>
+
+</div><div id="ref-PJSStep6" class="section"><h1>ステップ6: シミュレーション</h1>
+
+<p>ゲームのなかのオブジェクトは馴染みがあると遊びやすくなります。たとえば、重力で落ちるボールはどのようにプログラムで表現するのでしょうか？それはシミュレーションを使って実装できます。ボールのシミュレーションにはボールの位置と速度が必要です。重力の場合は加速度は定数です。</p>
+
+<pre><code class="language-example">var y = 10;
+var vy = 0;
+
+void draw() {
+  // シミュレーション
+  y = y + vy;     // 縦位置
+  vy = vy + 0.1;  // 加速
+  // アニメーション
+  background(220);
+  ellipse(50, y, 30, 30);
+}
+</code></pre>
+
+<p>ボールのシミュレーションに２つの変数を使います。<code>y</code>は縦位置と<code>vy</code>は縦速度を表しています。<code>draw()</code>は一秒で何回も呼ばれるので、毎回新しい位置や速度を計算します。シミュレーションの計算の後、キャンバスを書き直すことでアニメーションを実装します。この例では前と違って<code>float</code>の変数を使います。<code>float</code>は浮動小数点数といい、整数ではない数を保存できます。</p>
+
+<p>以上のシミュレーションでボールが一回キャンバスの下に落ちたらキャンバスから消えます。ボールをゲームから消えさせないようにキャンバスの端からバウンドさせることできます。
+プログラムの実行の世界では端というものが存在しないので、プログラムは「壁にぶつかったか」という条件を調べなければいけません。</p>
+
+<pre><code class="language-example">var y = 10;
+var vy = 0;
+
+void draw() {
+  y = y + vy;     // 縦位置
+  vy = vy + 0.1;  // 加速
+  if (y &gt; height) {  // 床に当たる条件
+    y = height;
+    vy = -4;
+  }
+  background(220);
+  ellipse(50, y, 30, 30);
+}
+</code></pre>
+
+<p>この例では、円が床に当たっているかどうかという条件を調べています。<code>y</code>軸は下向きなので、キャンバスの下の部分のY座標は<code>height</code>です。シミュレーションの計算の結果でボールは床下に行きそうの条件は
+<code>y &gt; height</code>で調べます。</p>
+
+<p>ボールが床に当たったら、ボールに上向きの速度を与えれば、本物のボールのようにバウンドします。</p>
+
+<p><strong>問題6:</strong> 雪だるまを飛びさせましょう。</p>
+
+<pre><code class="language-hidden">// SnowmanBounce
+
+var x = 150;
+var y;
+var vy = -2;
+
+void setup() {
+  size(300, 300);
+  y = height;
+}
+
+void draw() {
+  y = y + vy;
+  vy = vy + 0.1;
+  if (y &gt; height) {
+    y = height;
+    vy = -4;
+  }
+  background(220);
+  ellipse(x, y-50, 100, 100);
+  ellipse(x, y-130, 80, 80);
+  ellipse(x, y-190, 60, 60);
+}
+
+void keyPressed() {
+  if (keyCode == LEFT) {
+    x = x - 5;
+  }
+  if (keyCode == RIGHT) {
+      x = x + 5;
+  }
+}
+</code></pre>
+
+<p>次は<a href="#ref-PJSStep7">ステプ7</a>へ。</p>
+
+</div><div id="ref-PJSStep7" class="section"><h1>ステップ7: 画像と音</h1>
+
+<p>以前はゲーム作り基本を学びましたが、 楽しいゲームを作るために画像や音が欠かせないものです。 簡単な画像や音のエフェクトの使い方を紹介します。</p>
+
+<p>画像を使うにはそれをロードしなければいけません。 このプログラムでは、<code>@pjs preload=&#34;...&#34;;</code>と<code>loadImage(&#34;...&#34;)</code>
+二箇所で画像名を入れて、画像データを用意します。</p>
+
+<pre><code class="language-prerender">/* @pjs preload=&#34;images/baloon1-170x200.png&#34;; */
+PImage img = loadImage(&#34;images/baloon1-170x200.png&#34;);
+imageMode(CENTER);
+image(img, 50, 50, 85, 100);
+</code></pre>
+
+<p><code>imageMode</code>は画像の写し方を設定します。 <code>CENTER</code>(中心)を設定すると座標の(x,y)の点に画像の中心が写します。
+<code>CORNER</code>(角)を設定すると(x,y)の点に左上角が写します。</p>
+
+<pre><code class="language-render">/* @pjs preload=&#34;images/baloon1-170x200.png&#34;; */
+PImage img = loadImage(&#34;images/baloon1-170x200.png&#34;);
+void setup() {
+  size(300, 200);
+  frameRate(1);
+  textSize(16);
+  fill(0);
+  textAlign(LEFT, TOP);
+  strokeWeight(5);
+}
+void draw() {
+  background(220);
+  if (frameCount % 2 == 0) {
+    imageMode(CENTER);
+    image(img, width/2, height/2, 85, 100);
+    text(&#34;imageMode(CENTER);&#34;, 2, 5);
+  } else {
+    imageMode(CORNER);
+    image(img, width/2, height/2, 85, 100);
+    text(&#34;imageMode(CORNER);&#34;, 2, 5);
+  }
+  point(width/2, height/2);
+  text(&#34;(x,y)&#34;, width/2, height/2);
+}
+</code></pre>
+
+<p>画像をいくつか用意しましたので、<a href="#ref-ImageLibrary">画像リスト</a>でご確認ください。</p>
+
+<p>音の場合も、音のデータを用意する必要があります。<code>loadSound()</code>を呼ぶことによって
+音のデータを用意します。用意されたデータを<code>PAudio</code>の変数に保存しておきます。
+用意してから適切なときに<code>play()</code>命令を使って再生します。音の場合は、再生は 時間かかりますが、その家にプログラムは実行し続きます。
+次のプログラムを実行して、 キャンバス内でクリックしてみてください。</p>
+
+<pre><code class="language-prerender">PAudio sound = loadSound(&#34;images/meow.ogg&#34;);
+void mouseClicked() {
+  sound.play();
+}
+void draw() {
+  if (sound.isPlaying()) {
+    background(220);
+    fill(0); textSize(20);
+    text(&#34;Meow&#34;, 5, 20);
+  } else {
+    background(220);
+  }
+}
+</code></pre>
+
+<p>音をいくつか用意しましたので、<a href="#ref-SoundLibrary">音のリスト</a>を見てください。</p>
+
+<p>次は<a href="#ref-PJSStep8">ステップ8</a>へ。</p>
+
+</div><div id="ref-PJSStep8" class="section"><h1>ステップ7: ゲームサンプル</h1>
+
+<p>次のプログラムをサンプルとして使って自由自在ゲームを作ってみましょう。 以下に部分ごとに説明あります。</p>
+
+<pre><code class="language-example">// RocketLandingExample
+
+/* @pjs preload=&#34;images/fire2-134x200.png&#34;; */
+/* @pjs preload=&#34;images/rocket-168x300.png&#34;; */
+/* @pjs preload=&#34;images/rocket1-168x300.png&#34;; */
+PImage fire = loadImage(&#34;images/fire2-134x200.png&#34;);
+PImage rocket = loadImage(&#34;images/rocket-168x300.png&#34;);
+PImage rocket_fire = loadImage(&#34;images/rocket1-168x300.png&#34;);
+PAudio explosion = loadSound(&#34;images/explosion.ogg&#34;);
+PAudio roar = loadSound(&#34;images/roar.ogg&#34;);
+PAudio win = loadSound(&#34;images/win.ogg&#34;);
+
+var x;
+var y;
+var vy;
+
+boolean burning = false;
+boolean gameOver = false;
+
+void initVars() {
+  x = 100;
+  y = 10;
+  vy = 0;
+  gameOver = false;
+  burning = false;
+}
+
+void setup() {
+  size(200, 200);
+  frameRate(20);
+  imageMode(CENTER);
+  initVars();
+}
+
+void draw() {
+  y = y + vy;
+  vy = vy + 0.2;
+  
+  if (y &gt; height - 30) {
+    if (abs(vy) &gt; 3) {
+      background(200);
+      image(fire, x, y-25, 65, 100);
+      explosion.play();
+    } else {
+      win.play();
+    }
+    noLoop();
+    gameOver = true;
+    return;
+  }
+  
+  background(100);
+  if (burning) {
+    image(rocket_fire, x, y, 34, 60);
+    burning = false;
+  } else {
+    image(rocket, x, y, 34, 60);
+  }
+}
+
+void burn() {
+  burning = true;
+  vy -= 2;
+  roar.play();
+}
+
+void keyPressed() {
+  if (gameOver) {
+    initVars();
+    loop();
+    return;
+  }
+  burn();
+}
+
+void mousePressed() {
+  if (gameOver) {
+    explosion.pause();
+    initVars();
+    loop();
+    return;
+  }
+  burn();
+}
+</code></pre>
+
+<p>次は<a href="#ref-Games">サンプルゲーム</a>を参照。</p>
+
+</div><div id="ref-Tools" class="section"><h1>ツール</h1>
+
+<ul>
+<li><a href="#ref-ShowAxes">軸を示す</a></li>
+<li><a href="#ref-ShowCoordinates">座標を示す</a></li>
+<li><a href="#ref-ColorTool">色を選ぶ</a></li>
+<li><a href="#ref-RectangleTool">長方形を描く</a></li>
+<li><a href="#ref-EllipseTool">楕円を描く</a></li>
+<li><a href="#ref-keyCodes">keyCodeを調べる</a></li>
+</ul>
+
+</div><div id="ref-ShowAxes" class="section"><h1>ShowAxes</h1>
+
+<p>このプログラムは軸をお見せします。</p>
+
+<pre><code class="language-prerender">// CanvasAxes
+void arrow(x1, y1, x2, y2) {
+  line(x1, y1, x2, y2);
+  var x = x2-x1;
+  var y = y2-y1;
+  var l = sqrt(x*x+y*y);
+  x = x / l * 10;
+  y = y / l * 10;
+  alpha = PI/4;
+  line(x2, y2, x2 - x*cos(alpha) + y*sin(alpha), y2 - x*sin(alpha) - y*cos(alpha));
+  line(x2, y2, x2 - x*cos(-alpha) + y*sin(-alpha), y2 - x*sin(-alpha) - y*cos(-alpha));
+}
+
+arrow(10, 20, 90, 20);
+arrow(20, 10, 20, 90);
+fill(0);
+text(&#34;(0,0)&#34;, 1, 11);
+text(&#34;x&#34;, 80, 37);
+text(&#34;y&#34;, 30, 85);
+</code></pre>
+
+</div><div id="ref-ShowCoordinates" class="section"><h1>ShowCoordinates</h1>
+
+<p>このプログラムは座標をお見せします。マウスをキャンバス内で動かしてみてください。</p>
+
+<pre><code class="language-prerender">// ShowCoordinates
+void setup() {
+  size(200, 200);
+}
+
+void draw() {
+  background(220);
+  textSize(20);
+  fill(0);
+  text(&#34;(&#34;+mouseX+&#34;,&#34;+mouseY+&#34;)&#34;, 80, 110);
+}
+</code></pre>
+
+</div><div id="ref-ColorTool" class="section"><h1>ColorTool</h1>
+
+<p>マウスを動かじながら、色を選ぶ</p>
+
+<pre><code class="language-prerender">// ColorsDemo2
+color posToColor(x, y) {
+  if (x &lt; width/2 &amp;&amp; y &lt; height/2) {
+    return color((width/2-x)/width*512, (height/2-y)/height*512, 0);
+  } else if (x &lt; width/2) {
+    return color(220);
+  } else if (y &lt; height/2) {
+    return color(0, (height/2-y)/height*512, (x-width/2)/width*512);
+  } else {
+    return color((y-height/2)/height*512, 0, (x-width/2)/width*512);
+  }
+}
+
+void setup() {
+  size(300, 300);
+  for (var x = 0; x &lt; width; x++) {
+    for (var y = 0; y &lt; height; y++) {
+      set(x, y, posToColor(x, y));
+    }
+  }
+
+  fill(0);
+  textSize(height/20);
+  text(&#34;(255,0,0)&#34;, 5, height/2-5);
+  text(&#34;(255,255,0)&#34;, 5, 20);
+  textAlign(RIGHT, TOP);
+  text(&#34;(0,255,255)&#34;, width-5, 2);
+  textAlign(CENTER, TOP);
+  text(&#34;(0,255,0)&#34;, width/2, 2);
+  textAlign(LEFT, BASELINE);
+  fill(255);
+  text(&#34;(0,0,0)&#34;, width/2+2, height/2-2);
+  textAlign(RIGHT, BASELINE);
+  text(&#34;(0,0,255)&#34;, width-2, height/2);
+  fill(0);
+  textAlign(LEFT, BOTTOM);
+  text(&#34;(255,0,0)&#34;, width/2+2, height-2);
+  textAlign(RIGHT, BOTTOM);
+  text(&#34;(255,0,255)&#34;, width-2, height-2);
+}
+
+void draw() {
+  color c = posToColor(mouseX, mouseY);
+  noStroke();
+  fill(c);
+  rect(width/10, 6*height/10, 3*width/10, 3*height/10);
+  fill(250);
+  rect(width/10, 9*height/10, 3*width/10, height/15);
+  fill(0);
+  textSize(height/27);
+  textAlign(LEFT, BASELINE);
+  text(&#34;color(&#34;+red(c)+&#34;,&#34;+green(c)+&#34;,&#34;+blue(c)+&#34;)&#34;, width/10, height*19/20);
+}
+</code></pre>
+
+</div><div id="ref-EllipseTool" class="section"><h1>EllipseTool</h1>
+
+<p>このプログラムは楕円を書く命令をお見せします。キャンバス内でマウス・ドラッグしてみてください。</p>
+
+<pre><code class="language-prerender">// EllipseTool
+void setup() {
+  size(200, 200);
+}
+
+var x1, y1, x2, y2;
+var pressed = false;
+
+void draw() {
+  background(220);
+  if (pressed) {
+    x2 = mouseX;
+    y2 = mouseY;
+  }
+  if (x2 != x1) {
+    fill(255);
+    ellipse(x1, y1, (x2-x1)*2, (y2-y1)*2);
+  }
+  textSize(18);
+  fill(0);
+  text(&#34;ellipse(&#34;+x1+&#34;,&#34;+y1+&#34;,&#34;+((x2-x1)*2)+&#34;,&#34;+((y2-y1)*2)+&#34;)&#34;, 10, height-10);
+}
+
+void mousePressed() {
+  if (!pressed) {
+    x1 = mouseX;
+    y1 = mouseY;
+    pressed = true;
+  }
+}
+
+void mouseReleased() {
+  if (pressed) {
+    x2 = mouseX;
+    y2 = mouseY;
+    pressed = false;
+  }
+}
+</code></pre>
+
+</div><div id="ref-RectangleTool" class="section"><h1>RectangleTool</h1>
+
+<p>このプログラムは長方形を書く命令をお見せします。キャンバス内でマウス・ドラッグしてみてください。</p>
+
+<pre><code class="language-prerender">// RectangleTool
+void setup() {
+  size(200, 200);
+}
+
+var x1, y1, x2, y2;
+boolean pressed = false;
+
+void draw() {
+  background(220);
+  if (pressed) {
+    x2 = mouseX;
+    y2 = mouseY;
+  }
+  if (x2 != x1) {
+    fill(255);
+    rect(x1, y1, (x2-x1), (y2-y1));
+  }
+  textSize(20);
+  fill(0);
+  text(&#34;rect(&#34;+x1+&#34;,&#34;+y1+&#34;,&#34;+(x2-x1)+&#34;,&#34;+(y2-y1)+&#34;)&#34;, 10, height-10);
+}
+
+void mousePressed() {
+  if (!pressed) {
+    x1 = mouseX;
+    y1 = mouseY;
+    pressed = true;
+  }
+}
+
+void mouseReleased() {
+  if (pressed) {
+    x2 = mouseX;
+    y2 = mouseY;
+    pressed = false;
+  }
+}
+</code></pre>
+
+</div><div id="ref-SoundLibrary" class="section"><h1>音のリスト</h1>
+
+<pre><code class="language-prerender">// SoundExample
+PAudio sound = loadSound(&#34;images/explosion.ogg&#34;);
+void mousePressed() {
+  sound.play();
+}
+</code></pre>
+
+<ul>
+<li><code>images/coin.ogg</code> <audio src="images/coin.ogg" controls=""></audio></li>
+<li><code>images/tututun.ogg</code> <audio src="images/tututun.ogg" controls=""></audio></li>
+<li><code>images/didin.ogg</code> <audio src="images/didin.ogg" controls=""></audio></li>
+<li><code>images/rururun.ogg</code> <audio src="images/rururun.ogg" controls=""></audio></li>
+<li><code>images/bells.ogg</code> <audio src="images/bells.ogg" controls=""></audio></li>
+<li><code>images/strings.ogg</code> <audio src="images/strings.ogg" controls=""></audio></li>
+<li><code>images/ugh.ogg</code> <audio src="images/ugh.ogg" controls=""></audio></li>
+<li><code>images/bang.ogg</code> <audio src="images/bang.ogg" controls=""></audio></li>
+<li><code>images/ding.ogg</code> <audio src="images/ding.ogg" controls=""></audio></li>
+<li><code>images/cannon.ogg</code> <audio src="images/cannon.ogg" controls=""></audio></li>
+<li><code>images/growl.ogg</code> <audio src="images/growl.ogg" controls=""></audio></li>
+<li><code>images/explosion.ogg</code> <audio src="images/explosion.ogg" controls=""></audio></li>
+<li><code>images/clicks.ogg</code> <audio src="images/clicks.ogg" controls=""></audio></li>
+<li><code>images/fireworks.ogg</code> <audio src="images/fireworks.ogg" controls=""></audio></li>
+<li><code>images/meow.ogg</code> <audio src="images/meow.ogg" controls=""></audio></li>
+<li><code>images/dog.ogg</code> <audio src="images/dog.ogg" controls=""></audio></li>
+<li><code>images/frog.ogg</code> <audio src="images/frog.ogg" controls=""></audio></li>
+<li><code>images/roar.ogg</code> <audio src="images/roar.ogg" controls=""></audio></li>
+<li><code>images/launch.ogg</code> <audio src="images/launch.ogg" controls=""></audio></li>
+<li><code>images/shot.ogg</code> <audio src="images/shot.ogg" controls=""></audio></li>
+<li><code>images/win.ogg</code> <audio src="images/win.ogg" controls=""></audio></li>
+</ul>
+
+</div><div id="ref-ImageLibrary" class="section"><h1>画像リスト</h1>
+
+<pre><code class="language-prerender">// ImageExample
+/* @pjs preload=&#34;images/baloon1-170x200.png&#34;; */
+PImage img = loadImage(&#34;images/baloon1-170x200.png&#34;);
+imageMode(CENTER);
+image(img, 50, 50, 85, 100);
+</code></pre>
+
+<ul>
+<li>images/baloon1-170x200.png
+<img src="images/baloon1-170x200.png" alt="static/baloon1-170x200.png"/></li>
+<li>images/baloon2-158x200.png
+<img src="images/baloon2-158x200.png" alt="images/baloon2-158x200.png"/></li>
+<li>images/banana-200x113.png
+<img src="images/banana-200x113.png" alt="images/banana-200x113.png"/></li>
+<li>images/baseball-200x171.png
+<img src="images/baseball-200x171.png" alt="images/baseball-200x171.png"/></li>
+<li>images/cat1-200x134.png
+<img src="images/cat1-200x134.png" alt="images/cat1-200x134.png"/></li>
+<li>images/cat2-185x200.png
+<img src="images/cat2-185x200.png" alt="images/cat2-185x200.png"/></li>
+<li>images/cat3-134x200.png
+<img src="images/cat3-134x200.png" alt="images/cat3-134x200.png"/></li>
+<li>images/dog1-200x188.png
+<img src="images/dog1-200x188.png" alt="images/dog1-200x188.png"/></li>
+<li>images/dog2-180x200.png
+<img src="images/dog2-180x200.png" alt="images/dog2-180x200.png"/></li>
+<li>images/dog3-179x200.png
+<img src="images/dog3-179x200.png" alt="images/dog3-179x200.png"/></li>
+<li>images/face1-150x200.png
+<img src="images/face1-150x200.png" alt="images/face1-150x200.png"/></li>
+<li>images/face2-171x200.png
+<img src="images/face2-171x200.png" alt="images/face2-171x200.png"/></li>
+<li>images/face3-188x200.png
+<img src="images/face3-188x200.png" alt="images/face3-188x200.png"/></li>
+<li>images/face4-106x200.png
+<img src="images/face4-106x200.png" alt="images/face4-106x200.png"/></li>
+<li>images/face5-163x200.png
+<img src="images/face5-163x200.png" alt="images/face5-163x200.png"/></li>
+<li>images/face6-155x200.png
+<img src="images/face6-155x200.png" alt="images/face6-155x200.png"/></li>
+<li>images/fire1-200x123.png
+<img src="images/fire1-200x123.png" alt="images/fire1-200x123.png"/></li>
+<li>images/fire2-134x200.png
+<img src="images/fire2-134x200.png" alt="images/fire2-134x200.png"/></li>
+<li>images/football1-200x200.png
+<img src="images/football1-200x200.png" alt="images/football1-200x200.png"/></li>
+<li>images/football2-200x200.png
+<img src="images/football2-200x200.png" alt="images/football2-200x200.png"/></li>
+<li>images/kiwi-200x200.png
+<img src="images/kiwi-200x200.png" alt="images/kiwi-200x200.png"/></li>
+<li>images/rose-200x161.png
+<img src="images/rose-200x161.png" alt="images/rose-200x161.png"/></li>
+<li>images/rocket-168x300.png
+<img src="images/rocket-168x300.png" alt="images/rocket-168x300.png"/></li>
+<li>images/rocket1-168x300.png
+<img src="images/rocket1-168x300.png" alt="images/rocket1-168x300.png"/></li>
+<li>images/smoke-200x195.png
+<img src="images/smoke-200x195.png" alt="images/smoke-200x195.png"/></li>
+<li>images/sunflower-130x200.png
+<img src="images/sunflower-130x200.png" alt="images/sunflower-130x200.png"/></li>
+<li>images/tennisball-200x197.png
+<img src="images/tennisball-200x197.png" alt="images/tennisball-200x197.png"/></li>
+<li>images/Walker44.png <img src="images/Walker44.png" alt="images/Walker44.png"/></li>
+<li>images/fuzzy-white-64x64.png
+<img src="images/fuzzy-white-64x64.png" alt="images/fuzzy-white-64x64.png"/></li>
+<li>images/fuzzy-black-64x64.png
+<img src="images/fuzzy-black-64x64.png" alt="images/fuzzy-black-64x64.png"/></li>
+</ul>
+
+</div><div id="ref-workshopSep" class="section"><h1>Processing.js 夏期ワークショップ</h1>
+
+<ul>
+<li><a href="#ref-WhackACircle0">はじめに</a></li>
+<li>Step 1: 円が１個
+
+<ul>
+<li><a href="#ref-WhackACircle11">Step 1.1: 円を描いてみる</a></li>
+<li><a href="#ref-WhackACircle12">Step 1.2: コメントを書きましょう</a></li>
+<li><a href="#ref-WhackACircle13">Step 1.3: 様々な色</a></li>
+<li><a href="#ref-WhackACircle14">Step 1.4: ◯をランダムに表示</a></li>
+<li><a href="#ref-WhackACircle15">Step 1.5: 円を「動かす」</a></li>
+<li><a href="#ref-WhackACircle16">Step 1.6: クリックして文字を表示する</a></li>
+<li><a href="#ref-WhackACircle17">Step 1.7: クリック回数を表示する</a></li>
+<li><a href="#ref-WhackACircle18">Step 1.8: コードを整理しよう</a></li>
+<li><a href="#ref-WhackACircle19">Step 1.9: 円をクリックしたらスコアを増やす</a></li>
+</ul></li>
+<li>Step 2: 円が 9 個
+
+<ul>
+<li><a href="#ref-WhackACircle21">Step 2.1: 9 個の円を一定の場所に表示する</a></li>
+<li><a href="#ref-WhackACircle22">Step 2.2: 各円を表示するかどうかをランダムに決める</a></li>
+<li><a href="#ref-WhackACircle23">Step 2.3: 課題</a></li>
+</ul></li>
+<li>迷路を右手法で解く
+
+<ul>
+<li><a href="#ref-Maze1">1. キャラクタを表示</a></li>
+<li><a href="#ref-Maze2">2. キャラクターを動かす</a></li>
+<li><a href="#ref-Maze3">3. 壁の検出</a></li>
+<li><a href="#ref-Maze4">4. 右手法</a></li>
+<li><a href="#ref-Maze5">5. ゴールの検出</a></li>
+<li><a href="#ref-Maze6">6. 完成プログラム</a></li>
+</ul></li>
+<li>最短ルート探し
+
+<ul>
+<li><a href="#ref-LabyrinthBlank">1. 空迷路</a></li>
+<li><a href="#ref-LabyrinthMapper">2. 地図作り</a></li>
+<li><a href="#ref-LabyrinthSearch">3. 最短の道</a></li>
+<li><a href="#ref-LabyrinthBacktrace">4. 道の作り直し</a></li>
+<li><a href="#ref-LabyrinthSolver">5. 完成版</a></li>
+</ul></li>
+<li><a href="#ref-index">索引</a></li>
+<li><a href="#ref-Demos">デモ</a></li>
+<li><a href="#ref-Games">ゲーム</a></li>
+</ul>
+
+</div><div id="ref-WhackACircle0" class="section"><h1>はじめに</h1>
+
+<p>今回は Scratch のようにブロックでコードを書くプログラミング言語ではなく、文字で書かれたプログラミング言語で、簡単なゲームを作ってみましょう。</p>
+
+<p>このゲームは午前中に Scratch で作った「猫たたき」のように円が現れたり消えたりして、円をクリックできたら得点がもらえるゲームです。</p>
+
+<pre><code class="language-render">// WhackACircle0
+void circle(x, y, r) {
+}
+int width = 300;
+int margin = 50;
+int radius = 50;
+int step = (width - 2*margin)/2;
+void maru(int col, int row) {
+  fill(0, 255, 0);
+  stroke(255, 0, 0);
+  strokeWeight(3);
+  ellipse(margin + col*step, margin + row*step, radius, radius);
+}
+void setup() {
+  size(300, 300);
+  background(255);
+  maru(0, 0);
+  maru(1, 0);
+  maru(1, 1);
+  maru(2, 1);
+  maru(0, 2);
+  maru(2, 2);
+  fill(0);
+  textSize(18);
+  text(&#34;スコア:2&#34;, 10, 20);
+}
+void draw() {
+  exit();
+}
+</code></pre>
+
+<h2>Processing って何？</h2>
+
+<p>Processing は絵などを描けるプログラミング言語です。アプリ開発などで広く使われている Java
+というプログラミング言語に近いので、Processing をマスターできたらあと一歩で Java でプログラムを書いて実際のエンジニアになれます。</p>
+
+<h2>Processing で作る <strike>「猫たたき」</strike> 「◯たたき」</h2>
+
+<p>では、本番に入って Processing のコードを書いてみましょう！</p>
+
+<h2>Step 1: 円が１個</h2>
+
+<p>最初のステップでは円１個だけをランダムに表示し、ユーザーがクリックできたらスコアを１増やします。</p>
+
+<p><a href="#ref-WhackACircle11">Step 1.1: 円を描いてみる</a></p>
+
+</div><div id="ref-WhackACircle11" class="section"><h1>Step 1.1: 円を描いてみる</h1>
+
+<p><a href="#ref-WhackACircle0">前に戻る</a></p>
+
+<p>まず円を描いてみましょう！以下のコードを入力して実行したら、円が描かれます。</p>
+
+<pre><code class="language-prerender">// Circle
+size(100, 100);
+ellipse(50, 50, 10, 10);
+</code></pre>
+
+<p>このプログラムには命令が２つ含まれています。最初の命令は <code>size(100, 100);</code> です。これはキャンバスの大きさを 100 × 100
+にする命令です。これを指定して実行すると、四角いキャンバスが現れます。括弧の中に数字が 2
+つ入っています。この数字を引数と呼びます。値を変えて実行すると、違うサイズのキャンバスが現れます。例えば、<code>size(500, 300);</code>
+にすると、横長のキャンバスができたり、<code>size(200, 600);</code> にすると、縦長のキャンバスができます。</p>
+
+<p>次の命令は <code>ellipse(50, 50, 10, 10);</code> です。これはキャンバスに円を描く命令です。この命令には 4 つの引数が必要です。最初の 2
+つは円の中心点の位置を指定します。値を変えて実行し、円の位置を動かしてみましょう。最後の 2
+つの引数は円の横と縦の直径を指定します。英語がわかる人は気づいたかもしれませんが、ellipse
+という単語は円という意味ではなくて、楕円という意味です。円は必ず横と縦の直径が等しいですが、この命令で 2
+つの値を違う大きさにすると円ではなく、楕円が描かれます。値を変えて実行してみましょう。</p>
+
+<p>この 2 つの命令には行の最後に <code>;</code> <strong>セミコロン</strong>
+があります。セミコロンは命令が終わったことを意味します。これがないと実行できたり、できなかったり、またはプログラムが思った通りに動かない場合があります。また、セミコロンを書き忘れると、赤い線が出てきます。この赤い線はコードの中でどこかで書き間違えているという意味なので、赤い線を見たら間違いを探してコードを修正してください。</p>
+
+<p><img src="images/missing_semicolon.png" alt="Missing semicolon warning"/></p>
+
+<p><a href="#ref-WhackACircle12">Step 1.2: コメントを書きましょう</a></p>
+
+</div><div id="ref-WhackACircle12" class="section"><h1>Step 1.2: コメントを書きましょう</h1>
+
+<p><a href="#ref-WhackACircle11">前に戻る</a></p>
+
+<p>以下のコードを入力して実行してみましょう。</p>
+
+<pre><code class="language-example">// WhackACircle11
+// キャンバスの大きさを 300 x 300 にする
+size(300, 300);
+// 中心座標が (150, 150)、直径が 10 の円を描く
+ellipse(150, 150, 10, 10);
+</code></pre>
+
+<p>今回のコードには日本語の説明が入っています。これを<strong>コメント</strong>と呼びます。コメントに書かれた内容はコンピュータは実行しません。コメントは、コードを説明するためのもので、他人にコードを共有するときに相手の人が速く理解できるように記述します。誰かとコードを共有しなくてもコードが長くなると、自分でも１行１行の意味を忘れてしまうこともあるので、コメントをつける習慣を身につけましょう。</p>
+
+<p><a href="#ref-WhackACircle13">Step 1.3: 様々な色</a></p>
+
+</div><div id="ref-WhackACircle13" class="section"><h1>Step 1.3: 様々な色</h1>
+
+<p><a href="#ref-WhackACircle12">前に戻る</a></p>
+
+<p>色を変えてみましょう。以下のコードを入力して実行してみましょう。</p>
+
+<pre><code class="language-example">// WhackACircle12
+// キャンバスの大きさを 300 × 300 にする
+size(300, 300);
+// キャンバスを白で塗ります
+background(255, 255, 255);
+// 円の中身を緑色にする
+fill(0, 255, 0);
+// 円周を赤にする
+stroke(255, 0, 0);
+// 線の太さを 2 にする
+strokeWeight(2);
+// 中心座標が (150, 150)、直径が 40 の円を描く
+ellipse(150, 150, 40, 40);
+</code></pre>
+
+<p>各命令の意味はコメントで説明されています。ここで注目してほしいのは色の指定方法です。すべての色に関する命令は 3
+つの数値を必要とします。これはパソコンやTVで使用される画面の色の表示のしかたに由来します。画面で表示される色は３つの原色から表現されています。この原色は光の原色で、<strong>赤</strong>、<strong>緑</strong>、<strong>青</strong>で、RGB
+(Red, Green, Blue) と呼ばれています。それぞれの値は0 から 255 まで指定できます。すべての値が 0 の場合は黒で、すべての値が 255
+の場合は白になります。</p>
+
+<p><img src="images/colors.png" alt="Color chart"/></p>
+
+<p><a href="#ref-WhackACircle14">Step 1.4: ◯をランダムに表示</a></p>
+
+</div><div id="ref-WhackACircle14" class="section"><h1>Step 1.4: ◯をランダムに表示</h1>
+
+<p><a href="#ref-WhackACircle13">前に戻る</a></p>
+
+<p>円をランダムな場所に表示します。以下のコードを入力して数回実行してみましょう。</p>
+
+<pre><code class="language-example">// RandomCircle
+// キャンバスの大きさを 300 × 300 にする
+size(300, 300);
+// キャンバスを白で塗る
+background(255, 255, 255);
+// 円の中身を緑色にする
+fill(0, 255, 0);
+// 円周を赤にする
+stroke(255, 0, 0);
+// 線の太さを 2 にする
+strokeWeight(2);
+
+// ランダムな座標を生成する
+int x = random(0, 300);
+int y = random(0, 300);
+
+// 中心座標が (x, y)、直径が 40 の円を描く
+ellipse(x, y, 40, 40);
+</code></pre>
+
+<p>実行される度に円の場所が変わることがわかります。そこで <code>int x = random(0, 300);</code>
+という命令に注目してください。この命令は変数を定義します。変数はデータを一時的に保存するものです。Scratch
+ではこのように変数を作って様々なブロックが現れますね。</p>
+
+<p><img src="images/scratch_variable.png" alt="Scratch variable"/></p>
+
+<p>変数を初めて使うときには、変数を「<strong>定義</strong>」して、変数の名前・型・初期値を決めます。名前と型は定義した後で変更できませんが、値は後から変更できます。</p>
+
+<pre><code>int x = random(0, 300);
+</code></pre>
+
+<p>上記の文は、 <code>int</code>（整数）型の変数 <code>x</code> を定義し、初期値を <code>random(0, 300)</code>、つまり 0 から 300 までの乱数とします。<code>x</code> と
+<code>y</code> の変数は円を描く命令に使われます。円の中心座標が今までの 150, 150 のかわりに <code>x</code>, <code>y</code> となり、命令が <code>ellipse(x, y,
+40, 40);</code> になっています。</p>
+
+<p><a href="#ref-WhackACircle15">Step 1.5: 円を「動かす」</a></p>
+
+</div><div id="ref-WhackACircle15" class="section"><h1>Step 1.5: 円を「動かす」</h1>
+
+<p><a href="#ref-WhackACircle14">前に戻る</a></p>
+
+<p>今までは円を一回描くだけですが、次は円を繰り返しランダムな場所に描いてみます。以下のコードを入力して実行してみましょう。</p>
+
+<pre><code class="language-example">// WhackACircle15
+// 初期化・一回だけ実行される
+void setup() {
+  // キャンバスの大きさを 300 × 300 にする
+  size(300, 300);
+  // 滑らかに描く
+  smooth();
+  // 1 秒間に 30 回描く
+  frameRate(30);
+}
+
+// ずっと実行される
+void draw() {
+  // キャンバスを白で塗る
+  background(255, 255, 255);
+  // 円の内部を緑色で塗る
+  fill(0, 255, 0);
+  // 円周を赤色で描く
+  stroke(255, 0, 0);
+  // 線の太さを 2 にする
+  strokeWeight(2);
+
+  // ランダムな座標を生成する
+  int x = random(0, 300);
+  int y = random(0, 300);
+
+  // 中心座標が (x, y)、直径が 40 の円を描く
+  ellipse(x, y, 40, 40);
+}
+</code></pre>
+
+<p>実行すると、円が高速でランダムな場所で現れます。今回のプログラムには、<code>void setup() { ... }</code> と <code>void draw() { ...
+}</code> という書き方が出てきます。これらは<strong>メソッド</strong>と呼びます。メソッドは複数の命令をまとめて、１個の命令として使えるようにします。</p>
+
+<p>Scratch では、各ブロック（例：ペンを下ろす）がメソッドだと考えても間違いではないでしょう。Processing
+でメソッドを定義することは、Scratch でブロック定義を使用して他のブロックをまとめるのに似ています。次の例を見てみましょう。</p>
+
+<p><img src="images/scratch_method.png" alt="Scratch method"/></p>
+
+<p>Scratch と同様、Processing でも <code>size(300, 300);</code> などの命令がメソッドの呼び出しです。</p>
+
+<p>Step 1.5 の Processing のプログラムでは、<code>setup</code> と <code>draw</code>
+というメソッドを定義しています。これは特別なメソッドです。<code>setup</code> はプログラムが始まったらすぐに 1 回だけ実行されます。<code>draw</code> は
+<code>setup</code> が実行されたあとに、ずっと実行されます。定義文の構成を説明します。最初の <code>void</code>
+はこのメソッドを実行しても何の値も返さないという意味を宣言しています。値を返すメソッドもあり、<code>random</code> はその例の 1
+つで指定された範囲からランダムな値を返します。</p>
+
+<p>これから、値の返すメソッドを定義していきます。メソッド名のあとの括弧には何も入っていない <code>setup()</code>
+のようなメソッドは引数を取りません。引数を取るメソッドも続きのステップで定義します。</p>
+
+<p>さて、問題です。今のプログラムでは円が高速で動いています。もっとゆっくり動かすことができるでしょうか？コードとコメントを読んで、表示の頻度を 1 秒に 1
+回に変えましょう。</p>
+
+<p><a href="#ref-WhackACircle16">Step 1.6: クリックして文字を表示する</a></p>
+
+</div><div id="ref-WhackACircle16" class="section"><h1>Step 1.6: クリックして文字を表示する</h1>
+
+<p><a href="#ref-WhackACircle15">前に戻る</a></p>
+
+<p>以下のコードを入力して実行してみましょう。</p>
+
+<pre><code class="language-example">// WhackACircle16
+void setup() {
+  size(300,300);
+  framerate(1);
+}
+
+// マウスをクリックしたら実行される
+void mouseClicked() {
+  // 文字の色を黒にする
+  fill(0, 0, 0);
+  // 文字の大きさを 30 にする
+  textSize(30);
+  // 座標 (150, 150) に「こんにちは」という文字を表示
+  text(&#34;こんにちは&#34;, 150, 150);
+}
+</code></pre>
+
+<p>上記のプログラムでは <code>mouseClicked()</code>
+というメソッドが定義されています。これも特別なメソッドで、キャンバスにマウスでクリックした際にだけこのメソッドが実行されます。このようなきっかけを<strong>イベント</strong>と呼びます。そして、イベントが起こると実行されるメソッドを<strong>イベントハンドラ</strong>と呼びます。</p>
+
+<p><a href="#ref-WhackACircle17">Step 1.7: クリック回数を表示する</a></p>
+
+</div><div id="ref-WhackACircle17" class="section"><h1>Step 1.7: クリック回数を表示する</h1>
+
+<p><a href="#ref-WhackACircle16">前に戻る</a></p>
+
+<p>以下のコードを入力して実行してみましょう。</p>
+
+<pre><code class="language-example">// WhackACircle17
+int score = 0;
+
+void setup() {
+  size(300,300);
+  background(255, 255, 255);
+  frameRate(1);
+}
+
+void draw() {
+  // キャンバスを白で塗る
+  background(255, 255, 255);
+  // 文字の色を黒にする
+  fill(0, 0, 0);
+  // 文字の大きさを 15 にする
+  textSize(15);
+  // 座標 (10, 20) にスコアを表示
+  text(&#34;スコア: &#34; + str(score), 10, 20);
+}
+
+// マウスをクリックしたら実行されるイベントハンドラ
+void mouseClicked() {
+  // score の値を増やす
+  score = score + 1;
+}
+</code></pre>
+
+<p>上記のプログラムはメソッドの外で <code>score</code> という変数を定義しています。そして、マウスをクリックするたびにその値を 1
+ずつ増やして表示します。値を増やす命令は、<code>score = score + 1</code>
+と数学的にはありえない等式のようですが、これは等式ではなくて右の値を左の変数に代入する命令です。</p>
+
+<p><a href="#ref-WhackACircle18">Step 1.8: コードを整理しよう</a></p>
+
+</div><div id="ref-WhackACircle18" class="section"><h1>Step 1.8: コードを整理しよう</h1>
+
+<p><a href="#ref-WhackACircle17">前に戻る</a></p>
+
+<p>以下のコードを入力して実行してみましょう。</p>
+
+<pre><code class="language-example">// WhackACircle18
+// 円の中心の座標
+int x;
+int y;
+
+// 円の半径
+int radius = 20;
+
+// スコアを初期化
+int score = 0;
+
+// 初期化・一回だけ実行される
+void setup() {
+  // キャンバスの大きさを 300 × 300 にする
+  size(300, 300);
+  // キャンバスを白で塗ります
+  background(255, 255, 255);
+  // 滑らかに描く
+  smooth();
+  // 1 秒間、1 回描く
+  frameRate(1);
+}
+
+// 座標 (x, y) に円を描く
+void drawCircle(int x, int y) {
+  // 円の中身を緑色にする
+  fill(0, 255, 0);
+  // 円周を赤にする
+  stroke(255, 0, 0);
+  // 線の太さを 2 にする
+  strokeWeight(2);
+  // 中心座標が (x, y)、直径が radius * 2 の円を描く
+  ellipse(x, y, radius * 2, radius * 2);
+}
+
+// スコアを表示
+void drawScore() {
+  // 文字の色を黒にする
+  fill(0, 0, 0);
+  // 文字の大きさを 15 にする
+  textSize(15);
+  // スコアを文字にして、座標 (20, 40) に表示する
+  text(&#34;スコア: &#34; + str(score), 20, 40);
+}
+
+// ずっと実行される
+void draw() {
+  // キャンバスを白で塗ります
+  background(255, 255, 255);
+  // ランダムな座標を生成する
+  x = random(0, 300);
+  y = random(0, 300);
+  // 中心座標が (x, y) の円を描く
+  drawCircle(x, y);
+  // スコアの文字を表示する
+  drawScore();
+}
+
+// マウスをクリックしたら実行されるイベントハンドラ
+void mouseClicked() {
+  // score の値を増やす
+  score = score + 1;
+}
+</code></pre>
+
+<p>上記は円を描くプログラムとスコアを表示するプログラムをあわせたものです。そこにコードをまとめるために <code>drawCircle</code> と <code>drawScore</code>
+というメソッドを定義しています。この 2 つのメソッドの内容を <code>draw</code> に直接書くと、長くなって分かりにくくなります。そこで
+2つの別々のメソッドにまとめています。</p>
+
+<p>この状態ではどこをクリックしてもスコアが増えてしまいます。次は、円をクリックした場合にだけスコアが増えるようにコードを変更してみましょう。</p>
+
+<p><a href="#ref-WhackACircle19">Step 1.9: 円をクリックしたらスコアを増やす</a></p>
+
+</div><div id="ref-WhackACircle19" class="section"><h1>Step 1.9: 円をクリックしたらスコアを増やす</h1>
+
+<p><a href="#ref-WhackACircle18">前に戻る</a></p>
+
+<p>mouseClicked メソッドのコードを次のように書き換えて実行してみましょう。</p>
+
+<pre><code>// ユーザーがマウスをクリックしたら実行されるイベントハンドラ
+void mouseClicked() {
+  // 円の中心点とマウスをクリックした場所との距離が radius より小さかったら
+  if (dist(x, y, mouseX, mouseY) &lt; radius) {
+    // score の値を増やす
+    score = score + 1;
+  }
+}
+</code></pre>
+
+<p>ここでは条件文を使っています。<strong>条件文</strong>の構成は <code>if( ... ) { ... }</code>
+です。括弧の中に条件を書きます。条件が満たされる場合、中括弧の中のコードが実行されます。</p>
+
+<p>上記で使われている条件はコメントで説明されています。<code>dist()</code> メソッドは Processing でもともと定義されているメソッドで、 2
+つの点の間の距離を計算します。</p>
+
+<p>これで最初のステップが完成です。</p>
+
+<p>今までの完成プログラムはこちらで確認できます。</p>
+
+<pre><code class="language-hidden">// WhackACircle19
+// 円の中心の座標
+int x;
+int y;
+
+// 円の半径
+int radius = 20;
+
+// スコアを初期化
+int score = 0;
+
+// 初期化・一回だけ実行される
+void setup() {
+  // キャンバスの大きさを 300 × 300 にする
+  size(300, 300);
+  // キャンバスを白で塗ります
+  background(255, 255, 255);
+  // 滑らかに描く
+  smooth();
+  // 1 秒間、1 回描く
+  frameRate(1);
+}
+
+// 座標 (x, y) に円を描く
+void drawCircle(int x, int y) {
+  // 円の中身を緑色にする
+  fill(0, 255, 0);
+  // 円周を赤にする
+  stroke(255, 0, 0);
+  // 線の太さを 2 にする
+  strokeWeight(2);
+  // 中心座標が (x, y)、直径が radius * 2 の円を描く
+  ellipse(x, y, radius * 2, radius * 2);
+}
+
+// スコアを表示
+void drawScore() {
+  // 文字の色を黒にする
+  fill(0, 0, 0);
+  // 文字の大きさを 15 にする
+  textSize(15);
+  // スコアを文字にして、座標 (20, 40) に表示する
+  text(&#34;スコア: &#34; + str(score), 20, 40);
+}
+
+// ずっと実行される
+void draw() {
+  // キャンバスを白で塗ります
+  background(255, 255, 255);
+  // ランダムな座標を生成する
+  x = random(0, 300);
+  y = random(0, 300);
+  // 中心座標が (x, y) の円を描く
+  drawCircle(x, y);
+  // スコアの文字を表示する
+  drawScore();
+}
+
+// ユーザーがマウスをクリックしたら実行されるイベントハンドラ
+void mouseClicked() {
+  // 円の中心点とマウスをクリックした場所との距離が radius より小さかったら
+  if (dist(x, y, mouseX, mouseY) &lt; radius) {
+    // score の値を増やす
+    score = score + 1;
+  }
+}
+</code></pre>
+
+<h2>Step 2: 円が 9 個</h2>
+
+<p>円を９個に増やして、表示するかどうかをランダムに変えてみます。</p>
+
+<p><a href="#ref-WhackACircle21">Step 2.1: 9 個の円を一定の場所に表示する</a></p>
+
+</div><div id="ref-WhackACircle21" class="section"><h1>Step 2.1: 9 個の円を一定の場所に表示する</h1>
+
+<p><a href="#ref-WhackACircle19">前に戻る</a></p>
+
+<p>コードを次のように書き換えて実行してみましょう。 <code>circleX</code> と <code>circleY</code> は新しいメソッドです。古い <code>draw</code>
+メソッドは消してください。</p>
+
+<pre><code>// WhackACircle21
+// i 番目の円の x 座標を返す (iは円の番号を表す0から8までの整数)
+int circleX(int i) {
+  return (int)(i / 3) * 100 + 50;
+}
+// i 番目の円の y 座標を返す (iは円の番号を表す0から8までの整数)
+int circleY(int i) {
+  return (i % 3) * 100 + 50;
+}
+
+// ずっと実行される
+void draw() {
+  // キャンバスを白で塗る
+  background(255, 255, 255);
+
+  // i を 0 から 8 まで繰り返す
+  int i = 0;
+  while (i &lt; 9) {
+    // 座標 (circleX(i), circleY(i)) に円を描く
+    drawCircle(circleX(i), circleY(i));
+    // 次の円に移る
+    i = i + 1;
+  }
+
+  // スコアの文字を表示する
+  drawScore();
+}
+</code></pre>
+
+<p>上記のコードは 9 個の円を描きます。円は 0 番から 8 番までの番号にします。各円の x 座標と y 座標はそれぞれ <code>circleX</code> と
+<code>circleY</code> で計算します。<code>draw</code>
+メソッド内では、<code>while</code>-ループを使って円を描きます。これは繰り返しを意味します。<code>while</code>-文の構成は <code>while( ... ) { ... }</code>
+です。条件分岐の <code>if</code>
+に近いですが、条件が満たされる限り中括弧のコードが永遠に実行されます。このようなプログラムを書くときには、ループからいつか出るように条件を設定する注意をしなければなりません。上記のコードでは、最初は
+<code>i</code> を 0 に設定して、中括弧の最後のコードで 1 ずつ <code>i</code> を増やしています。</p>
+
+<p>今までの完成プログラムはこちらで確認できます。</p>
+
+<pre><code class="language-hidden">// WhackACircle21
+// 円の中心の座標
+int x;
+int y;
+
+// 円の半径
+int radius = 20;
+
+// スコアを初期化
+int score = 0;
+
+// 初期化・一回だけ実行される
+void setup() {
+  // キャンバスの大きさを 300 × 300 にする
+  size(300, 300);
+  // キャンバスを白で塗ります
+  background(255, 255, 255);
+  // 滑らかに描く
+  smooth();
+  // 1 秒間、1 回描く
+  frameRate(1);
+}
+
+// 座標 (x, y) に円を描く
+void drawCircle(int x, int y) {
+  // 円の中身を緑色にする
+  fill(0, 255, 0);
+  // 円周を赤にする
+  stroke(255, 0, 0);
+  // 線の太さを 2 にする
+  strokeWeight(2);
+  // 中心座標が (x, y)、直径が radius * 2 の円を描く
+  ellipse(x, y, radius * 2, radius * 2);
+}
+
+// スコアを表示
+void drawScore() {
+  // 文字の色を黒にする
+  fill(0, 0, 0);
+  // 文字の大きさを 15 にする
+  textSize(15);
+  // スコアを文字にして、座標 (10, 20) に表示する
+  text(&#34;スコア: &#34; + str(score), 10, 20);
+}
+
+// i 番目の円の x 座標を返す (iは円の番号を表す0から8までの整数)
+int circleX(int i) {
+  return (int)(i / 3) * 100 + 50;
+}
+// i 番目の円の y 座標を返す (iは円の番号を表す0から8までの整数)
+int circleY(int i) {
+  return (i % 3) * 100 + 50;
+}
+
+// ずっと実行される
+void draw() {
+  // キャンバスを白で塗る
+  background(255, 255, 255);
+
+  // i を 0 から 8 まで繰り返す
+  int i = 0;
+  while (i &lt; 9) {
+    // 座標 (circleX(i), circleY(i)) に円を描く
+    drawCircle(circleX(i), circleY(i));
+    // 次の円に移る
+    i = i + 1;
+  }
+
+  // スコアの文字を表示する
+  drawScore();
+}
+
+// ユーザーがマウスをクリックしたら実行されるイベントハンドラ
+void mouseClicked() {
+  // 円の中心点とマウスをクリックした場所との距離が radius より小さかったら
+  if (dist(x, y, mouseX, mouseY) &lt; radius) {
+    // score の値を増やす
+    score = score + 1;
+  }
+}
+</code></pre>
+
+<p><a href="#ref-WhackACircle22">Step 2.2: 各円を表示するかどうかをランダムに決める</a></p>
+
+</div><div id="ref-WhackACircle22" class="section"><h1>Step 2.2: 各円を表示するかどうかをランダムに決める</h1>
+
+<p><a href="#ref-WhackACircle21">前に戻る</a></p>
+
+<p>コードを次のように書き換えて実行してみましょう。</p>
+
+<pre><code>// WhackACircle22
+// 円がそれぞれ現れているかを記憶する
+boolean[] shown = new boolean[9];
+
+// ずっと実行される
+void draw() {
+  // キャンバスを白で塗る
+  background(255, 255, 255);
+
+  // i を 0 から 8 まで繰り返す
+  int i = 0;
+  while (i &lt; 9) {
+    // 50% の確率で表示される
+    if (random(100) &lt; 50) {
+      // i 番の円を表示する
+      shown[i] = true;
+      drawCircle(circleX(i), circleY(i));
+    } else {
+      // i 番の円を表示しない
+      shown[i] = false;
+    }
+    i = i + 1;
+  }
+
+  // スコアの文字を表示する
+  drawScore();
+}
+
+// マウスをクリックしたら実行されるイベントハンドラ
+void mouseClicked() {
+  int i = 0;
+  while (i &lt; 9) {
+    // 円の中心点とマウスをクリックした場所との距離が radius より小さかったら
+    if (shown[i] &amp;&amp;
+        dist(circleX(i), circleY(i), mouseX, mouseY) &lt; radius) {
+      // score の値を増やす
+      score = score + 1;
+    }
+    i = i + 1;
+  }
+}
+</code></pre>
+
+<p>上記のコードでは、各円が表示されているかを記憶する変数を用意します。メソッドの外の定義文は以下のようになっています。</p>
+
+<pre><code>boolean[] shown = new boolean[9];
+</code></pre>
+
+<p>これは今まで違う変数の種類です。<code>boolean</code> は真理値型を指します。値が <code>true</code>（真） あるいは <code>false</code>（偽）の 2
+つだけです。また<code>boolean</code> のあとの <code>[]</code> はこの変数を配列に定義する意味をします。配列は 1
+つの変数で複数の値を記憶できるような変数です。そして、配列のサイズは初期値の <code>new boolean[9]</code> で指定しています。サイズは 9 で番号は 0
+から 8 までになっています。</p>
+
+<p>この配列は <code>draw</code> の中で値が決まります。そして、<code>mouseClicked</code> の中で値を使っています。</p>
+
+<p>これでプログラムが完成です！実行して遊んでみてください。</p>
+
+<pre><code class="language-hidden">// WhackACircle22
+// 円の中心の座標
+int x;
+int y;
+
+// 円の半径
+int radius = 20;
+
+// スコアを初期化
+int score = 0;
+
+// 初期化・一回だけ実行される
+void setup() {
+  // キャンバスの大きさを 300 × 300 にする
+  size(300, 300);
+  // キャンバスを白で塗ります
+  background(255, 255, 255);
+  // 滑らかに描く
+  smooth();
+  // 1 秒間、1 回描く
+  frameRate(1);
+}
+
+// 座標 (x, y) に円を描く
+void drawCircle(int x, int y) {
+  // 円の中身を緑色にする
+  fill(0, 255, 0);
+  // 円周を赤にする
+  stroke(255, 0, 0);
+  // 線の太さを 2 にする
+  strokeWeight(2);
+  // 中心座標が (x, y)、直径が radius * 2 の円を描く
+  ellipse(x, y, radius * 2, radius * 2);
+}
+
+// スコアを表示
+void drawScore() {
+  // 文字の色を黒にする
+  fill(0, 0, 0);
+  // 文字の大きさを 15 にする
+  textSize(15);
+  // スコアを文字にして、座標 (10, 20) に表示する
+  text(&#34;スコア: &#34; + str(score), 10, 20);
+}
+
+// i 番目の円の x 座標を返す (iは円の番号を表す0から8までの整数)
+int circleX(int i) {
+  return (int)(i / 3) * 100 + 50;
+}
+// i 番目の円の y 座標を返す (iは円の番号を表す0から8までの整数)
+int circleY(int i) {
+  return (i % 3) * 100 + 50;
+}
+
+// 円がそれぞれ現れているかを記憶する
+boolean[] shown = new boolean[9];
+
+// ずっと実行される
+void draw() {
+  // キャンバスを白で塗る
+  background(255, 255, 255);
+
+  // i を 0 から 8 まで繰り返す
+  int i = 0;
+  while (i &lt; 9) {
+    // 50% の確率で表示される
+    if (random(100) &lt; 50) {
+      // i 番の円を表示する
+      shown[i] = true;
+      drawCircle(circleX(i), circleY(i));
+    } else {
+      // i 番の円を表示しない
+      shown[i] = false;
+    }
+    i = i + 1;
+  }
+
+  // スコアの文字を表示する
+  drawScore();
+}
+
+// マウスをクリックしたら実行されるイベントハンドラ
+void mouseClicked() {
+  int i = 0;
+  while (i &lt; 9) {
+    // 円の中心点とマウスをクリックした場所との距離が radius より小さかったら
+    if (shown[i] &amp;&amp;
+        dist(circleX(i), circleY(i), mouseX, mouseY) &lt; radius) {
+      // score の値を増やす
+      score = score + 1;
+    }
+    i = i + 1;
+  }
+}
+</code></pre>
+
+<p><a href="#ref-WhackACircle23">Step 2.3: 課題</a></p>
+
+</div><div id="ref-WhackACircle23" class="section"><h1>Step 2.3: 課題</h1>
+
+<p><a href="#ref-WhackACircle22">前に戻る</a></p>
+
+<p>このプログラムはまだまだ改良できます。次の点を直す方法を考えて実装してみてください。</p>
+
+<ul>
+<li>円をクリックしてもすぐにスコアが更新されません。すぐにスコアが更新されるように改良してみましょう。</li>
+<li>クリックして円に当たらなかった際、スコアをマイナスしてみましょう。</li>
+<li>1 秒間に何回も円をクリックしてスコアを増やせてしまいます。円をクリックしたらその円がすぐに消えるなどの対策を実装してみましょう。</li>
+</ul>
+
+<p><a href="#ref-WhackACircle22">前に戻る</a></p>
+
+</div><div id="ref-Maze1" class="section"><h1>1. キャラクターを表示</h1>
+
+<p>まずは迷路を表示しましょう。 下にある「読み込む」ボタンを押してから画面の左上にある 「実行」ボタンをおしましょう。</p>
+
+<pre><code class="language-example">// Maze1
+/* @pjs preload=&#34;images/labyrinth1.png&#34;; */
+PImage imgLabyrinth = loadImage(&#34;images/labyrinth1.png&#34;);
+size(360, 360);  // キャンバスの大きさの設定
+image(imgLabyrinth, 1, 1, 360, 360); // 迷路の表示
+</code></pre>
+
+<p>そして、キャラクターを表示しましょう。キャラクターはマウスのカーソル のところに表示されます。Processing.jsでは画像はスクラッチのスプライトのよう
+ではなく、スタンプのようなものです。なので、もともとの背景を壊さないように <a href="#ref-get">get()</a>を使って画像を保存して、あと背景を回復をしなければなりません。</p>
+
+<pre><code class="language-example">// Maze1
+/* @pjs preload=&#34;images/labyrinth1.png&#34;; */
+/* @pjs preload=&#34;images/Walker44.png&#34;; */
+PImage imgLabyrinth = loadImage(&#34;images/labyrinth1.png&#34;);
+PImage imgWalker = loadImage(&#34;images/Walker44.png&#34;);
+void setup() {
+  size(360, 360);  // キャンバスの大きさの設定
+  image(imgLabyrinth, 1, 1, 360, 360); // 迷路の表示
+  imageMode(CENTER);
+}
+
+// キャラクターの大きさ、ピクセル単位
+int s = 44;
+// キャラクターの座標。
+int x = 176, y = 314;
+PImage imgSave = null;
+void draw() {
+  if (imgSave != null) {
+    image(imgSave, x, y, s, s);
+  }
+  x = mouseX;
+  y = mouseY;
+  imgSave = get(x-s/2, y-s/2, s, s);
+  image(imgWalker, x, y, s, s);
+}
+</code></pre>
+
+<p>次は<a href="#ref-Maze2">2. キャラクターを動かす</a></p>
+
+</div><div id="ref-Maze2" class="section"><h1>2. キャラクターを動かす</h1>
+
+<p><a href="#ref-Maze1">前に戻る</a></p>
+
+<p>キャラクターを動かすために、次のコードを足してみましょう。</p>
+
+<pre><code>// 進む方向
+int dx = 0;
+int dy = -1;
+
+void draw() {  // この関数は繰り返し呼ばれている.
+  image(imgWalker, x, y);
+  x += dx;
+  y += dy;
+}
+</code></pre>
+
+<p>結果はこのようなスケッチになります。</p>
+
+<pre><code class="language-hidden">// Maze2
+/* @pjs preload=&#34;images/labyrinth1.png&#34;; */
+/* @pjs preload=&#34;images/Walker44.png&#34;; */
+PImage imgLabyrinth = loadImage(&#34;images/labyrinth1.png&#34;);
+PImage imgWalker = loadImage(&#34;images/Walker44.png&#34;);
+void setup() {
+  size(360, 360);  // キャンバスの大きさの設定
+  image(imgLabyrinth, 1, 1, 360, 360); // 迷路の表示
+  imageMode(CENTER);
+}
+
+// キャラクターの大きさ、ピクセル単位
+int s = 44;
+// キャラクターの座標
+int x = 176, y = 314;
+
+// 進む方向
+int dx = 0;
+int dy = -1;
+
+PImage imgSave = null;
+void draw() {  // この関数は繰り返し呼ばれている.
+  if (imgSave != null) {
+    image(imgSave, x, y, s, s);
+  }
+  x += dx;
+  y += dy;
+  imgSave = get(x-s/2, y-s/2, s, s);
+  image(imgWalker, x, y);
+}
+</code></pre>
+
+<p>キャラクターは壁を無視して動いてます。 <code>imgSave =
+get(...)</code>や<code>image(imgSave,...)</code>をしなければ、キャラクターは壁に当たると壁を消して穴を開けてしまいます。
+これは、実際には壁ではなくてただの背景画像が表示されているだけだからです。壁が実際にあるように見せるのが、プログラマの仕事です。</p>
+
+<p>次は<a href="#ref-Maze3">3. 壁の検出</a></p>
+
+</div><div id="ref-Maze3" class="section"><h1>3. 壁の検出</h1>
+
+<p><a href="#ref-Maze2">前に戻る</a></p>
+
+<p>壁を検出するには<a href="#ref-get">get()</a>関数を利用して、指定した位置のピクセルの色を調べます。<a href="[CENTER]">imageMode</a>の設定によって、キャラクターの位置はスタンプの中心を示すようになるので、キャラクターの進行方向の前の位置を調べましょう。</p>
+
+<p>その前に、dx,
+dyには常に０か１の値しか与えないようにします。たとえば、下は（０，１）、上は（０，−１）、右は（１，０）、左は（−１，０）です。最初の設定では上方向にしましょう。</p>
+
+<pre><code>int dx = 0;
+int dy = -1;
+</code></pre>
+
+<p>こうしておくと、 <code>(x+(s/2)*dx, y+(s/2)*dy)</code>
+は常にキャラクターのちょうど前のピクセルを指すようになります。ここに３ピクセル足せば、キャラクターの少し前の位置になります。これが壁に当たったら<a href="#ref-noLoop">noLoop()</a>によってプログラムの実行を止めましょう。</p>
+
+<pre><code>boolean wallAhead() {
+  // キャラクターの３ピクセル前に調べよう.
+  color c = get(x+dx*(s/2+3), y+dy*(s/2+3));
+　// 黒を検出しよう。
+  return brightness(c) &lt; 50;
+}
+
+void draw() {
+  ...
+  if (wallAhead()) {
+    noLoop(); // 実行を停止する
+  }
+  ...
+}
+</code></pre>
+
+<p>スケッチこんな漢字になったでしょうか？</p>
+
+<pre><code class="language-hidden">// Maze3
+/* @pjs preload=&#34;images/labyrinth1.png&#34;; */
+/* @pjs preload=&#34;images/Walker44.png&#34;; */
+PImage imgLabyrinth = loadImage(&#34;images/labyrinth1.png&#34;);
+PImage imgWalker = loadImage(&#34;images/Walker44.png&#34;);
+void setup() {
+  size(360, 360);  // キャンバスの大きさの設定
+  image(imgLabyrinth, 1, 1, 360, 360); // 迷路の表示
+  imageMode(CENTER);
+}
+
+// キャラクターの大きさ、ピクセル単位
+int s = 44;
+
+// キャラクターの座標
+int x = 176, y = 314;
+
+// 進む方向
+int dx = 0;
+int dy = -1;
+
+PImage imgSave = null;
+void draw() {  // この関数は繰り返し呼ばれている.
+  if (imgSave != null) {
+    image(imgSave, x, y, s, s);
+  }
+  if (wallAhead()) {
+    noLoop(); // 実行を停止する
+  }
+  x += dx;
+  y += dy;
+  imgSave = get(x-s/2, y-s/2, s, s);
+  image(imgWalker, x, y);
+}
+
+boolean wallAhead() {
+  // キャラクターの３ピクセル前に調べよう.
+  color c = get(x+dx*(s/2+3), y+dy*(s/2+3));
+　// 黒を検出しよう。
+  return brightness(c) &lt; 50;
+}
+</code></pre>
+
+<p>止まる代わりにその場で回ってみましょう。</p>
+
+<pre><code>void turnLeft() {
+  int tmp = dx;
+  dx = dy;
+  dy = -tmp;
+}
+
+void draw() {
+  ...
+  if (wallAhead()) {
+    turnLeft();
+  }
+  ...
+}
+</code></pre>
+
+<p>ついでなので、前に動かす指示を関数としてまとめましょう。</p>
+
+<pre><code>void moveForward() {
+  x += dx;
+  y += dy;
+}
+
+void draw() {
+  ...
+  if (wallAhead()) {
+    turnLeft();
+  }
+  moveForward();
+  ...
+}
+</code></pre>
+
+<p>完成スケッチはこちらです。</p>
+
+<pre><code class="language-hidden">// Maze3
+/* @pjs preload=&#34;images/labyrinth1.png&#34;; */
+/* @pjs preload=&#34;images/Walker44.png&#34;; */
+PImage imgLabyrinth = loadImage(&#34;images/labyrinth1.png&#34;);
+PImage imgWalker = loadImage(&#34;images/Walker44.png&#34;);
+void setup() {
+  size(360, 360);  // キャンバスの大きさの設定
+  image(imgLabyrinth, 1, 1, 360, 360); // 迷路の表示
+  imageMode(CENTER);
+}
+
+// キャラクターの大きさ、ピクセル単位
+int s = 44;
+
+// キャラクターの座標
+int x = 176, y = 314;
+
+// 進む方向
+int dx = 0;
+int dy = -1;
+
+PImage imgSave = null;
+void draw() {  // この関数は繰り返し呼ばれている.
+  if (imgSave != null) {
+    image(imgSave, x, y, s, s);
+  }
+  if (wallAhead()) {
+    turnLeft();
+  }
+  moveForward();
+  imgSave = get(x-s/2, y-s/2, s, s);
+  image(imgWalker, x, y);
+}
+
+boolean wallAhead() {
+  // キャラクターの３ピクセル前に調べよう.
+  color c = get(x+dx*(s/2+3), y+dy*(s/2+3));
+　// 黒を検出しよう。
+  return brightness(c) &lt; 50;
+}
+
+void moveForward() {
+  x += dx;
+  y += dy;
+}
+
+void turnLeft() {
+  int tmp = dx;
+  dx = dy;
+  dy = -tmp;
+}
+</code></pre>
+
+<p>これだけでもキャラクターが少しは賢くみえてきましたが、動かしているとすぐに無限ループに入ってしまいます。</p>
+
+<p>次は<a href="#ref-Maze4">4. 右手法</a></p>
+
+</div><div id="ref-Maze4" class="section"><h1>4. 右手法</h1>
+
+<p><a href="#ref-Maze3">前に戻る</a></p>
+
+<p>右手法を実装するには、右側の壁を検出し、壁がない場合は右側に曲がることが必要になります。だいたいこのような感じでしょうか。</p>
+
+<pre><code>void turnRight() {
+  int tmp = dx;
+  dx = -dy;
+  dy = tmp;
+}
+
+boolean wallRight() {
+  int rx = -dy;
+  int ry = dx;
+  color c = get(x + rx*(s/2+4), y + ry*(s/2+4));
+  return brightness(c) &lt; 50;
+}
+
+void draw() {
+  ...
+  if (!wallRight()) {
+    turnRight();
+  } else if (wallAhead()) {
+    turnLeft();
+  }
+  moveForward();
+  ...
+}
+</code></pre>
+
+<p>上のプログラムは一回右に曲がってしまうと、キャラクターが無限ループに入ってしまうため上手く動きません。原因は右側を検出する関数が1ピクセルしか確認していないため、キャラクター全体が曲がった先に入れないときにも
+true を返してしまうからです。</p>
+
+<p>キャラクターのサイズに合わせて検出してみましょう。</p>
+
+<pre><code>boolean wallAhead() {
+  boolean wallFound = false;
+  int rx = -dy;
+  int ry = dx;
+  for (int i = -s/2-1; i &lt; s/2+1; i++) {
+    color c = get(x+dx*(s/2+3)+rx*i, y+dy*(s/2+3)+ry*i);
+    wallFound = wallFound || brightness(c) &lt; 50;
+  }
+  return wallFound;
+}
+
+boolean wallRight() {
+  int rx = -dy;
+  int ry = dx;
+  boolean wallFound = false;
+  for (int i = -s/2-1; i &lt;= s/2+1; i++) {
+    color c = get(x + rx*(s/2+3)+dx*i, y + ry*(s/2+3)+dy*i);
+    wallFound = wallFound || brightness(c) &lt; 50;
+  }
+  return wallFound;
+}
+</code></pre>
+
+<p>それでも他にも問題が残ってます。右に空き通路を検出すると、キャラクターはまた無限ループに入ってしまいます。今度の原因は、右に曲がったすぐ後に右側に壁がないとキャラクターがすぐにまた右に曲がってしまうことです。これを直すには、曲がってから数ピクセルはまっすぐに進む必要があります。</p>
+
+<pre><code>void draw() {
+  if (!wallRight()) {
+    turnRight();
+    moveForward();
+    moveForward();
+  } else if (wallAhead()) {
+    turnLeft();
+  }
+  moveForward();
+}
+</code></pre>
+
+<p>完成スケッチこちらです。</p>
+
+<pre><code class="language-hidden">// Maze4
+/* @pjs preload=&#34;images/labyrinth1.png&#34;; */
+/* @pjs preload=&#34;images/Walker44.png&#34;; */
+PImage imgLabyrinth = loadImage(&#34;images/labyrinth1.png&#34;);
+PImage imgWalker = loadImage(&#34;images/Walker44.png&#34;);
+void setup() {
+  size(360, 360);  // キャンバスの大きさの設定
+  image(imgLabyrinth, 1, 1, 360, 360); // 迷路の表示
+  imageMode(CENTER);
+}
+
+// キャラクターの大きさ、ピクセル単位
+int s = 44;
+
+// キャラクターの座標
+int x = 176, y = 314;
+
+// 進む方向
+int dx = 0;
+int dy = -1;
+
+PImage imgSave = null;
+void draw() {  // この関数は繰り返し呼ばれている.
+  if (imgSave != null) {
+    image(imgSave, x, y, s, s);
+  }
+  if (!wallRight()) {
+    turnRight();
+    moveForward();
+    moveForward();
+  } else if (wallAhead()) {
+    turnLeft();
+  }
+  moveForward();
+  imgSave = get(x-s/2, y-s/2, s, s);
+  image(imgWalker, x, y);
+}
+
+boolean wallAhead() {
+  boolean wallFound = false;
+  int rx = -dy;
+  int ry = dx;
+  for (int i = -s/2-1; i &lt; s/2+1; i++) {
+    color c = get(x+dx*(s/2+3)+rx*i, y+dy*(s/2+3)+ry*i);
+    wallFound = wallFound || brightness(c) &lt; 50;
+  }
+  return wallFound;
+}
+
+boolean wallRight() {
+  int rx = -dy;
+  int ry = dx;
+  boolean wallFound = false;
+  for (int i = -s/2-1; i &lt;= s/2+1; i++) {
+    color c = get(x + rx*(s/2+3)+dx*i, y + ry*(s/2+3)+dy*i);
+    wallFound = wallFound || brightness(c) &lt; 50;
+  }
+  return wallFound;
+}
+
+void moveForward() {
+  x += dx;
+  y += dy;
+}
+
+void turnLeft() {
+  int tmp = dx;
+  dx = dy;
+  dy = -tmp;
+}
+
+void turnRight() {
+  int tmp = dx;
+  dx = -dy;
+  dy = tmp;
+}
+</code></pre>
+
+<p>ここまでのプログラムで、キャラクターは迷路の中をうまく動くはずです。まだ問題がある場合、以下の点を確認しましょう。</p>
+
+<ul>
+<li><code>dx</code>, <code>dy</code>には-1/0/1の以外の値を与えない。</li>
+<li>右側に空き通路を検出する関数はキャラクターが確実に入れる広さか確認する。</li>
+</ul>
+
+<p>次は<a href="#ref-Maze5">5. ゴールの判定</a></p>
+
+</div><div id="ref-Maze5" class="section"><h1>5. ゴールの判定</h1>
+
+<p><a href="#ref-Maze4">前に戻る</a></p>
+
+<p>最後にゴールの判定をする機能を加えてみましょう。ゴールの判定は壁の検出に似ていますが、黒の代わりに緑か調べなければなりません。</p>
+
+<pre><code>boolean reachedGoal() {
+  color c = get(x+dx*(s/2+3), y+dy*(s/2+3));
+  return red(c) &lt; 50 &amp;&amp; green(c) &gt; 50;
+}
+
+void draw() {
+  ...
+  if (reachedGoal()) {
+    fill(0,0,0);  // black.
+    text(&#34;Finish!&#34;, x+s/2, y);
+    exit();
+  }
+  ...
+}
+</code></pre>
+
+<p>次は<a href="#ref-Maze6">6. 完成プログラム</a></p>
+
+</div><div id="ref-Maze6" class="section"><h1>6. 完成プログラム</h1>
+
+<p><a href="#ref-Maze5">前に戻る</a></p>
+
+<p><strong>挑戦</strong>: 別の迷路を解いてみよう</p>
+
+<p>別の迷路を解いてみましょう。2箇所の「labyrinth1.png」をに変えたら、別の迷路に挑戦できます。使用可能の迷路は</p>
+
+<ul>
+<li><code>labyrinth1.png</code></li>
+<li><code>labyrinth2.png</code></li>
+<li><code>labyrinth3.png</code></li>
+<li><code>labyrinth4.png</code></li>
+</ul>
+
+<p>完成させたプログラムは全ての迷路を解けるでしょうか？</p>
+
+<pre><code class="language-example">// Maze5
+/* @pjs preload=&#34;images/labyrinth1.png&#34;; */
+/* @pjs preload=&#34;images/Walker44.png&#34;; */
+PImage imgLabyrinth = loadImage(&#34;images/labyrinth1.png&#34;);
+PImage imgWalker = loadImage(&#34;images/Walker44.png&#34;);
+void setup() {
+  size(360, 360);  // キャンバスの大きさの設定
+  image(imgLabyrinth, 1, 1, 360, 360); // 迷路の表示
+  imageMode(CENTER);
+}
+
+// キャラクターの大きさ、ピクセル単位
+int s = 44;
+
+// キャラクターの座標
+int x = 176, y = 314;
+
+// 進む方向
+int dx = 0;
+int dy = -1;
+
+PImage imgSave = null;
+void draw() {  // この関数は繰り返し呼ばれている.
+  if (imgSave != null) {
+    image(imgSave, x, y, s, s);
+  }
+  if (reachedGoal()) {
+    fill(0,0,0);  // black.
+    text(&#34;Finish!&#34;, x+s/2, y);
+    exit();
+  }
+  if (!wallRight() &amp;&amp; !wallAhead()) {
+    turnRight();
+    boolean hitWall = false;
+    for (int i = 0; i &lt; 2; i++) {
+      if (!wallAhead() &amp;&amp; !wallRight()) {
+        moveForward(1);
+      } else {
+        hitWall = true;
+        break;
+      }
+    }
+    if (!hitWall) {
+      //moveForward(-2);
+      turnLeft();
+    }
+  } else if (wallAhead()) {
+    turnLeft();
+  }
+  moveForward(1);
+  imgSave = get(x-s/2, y-s/2, s, s);
+  image(imgWalker, x, y);
+}
+
+boolean reachedGoal() {
+  color c = get(x+dx*(s/2+3), y+dy*(s/2+3));
+  return red(c) &lt; 50 &amp;&amp; green(c) &gt; 50;
+}
+
+boolean wallAhead() {
+  boolean wallFound = false;
+  int rx = -dy;
+  int ry = dx;
+  for (int i = -s/2-1; i &lt; s/2+1; i++) {
+    color c = get(x+dx*(s/2+3)+rx*i, y+dy*(s/2+3)+ry*i);
+    wallFound = wallFound || brightness(c) &lt; 50;
+  }
+  return wallFound;
+}
+
+boolean wallRight() {
+  int rx = -dy;
+  int ry = dx;
+  boolean wallFound = false;
+  for (int i = -s/2-1; i &lt;= s/2+1; i++) {
+    color c = get(x + rx*(s/2+3)+dx*i, y + ry*(s/2+3)+dy*i);
+    wallFound = wallFound || brightness(c) &lt; 50;
+  }
+  return wallFound;
+}
+
+void moveForward(int c) {
+  x += c*dx;
+  y += c*dy;
+}
+
+void turnLeft() {
+  int tmp = dx;
+  dx = dy;
+  dy = -tmp;
+}
+
+void turnRight() {
+  int tmp = dx;
+  dx = -dy;
+  dy = tmp;
+}
+</code></pre>
+
+</div><div id="ref-TTSWorkshop" class="section"><h1>プログラミング体験ワークショップ</h1>
+
+<ul>
+<li>プログラミング体験ワークショップ
+
+<ul>
+<li><a href="#ref-step1">ステップ1</a></li>
+<li><a href="#ref-step2">ステップ2</a></li>
+<li><a href="#ref-step3">ステップ3</a></li>
+<li><a href="#ref-step4">ステップ4</a></li>
+</ul></li>
+<li><a href="#ref-Addendum">補足</a></li>
+<li><a href="#ref-Demos">デモ</a></li>
+<li><a href="#ref-Games">ゲーム</a></li>
+<li><a href="#ref-otherworkshops">その他ワークショップ</a></li>
+</ul>
+
+</div><div id="ref-step1" class="section"><h1>ステップ1</h1>
+
+<p>今回のワークショップのテーマはコンピューターに言葉を話させることです。こちらのプログラムを入力してみましょう。</p>
+
+<pre><code class="language-example">// 「こんにちは」と話して。
+speak(&#34;こんにちは&#34;);
+</code></pre>
+
+<p>ここに書いてある2行のうち、「//」
+から初めの行は人間への説明です。コンピュータはこちらを無視しますので入力を省略しても大丈夫です。コンピューターへの命令は２行目のみです。</p>
+
+<pre><code>speak(&#34;こんにちは&#34;);
+</code></pre>
+
+<p>実行してみましょう。</p>
+
+<p>「こんにちは」の部分を変えてみて、別の言葉を話させてみましょう。</p>
+
+<p>詳しく知りたい人へ：</p>
+
+<ul>
+<li><code>speak(...)</code> は 「… の中の内容を話して」という命令です。</li>
+<li>“…” の <strong>“</strong> は言葉を囲む記号です。</li>
+<li><strong>;</strong> は命令の区切りを意味します。</li>
+</ul>
+
+<p>次は<a href="#ref-step2">ステップ2</a>に進みましょう。</p>
+
+</div><div id="ref-step2" class="section"><h1>ステップ2</h1>
+
+<p><a href="#ref-step1">ステップ1</a>に戻る。</p>
+
+<p>次にコンピューターに自分の名前を覚えさせてみましょう。プログラムの中で「記憶する」という役割をするのを<a href="#ref-Variable">変数</a>と呼びます。変数はプログラムの実行中で様々のことを記憶することができます。こちらのプログラムにあなたの名前を入れてみましょう。</p>
+
+<pre><code class="language-example">// 変数を作ります。
+String namae = &#34;太郎&#34;;
+// 変数を使うことによって、名前を思い出します。
+speak(&#34;こんにちは、&#34; + namae);
+</code></pre>
+
+<p>挨拶を変えてみましょう。または、変数は名前を覚えてくれるので、別のところでも使えます。</p>
+
+<pre><code class="language-example">// 変数を作ります。
+String namae = &#34;太郎&#34;;
+// 変数を使うことによって、名前を思い出します。
+speak(&#34;こんにちは、&#34; + namae);
+// まだ覚えています。
+text(&#34;こんにちは、&#34; + namae, 0, 50);
+</code></pre>
+
+<p>詳しく知りたい人へ：</p>
+
+<ul>
+<li>「String namae」 は 「言葉 (String) を記憶する変数を作ります、その変数の名前は 「namae」 です」 という意味です。</li>
+<li>「=」 は右にあるものを左の変数に記憶しなさいという命令です。全体で、「namae という言葉を格納する変数に “太郎” を記憶しなさい」
+という命令になります。</li>
+<li>「+」 を使うと言葉をつなげることができます。</li>
+<li>「text(…)」はテキストを表示します。格好のなかの最初のものは表示する言葉です。その後のは2つの数字は表示する場所を表しています。
+変数はコンピューターの記憶と考えてもいいです。変数を使うことによって、 コンピューターは様々な情報を覚えてくれます。</li>
+</ul>
+
+<p>次は<a href="#ref-step3">ステップ3</a>に進みましょう。</p>
+
+</div><div id="ref-step3" class="section"><h1>ステップ3：配列（はいれつ）</h1>
+
+<p><a href="#ref-step2">ステップ2</a>に戻る。</p>
+
+<p>次にいくつかのことをコンピューターに覚えさせてみましょう。もちろん、いくつかのの<a href="#ref-Variable">変数</a>を作れます。</p>
+
+<pre><code class="language-example">String sei = &#34;ぷろぷろ&#34;;
+String mei = &#34;太郎&#34;;
+speak(&#34;こんにちは、&#34; + sei + mei);
+</code></pre>
+
+<p>ただし、覚えさせたいことが多すぎたら、別の方法は必要になります。そこで、<a href="#ref-Array">配列</a>（はいれつ）というものが役に立ちます。</p>
+
+<pre><code class="language-example">// 配列を作る。
+String yotei[] = {&#34;顔洗い&#34;, &#34;朝ゴハン&#34;, &#34;歯磨き&#34;, &#34;登校&#34;};
+speak(&#34;明日の最初の予定は&#34; + yotei[0] + &#34;です。&#34;);
+speak(&#34;次は&#34; + yotei[1] + &#34;です。&#34;);
+speak(&#34;全部で&#34; + yotei.length + &#34;個の予定があります。&#34;);
+</code></pre>
+
+<p>詳しく知りたい人へ：</p>
+
+<ul>
+<li>「<code>String yotei[]</code>」 の「<code>[]</code>」は 「ふくすうの言葉 (String) を記憶する変数を作ります、その変数の名前は
+「<code>yotei</code>」 です」 という意味です。</li>
+<li>「<code>{</code>」 と「<code>}</code>」で覚えてほしい言葉は囲まれています。</li>
+<li>「<code>yotei[0]</code>」と「<code>yotei[1]</code>」はふくすうの覚えてるのものから思い出す命令です。「<code>[0]</code>」は1つ目と「<code>[1]</code>」は二つ目を指します。というわけで、覚えているものは０から数えます。</li>
+<li>「<code>yotei.length</code>」は配列の長さといい、覚えているものの数という意味です。</li>
+</ul>
+
+<p>次は<a href="#ref-step4">ステップ4</a>に進みましょう。</p>
+
+</div><div id="ref-step4" class="section"><h1>ステップ4：「いつだれがどこでどうした」ゲーム</h1>
+
+<p><a href="#ref-step3">ステップ3</a>に戻る。</p>
+
+<p>今回はいままでのステップで学んだことを活かして「いつだれがどこでどうした」というゲームを作ってみましょう。プログラムは長くなりましたので、タイピング代わりにヘルプの画面で
+「トップ」→「ステップ4」を押してから「読み込む」ボタンを押してプログラムを読み込みましょう。</p>
+
+<pre><code class="language-example">// 「いつだれがどこでどうした」ゲーム
+String itsu[] = {&#34;昨日&#34;, &#34;2年前&#34;, &#34;今朝&#34;};
+String darega[] = {&#34;太郎が&#34;, &#34;花子が&#34;};
+String dokode[] = {&#34;外で&#34;, &#34;学校で&#34;, &#34;とつぜん&#34;, &#34;大きく&#34;};
+String doushita[] = {&#34;起きました&#34;,  &#34;叫びました&#34;,  &#34;転びました&#34;,  &#34;輝きました&#34;};
+
+size(400, 200);
+fill(0);
+textSize(25);
+
+int itsuBangou = int(random(itsu.length));
+int daregaBangou = int(random(darega.length));
+int dokodeBangou = int(random(dokode.length));
+int doushitaBangou = int(random(doushita.length));
+
+String phrase = itsu[itsuBangou] + darega[daregaBangou] + dokode[dokodeBangou] + doushita[doushitaBangou];
+text(phrase, 10, 100);
+speak(phrase);
+</code></pre>
+
+<p>文しょうを作るのための部分を変えてみましょう。</p>
+
+<p>詳しく知りたい人へ：</p>
+
+<ul>
+<li>「random(…)」は乱数といい、実行するごとに違う数字を返します。例えば、「random(5)」は0から5までの数字を返します。</li>
+<li>「int(…)」は数字の整数部分を抽出します。例えば、「int(4.5)」=
+4。「random」は整数ではない数字を返しますが、<a href="#ref-Array">配列</a>にアクセスするには整数は必要です。</li>
+</ul>
+
+<p>それでプログラミング体験のステップ終わりです。 もし、時間の余裕と興味があったら、<a href="#ref-Addendum">補足</a>を見てみてください。
+または、<a href="#ref-Demos">デモ</a>や<a href="#ref-Games">ゲーム</a>を実行してみましょう。</p>
+
+</div><div id="ref-Addendum" class="section"><h1>補足</h1>
+
+<p>プログラミングに興味があったらこちらの補足情報もご覧ください。</p>
+
+<ul>
+<li><a href="#ref-DrawFace">顔を描く</a></li>
+<li><a href="#ref-Loop">繰り返し（ループ）</a></li>
+<li><a href="#ref-Events">イベント</a></li>
+</ul>
+
+</div><div id="ref-DrawFace" class="section"><h1>補足：顔を描く</h1>
+
+<p>左側にあるプログラムを実行したら、右側にある実行キャンバスにさまざまな 絵や形状を描けます。位置を指定のために座標を使います。左上は(0,0)です。
+座標の最初の数は左右を表して、最後の数は上下を表しています。</p>
+
+<pre><code class="language-prerender">size(200, 200);
+fill(0);
+textSize(10);
+
+ellipse(0, 0, 10, 10);
+text(&#34;(0, 0)&#34;, 10, 10);
+
+ellipse(200, 0, 10, 10);
+text(&#34;(200, 0)&#34;, 160, 10);
+
+ellipse(0, 200, 10, 10);
+text(&#34;(0, 200)&#34;, 10, 190);
+</code></pre>
+
+<p>では、丸を描きましょう。丸を描くために<code>ellipse()</code>という関数を使います。
+<code>ellipse()</code>を呼ぶときは4つの数を指定します。最初2つの数は中心の座標を表します。
+最後の2つの数は横幅と高さを表しています。例えば、縦の長い丸を描いてみましょう。 顔に似ているでしょうか？</p>
+
+<pre><code class="language-prerender">size(200, 200);
+fill(255, 200, 180); // 肌色
+ellipse(100, 100, 150, 180);
+</code></pre>
+
+<p>鼻を描くために三角を使いましょう。三角を描くために<code>triangle()</code>という関数を使います。
+この関数を呼ぶときに数を6つを指定しなければなりません。それは三角の3つの点は各2つづつの座標です。</p>
+
+<pre><code class="language-prerender">fill(100, 255, 100); // 緑
+size(200, 200);
+triangle(100, 90, 90, 120, 110, 120);
+</code></pre>
+
+<p>口と目を前と同じように<code>ellipse()</code>を使いましょう。次の見本のプログラムに進む前に 自分で目と口を描いてみましょう。</p>
+
+<pre><code class="language-prerender">size(200, 200);
+fill(255, 200, 180); // 肌色
+ellipse(100, 100, 150, 180);  // 顔
+fill(100, 255, 100); // 緑
+triangle(100, 90, 90, 120, 110, 120); // 鼻
+fill(0, 0, 150); // 青
+ellipse(60, 75, 30, 5); // 左目
+ellipse(140, 75, 30, 5); // 右目
+fill(255, 130, 120); // 赤
+ellipse(100, 160, 60, 15); // 口
+</code></pre>
+
+</div><div id="ref-Loop" class="section"><h1>補足：繰り返し（ループ）</h1>
+
+<p>同じ命令を何回も繰り返すためにループを使います。</p>
+
+<pre><code class="language-prerender">for (int i = 1; i &lt;= 5; i++) {　// 1から5まで数えます。
+  text(str(i), 10, 10+i*10);
+}
+</code></pre>
+
+<p>条件を調べることは「if」文でできます。</p>
+
+<pre><code class="language-prerender">for (int i = 1; i &lt;= 5; i++) {　// 1から5まで数えます。
+  if (i % 2 == 1) {  // 奇数かどうか調べます
+    text(str(i), 10, 10+i*10);
+  }
+}
+</code></pre>
+
+</div><div id="ref-Events" class="section"><h1>補足：イベント</h1>
+
+<p>プログラムの実行中でユーザの入力に対応するにはいくつかの方法ありますが、 こちらで<strong>イベント</strong>を紹介します。ユーザーはマウスクリックしたときに
+<a href="#ref-mouseClicked">mouseClicked()</a>という関数が呼ばれます。</p>
+
+<pre><code class="language-example">// マウスがクリックした時に実行されます。
+void mouseClicked() {　
+  // 長方形の中か外か判断する。
+  if (60 &lt;= mouseX &amp;&amp; mouseX &lt;= 140 &amp;&amp;
+      60 &lt;= mouseY &amp;&amp; mouseY &lt;= 140) {
+    speak(&#34;ピンポン&#34;);
+  } else {
+    speak(&#34;ぶぶ&#34;);
+  }
+}
+
+// 設定。実行の最初に実行されます。
+void setup() {
+  size(200, 200);   // キャンバスの大きさを設定する。
+  background(200);　// 灰色に塗る。
+  stroke(0);　　　　 // 筆色を黒にする。
+  rect(60, 60, 80, 80);  // 長方形を描く。
+}
+</code></pre>
+
+<p>マウスイベントについてもっと詳しくは<a href="#ref-Mouse">マウス</a>に参考ください。</p>
+
+</div><div id="ref-Mouse" class="section"><h1>マウス</h1>
+
+<p>マウスの入力は<a href="#ref-Events">イベント</a>によって行う。イベントのリスト:</p>
+
+<ul>
+<li><a href="#ref-mouseClicked">mouseClicked()</a> マウスはクリックされたとき</li>
+<li><a href="#ref-mousePressed">mousePressed()</a> マウスのボタンが押されたとき</li>
+<li><a href="#ref-mouseReleased">mouseReleased()</a> マウスのボタンが話されたとき</li>
+<li><a href="#ref-mouseMoved">mouseMoved()</a> マウスが動いたとき</li>
+<li><a href="#ref-mouseDragged">mouseDragged()</a> マウスが押されたままに動いたとき</li>
+<li><a href="#ref-mouseOver">mouseOver()</a> マウスのカーソルはキャンバスに入ったとき</li>
+<li><a href="#ref-mouseOut">mouseOut()</a> マウスのカーソルがキャンバスから離れたとき</li>
+<li><a href="#ref-mouseX">mouseX</a>, <a href="#ref-mouseY">mouseY</a> マウスのXとY座標</li>
+<li><a href="#ref-mouseButton">mouseButton</a> マウスイベントの関数の中は押されたボタンを表す</li>
+</ul>
+
+</div><div id="ref-ShapeGame" class="section"><h1>形状ゲーム</h1>
+
+<p>ここまでに勉強してきたことを合わせて簡単のゲームを作ってみましょう。 キャンバスに形状を３つ書いて、英語で形状の名前を話して、ユーザー
+に形を当てましょう。正しければ「ピンポン」、間違っていれば「ぶぶ」と コンピューターに話させましょう。</p>
+
+<pre><code class="language-example">// ShapeGame
+String shapes[] = new String[3];
+shapes[0] = &#34;circle&#34;;
+shapes[1] = &#34;square&#34;;
+shapes[2] = &#34;triangle&#34;;
+int next = -1;
+
+void mouseClicked() {
+  int x = int(mouseX/100);  // どっちの形状に近いか計算します。
+  if (x != next) {  // 間違った場合
+    speak(&#34;ぶぶ&#34;);
+    speak(&#34;もう一回いいます&#34;);
+    speak(shapes[next], &#34;en&#34;);  // 英語でも話せます
+  } else {          // 正しくあたった場合
+    speak(&#34;ピンポン&#34;);
+    next = -1;
+  }
+}
+
+// 設定します。この関数は実行の頭で一回だけ実行されます。
+void setup() {
+  size(300, 210);  // 大きさの設定
+  background(200); // 灰色で塗ります。
+  stroke(0);  // 筆の色を黒にします。
+  ellipse(60, 125, 50, 50);　// 円形を描きます。
+  rect(120, 100, 50, 50);　// 長方形を描きます。
+  triangle(240, 100, 210, 150, 270, 150); // 三角を描きます。
+}
+
+void draw() {
+  if (next == -1) {
+    speak(&#34;つぎの問題&#34;);
+    next = int(random(3));　　// 次の問題を定めます。
+    speak(shapes[next], &#34;en&#34;);
+  }
+}
+</code></pre>
+
+</div><div id="ref-setup" class="section"><h1>setup</h1>
+
+<p><code>setup()</code>はスケッチを実行すると最初に1回だけ呼ばれます。<code>setup()</code>関数の中でキャンバスの大きさの設定などをしましょう。</p>
+
+<p>スケッチの実行はこのように説明できます：</p>
+
+<pre><code>setup();
+while(noLoop()は呼ばれていない) {
+  // frameRate()で定められた頻度でdraw()を呼ぶ。
+  draw();
+}
+</code></pre>
+
+<h2>参考</h2>
+
+<ul>
+<li><a href="#ref-draw">draw()</a></li>
+<li><a href="#ref-noLoop">noLoop()</a></li>
+<li><a href="#ref-loop">loop()</a></li>
+</ul>
+
+</div><div id="ref-draw" class="section"><h1>draw</h1>
+
+<p>スケッチを実行すると、<code>setup()</code>関数が1回呼ばれた後、<code>draw()</code>関数が繰り返し呼ばれます。
+<code>draw()</code>関数の中で画面を更新することでアニメーションを実現することができます。
+<code>draw()</code>関数を1秒間に何回呼ぶかは<a href="#ref-frameRate">frameRate()</a>で設定できます。</p>
+
+<pre><code class="language-prerender">int i = 0;
+void draw() {
+  background(200);
+  text(str(int(millis()/1000)), 10, 30);
+  i++;
+}
+
+void setup() {
+  frameRate(1);
+  fill(0);  // 描画色を黒に設定。
+  textSize(30);
+}
+</code></pre>
+
+<p>関連項目: <a href="#ref-frameRate">frameRate()</a>。</p>
+
+</div><div id="ref-frameRate" class="section"><h1>frameRate</h1>
+
+<p><code>frameRate(x)</code>は<code>setup()</code>の中で使える関数で、<code>draw()</code>が呼ばれる頻度を設定します。
+括弧の中には<code>draw()</code>関数を1秒間に何回呼ぶかを指定します。 たとえば、<code>frameRate(10)</code>を実行すると、<code>draw()</code>の実行が終わってから
+次に<code>draw()</code>を呼ぶまで0.1秒待ちます。<code>frameRate(1)</code>では1秒待ちます。</p>
+
+<p>関連項目: <a href="#ref-frameCount">frameCount</a>, <a href="#ref-draw">draw()</a>.</p>
+
+</div><div id="ref-frameCount" class="section"><h1>frameCount</h1>
+
+<p><code>frameCount</code>は<code>draw()</code>は何回呼ばれたかカウントします。</p>
+
+<p>関連項目: <a href="#ref-frameRate">frameRate()</a>, <a href="#ref-draw">draw()</a>.</p>
+
+</div><div id="ref-width" class="section"><h1>width</h1>
+
+<p><code>width</code>はキャンバスの横幅です。</p>
+
+</div><div id="ref-height" class="section"><h1>height</h1>
+
+<p><code>height</code>はキャンバスの縦幅です。</p>
+
+</div><div id="ref-print" class="section"><h1>print</h1>
+
+<p><code>print</code>はメッセージをプリントします。メッセージはキャンバス内で下のところにでてきます。<code>println()</code>と違って、メッセージのの後に改行しません。</p>
+
+<p>呼び方:<code>print(message);</code></p>
+
+<p>関連項目:<a href="#ref-println">println()</a>。</p>
+
+</div><div id="ref-println" class="section"><h1>println</h1>
+
+<p><code>println</code>はメッセージをプリントします。メッセージはキャンバス内で下のところにでてきます。<code>print()</code>と違って、メッセージのの後に改行します。</p>
+
+<p>呼び方:<code>println(message);</code></p>
+
+<p>関連項目:<a href="#ref-print">print()</a>。</p>
+
+</div><div id="ref-index" class="section"><h1>インデックス</h1>
+
+<p>正式なProcessing.jsのマニュアルはこちら:
+<a href="http://processingjs.org/reference/" target="_blank">http://processingjs.org/reference/</a>.</p>
+
+<h2>実行</h2>
+
+<p><code>setup()</code>と<code>draw()</code>はプログラムの中で定義する必要があります。</p>
+
+<ul>
+<li><a href="#ref-setup">void setup() {…}</a> 設定するための関数</li>
+<li><a href="#ref-draw">void draw() {…}</a> アニメーションのフレームを描くための関数</li>
+<li><a href="#ref-exit">exit()</a> 実行を終了する</li>
+</ul>
+
+<h2>アニメーション</h2>
+
+<ul>
+<li><a href="#ref-noLoop">noLoop()</a> アニメーションの繰り返しを止める</li>
+<li><a href="#ref-loop">loop()</a> アニメーションの繰り返しを再開する</li>
+<li><a href="#ref-millis">millis()</a> 実行時間をミリ秒単位で返す</li>
+<li><a href="#ref-frameRate">frameRate()</a> <code>draw()</code>の呼び方の頻度の設定</li>
+<li><a href="#ref-frameCount">frameCount</a> <code>draw()</code>が何回呼ばれたかカウント</li>
+</ul>
+
+<h2>キャンバス</h2>
+
+<ul>
+<li><a href="#ref-background">background()</a> キャンバスを色で塗る</li>
+<li><a href="#ref-size">size()</a> キャンバスの大きさを設定する</li>
+<li><a href="#ref-dist">dist()</a> 2点間の距離を計算する</li>
+<li><a href="#ref-copy">copy()</a> 画像の一部を別の位置にコピーする</li>
+</ul>
+
+<h2>図形</h2>
+
+<ul>
+<li><a href="#ref-ellipse">ellipse()</a> 楕円</li>
+<li><a href="#ref-rect">rect()</a> 長方形</li>
+<li><a href="#ref-triangle">triangle()</a> 三角形</li>
+<li><a href="#ref-line">line()</a> 直線</li>
+<li><a href="#ref-arc">arc()</a> 円弧</li>
+<li><a href="#ref-point">point()</a> 点</li>
+</ul>
+
+<h2>筆の設定</h2>
+
+<ul>
+<li><a href="#ref-fill">fill()</a> 塗りつぶしの色を設定する</li>
+<li><a href="#ref-stroke">stroke()</a> ペンの色を設定する</li>
+<li><a href="#ref-strokeCap">strokeCap()</a> ペンの端の形を設定する</li>
+<li><a href="#ref-strokeWeight">strokeWeight()</a> ペンの太さを設定する</li>
+</ul>
+
+<h2>画像</h2>
+
+<ul>
+<li><a href="#ref-image">image()</a> 画像を写す</li>
+<li><a href="#ref-imageMode">imageMode()</a> 画像の写し方の設定</li>
+<li><a href="#ref-loadImage">loadImage()</a>, <a href="#ref-preload">@pjs preload</a> 画像データを読み込む</li>
+<li><a href="#ref-createImage">createImage()</a> 空画像を作る</li>
+<li><a href="#ref-get">get()</a> 画像データをキャンバスから抽出する</li>
+</ul>
+
+<h2>文字</h2>
+
+<ul>
+<li><a href="#ref-text">text()</a> 文字を表示する</li>
+<li><a href="#ref-textSize">textSize()</a> 文字の大きさを設定する</li>
+<li><a href="#ref-textAlign">textAlign()</a> 文字の写し方を設定する</li>
+<li><a href="#ref-textFont">textFont()</a> 字体を設定する</li>
+<li><a href="#ref-loadFont">loadFont()</a> 字体を読み込みする</li>
+</ul>
+
+<h2>スピーチ</h2>
+
+<ul>
+<li><a href="#ref-speak">speak()</a> 声で話す</li>
+</ul>
+
+<h2><a href="#ref-Mouse">マウス</a></h2>
+
+<ul>
+<li><a href="#ref-mouseClicked">mouseClicked()</a> マウスのボタンがクリックされたとき</li>
+<li><a href="#ref-mousePressed">mousePressed()</a> マウスのボタンが押されたとき</li>
+<li><a href="#ref-mouseReleased">mouseReleased()</a> マウスのボタンが離されたとき</li>
+<li><a href="#ref-mouseOver">mouseOver()</a> マウスがキャンバス内に入ったとき</li>
+<li><a href="#ref-mouseOut">mouseOut()</a> マウスがキャンバスの外に出たとき</li>
+<li><a href="#ref-mouseX">mouseX</a>, <a href="#ref-mouseY">mouseY</a>, <a href="#ref-pmouseX">pmouseX</a>, <a href="#ref-pmouseY">pmouseY</a> マウスのX座標とY座標</li>
+<li><a href="#ref-mouseButton">mouseButton</a> マウスイベント関数の中で押されたボタンを表す</li>
+<li><a href="#ref-cursor">cursor()</a> マウスカーソルの形を変える</li>
+</ul>
+
+<h2>キーボード</h2>
+
+<ul>
+<li><a href="#ref-keyPressed">keyPressed()</a>, <a href="#ref-keyReleased">keyReleased()</a>, <a href="#ref-keyTyped">keyTyped()</a> キーボードのイベント関数</li>
+<li><a href="#ref-key">key</a>, <a href="#ref-keyCode">keyCode</a>, <a href="#ref-keyPressed">keyPressed</a> 押されたキーの変数</li>
+<li><a href="#ref-keyCodes">keyCodes</a> キーコードの一覧</li>
+</ul>
+
+<h2>データ</h2>
+
+<ul>
+<li>単純な型
+
+<ul>
+<li><a href="#ref-int">int</a>, <a href="#ref-float">float</a>, <a href="#ref-boolean">boolean</a>, <a href="#ref-byte">byte</a>, <a href="#ref-short">short</a>, <a href="#ref-double">double</a>, <a href="#ref-char">char</a></li>
+</ul></li>
+<li><a href="#ref-Array">Array</a>
+
+<ul>
+<li><a href="#ref-append">append()</a>, <a href="#ref-concat">concat()</a></li>
+</ul></li>
+<li><a href="#ref-HashMap">HashMap</a>
+
+<ul>
+<li><a href="#ref-entrySet">entrySet()</a></li>
+</ul></li>
+<li><a href="#ref-PImage">PImage</a> 画像</li>
+</ul>
+
+<h2>言語の基礎</h2>
+
+<ul>
+<li>条件付き実行
+
+<ul>
+<li><a href="#ref-if">if</a>, <a href="#ref-else">else</a></li>
+</ul></li>
+<li><a href="#ref-Loop">ループ</a>
+
+<ul>
+<li><a href="#ref-for">for</a>, <a href="#ref-while">while</a>, <a href="#ref-do">do</a></li>
+<li><a href="#ref-continue">continue</a>, <a href="#ref-break">break</a></li>
+</ul></li>
+<li>switch文
+
+<ul>
+<li><a href="#ref-switch">switch</a>, <a href="#ref-case">case</a>, <a href="#ref-default">default</a></li>
+</ul></li>
+<li>クラス
+
+<ul>
+<li><a href="#ref-class">class</a>, <a href="#ref-this">this</a></li>
+</ul></li>
+<li><a href="#ref-final">final</a></li>
+</ul>
+
+<h2>定数</h2>
+
+<ul>
+<li><a href="#ref-PI">PI</a>, <a href="#ref-HALF_PI">HALF_PI</a>, <a href="#ref-QUARTER_PI">QUARTER_PI</a>, <a href="#ref-TWO_PI">TWO_PI</a>.</li>
+</ul>
+
+<h2>数学関数</h2>
+
+<ul>
+<li><a href="#ref-abs">abs()</a></li>
+<li><a href="#ref-ceil">ceil()</a>, <a href="#ref-floor">floor()</a>, <a href="#ref-round">round()</a></li>
+<li><a href="#ref-sin">sin()</a>, <a href="#ref-cos">cos()</a>, <a href="#ref-tan">tan()</a></li>
+</ul>
+
+</div><div id="ref-size" class="section"><h1>size</h1>
+
+<p><code>size(x_size, y_size)</code>はキャンバスの大きさを定めます。スケッチの実行の最初に一回だけ呼ばなければいけない関数です。</p>
+
+<pre><code class="language-prerender">// キャンバスの大きさを300×200に設定します。
+size(300, 200);
+// キャンバスをピンクで塗りつぶします。
+background(250, 200, 200);
+</code></pre>
+
+</div><div id="ref-background" class="section"><h1>background</h1>
+
+<p>キャンバスを一つの色で塗りつぶます。色を指定する方法は2つあります。 1個の数値を指定した場合は、グレースケールで明るさを指定します。
+0は黒、255は白、その中間は数値に応じた灰色を意味します。例えば</p>
+
+<pre><code class="language-prerender">// キャンバスを灰色に塗ります。
+background(150);
+</code></pre>
+
+<p>3個の数値を指定した場合は、RGBモデルで任意の色を指定できます。 R・G・Bそれぞれを0から255までの数値で指定します。</p>
+
+<pre><code class="language-prerender">// キャンバスを赤で塗ります。
+background(255, 0, 0);
+</code></pre>
+
+</div><div id="ref-loop" class="section"><h1>loop</h1>
+
+<p>スケッチの実行ループが止まっているときに<code>loop()</code>を呼ぶと、実行ループを再開します。</p>
+
+<h2>参考</h2>
+
+<ul>
+<li><a href="#ref-draw">draw()</a></li>
+<li><a href="#ref-noLoop">noLoop()</a></li>
+</ul>
+
+</div><div id="ref-noLoop" class="section"><h1>noLoop</h1>
+
+<p>スケッチの実行ループを停止します。 なお、マウスなどのイベントが発生したときは対応する関数が呼ばれるので、 スケッチの実行が完全に停止するわけではありません。</p>
+
+<h2>参考</h2>
+
+<ul>
+<li><a href="#ref-draw">draw()</a></li>
+<li><a href="#ref-loop">loop()</a></li>
+</ul>
+
+</div><div id="ref-Demos" class="section"><h1>Demos</h1>
+
+<ul>
+<li>簡単なデモ
+
+<ul>
+<li><a href="#ref-ImageSave">ImageSave</a></li>
+<li><a href="#ref-ImageRotate">ImageRotate</a></li>
+</ul></li>
+<li><a href="#ref-RandomSentenceGenerator">RandomSentenceGenerator</a></li>
+<li><a href="#ref-Drawing">Drawing</a></li>
+<li><a href="#ref-ChaseTheCircle">ChaseTheCircle</a></li>
+</ul>
+
+</div><div id="ref-ImageRotate" class="section"><h1>ImageRotate</h1>
+
+<p>このプログラムは、画像を回しています。</p>
+
+<pre><code class="language-prerender">// ImageRotateExample
+/* @pjs preload=&#34;images/cat2-185x200.png&#34;; */
+PImage img = loadImage(&#34;images/cat2-185x200.png&#34;);
+
+void setup() {
+  imageMode(CENTER);
+}
+
+void draw() {
+  var angle = (mouseX+mouseY)/45*PI;
+  var x = 50, y = 50;
+  background(220);
+  translate(x, y);
+  rotate(frameCount/180*PI);
+  image(img, 0, 0, 92, 100);
+  rotate(-angle);
+  translate(-x, -y);
+}
+</code></pre>
+
+</div><div id="ref-ImageSave" class="section"><h1>ImageSave</h1>
+
+<p>このプログラムでは、キャンバスを消すことなく、一部だけを保存して、後もとに戻すことで 綺麗なアニメーションが成り立っています。</p>
+
+<pre><code class="language-prerender">// ImageSaveExample
+/* @pjs preload=&#34;images/cat2-185x200.png&#34;; */
+PImage img = loadImage(&#34;images/cat2-185x200.png&#34;);
+
+void setup() {
+  imageMode(CENTER);
+}
+
+PImage imgSave = null;
+
+void draw() {
+  if (imgSave != null) {
+    image(imgSave, pmouseX, pmouseY, 100, 100);
+  }
+  imgSave = get(mouseX-50, mouseY-50, 100, 100);
+  image(img, mouseX, mouseY, 92, 100);
+}
+</code></pre>
+
+</div><div id="ref-Drawing" class="section"><h1>Drawing</h1>
+
+<p>このスケッチでマウスで描くことができます。</p>
+
+<pre><code class="language-example">// Drawing
+void setup() {
+  size(300, 300);
+  stroke(200, 0, 0);
+  strokeCap(ROUND);
+  strokeWeight(10);
+}
+
+var penDown = false;
+
+void mousePressed() {
+  if (mouseButton == RIGHT) {
+    background(200);
+    return;
+  }
+  penDown = true;
+}
+
+void mouseReleased() {
+  penDown = false;
+}
+
+var prevX = 0;
+var prevY = 0;
+
+void draw() {
+  if (penDown) {
+    if (prevX != 0) {
+      line(prevX, prevY, mouseX, mouseY);
+    }
+  }
+  prevX = mouseX;
+  prevY = mouseY;
+}
+</code></pre>
+
+</div><div id="ref-ChaseTheCircle" class="section"><h1>ChaseTheCircle</h1>
+
+<pre><code class="language-example">// ChaseTheCircle
+
+// Coordinates of the first circle.
+var x1 = 250;
+var y1 = 250;
+// Coordinates of the second circle.
+var x2 = 250;
+var y2 = 250;
+// Larger -&gt; faster.
+var easing = 0.1;
+
+void setup() {
+  size(500, 500);
+  frameRate(60);
+  stroke(0);
+}
+
+void draw() {
+  // Paint the background.
+  background(40, 40, 100);
+
+  // The first circle chases the mouse cursor.
+  var dx1 = mouseX - x1;
+  x1 += dx1 * easing;
+  var dy1 = mouseY - y1;
+  y1 += dy1 * easing;
+
+  // Draw the first circle.
+  fill(0, 220, 0);
+  ellipse(x1, y1, 66, 66);
+
+  // The second circle chases the first circle.
+  var dx2 = x1 - x2;
+  x2 += dx2 * easing;
+  var dy2 = y1 - y2;
+  y2 += dy2 * easing;
+
+  // Draw the second circle.
+  fill(255, 40, 40);
+  ellipse(x2, y2, 66, 66);
+}
+</code></pre>
+
+</div><div id="ref-Games" class="section"><h1>ゲーム</h1>
+
+<ul>
+<li><a href="#ref-JumpingBall">JumpingBall</a>
+
+<ul>
+<li><a href="#ref-JumpingBall2">JumpingBall2</a></li>
+</ul></li>
+<li><a href="#ref-TouchTheNumber">TouchTheNumber</a></li>
+<li><a href="#ref-ShapeGame">形状ゲーム</a></li>
+<li><a href="#ref-IslandHopper">IslandHopper</a></li>
+<li><a href="#ref-PingPong">PingPong</a></li>
+<li><a href="#ref-RocketLanding">RocketLanding</a></li>
+</ul>
+
+</div><div id="ref-RocketLanding" class="section"><h1>RocketLanding</h1>
+
+<pre><code class="language-example">// RocketLanding
+/* @pjs preload=&#34;images/fire2-134x200.png&#34;; */
+/* @pjs preload=&#34;images/rocket-168x300.png&#34;; */
+/* @pjs preload=&#34;images/rocket1-168x300.png&#34;; */
+PImage fire = loadImage(&#34;images/fire2-134x200.png&#34;);
+PImage rocket = loadImage(&#34;images/rocket-168x300.png&#34;);
+PImage rocket_fire = loadImage(&#34;images/rocket1-168x300.png&#34;);
+PAudio explosion = loadSound(&#34;images/explosion.ogg&#34;);
+PAudio roar = loadSound(&#34;images/roar.ogg&#34;);
+PAudio win = loadSound(&#34;images/win.ogg&#34;);
+
+var x;
+var y;
+var vy;
+
+boolean burning = false;
+boolean gameOver = false;
+
+void initVars() {
+  x = 100;
+  y = 10;
+  vy = 0;
+  gameOver = false;
+  burning = false;
+}
+
+void setup() {
+  size(200, 200);
+  frameRate(20);
+  imageMode(CENTER);
+  initVars();
+}
+
+void draw() {
+  y = y + vy;
+  vy = vy + 0.2;
+
+  if (y &gt; height - 30) {
+    if (abs(vy) &gt; 3) {
+      background(200);
+      image(fire, x, y-25, 65, 100);
+      explosion.play();
+    } else {
+      win.play();
+    }
+    noLoop();
+    gameOver = true;
+    return;
+  }
+
+  background(100);
+  if (burning) {
+    image(rocket_fire, x, y, 34, 60);
+    burning = false;
+  } else {
+    image(rocket, x, y, 34, 60);
+  }
+}
+
+void burn() {
+  burning = true;
+  vy -= 2;
+  roar.play();
+}
+
+void keyPressed() {
+  if (gameOver) {
+    initVars();
+    loop();
+    return;
+  }
+  burn();
+}
+
+void mousePressed() {
+  if (gameOver) {
+    initVars();
+    loop();
+    return;
+  }
+  burn();
+}
+</code></pre>
+
+</div><div id="ref-PingPong" class="section"><h1>PingPong</h1>
+
+<pre><code class="language-example">// PingPong
+void setup() {
+  size(360, 360, P2D);
+  background(250);
+  frameRate(30);
+}
+
+var ballDiameter = 30;
+var paddleWidth = 10;
+var paddleHeight = 90;
+
+var sleepUntil = 0;
+
+void drawBall(x, y) {
+  fill(200);
+  stroke(0);
+  var deform = 0;
+  if (x &lt;= paddleWidth*2 + ballDiameter/2 &amp;&amp;
+      y1 - paddleHeight/2 - ballDiameter/2 &lt; y &amp;&amp;
+      y &lt; y1 + paddleHeight/2 + ballDiameter/2) {
+    deform = (paddleWidth*2 + ballDiameter/2 - x);
+  } else if (x &gt;= 360-paddleWidth*2 - ballDiameter/2 &amp;&amp;
+             y2 - paddleHeight/2 -ballDiameter/2&lt; y &amp;&amp;
+             y &lt; y2 + paddleHeight/2 + ballDiameter/2) {
+    deform = (paddleWidth*2 + ballDiameter/2 - (360-x));
+  }
+  ellipse(x, y, ballDiameter-deform, ballDiameter+deform);
+}
+
+void drawPaddle(x, y) {
+  fill(100);
+  stroke(0);
+  rect(x - paddleWidth/2, y - paddleHeight/2, paddleWidth, paddleHeight);
+}
+
+// Ball coordinates.
+var x = 180, y = 180;
+// Ball velocity.
+var vx = 5, vy = 5;
+var lastPlayer1inputMs = 0;
+var lastPlayer2inputMs = 0;
+
+boolean updateBall() {
+  if (y &lt; 10 &amp;&amp; vy &lt; 0) {
+    vy = -vy - 1 + random(2);
+  }
+  if (y &gt; 350 &amp;&amp; vy &gt; 0) {
+    vy = -vy - 1 + random(2);
+  }
+  if (x &lt;= paddleWidth + ballDiameter/2 &amp;&amp;
+      y1 - paddleHeight/2 - ballDiameter/2 &lt; y &amp;&amp;
+      y &lt; y1 + paddleHeight/2 + ballDiameter/2) {
+    vx = 5 + random(2);
+  }
+  if (x &gt;= 360-paddleWidth - ballDiameter/2 &amp;&amp;
+      y2 - paddleHeight/2 -ballDiameter/2&lt; y &amp;&amp;
+      y &lt; y2 + paddleHeight/2 + ballDiameter/2) {
+    vx = -7 + random(2);
+  }
+  x += vx;
+  y += vy;
+  if (x &lt; 10 || x &gt; 350) {
+    sleepUntil = millis() + 2000;
+    background(250);
+    textSize(30);
+    fill(0);
+    if (x &lt; 10) {
+      text(&#34;Player B won!&#34;, 100, 180);
+       speak(&#34;Player B won!&#34;, &#34;en&#34;);
+    } else {
+      text(&#34;Player A won!&#34;, 100, 180);
+       speak(&#34;Player A won!&#34;, &#34;en&#34;);
+    }
+    x = 180;
+    y = 0;
+    vx = -5;
+    return false;
+  }
+  return true;
+}
+
+void draw() {
+  if (millis() &lt; sleepUntil) {
+    return;
+  }
+  if (!updateBall()) {
+    return;
+  }
+  background(255);
+  drawPaddle(10, y1);
+  drawPaddle(345, y2);
+  drawBall(x, y);
+  textSize(10);
+  text(str(x) + &#34;,&#34; + str(y)+&#34;  &#34;+y1+&#34; &#34; + y2, 10, 10);
+  if (random(70) &lt; 10 &amp;&amp; millis() - lastPlayer1inputMs &gt; 5000) {
+    y1 = y;
+  } else if (random(90) &lt; 10 &amp;&amp; millis() - lastPlayer2inputMs &gt; 5000) {
+    y2 = y;
+  }
+}
+
+var y1 = 180;
+var y2 = 180;
+
+void mouseMoved() {
+  y1 = mouseY;
+  lastPlayer1inputMs = millis();
+}
+
+void keyPressed() {
+  var ms = millis() - lastPlayer2inputMs;
+  if (keyCode == UP) {
+    if (ms &lt; 100) {
+      y2 -= 100;
+    } else if (ms &lt; 200) {
+      y2 -= 50;
+    } else {
+      y2 -= 10;
+    }
+  } else if (keyCode = DOWN) {
+    if (ms &lt; 100) {
+      y2 += 100;
+    } else if (ms &lt; 200) {
+      y2 += 50;
+    } else {
+      y2 += 10;
+    }
+  }
+  lastPlayer2inputMs = millis();
+}
+</code></pre>
+
+</div><div id="ref-IslandHopper" class="section"><h1>IslandHopper</h1>
+
+<pre><code class="language-example">// IslandHopper
+var location = 0;
+var sizes = [30, 30, 20, 30, 20, 10, 30];
+var N = sizes.length;
+
+void setup() {
+  frameRate(10);
+  stroke(0);
+  fill(255);
+}
+
+var margin = 30;
+var islandR = 30;
+var islandAspect = 4;
+var islandH = height-20;
+var step = (width - 2*margin) / (N-1);
+
+var negSizeThreshold = -3;
+
+var humanHeight = 50;
+var humanWidth = 20;
+var humanHeadR = 10;
+var humanY = islandH;
+
+boolean gameOver = false;
+String message = &#34;GAME OVER&#34;;
+
+void initialize() {
+  location = 0;
+  gameOver = false;
+  humanY = islandH;
+  message = &#34;GAME OVER&#34;;
+}
+
+
+void drawHuman(x, y) {
+  line(x, y-humanHeight/3, x, y-humanHeight);
+  line(x-humanWidth/2, y, x, y-humanHeight/3);
+  line(x+humanWidth/2, y, x, y-humanHeight/3);
+  line(x-humanWidth/2, y-humanHeight*4/5, x+humanWidth/2, y-humanHeight*4/5);
+  ellipse(x, y-humanHeight-humanHeadR, humanHeadR*2, humanHeadR*2);
+}
+
+void drawIsland(x, s) {
+  ellipse(x, islandH, s, islandW);
+}
+
+void redraw() {
+  background(200);
+  drawHuman(margin + location*step, humanY);
+  for (var i = 0; i &lt; N; i++) {
+    var s = sizes[i];
+    if (s &gt; 0) {
+      if (s &gt; islandR) s = islandR;
+      ellipse(margin + i*step, islandH, s, s/islandAspect);
+    }
+  }
+  drawHuman(margin + location*step, humanY);
+  if (gameOver) {
+    textSize(40);
+    fill(0);
+    text(message, 30, height/2+10);
+    fill(255);
+  }
+}
+
+void shrinkIslands() {
+  for (var i = 1; i &lt; N-1; i++) {
+    if (sizes[i] &gt; -random(negSizeThreshold)) {
+      sizes[i] -= 1;
+    } else {
+      sizes[i] = random(islandR) + islandR;
+    }
+  }
+}
+
+void pullHuman() {
+  if (humanY &lt; islandH) {
+    humanY += humanHeight/10;
+  }
+  if (humanY &gt; islandH) {
+    humanY = islandH;
+  }
+}
+
+void advanceTime() {
+  shrinkIslands();
+  pullHuman();
+}
+
+void checkGround() {
+  var s = sizes[location];
+  if (humanY == islandH &amp;&amp; s &lt; humanWidth-2) {
+    humanY = height;
+    gameOver = true;
+    redraw();
+    noLoop();
+    return;
+  }
+  if (location == sizes.length-1 &amp;&amp; humanY == islandH) {
+    message = &#34;YOU WON&#34;;
+    gameOver = true;
+  }
+}
+
+void draw() {
+  if (gameOver) return;
+  advanceTime();
+  checkGround();
+  redraw();
+}
+
+void keyPressed() {
+  if (gameOver) {
+    if (keyCode == &#39; &#39;) {
+      initialize();
+      loop();
+    }
+    return;
+  }
+  switch (keyCode) {
+    case LEFT: if (location &gt; 0) location--; break;
+    case RIGHT: if (location &lt; sizes.length-1) location++; break;
+    case 32:
+      if (humanY == islandH) {
+        humanY -= humanHeight;
+      }
+      break;
+  }
+  checkGround();
+  redraw();
+}
+
+void mouseClicked() {
+  if (gameOver) {
+    initialize();
+    loop();
+  }
+}
+</code></pre>
+
+</div><div id="ref-JumpingBall" class="section"><h1>JumpingBall</h1>
+
+<pre><code class="language-example">// JumpingBall
+
+var groundHeight = 10;
+var skyHeight = height - groundHeight - 10;
+
+var walls = [];
+var ball;
+
+void setup() {
+  ball = new Ball(40, 20, 20);
+  walls = [];
+}
+
+void draw() {
+  background(255, 255, 255);
+
+  if (frameCount % 50 == 0 &amp;&amp; random(100) &lt; 50) {
+   walls.add(new Wall(width, int(random(skyHeight / 2))));
+  }
+
+  for (var i = 0; i &lt; walls.length; ++i) {
+   walls[i].update();
+    if (ball.hit(walls.get(i))) {
+      speak(&#34;ゲームオーバー&#34;);
+      noLoop();
+    }
+    if (walls[i].x &lt; 0) {
+      walls.shift();
+      i--;
+      continue;
+    }
+    walls[i].draw();
+  }
+
+  drawGround();
+  ball.update();
+  ball.draw();
+}
+
+void mouseClicked() {
+  if (ball.y &lt;= ball.r) {
+   ball.v = 20;
+  }
+}
+
+void drawGround() {
+  for (var start = -(4 * frameCount % 11); start &lt; width; start += 11) {
+    fill(100, 100, 100);
+    rect(start, skyHeight, 11, groundHeight);
+  }
+}
+
+var Ball = function(init_x, init_y, init_r) {
+  this.x = init_x;
+  this.y = init_y;
+  this.r = init_r;
+  this.v = 0;
+}
+
+Ball.prototype.update = function() {
+  if (this.v &lt; 0 &amp;&amp; this.y - this.r &lt;= 0) {
+    this.v = 0;
+    this.y = this.r;
+  } else {
+    this.y += this.v;
+    this.v--;
+  }
+}
+
+Ball.prototype.hit = function(w) {
+  if (w.x &gt; this.x + this.r || w.x &lt; this.x - this.r) return false;
+  return this.y - this.r &lt; w.y;
+}
+
+void draw() {
+  fill(0, 0, 0);
+  ellipse(this.x, skyHeight - 1 - this.y, this.r*2, this.r*2);
+}
+
+var Wall = function(init_x, init_y) {
+  this.x = init_x;
+  this.y = init_y;
+};
+
+Wall.prototype.update = function() {
+  this.x -= 4;
+};
+
+Wall.prototype.draw = function() {
+  fill(0, 255, 0);
+  rect(this.x, skyHeight - 1 - this.y, 5, this.y);
+};
+</code></pre>
+
+</div><div id="ref-JumpingBall2" class="section"><h1>JumpingBall2</h1>
+
+<pre><code class="language-example">// JumpingBall2
+/* @pjs preload=&#34;images/football1-200x200.png&#34;; */
+/* @pjs preload=&#34;images/fire1-200x123.png&#34;; */
+PImage img = loadImage(&#34;images/football1-200x200.png&#34;);
+PImage fire = loadImage(&#34;images/fire1-200x123.png&#34;);
+imageMode(CENTER);
+
+// 座標
+var x = 100;
+var y = 100;
+// 速度
+var vx = 0;
+var vy = 0;
+// 加速度
+var ax = 0.99;
+var ay = 0.1;
+
+var fireX = 200;
+var fireY = 300;
+var fireV = 1;
+var fireVX = 0.5;
+var fireVY = -0.1;
+var fireAngle = 0;
+
+var goalX = 450;
+var goalY = 465;
+
+boolean gameOver = false;
+String gameMessage = &#34;&#34;;
+
+void initializeVars() {
+  x = 100;
+  y = 100;
+  vx = 0;
+  vy = 0;
+}
+
+void setup() {
+  size(500, 500);
+  initializeVars();
+}
+
+void draw() {
+  updatePosition();
+  drawFrame();
+}
+
+
+void updatePosition() {
+  // 座標や速度の計算。
+  x = x + vx;
+  y = y + vy;
+  if (vx != 0) {
+    vx = vx*abs(vx*ax)/abs(vx);
+  }
+  vy = vy + ay;
+  /*
+  if (y &gt; height-5) {
+    gameOver = true;
+    gameMessage = &#34;GAME OVER&#34;;
+    return;
+  }
+  */
+  // バウンス
+  if (x &lt; 5) {
+    x = 5;
+    vx = abs(vx);
+  }
+  if (x &gt; width-5) {
+    x = width - 5;
+    vx = -abs(vx);
+  }
+  if (y &lt; 5) {
+    y = 5;
+    vy = abs(vy);
+  }
+  if (y &gt; height-5) {
+    y = height-5;
+    vy = -abs(vy);
+  }
+  fireX += fireVX;
+  fireY += fireVY;
+  fireAngle += 0.02;
+  fireVX = fireV*cos(fireAngle) + fireV*sin(fireAngle);
+  fireVY = fireV*sin(fireAngle) - fireV*cos(fireAngle);
+
+  if (dist(x, y, fireX, fireY) &lt; 100 &amp;&amp; abs(y - fireY) &lt; 60) {
+    gameOver = true;
+    gameMessage = &#34;GAME OVER&#34;;
+  }
+  if (dist(x, y, goalX, goalY) &lt; 25 &amp;&amp; y &lt;= goalY) {
+    gameOver = true;
+    gameMessage = &#34;YOU WON&#34;;
+  }
+}
+
+
+void drawFrame() {
+  if (gameOver) {
+    background(220);
+    fill(0);
+    textSize(20);
+    text(gameMessage, 30, 100);
+    noLoop();
+    return;
+  }
+  background(220);
+  strokeWeight(3);
+  fill(255);
+  ellipse(goalX, goalY, 45, 25);
+  fill(255);
+  //ellipse(x, y, 10, 10);
+  image(img, x, y,  40, 40);
+  translate(fireX, fireY);
+  image(fire, 0, 0, 200, 130);
+  translate(-fireX, -fireY);
+}
+
+void keyPressed() {
+  if (gameOver) {
+    gameOver = false;
+    initializeVars();
+    loop();
+    return;
+  }
+  switch (key) {
+    case &#39; &#39;:
+      break;
+    case &#39;\n&#39;:
+      break;
+    case &#39;q&#39;:
+      gameOver = true;
+      gameMessage = &#34;STOP&#34;;
+      break;
+  }
+  switch (keyCode) {
+    case UP:
+      vy -= 5;
+      break;
+    case DOWN:
+      vy += 5;
+      break;
+    case LEFT:
+      vx = -2;
+      break;
+    case RIGHT:
+      vx = 2;
+      break;
+  }
+}
+
+</code></pre>
+
+</div><div id="ref-TouchTheNumber" class="section"><h1>TouchTheNumber</h1>
+
+<pre><code class="language-example">// TouchTheNumber
+
+int N = 3;
+int numbers[][];
+
+// Draw the rectangles.
+void rectangles() {
+  fill(200);
+  for (int i = 0; i &lt; N; i++) {
+    for (int j = 0; j &lt; N; j++) {
+      rect(50+120*i, 50+120*j, 100, 100);
+    }
+  }
+}
+
+void printNumbers() {
+  fill(0);
+  textSize(50);
+  for (int i = 0; i &lt; N; i++) {
+    for (int j = 0; j &lt; N; j++) {
+      text(str(numbers[i][j]), 85+120*i, 118+120*j);
+    }
+  }
+}
+
+void shuffle() {
+  for (int i = 0; i &lt; N; i++) {
+    for (int j = 0; j &lt; N; j++) {
+      int x = int(random(N));
+      int y = int(random(N));
+      if (x != i || y != j) {
+        int tmp = numbers[i][j];
+        numbers[i][j] = numbers[x][y];
+        numbers[x][y] = tmp;
+      }
+    }
+  }
+}
+
+void setup() {
+  size(440, 440);
+  background(240);
+  textSize(50);
+  numbers = new int[N][];
+  for (int i = 0; i &lt; N; i++) {
+    numbers[i] = new int[N];
+    for (int j = 0; j &lt; N; j++) {
+      numbers[i][j] = i*3 + j + 1;
+    }
+  }
+  shuffle();
+  rectangles();
+  printNumbers();
+}
+
+int current = 1;
+int started = false;
+int started_ms = 0;
+
+void draw() {
+  noLoop();
+}
+
+void mouseOver() {
+  if (!started) {
+    started = true;
+    background(240);
+    rectangles();
+    started_ms = millis();
+  }
+}
+
+int lastClickMs;
+
+void mouseClicked() {
+  // Ignore click repeats (touch screen generates too many click events).
+  if (millis() - lastClickMs &lt; 50) return;
+  lastClickMs = millis();
+  if (!started) {
+    started = true;
+    background(240);
+    rectangles();
+    started_ms = millis();
+  }
+  if (current == 10) {
+    background(240);
+    rectangles();
+    shuffle();
+    printNumbers();
+    current = 1;
+    started = false;
+    return;
+  }
+  int x = int((mouseX-60)/120);
+  int y = int((mouseY-60)/120);
+  if (x &lt; 0) x = 0;
+  if (x &gt;= N) x = N-1;
+  if (y &lt; 0) y = 0;
+  if (y &gt;= N) y = N-1;
+  //fill(240); stroke(240);
+  //rect(20, 20, 50, 20);
+  //textSize(20); fill(0); stroke(0);
+  //text(str(mouseX) + &#34; &#34; + str(mouseY)+&#34; : &#34; + str(x) + &#34; &#34; + str(y), 20, 20);
+  if (numbers[x][y] == current) {
+    textSize(50);
+    fill(0);
+    text(str(numbers[x][y]), 85+120*x, 118+120*y);
+    current++;
+    if (current == 10) {
+      background(240);
+      int t = millis() - started_ms;
+      fill(0); textSize(50);
+      text(str(int(t/1000)) + &#34;.&#34; + str((int(t/100))%10) + str((int(t/10))%10) + &#34;s&#34;, 100, 100);
+    }
+  }
+}
+</code></pre>
+
+</div><div id="ref-ellipse" class="section"><h1>ellipse</h1>
+
+<p>円または楕円を描きます。</p>
+
+<pre><code class="language-prerender">size(100, 50);
+ellipse(50, 25, 90, 20);
+</code></pre>
+
+<pre><code class="language-prerender">fill(255, 0, 0); // 赤
+// 横に細長い赤い楕円を描きます。
+ellipse(50, 10, 100, 20);
+fill(0, 0, 255); // 青
+// 縦の細長い楕円を描きます。
+ellipse(10, 50, 20, 100);
+fill(255);  // 白
+ellipse(50, 50, 40, 40);
+</code></pre>
+
+<p>呼び方: <code>ellipse(x, y, width, height)</code></p>
+
+<ul>
+<li>x — 中心のX座標</li>
+<li>y — 中心のY座標</li>
+<li>width — 楕円の幅</li>
+<li>height — 楕円の高さ</li>
+</ul>
+
+<p>weightとheightを等しくすれば円になります。</p>
+
+<p>関連項目: <a href="#ref-arc">arc()</a>, <a href="#ref-triangle">triangle()</a>, <a href="#ref-rect">rect()</a>, <a href="#ref-ellipse">ellipse()</a>.</p>
+
+</div><div id="ref-speak" class="section"><h1>speak</h1>
+
+<p>テキストを読み上げます。</p>
+
+<pre><code class="language-example">// こんにちはと言います。
+speak(&#34;こんにちは&#34;);
+</code></pre>
+
+<p>他の言語のテキストを話させたいときは、テキストの後に<code>&#34;en&#34;</code>, <code>&#34;it&#34;</code>などの言語コードを指定します。</p>
+
+<pre><code class="language-example">speak(&#34;Ciao!&#34;, &#34;it&#34;);
+speak(&#34;Hallo!&#34;, &#34;en-GB&#34;);
+speak(&#34;Hello!&#34;, &#34;en-US&#34;);
+</code></pre>
+
+<h3>注意</h3>
+
+<p><code>speak()</code>は標準的なProcessing.jsの一部ではありません。このシステム以外のProcessing.jsの環境では使えません。</p>
+
+</div><div id="ref-RandomSentenceGenerator" class="section"><h1>RandomSentenceGenerator</h1>
+
+<pre><code class="language-example">// RandomSentenceGenerator
+String itsu[] = {&#34;昨日&#34;, &#34;2年前&#34;, &#34;今朝&#34;};
+String darega[] = {&#34;太郎が&#34;, &#34;花子が&#34;};
+String dokode[] = {&#34;外で&#34;, &#34;学校で&#34;, &#34;とつぜん&#34;, &#34;大きく&#34;};
+String doushita[] = {&#34;起きました&#34;,  &#34;叫びました&#34;,  &#34;転びました&#34;,  &#34;輝きました&#34;};
+
+size(400, 200);
+fill(0);
+textSize(25);
+
+int itsuBangou = int(random(itsu.length));
+int daregaBangou = int(random(darega.length));
+int dokodeBangou = int(random(dokode.length));
+int doushitaBangou = int(random(doushita.length));
+
+String phrase = itsu[itsuBangou] + darega[daregaBangou] + dokode[dokodeBangou] + doushita[doushitaBangou];
+text(phrase, 10, 100);
+speak(phrase);
+</code></pre>
+
+</div><div id="ref-Ball" class="section"><h1>Ball</h1>
+
+<p>Ball: 玉。ボール。</p>
+
+</div><div id="ref-Wall" class="section"><h1>Wall</h1>
+
+<p>Wall: 壁</p>
+
+</div><div id="ref-add" class="section"><h1>add</h1>
+
+<p>足す。付き加える。</p>
+
+</div><div id="ref-alert" class="section"><h1>alert</h1>
+
+<p>警報。アラート。<code>alert(text)</code>はブラウザに<code>text</code>のテキストを警報します。</p>
+
+</div><div id="ref-drawGround" class="section"><h1>drawGround</h1>
+
+<p>地面を描く。</p>
+
+</div><div id="ref-fill" class="section"><h1>fill</h1>
+
+<p><code>fill()</code>は筆の中の色を設定する。筆には２つの色が設定できます。中の色は形状の中に塗ります。 端の色は形状の堺麺を描く時に使います。</p>
+
+<pre><code class="language-prerender">fill(0, 255, 0);  // 緑
+ellipse(50, 50, 50, 25);
+</code></pre>
+
+<p>他に<a href="#ref-stroke">stroke()</a>を見てみてください。</p>
+
+</div><div id="ref-hit" class="section"><h1>hit</h1>
+
+<p>当たる、打つかる。</p>
+
+</div><div id="ref-false" class="section"><h1>false</h1>
+
+<p>真理値の一つ。「偽」という意味。<a href="#ref-boolean">boolean</a>を見てください。</p>
+
+</div><div id="ref-true" class="section"><h1>true</h1>
+
+<p>真理値の一つ。「真」という意味。<a href="#ref-boolean">boolean</a>を見てください。</p>
+
+</div><div id="ref-boolean" class="section"><h1>boolean</h1>
+
+<p><code>boolean</code>は真理値の型です。真理値には2つの値があります。</p>
+
+<ul>
+<li><code>true</code> 「真」</li>
+<li><code>false</code> 「偽」</li>
+</ul>
+
+<p><a href="#ref-if">if()</a>と<a href="#ref-while">while()</a>のカッコの中の値は真理値でなければなりません。</p>
+
+</div><div id="ref-void" class="section"><h1>void</h1>
+
+<p><code>void</code>は何も返さない関数の型です。関数が値を返す必要がないときに使います。</p>
+
+</div><div id="ref-char" class="section"><h1>char</h1>
+
+<p><code>char</code>は一つの文字のコードポイント(符号点)を保存する整数の型です。</p>
+
+<pre><code>char c = &#39;d&#39;; // 100.
+</code></pre>
+
+</div><div id="ref-int" class="section"><h1>int</h1>
+
+<p>整数の型です。整数は…, -3, -2, -1, 0, 1, 2, 3, 4, …などの数です。</p>
+
+</div><div id="ref-float" class="section"><h1>float</h1>
+
+<p>単精度浮動小数点数の型です。</p>
+
+<p><strong>注意:</strong> Processing.jsでは、変数に付く型が倍精度(double)である。</p>
+
+</div><div id="ref-double" class="section"><h1>double</h1>
+
+<p>倍精度浮動小数点数変の型です。</p>
+
+</div><div id="ref-byte" class="section"><h1>byte</h1>
+
+<p>-128以上127以下の整数の型です。</p>
+
+<p><strong>注意:</strong> Processing.jsでは変数につけている型は倍精度(double)であるため、使う時点で<code>byte()</code>で変換が必要である。</p>
+
+<pre><code class="language-prerender">fill(0); textSize(20);
+byte x = byte(257);
+text(str(x), 10, 30);
+</code></pre>
+
+</div><div id="ref-short" class="section"><h1>short</h1>
+
+<p>-32768以上32767以下の整数の型です。</p>
+
+<p><strong>注意:</strong> Processing.jsでは変数につけている型は倍精度(double)であるため、使う時点で<code>short()</code>で変換が必要である。</p>
+
+</div><div id="ref-line" class="section"><h1>line</h1>
+
+<p><code>line()</code>はキャンバスに直線を描きます。</p>
+
+<pre><code class="language-prerender">int x1 = 10, y1 = 10, y2 = 100, x2 = 50;
+// (x1, y1)から(x2, y2)までの直線を描きます。
+line(x1, y1, x2, y2);
+</code></pre>
+
+<p>関連項目: <a href="#ref-triangle">triangle</a>, <a href="#ref-rect">rect</a>, <a href="#ref-ellipse">ellipse</a>, <a href="#ref-arc">arc</a>.</p>
+
+</div><div id="ref-millis" class="section"><h1>millis</h1>
+
+<p>プログラム開始から現在までの経過時間をミリ秒単位で返します。</p>
+
+<p>例えば、このプログラムは実行を始めてから2秒後に赤い円を描きます。</p>
+
+<pre><code class="language-prerender">// millis
+void setup() {
+  size(150, 100);
+  background(255);  // キャンバスを白で塗ります
+  fill(0);
+  textSize(20);
+  text(&#34;2秒待って&#34;, 10, 50);
+}
+
+void draw() {
+  if (millis() &gt; 2000) {  // 2000ミリ秒=2秒
+    background(255);
+    fill(255, 0, 0); // 赤
+    ellipse(75, 50, 55, 55);
+    noLoop(); // アニメーションを止めます。
+  }
+}
+</code></pre>
+
+</div><div id="ref-mouseClicked" class="section"><h1>mouseClicked</h1>
+
+<p>ユーザがマウスをクリックすると<code>mouseClicked()</code>関数が呼ばれます。
+マウスのクリックに反応するプログラムを作るにはこの関数を定義しなければなりません。
+カーソルの位置は<code>mouseX</code>と<code>mouseY</code>変数を使って調べることができます。
+クリックされたボタンは<a href="#ref-mouseButton">mouseButton</a>変数を使って調べることができます。クリックされたボタンによって<code>mouseButton</code>の値は<a href="#ref-LEFT">LEFT</a>か<a href="#ref-RIGHT">RIGHT</a>かになります。</p>
+
+<pre><code class="language-example">void setup() {
+  background(255);
+}
+
+void mouseClicked() {
+  fill(0);
+  ellipse(mouseX, mouseY, 20, 20);
+}
+</code></pre>
+
+</div><div id="ref-mouseMoved" class="section"><h1>mouseMoved</h1>
+
+<p><strong>マウスイベント</strong>: <code>mouseMoved()</code>を定義すれば、マウスカーソルが動いたときに呼ばれる関数。</p>
+
+<p>関連項目: <a href="#ref-mouseClicked">mouseClicked()</a>, <a href="#ref-mouseDragged">mouseDragged()</a>, <a href="#ref-mouseOver">mouseOver()</a>, <a href="#ref-mouseOut">mouseOut()</a>.</p>
+
+</div><div id="ref-mouseDragged" class="section"><h1>mouseDragged</h1>
+
+<p><strong>マウスイベント</strong>: <code>mouseDragged()</code>を定義すれば、マウスが押されたままに動いたときに呼ばれる関数。</p>
+
+<p>関連項目: <a href="#ref-mouseClicked">mouseClicked()</a>, <a href="#ref-mouseMoved">mouseMoved()</a>, <a href="#ref-mouseOver">mouseOver()</a>, <a href="#ref-mouseOut">mouseOut()</a>.</p>
+
+</div><div id="ref-mouseOver" class="section"><h1>mouseOver</h1>
+
+<p>ユーザがマウスをキャンバスの外から中に動かすと<code>mouseOver()</code>関数が呼ばれます。</p>
+
+<pre><code class="language-example">void setup() {
+  background(0);
+  text(&#34;待っています&#34;, 20, 20);
+}
+
+void mouseOver() {
+  background(80);
+  text(&#34;スタート&#34;, 20, 20);
+}
+
+void mouseOut() {
+  background(0);
+  text(&#34;終わり&#34;, 20, 20);
+}
+</code></pre>
+
+</div><div id="ref-mouseOut" class="section"><h1>mouseOut</h1>
+
+<p>ユーザがマウスをキャンバスの中から外に動かすと<code>mouseOut()</code>関数が呼ばれます。</p>
+
+<pre><code class="language-example">void setup() {
+  background(0);
+  text(&#34;待っています&#34;, 20, 20);
+}
+
+void mouseOver() {
+  background(80);
+  text(&#34;スタート&#34;, 20, 20);
+}
+
+void mouseOut() {
+  background(0);
+  text(&#34;終わり&#34;, 20, 20);
+}
+</code></pre>
+
+</div><div id="ref-mousePressed" class="section"><h1>mousePressed</h1>
+
+<p>ユーザがマウスのボタンを押すと<code>mousePressed()</code>関数が呼ばれます。 この関数を定義すれば、「マウスで絵を描く」のような操作が実装できます。</p>
+
+<pre><code class="language-example">void setup() {
+  background(20);
+  fill(240);
+}
+
+bool pressed = false;
+
+// キャンバスの中でマウスの左ボタンか右ボタンが押されたら、
+// それに対応して塗りつぶしとペンの色を設定する。
+void mousePressed() {
+  pressed = true;
+  if (mouseButton == LEFT) {
+    fill(0); stroke(0);
+  } else if (mouseButton == RIGHT) {
+    fill(255); stroke(255);
+  }
+}
+
+void mouseReleased() {
+  pressed = false;
+}
+
+void draw() {
+  if (pressed) {
+    ellipse(mouseX, mouseY, 5, 5);
+  }
+}
+</code></pre>
+
+</div><div id="ref-mouseReleased" class="section"><h1>mouseReleased</h1>
+
+<p>ユーザがマウスのボタンを離すと<code>mouseReleased()</code>関数が呼ばれます。 この関数を定義すれば、「マウスで絵を描く」のような操作が実装できます。</p>
+
+<pre><code class="language-example">void setup() {
+  background(20);
+  fill(240);
+}
+
+bool pressed = false;
+
+void mousePressed() {
+  pressed = true;
+}
+
+void mouseReleased() {
+  pressed = true;
+}
+
+void draw() {
+  if (pressed) {
+    ellipse(mouseX, mouseY, 10, 10);
+  }
+}
+</code></pre>
+
+</div><div id="ref-mouseButton" class="section"><h1>mouseButton</h1>
+
+<p><a href="#ref-Mouse">マウスイベント</a>の中で使い、押されたボタンを表す。 押されたボタンが左ボタンのときは<a href="#ref-LEFT">LEFT</a>に、右ボタンがときは<a href="#ref-RIGHT">RIGHT</a>になる。</p>
+
+<pre><code class="language-prerender">// キャンバスの中でマウスボタンが押してみましょう。
+void mousePressed() {
+  if (mouseButton == LEFT) {
+    fill(0);
+    rect(5,5,40,90);
+  } else if (mouseButton == RIGHT) {
+    fill(0);
+    rect(55,5,40,90);
+  } else {
+    fill(0);
+    rect(45,5,10,90);
+  }
+}
+
+void mouseReleased() {
+  background(200);
+}
+</code></pre>
+
+</div><div id="ref-mouseX" class="section"><h1>mouseX</h1>
+
+<p>マウスのX座標。<a href="#ref-draw">draw()</a>からも<a href="#ref-Mouse">マウスイベント</a>からも参照できます。</p>
+
+<p>関連項目: <a href="#ref-mouseX">mouseX</a>, <a href="#ref-pmouseX">pmouseX</a>, <a href="#ref-pmouseY">pmouseY</a>, <a href="#ref-mousePressed">mousePressed()</a>, <a href="#ref-mouseReleased">mouseReleased()</a>,
+<a href="#ref-mouseClicked">mouseClicked()</a>.</p>
+
+<pre><code class="language-prerender">void draw() {
+  ellipse(mouseX, mouseY, 5, 5);
+}
+</code></pre>
+
+</div><div id="ref-pmouseX" class="section"><h1>pmouseX</h1>
+
+<p>前のフレームでの<a href="#ref-mouseX">mouseX</a>の値。</p>
+
+<p>関連項目: <a href="#ref-mouseX">mouseX</a>, <a href="#ref-mouseY">mouseY</a>, <a href="#ref-pmouseY">pmouseY</a>.</p>
+
+<pre><code class="language-prerender">void draw() {
+  line(pmouseX, pmouseY, mouseX, mouseY);
+}
+</code></pre>
+
+</div><div id="ref-pmouseY" class="section"><h1>pmouseY</h1>
+
+<p>前のフレームでの<a href="#ref-mouseY">mouseY</a>の値。</p>
+
+<p>関連項目: <a href="#ref-mouseX">mouseX</a>, <a href="#ref-mouseY">mouseY</a>, <a href="#ref-pmouseX">pmouseX</a>.</p>
+
+</div><div id="ref-mouseY" class="section"><h1>mouseY</h1>
+
+<p>マウスのY座標。<a href="#ref-draw">draw()</a>からも<a href="#ref-Mouse">マウスイベント</a>からも参照できます。</p>
+
+<p>関連項目: <a href="#ref-mouseX">mouseX</a>, <a href="#ref-pmouseX">pmouseX</a>, <a href="#ref-pmouseY">pmouseY</a>, <a href="#ref-mousePressed">mousePressed()</a>, <a href="#ref-mouseReleased">mouseReleased()</a>,
+<a href="#ref-mouseClicked">mouseClicked()</a>.</p>
+
+<pre><code class="language-prerender">void draw() {
+  ellipse(mouseX, mouseY, 5, 5);
+}
+</code></pre>
+
+</div><div id="ref-LEFT" class="section"><h1>LEFT</h1>
+
+<p><strong>マウス</strong>: <code>LEFT</code>は<a href="#ref-mouseButton">mouseButton</a>を参照するときにマウスの左ボタンを表す。</p>
+
+<p>関連項目: <a href="#ref-mouseButton">mouseButton</a>, <a href="#ref-mousePressed">mousePressed()</a>, <a href="#ref-mouseReleased">mouseReleased()</a>, <a href="#ref-mouseClicked">mouseClicked()</a>.</p>
+
+<p><strong>キーボード</strong>: 左の矢印キーのコード。一覧は<a href="#ref-keyCodes">keyCodes</a>に参照。 <code>keyCode == LEFT</code>を調べる先に<code>key ==
+CODED</code>を確かめなければなりません。</p>
+
+<p>関連項目: <a href="#ref-keyCode">keyCode</a>, <a href="#ref-keyCodes">keyCodes</a>.</p>
+
+</div><div id="ref-CENTER" class="section"><h1>CENTER</h1>
+
+<p><strong>マウス</strong>: <code>CENTER</code>は<a href="#ref-mouseButton">mouseButton</a>を参照するときにマウスの真ん中ボタンを表す。</p>
+
+<p>関連項目: <a href="#ref-mouseButton">mouseButton</a>, <a href="#ref-mousePressed">mousePressed()</a>, <a href="#ref-mouseReleased">mouseReleased()</a>, <a href="#ref-mouseClicked">mouseClicked()</a>.</p>
+
+</div><div id="ref-RIGHT" class="section"><h1>RIGHT</h1>
+
+<p><strong>マウス</strong>: <code>RIGHT</code>は<a href="#ref-mouseButton">mouseButton</a>を参照するときにマウスの右ボタンを表す。</p>
+
+<p>関連項目: <a href="#ref-mouseButton">mouseButton</a>, <a href="#ref-mousePressed">mousePressed()</a>, <a href="#ref-mouseReleased">mouseReleased()</a>, <a href="#ref-mouseClicked">mouseClicked()</a>.</p>
+
+<p><strong>キーボード</strong>: 右の矢印キーのコード。一覧は<a href="#ref-keyCodes">keyCodes</a>に参照。 <code>keyCode == RIGHT</code>を調べる先に<code>key ==
+CODED</code>を確かめなければなりません。</p>
+
+<p>関連項目: <a href="#ref-keyCode">keyCode</a>, <a href="#ref-keyCodes">keyCodes</a>.</p>
+
+</div><div id="ref-printNumbers" class="section"><h1>printNumbers</h1>
+
+<p>数値を表示する。</p>
+
+</div><div id="ref-random" class="section"><h1>random</h1>
+
+</div><div id="ref-rect" class="section"><h1>rect</h1>
+
+<p><code>rect()</code>は長方形を描きます。長方形の位置は2つの頂点の座標で指定します。</p>
+
+<pre><code class="language-prerender">fill(0);
+rect(20, 30, 60, 40);
+</code></pre>
+
+</div><div id="ref-remove" class="section"><h1>remove</h1>
+
+<p>なくす、処分する。</p>
+
+</div><div id="ref-shuffle" class="section"><h1>shuffle</h1>
+
+<p>順番をみだす、順不同にする。</p>
+
+</div><div id="ref-sqrt" class="section"><h1>sqrt</h1>
+
+<p><code>sqrt()</code>は数の平方根を計算します。例えば、<code>sqrt(4.0)</code>は2.0を返します。</p>
+
+</div><div id="ref-str" class="section"><h1>str</h1>
+
+<p><code>str()</code>は任意の値を文字列(テキスト)に変換します。</p>
+
+</div><div id="ref-stroke" class="section"><h1>stroke</h1>
+
+<p><code>stroke()</code>はペンの色を設定します。次の線や図形を描く命令に反映されます。</p>
+
+<pre><code class="language-prerender">stroke(255, 180, 0);  // オレンジ
+strokeWeight(5);
+line(20, 20, 80, 80);
+rect(20, 55, 60, 25);
+</code></pre>
+
+<p>関連項目: <a href="#ref-strokeCap">strokeCap</a>, <a href="#ref-fill">fill</a>.</p>
+
+</div><div id="ref-strokeCap" class="section"><h1>strokeCap</h1>
+
+<p><code>strokeCap()</code>はペンの端の形を設定します。次の<a href="#ref-line">line()</a>命令に反映されます。</p>
+
+<pre><code class="language-prerender">strokeCap(ROUND);
+strokeWeight(20);
+line(20, 20, 80, 80);
+</code></pre>
+
+<p>関連項目: <a href="#ref-stroke">stroke</a>, <a href="#ref-fill">fill</a>, <a href="#ref-ROUND">ROUND</a>, <a href="#ref-SQUARE">SQUARE</a>, <a href="#ref-PROJECT">PROJECT</a>.</p>
+
+<p>選択できる形は</p>
+
+<ul>
+<li><code>ROUND</code> - 丸い</li>
+<li><code>SQUARE</code> - 四角い。線は座標で表している点までぴったり及びます。</li>
+<li><code>PROJECT</code> - 四角い。線は座標で表している点から筆の大きさの部分まで出ています。</li>
+</ul>
+
+</div><div id="ref-ROUND" class="section"><h1>ROUND</h1>
+
+<p>線を描く筆を丸い形に設定します。 <a href="#ref-strokeCap">strokeCap()</a>を見てください。</p>
+
+<pre><code class="language-prerender">strokeCap(ROUND);
+strokeWeight(20);
+line(20, 20, 80, 80);
+</code></pre>
+
+<p>関連項目: <a href="#ref-strokeCap">strokeCap</a>, <a href="#ref-strokeWeight">strokeWeight</a>, <a href="#ref-stroke">stroke</a>, <a href="#ref-SQUARE">SQUARE</a>, <a href="#ref-PROJECT">PROJECT</a>.</p>
+
+</div><div id="ref-SQUARE" class="section"><h1>SQUARE</h1>
+
+<p>線を描く筆を四角い形に設定します。 <a href="#ref-strokeCap">strokeCap()</a>を見てください。</p>
+
+<pre><code class="language-prerender">strokeCap(SQUARE);
+strokeWeight(20);
+line(20, 20, 80, 80);
+</code></pre>
+
+<p>関連項目: <a href="#ref-strokeCap">strokeCap</a>, <a href="#ref-strokeWeight">strokeWeight</a>, <a href="#ref-stroke">stroke</a>, <a href="#ref-ROUND">ROUND</a>, <a href="#ref-PROJECT">PROJECT</a>.</p>
+
+</div><div id="ref-PROJECT" class="section"><h1>PROJECT</h1>
+
+<p>線を描く筆を四角い形に設定します。<a href="#ref-SQUARE">SQUARE</a>と比べて、筆の大きさは線の先端に出ています。 <a href="#ref-strokeCap">strokeCap()</a>を見てください。</p>
+
+<pre><code class="language-prerender">strokeCap(PROJECT);
+strokeWeight(20);
+line(20, 20, 80, 80);
+</code></pre>
+
+<p>関連項目: <a href="#ref-strokeCap">strokeCap</a>, <a href="#ref-strokeWeight">strokeWeight</a>, <a href="#ref-stroke">stroke</a>, <a href="#ref-ROUND">ROUND</a>, <a href="#ref-SQUARE">SQUARE</a>.</p>
+
+</div><div id="ref-strokeWeight" class="section"><h1>strokeWeight</h1>
+
+<p><code>strokeWeight()</code>はペンの太さを設定します。次の線や図形を描く命令に反映されます。</p>
+
+<pre><code class="language-prerender">strokeCap(SQUARE);
+strokeWeight(5);
+line(15, 20, 85, 20);
+strokeWeight(10);
+line(15, 40, 85, 40);
+strokeWeight(20);
+line(15, 70, 85, 70);
+</code></pre>
+
+<p>関連項目: <a href="#ref-stroke">stroke</a>, <a href="#ref-strokeWeight">strokeWeight</a>, <a href="#ref-SQUARE">SQUARE</a>.</p>
+
+</div><div id="ref-noStroke" class="section"><h1>noStroke</h1>
+
+<p><code>noStroke()</code>は端を書かないように設定する。</p>
+
+<pre><code class="language-prerender">noStroke();
+rect(20, 20, 60, 60);
+</code></pre>
+
+</div><div id="ref-text" class="section"><h1>text</h1>
+
+<p><code>text()</code>はキャンバスに言葉を表示します。表示する位置を座標で指定します。</p>
+
+<pre><code class="language-prerender">size(150, 100); fill(0); textSize(20);
+text(&#34;こんにちは&#34;, 20, 50);
+</code></pre>
+
+<p>関連項目: <a href="#ref-textSize">textSize</a>, <a href="#ref-fill">fill</a>, <a href="#ref-textFont">textFont</a>.</p>
+
+</div><div id="ref-textAlign" class="section"><h1>textAlign</h1>
+
+<p><code>textAlign()</code>は文字を移り方を設定する。</p>
+
+<pre><code class="language-render">void setup() {
+  size(300, 130);
+  stroke(0);
+  fill(0);
+  textSize(15);
+  strokeWeight(5);
+  point(width/2, height/2);
+  frameRate(1);
+}
+
+void draw() {
+  background(220);
+  point(width/2, height/2);
+  switch (frameCount % 12) {
+    case 0:
+      textAlign(LEFT, BASELINE);
+      text(&#34;textAlign(LEFT, TOP)&#34;, 10, 20);
+      textAlign(LEFT, TOP);
+      break;
+    case 1:
+      textAlign(LEFT, BASELINE);
+      text(&#34;textAlign(RIGHT, TOP)&#34;, 10, 20);
+      textAlign(RIGHT, TOP);
+      break;
+    case 2:
+      textAlign(LEFT, BASELINE);
+      text(&#34;textAlign(CENTER, TOP)&#34;, 10, 20);
+      textAlign(CENTER, TOP);
+      break;
+    case 3:
+      textAlign(LEFT, BASELINE);
+      text(&#34;textAlign(LEFT, BOTTOM)&#34;, 10, 20);
+      textAlign(LEFT, BOTTOM);
+      break;
+    case 4:
+      textAlign(LEFT, BASELINE);
+      text(&#34;textAlign(RIGHT, BOTTOM)&#34;, 10, 20);
+      textAlign(RIGHT, BOTTOM);
+      break;
+    case 5:
+      textAlign(LEFT, BASELINE);
+      text(&#34;textAlign(CENTER, BOTTOM)&#34;, 10, 20);
+      textAlign(CENTER, BOTTOM);
+      break;
+    case 6:
+      textAlign(LEFT, BASELINE);
+      text(&#34;textAlign(LEFT, CENTER)&#34;, 10, 20);
+      textAlign(LEFT, CENTER);
+      break;
+    case 7:
+      textAlign(LEFT, BASELINE);
+      text(&#34;textAlign(RIGHT, CENTER)&#34;, 10, 20);
+      textAlign(RIGHT, CENTER);
+      break;
+    case 8:
+      textAlign(LEFT, BASELINE);
+      text(&#34;textAlign(CENTER, CENTER)&#34;, 10, 20);
+      textAlign(CENTER, CENTER);
+      break;
+    case 9:
+      textAlign(LEFT, BASELINE);
+      text(&#34;textAlign(LEFT, BASELINE)&#34;, 10, 20);
+      textAlign(LEFT, BASELINE);
+      break;
+    case 10:
+      textAlign(LEFT, BASELINE);
+      text(&#34;textAlign(RIGHT, BASELINE)&#34;, 10, 20);
+      textAlign(RIGHT, BASELINE);
+      break;
+    case 11:
+      textAlign(LEFT, BASELINE);
+      text(&#34;textAlign(CENTER, BASELINE)&#34;, 10, 20);
+      textAlign(CENTER, BASELINE);
+      break;
+  }
+  text(&#34;text&#34;, width/2, height/2);
+}
+</code></pre>
+
+</div><div id="ref-textSize" class="section"><h1>textSize</h1>
+
+<p><code>textSize()</code>は文字の大きさを設定します。この関数を呼んでから次の<a href="#ref-text">text()</a>の命令に反映されます。</p>
+
+<pre><code class="language-prerender">fill(0);
+textSize(50);
+text(&#34;あ&#34;, 20, 80);
+textSize(20);
+text(&#34;か&#34;, 70, 30);
+</code></pre>
+
+<p>関連項目: <a href="#ref-text">text</a>, <a href="#ref-textFont">textFont</a>.</p>
+
+</div><div id="ref-triangle" class="section"><h1>triangle</h1>
+
+<p><code>triangle()</code>は三角形を描きます。3つの頂点を座標で指定します。</p>
+
+<pre><code class="language-prerender">triangle(50, 10, 10, 80, 90, 80);
+</code></pre>
+
+<p>三角形の辺は現在のペンの色と太さで描きます。<a href="#ref-stroke">stroke()</a>と<a href="#ref-strokeWeigth">strokeWeigth()</a>を見てください。
+三角形の内部は現在の塗りつぶしの色で塗りつぶします。<a href="#ref-fill">fill()</a>を見てください。</p>
+
+</div><div id="ref-update" class="section"><h1>update</h1>
+
+<p>更新する。</p>
+
+</div><div id="ref-while" class="section"><h1>while</h1>
+
+<p>指定された条件が真である間、 { … } の間に書いた文を繰り返します。</p>
+
+<pre><code class="language-prerender">fill(0);
+int x = 0;
+while (x &lt; 10) {
+  text(str(x), 10+x*7, 15+x*8);
+  x = x+1;
+}
+</code></pre>
+
+<p>関連項目: <a href="#ref-for">for</a>, <a href="#ref-do">do</a>, <a href="#ref-break">break</a>, <a href="#ref-continue">continue</a>.</p>
+
+</div><div id="ref-for" class="section"><h1>for</h1>
+
+<p>ループといい、ある条件を満たすまでの繰り返し命令である。</p>
+
+<pre><code class="language-prerender">fill(0);
+for (int i = 0; i &lt; 10; i++) {
+  text(str(i), 10, i*10);
+}
+</code></pre>
+
+<p>関連項目: <a href="#ref-while">while</a>, <a href="#ref-do">do</a>, <a href="#ref-break">break</a>, <a href="#ref-continue">continue</a>.</p>
+
+</div><div id="ref-do" class="section"><h1>do</h1>
+
+<p>ループの一つの種類。<a href="#ref-while">while</a>と違って、初めて条件を調べる前に一回ループの本体 を実行する。</p>
+
+<pre><code class="language-prerender">do {
+  fill(0);
+  text(&#34;一回だけ実行する!&#34;, 5, 50);
+} while (false);
+</code></pre>
+
+<p>関連項目: <a href="#ref-while">while</a>, <a href="#ref-for">for</a>, <a href="#ref-break">break</a>, <a href="#ref-continue">continue</a>.</p>
+
+</div><div id="ref-if" class="section"><h1>if</h1>
+
+<p>条件付き実行する。条件が満たされたら、条件付きのブロックを実行する。 条件は満たさなければ、<a href="#ref-else">else</a>のブロックを実行する。<a href="#ref-else">else</a>のブロックはなければ、
+何も実行しない。</p>
+
+<pre><code class="language-prerender">fill(0);
+if (10 &gt; 5) {
+  text(&#34;10 &gt; 5&#34;, 10, 50);
+} else {
+  text(&#34;10 &lt;= 5 ?!&#34;, 10, 50);
+}
+</code></pre>
+
+<p>関連項目: <a href="#ref-else">else</a></p>
+
+</div><div id="ref-else" class="section"><h1>else</h1>
+
+<p>条件付きの実行の<a href="#ref-if">if</a>のブロックに条件が満たされないときに実行するブロック 指定する。</p>
+
+<pre><code class="language-prerender">fill(0);
+if (10 &lt; 5) {
+  text(&#34;10 &lt; 5 ?!&#34;, 10, 50);
+} else {
+  text(&#34;10 &gt;= 5&#34;, 10, 50);
+}
+</code></pre>
+
+<p>関連項目: <a href="#ref-if">if</a></p>
+
+</div><div id="ref-case" class="section"><h1>case</h1>
+
+<p><code>case</code>は、<code>switch</code>文の中で一つの値の分岐を表す。</p>
+
+<p>関連項目: <a href="#ref-switch">switch</a>, <a href="#ref-default">default</a>.</p>
+
+</div><div id="ref-switch" class="section"><h1>switch</h1>
+
+<p><code>switch</code>文は一つの変数の値を検出して、複数の値に対して比べて多重分岐から 一つの分岐を実行する。</p>
+
+<pre><code class="language-prerender">fill(0); textSize(30);
+int x = 2;
+switch (x) {
+  case 0: text(&#34;〇&#34;, 10, 50); break;
+  case 1: text(&#34;一&#34;, 10, 50); break;
+  case 2: text(&#34;二&#34;, 10, 50); break;
+  default: text(&#34;他&#34;, 10, 50); break;
+}
+</code></pre>
+
+<p>関連項目: <a href="#ref-case">case</a>, <a href="#ref-default">default</a>.</p>
+
+</div><div id="ref-default" class="section"><h1>default</h1>
+
+<p><code>default</code>は、<a href="#ref-switch">switch</a>文の中でどの値でも当たらなかった場合の分岐を表す。</p>
+
+<p>関連項目: <a href="#ref-switch">switch</a>, <a href="#ref-case">case</a>.</p>
+
+</div><div id="ref-Loop-1" class="section"><h1>ループ</h1>
+
+<p>ループは繰り返す実行の命令である。いくつの種類がある</p>
+
+<ul>
+<li><a href="#ref-for">for</a></li>
+<li><a href="#ref-while">while</a></li>
+<li><a href="#ref-do">do</a></li>
+</ul>
+
+</div><div id="ref-LabyrinthWalker" class="section"><h1>LabyrinthWalker</h1>
+
+<pre><code class="language-example">/* @pjs preload=&#34;images/Labyrinth2a.png&#34;; */
+/* @pjs preload=&#34;images/Walker44.png&#34;; */
+
+PImage imgLabyrinth = loadImage(&#34;images/Labyrinth2a.png&#34;);
+PImage imgWalker = loadImage(&#34;images/Walker44.png&#34;);
+
+int s = 44;
+
+int x = 190;
+int y = 310;
+
+int dx = 0;
+int dy = -1;
+
+void setup() {  // this is run once.
+    // canvas size (Variable aren&#39;t evaluated. Integers only, please.)
+    size(360, 360);
+
+    // Display the background (labyrinth).
+    image(imgLabyrinth, 1, 1, 360, 360);
+
+
+
+    // Use white fill color for drawing rectangles.
+    fill(255,255,255);
+    // Use white stroke color for drawing rectangles.
+    noStroke();
+    // Show image centered at (x,y).
+    imageMode(CENTER);
+    // Display the starting position of the walker.
+    image(imgWalker, x, y, s, s);
+}
+
+void turnLeft() {
+  int tmp = dx;
+  dx = dy;
+  dy = -tmp;
+}
+
+boolean wallAhead() {
+    boolean wallFound = false;
+    int rx = -dy;
+    int ry = dx;
+    for (int i = -s/2-1; i &lt;= s/2+1; i++) {
+        color c = get(x+dx*(s/2+3)+rx*i, y+dy*(s/2+3)+ry*i);
+        wallFound = wallFound || brightness(c) &lt; 50;
+    }
+    return wallFound;
+}
+
+void moveForward() {
+  rect(x-s/2, y-s/2, s, s);
+  x += dx;
+  y += dy;
+  image(imgWalker, x, y, s, s);
+}
+
+void turnRight() {
+  int tmp = dx;
+  dx = -dy;
+  dy = tmp;
+}
+
+boolean wallRight() {
+  int rx = -dy;
+  int ry = dx;
+  boolean wallFound = false;
+  for (int i = -s/2-1; i &lt;= s/2+1; i++) {
+      color c = get(x + rx*(s/2+3)+dx*i, y + ry*(s/2+3)+dy*i);
+      wallFound = wallFound || brightness(c) &lt; 50;
+  }
+  return wallFound;
+}
+
+boolean reachedGoal() {
+  color c = get(x+dx*(s/2+3), y+dy*(s/2+3));
+  return red(c) &lt; 50 &amp;&amp; green(c) &gt; 50;
+}
+
+void draw() {
+  if (reachedGoal()) {
+      fill(0,0,0);  // black.
+      text(&#34;Finish!&#34;, x+s/2, y);
+      noLoop();
+  }
+  if (!wallRight()) {
+    turnRight();
+    moveForward();
+    moveForward();
+  } else if (wallAhead()) {
+    turnLeft();
+  }
+  moveForward();
+}
+</code></pre>
+
+</div><div id="ref-LabyrinthBlank" class="section"><h1>1. 空迷路</h1>
+
+<p>今回は、キャラクターの周りだけではなくて、動かす前に迷路全体を調べてみましょう。地図を作って、スタートやゴールの位置が判明してから、最短ルートを探します。プログラムは複雑になってくるので、アルゴリズムの面白い部分を見ることができます。以下のプログラムを読み込みしてから、「実行」のボタンを押してみましょう。</p>
+
+<pre><code class="language-example">/* @pjs preload=&#34;images/Labyrinth3a.png&#34;; */
+PImage imgLabyrinth = loadImage(&#34;images/Labyrinth3a.png&#34;);
+/* @pjs preload=&#34;images/Walker44.png&#34;; */
+PImage imgWalker = loadImage(&#34;images/Walker44.png&#34;);
+
+void setup() {  // this is run once.
+    // Set up canvas size.
+    size(360, 360);
+    // Display the background (labyrinth).
+    image(imgLabyrinth, 1, 1, 360, 360);
+}
+
+PImage imgSave = null;
+void draw() {
+  if (imgSave != null) {
+    image(imgSave, pmouseX, pmouseY, 44, 44);
+  }
+  imgSave = get(mouseX, mouseY, 44, 44);
+  image(imgWalker, mouseX, mouseY, 44, 44);
+}
+</code></pre>
+
+<p><a href="#ref-LabyrinthMapper">2. 地図作り</a></p>
+
+</div><div id="ref-LabyrinthMapper" class="section"><h1>2. 地図作り</h1>
+
+<p><a href="#ref-LabyrinthBlank">前に戻る</a></p>
+
+<p>このプログラムは迷路の画像を解析して地図を作っていきます。
+迷路の上に点をおいて、縦横にピクセルを調べながらグリッド形式で地図を作成します。迷路によってはもっと細かく地形を調べなければいけない場合があります。</p>
+
+<pre><code class="language-example">/* @pjs preload=&#34;images/Labyrinth3a.png&#34;; */
+PImage imgLabyrinth = loadImage(&#34;images/Labyrinth3a.png&#34;);
+/* @pjs preload=&#34;images/Walker44.png&#34;; */
+PImage imgWalker = loadImage(&#34;images/Walker44.png&#34;);
+
+// Step in pixels.
+int s = 17;
+// Size of the grid.
+int n = 360/s;
+// The grid. 0 means the cell is blocked. &gt;0 means the cell is open.
+int grid[][];
+
+boolean showMap = true;
+
+// The starting point;
+int sx = 0, sy = 0;
+// The goal.
+int gx = 0, gy = 0;
+
+void setup() {  // this is run once.
+    // canvas size (Variable aren&#39;t evaluated. Integers only, please.)
+    size(360, 360);
+
+    // Display the background (labyrinth).
+    image(imgLabyrinth, 1, 1, 360, 360);
+
+    // Allocate 2-dimensional array in 2 steps.
+    grid = new boolean[n][];
+    for (int i = 0; i &lt; n; i++) {
+        grid[i] = new boolean[n];
+    }
+}
+
+// The loop counters that live across multiple mapStep invocations.
+int i = 0, j = 0;
+
+void mapStep() {
+            color c = get(i*s+s/2, j*s+s/2);
+            if (brightness(c) &gt; 200) {
+                grid[i][j] = 999;
+                if (showMap) {
+                    fill(255, 255, 255);
+                    rect(s*i, s*j, s/2, s/2);
+                }
+            }
+            if (red(c) &gt; 100 &amp;&amp; green(c) &lt; 100) {
+                sx = i;
+                sy = j;
+                if (showMap) {
+                    fill(200, 0, 0);
+                    rect(s*i, s*j, s/2, s/2);
+                }
+            } else if (green(c) &gt; 100 &amp; red(c) &lt; 100) {
+                gx = i;
+                gy = j;
+                if (showMap) {
+                    fill(0, 200, 0);
+                    rect(s*i, s*j, s/2, s/2);
+                }
+            }
+     j++;
+     if (j &gt;= n) {
+         j = 0;
+         i++;
+         if (i &gt;= n) {
+             noLoop();
+         }
+     }
+}
+
+
+int next = 0;
+int step = 50;
+
+void draw() {
+    if (showMap) {
+        while (millis() &lt;= next) return;
+        next = millis() + step;
+    }
+    mapStep();
+}
+</code></pre>
+
+<p><a href="#ref-LabyrinthSearch">3. 最短の道</a></p>
+
+</div><div id="ref-LabyrinthSearch" class="section"><h1>3. 最短の道</h1>
+
+<p><a href="#ref-LabyrinthMapper">前に戻る</a></p>
+
+<p>このプログラムは幅優先探索を使って最短の道を探しています。</p>
+
+<pre><code class="language-example">/* @pjs preload=&#34;images/Labyrinth3a.png&#34;; */
+PImage imgLabyrinth = loadImage(&#34;images/Labyrinth3a.png&#34;);
+/* @pjs preload=&#34;images/Walker44.png&#34;; */
+PImage imgWalker = loadImage(&#34;images/Walker44.png&#34;);
+
+// Step in pixels.
+int s = 17;
+// Size of the grid.
+int n = 360/s;
+// The grid. 0 means the cell is blocked. &gt;0 means the cell is open.
+int grid[][];
+
+boolean showMap = true;
+
+// The starting point;
+int sx = 0, sy = 0;
+// The goal.
+int gx = 0, gy = 0;
+
+void CreateMap() {
+    for (int i = 0; i &lt; n; i++) {
+        for (int j = 0; j &lt; n; j++) {
+            color c = get(i*s+s/2, j*s+s/2);
+            if (brightness(c) &gt; 200) {
+                grid[i][j] = 999;
+            }
+            if (red(c) &gt; 100 &amp;&amp; green(c) &lt; 100) {
+                sx = i;
+                sy = j;
+
+            } else if (green(c) &gt; 100 &amp; red(c) &lt; 100) {
+                gx = i;
+                gy = j;
+
+            }
+        }
+    }
+    // Show the starting point.
+    fill(200, 0, 0);
+    rect(s*sx, s*sy, s/2, s/2);
+    // Show the goal.
+    fill(0, 200, 0);
+    rect(s*i, s*j, s/2, s/2);
+}
+
+// Fixed queue length for simplicity. The expected maximum queue size is
+// the the size of the grid, so should be well below 500.
+int queueLength = 500;
+int qx[] = new int[queueLength];
+int qy[] = new int[queueLength];
+int qhead = 0;
+int qtail = 0;
+
+void queuePush(int x, int y) {
+    qx[qtail] = x;
+    qy[qtail] = y;
+    qtail = (qtail+1) % queueLength;
+    // Note: in case of queue overflow, the queue contents will be lost
+    // (misinterpreted as empty queue).
+}
+
+void queuePop() {
+    if (qtail != qhead) {
+        qhead = (qhead+1) % queueLength;
+    }
+}
+
+boolean queueEmpty() {
+    return qtail == qhead;
+}
+
+void visitCell(int x, int y, int distance) {
+    // Out of bounds checks.
+    if (x &lt; 0 || x &gt;= n) return;
+    if (y &lt; 0 || y &gt;= n) return;
+    // Wall check.
+    if (grid[x][y] == 0) return;
+    // Distance check. If we find a shorter distance,
+    // record it and return true. Note that all empty cells
+    // originally have 999 recorded.
+    if (grid[x][y] &gt; distance) {
+        // Record the distance as shortest.
+        grid[x][y] = distance;
+        // Push the cell into the queue for further examination.
+        queuePush(x, y);
+        if (showMap) {
+            fill(0, 0, 0);
+        }
+    }
+}
+
+void StartSearch() {
+    // Using Breadth-first search in rectangular grid.
+    // Put the goal position into the queue and search back towards
+    // the start position.
+    queuePush(gx, gy);
+    grid[gx][gy] = 1;
+}
+
+void setup() {  // this is run once.
+    // canvas size (Variable aren&#39;t evaluated. Integers only, please.)
+    size(360, 360);
+
+    // Display the background (labyrinth).
+    image(imgLabyrinth, 1, 1, 360, 360);
+
+    // Allocate 2-dimensional array in 2 steps.
+    grid = new boolean[n][];
+    for (int i = 0; i &lt; n; i++) {
+        grid[i] = new boolean[n];
+    }
+
+    CreateMap();
+    StartSearch();
+}
+
+int next = 0;
+int step = 250;
+bool found = false;
+
+// The position during backtracing.
+int bx, by;
+
+void searchStep() {
+    // While queue is not empty. Loop is implicit around draw().
+    if (!queueEmpty()) {
+        int x = qx[qhead];
+        int y = qy[qhead];
+        queuePop();
+
+        fill(200, 200, 180);
+        rect(s*x, s*y, s/2, s/2);
+        int distance = grid[x][y];
+        fill(0,0,0);
+        text(&#34;&#34; + distance, x*s, y*s);
+
+        if (x == sx &amp;&amp; y == sy) {
+            exit();
+            return;
+        }
+        // Go and try 4 neighbors.
+        visitCell(x+1, y, distance+1);
+        visitCell(x-1, y, distance+1);
+        visitCell(x, y-1, distance+1);
+        visitCell(x, y+1, distance+1);
+
+    } else {
+        // path not found.
+        noLoop();
+    }
+}
+
+void draw() {
+    if (showMap) {
+        while (millis() &lt;= next) return;
+        next = millis() + step;
+    }
+
+    searchStep();
+}
+</code></pre>
+
+<p><a href="#ref-LabyrinthBacktrace">4. 道の作り直し</a></p>
+
+</div><div id="ref-LabyrinthBacktrace" class="section"><h1>4. 道の作り直し</h1>
+
+<p><a href="#ref-LabyrinthSearch">前に戻る</a></p>
+
+<p>このプログラムは最短のルートを見つけてから後ろから道を作り直します。</p>
+
+<pre><code class="language-example">/* @pjs preload=&#34;images/Labyrinth3a.png&#34;; */
+PImage imgLabyrinth = loadImage(&#34;images/Labyrinth3a.png&#34;);
+/* @pjs preload=&#34;images/Walker44.png&#34;; */
+PImage imgWalker = loadImage(&#34;images/Walker44.png&#34;);
+
+// Step in pixels.
+int s = 17;
+// Size of the grid.
+int n = 360/s;
+// The grid. 0 means the cell is blocked. &gt;0 means the cell is open.
+int grid[][];
+
+boolean showMap = true;
+
+// The starting point;
+int sx = 0, sy = 0;
+// The goal.
+int gx = 0, gy = 0;
+
+void CreateMap() {
+    for (int i = 0; i &lt; n; i++) {
+        for (int j = 0; j &lt; n; j++) {
+            color c = get(i*s+s/2, j*s+s/2);
+            if (brightness(c) &gt; 200) {
+                grid[i][j] = 999;
+            }
+            if (red(c) &gt; 100 &amp;&amp; green(c) &lt; 100) {
+                sx = i;
+                sy = j;
+            } else if (green(c) &gt; 100 &amp; red(c) &lt; 100) {
+                gx = i;
+                gy = j;
+            }
+        }
+    }
+}
+
+// Fixed queue length for simplicity. The expected maximum queue size is
+// the the size of the grid, so should be well below 500.
+int queueLength = 500;
+int qx[] = new int[queueLength];
+int qy[] = new int[queueLength];
+int qhead = 0;
+int qtail = 0;
+
+void queuePush(int x, int y) {
+    qx[qtail] = x;
+    qy[qtail] = y;
+    qtail = (qtail+1) % queueLength;
+    // Note: in case of queue overflow, the queue contents will be lost
+    // (misinterpreted as empty queue).
+}
+
+void queuePop() {
+    if (qtail != qhead) {
+        qhead = (qhead+1) % queueLength;
+    }
+}
+
+boolean queueEmpty() {
+    return qtail == qhead;
+}
+
+void visitCell(int x, int y, int distance) {
+    // Out of bounds checks.
+    if (x &lt; 0 || x &gt;= n) return;
+    if (y &lt; 0 || y &gt;= n) return;
+    // Wall check.
+    if (grid[x][y] == 0) return;
+    // Distance check. If we find a shorter distance,
+    // record it and return true. Note that all empty cells
+    // originally have 999 recorded.
+    if (grid[x][y] &gt; distance) {
+        // Record the distance as shortest.
+        grid[x][y] = distance;
+        // Push the cell into the queue for further examination.
+        queuePush(x, y);
+        if (showMap) {
+            fill(0, 0, 0);
+            text(&#34;&#34; + distance, x*s, y*s);
+        }
+    }
+}
+
+void StartSearch() {
+    // Using Breadth-first search in rectangular grid.
+    // Put the goal position into the queue and search back towards
+    // the start position.
+    queuePush(gx, gy);
+    grid[gx][gy] = 1;
+}
+
+void setup() {  // this is run once.
+    // canvas size (Variable aren&#39;t evaluated. Integers only, please.)
+    size(360, 360);
+
+    // Display the background (labyrinth).
+    image(imgLabyrinth, 1, 1, 360, 360);
+
+    // Allocate 2-dimensional array in 2 steps.
+    grid = new boolean[n][];
+    for (int i = 0; i &lt; n; i++) {
+        grid[i] = new boolean[n];
+    }
+
+    CreateMap();
+    StartSearch();
+}
+
+int next = 0;
+int step = 250;
+bool found = false;
+
+// The position during backtracing.
+int bx, by;
+
+void searchStep() {
+    // While queue is not empty. Loop is implicit around draw().
+    if (!queueEmpty()) {
+        int x = qx[qhead];
+        int y = qy[qhead];
+        queuePop();
+
+        fill(200, 200, 180);
+        rect(s*x, s*y, s/2, s/2);
+        int distance = grid[x][y];
+
+        if (x == sx &amp;&amp; y == sy) {
+            found = true;
+            fill(0,0,0);
+            bx = sx;
+            by = sy;
+            return;
+        }
+        // Go and try 4 neighbors.
+        visitCell(x+1, y, distance+1);
+        visitCell(x-1, y, distance+1);
+        visitCell(x, y-1, distance+1);
+        visitCell(x, y+1, distance+1);
+
+    } else {
+        // path not found.
+        noLoop();
+    }
+}
+
+boolean backTrace(int nx, int ny, int distance) {
+    if (nx &lt; 0 || nx &gt;= n) return false;
+    if (ny &lt; 0 || ny &gt;= n) return false;
+    if (grid[nx][ny] != distance) return false;
+    // Found the backtrace step.
+    if (showMap) {
+        stroke(255,0,0);
+        line(bx+s/4, by+s/4, nx+s/4, ny+s/4);
+    }
+    bx = nx;
+    by = ny;
+    return true;
+}
+
+void backTraceStep() {
+    fill(255, 255, 100);
+    rect(bx*s+s/4, by*s+s/4, s/2, s/2);
+    if (bx == gx &amp;&amp; by == gy) {
+        noLoop();
+    }
+    int distance = grid[bx][by];
+    stroke(255, 255, 0);
+    if (backTrace(bx-1, by, distance-1));
+    else if (backTrace(bx+1, by, distance-1));
+    else if (backTrace(bx, by-1, distance-1));
+    else if (backTrace(bx, by+1, distance-1));
+}
+
+void draw() {
+    if (found) {
+        while (millis() &lt;= next) return;
+        next = millis() + step;
+    }
+
+    if (found) {
+        backTraceStep();
+    } else {
+        searchStep();
+    }
+}
+</code></pre>
+
+<p><a href="#ref-LabyrinthSolver">5. 完成版</a></p>
+
+</div><div id="ref-LabyrinthSolver" class="section"><h1>5. 完成版</h1>
+
+<p><a href="#ref-LabyrinthBacktrace">前に戻る</a></p>
+
+<pre><code class="language-example">/* @pjs preload=&#34;images/Labyrinth2a.png&#34;; */
+/* @pjs preload=&#34;images/Walker44.png&#34;; */
+
+PImage imgLabyrinth = loadImage(&#34;images/Labyrinth2a.png&#34;);
+PImage imgWalker = loadImage(&#34;images/Walker44.png&#34;);
+
+// Step in pixels.
+int s = 17;
+// Size of the grid.
+int n = 360/s;
+// The grid. 0 means the cell is blocked. &gt;0 means the cell is open.
+int grid[][];
+
+boolean showMap = true;
+
+// The starting point;
+int sx = 0, sy = 0;
+// The goal.
+int gx = 0, gy = 0;
+
+void CreateMap() {
+    for (int i = 0; i &lt; n; i++) {
+        for (int j = 0; j &lt; n; j++) {
+            color c = get(i*s+s/2, j*s+s/2);
+            if (brightness(c) &gt; 200) {
+                grid[i][j] = 999;
+                if (showMap) {
+                    fill(255, 255, 255);
+                    rect(s*i, s*j, s/2, s/2);
+                }
+            }
+            if (red(c) &gt; 100 &amp;&amp; green(c) &lt; 100) {
+                sx = i;
+                sy = j;
+                if (showMap) {
+                    fill(200, 0, 0);
+                    rect(s*i, s*j, s/2, s/2);
+                }
+            } else if (green(c) &gt; 100 &amp; red(c) &lt; 100) {
+                gx = i;
+                gy = j;
+                if (showMap) {
+                    fill(0, 200, 0);
+                    rect(s*i, s*j, s/2, s/2);
+                }
+            }
+        }
+    }
+}
+
+// Fixed queue length for simplicity. The expected maximum queue size is
+// the the size of the grid, so should be well below 500.
+int queueLength = 500;
+int qx[] = new int[queueLength];
+int qy[] = new int[queueLength];
+int qhead = 0;
+int qtail = 0;
+
+void queuePush(int x, int y) {
+    qx[qtail] = x;
+    qy[qtail] = y;
+    qtail = (qtail+1) % queueLength;
+    // Note: in case of queue overflow, the queue contents will be lost
+    // (misinterpreted as empty queue).
+}
+
+void queuePop() {
+    if (qtail != qhead) {
+        qhead = (qhead+1) % queueLength;
+    }
+}
+
+boolean queueEmpty() {
+    return qtail == qhead;
+}
+
+void visitCell(int x, int y, int distance) {
+    // Out of bounds checks.
+    if (x &lt; 0 || x &gt;= n) return;
+    if (y &lt; 0 || y &gt;= n) return;
+    // Wall check.
+    if (grid[x][y] == 0) return;
+    // Distance check. If we find a shorter distance,
+    // record it and return true. Note that all empty cells
+    // originally have 999 recorded.
+    if (grid[x][y] &gt; distance) {
+        // Record the distance as shortest.
+        grid[x][y] = distance;
+        // Push the cell into the queue for further examination.
+        queuePush(x, y);
+        if (showMap) {
+            fill(0, 0, 0);
+            text(&#34;&#34; + distance, x*s, y*s);
+        }
+    }
+}
+
+void StartSearch() {
+    // Using Breadth-first search in rectangular grid.
+    // Put the goal position into the queue and search back towards
+    // the start position.
+    queuePush(gx, gy);
+    grid[gx][gy] = 1;
+}
+
+void setup() {  // this is run once.
+    // canvas size (Variable aren&#39;t evaluated. Integers only, please.)
+    size(360, 360);
+
+    // Display the background (labyrinth).
+    image(imgLabyrinth, 1, 1, 360, 360);
+
+    // Allocate 2-dimensional array in 2 steps.
+    grid = new boolean[n][];
+    for (int i = 0; i &lt; n; i++) {
+        grid[i] = new boolean[n];
+    }
+
+    CreateMap();
+    StartSearch();
+}
+
+int next = 0;
+int step = 10;
+bool found = false;
+
+// The position during backtracing.
+int bx, by;
+
+void searchStep() {
+    // While queue is not empty. Loop is implicit around draw().
+    if (!queueEmpty()) {
+        int x = qx[qhead];
+        int y = qy[qhead];
+        queuePop();
+
+        fill(200, 200, 180);
+        rect(s*x, s*y, s/2, s/2);
+        int distance = grid[x][y];
+
+        if (x == sx &amp;&amp; y == sy) {
+            found = true;
+            fill(0,0,0);
+            bx = sx;
+            by = sy;
+            return;
+        }
+        // Go and try 4 neighbors.
+        visitCell(x+1, y, distance+1);
+        visitCell(x-1, y, distance+1);
+        visitCell(x, y-1, distance+1);
+        visitCell(x, y+1, distance+1);
+
+    } else {
+        // path not found.
+        noLoop();
+    }
+}
+
+boolean backTrace(int nx, int ny, int distance) {
+    if (nx &lt; 0 || nx &gt;= n) return false;
+    if (ny &lt; 0 || ny &gt;= n) return false;
+    if (grid[nx][ny] != distance) return false;
+    // Found the backtrace step.
+    if (showMap) {
+        stroke(255,0,0);
+        line(bx+s/4, by+s/4, nx+s/4, ny+s/4);
+    }
+    bx = nx;
+    by = ny;
+    return true;
+}
+
+void backTraceStep() {
+    fill(255, 255, 100);
+    rect(bx*s+s/4, by*s+s/4, s/2, s/2);
+    if (bx == gx &amp;&amp; by == gy) {
+        noLoop();
+    }
+    int distance = grid[bx][by];
+    stroke(255, 255, 0);
+    if (backTrace(bx-1, by, distance-1));
+    else if (backTrace(bx+1, by, distance-1));
+    else if (backTrace(bx, by-1, distance-1));
+    else if (backTrace(bx, by+1, distance-1));
+}
+
+void draw() {
+    if (showMap) {
+        while (millis() &lt;= next) return;
+        next = millis() + step;
+    }
+
+    if (found) {
+        backTraceStep();
+    } else {
+        searchStep();
+    }
+}
+</code></pre>
+
+</div><div id="ref-Array" class="section"><h1>配列</h1>
+
+<p><code>Array</code>は配列といい、データのリストを持っている。複数のデータを保存するとき、 番号を使って取り出せるのだ。</p>
+
+<pre><code class="language-prerender">int x[] = {1, 2, 3};  // 配列をつくる
+fill(0); text(x[0], 10, 20);
+text(x[2], 10, 40);
+int y[] = new int[10]; // 別の配列を作る
+text(y[0], 10, 80);  // 最初は０が入っています。
+</code></pre>
+
+</div><div id="ref-HALF_PI" class="section"><h1>HALF_PI</h1>
+
+<p><code>HALF_PI</code>は円周率の半分である。 <code>1.5707963267948966</code>.</p>
+
+<pre><code class="language-prerender">arc(50, 50, 45, 45, 0, HALF_PI);
+</code></pre>
+
+<p>関連項目: <a href="#ref-PI">PI</a>, <a href="#ref-QUARTER_PI">QUARTER_PI</a>, <a href="#ref-TWO_PI">TWO_PI</a>.</p>
+
+</div><div id="ref-QUARTER_PI" class="section"><h1>QUARTER_PI</h1>
+
+<p><code>QUARTER_PI</code>は円周率の4分の1である。 <code>0.7853981633974483</code>.</p>
+
+<pre><code class="language-prerender">arc(50, 50, 45, 45, 0, QUARTER_PI, HALF_PI);
+</code></pre>
+
+<p>関連項目: <a href="#ref-PI">PI</a>, <a href="#ref-HALF_PI">HALF_PI</a>, <a href="#ref-TWO_PI">TWO_PI</a>.</p>
+
+</div><div id="ref-PI" class="section"><h1>PI</h1>
+
+<p><code>PI</code>は円周率である。<code>3.141592653589793</code>.</p>
+
+<pre><code class="language-prerender">size(150, 150);
+var ps = 0;
+for (var x = 1; x &lt; 150; x += 1) {
+  var s = sin(x/150*2*PI);
+  line(x-1, 50+40*ps, x, 50+40*s);
+  ps = s;
+}
+</code></pre>
+
+<p>関連項目: <a href="#ref-HALF_PI">HALF_PI</a>, <a href="#ref-QUARTER_PI">QUARTER_PI</a>, <a href="#ref-TWO_PI">TWO_PI</a>.</p>
+
+</div><div id="ref-TWO_PI" class="section"><h1>TWO_PI</h1>
+
+<p><code>TWO_PI</code>は円周率の二倍である。<code>6.283185307179586</code>.</p>
+
+<pre><code class="language-prerender">arc(50, 50, 45, 45, HALF_PI, TWO_PI);
+</code></pre>
+
+<p>関連項目: <a href="#ref-PI">PI</a>, <a href="#ref-HALF_PI">HALF_PI</a>, <a href="#ref-QUARTER_PI">QUARTER_PI</a>.</p>
+
+</div><div id="ref-HashMap" class="section"><h1>HashMap</h1>
+
+<p><code>HashMap</code>はハッシュテーブルデータ構造である。データはキーと値の組で保存され、 キーに対して値を素早く参照できる。</p>
+
+<pre><code class="language-prerender">HashMap&lt;Integer, String&gt; map = new HashMap();
+map.put(123, &#34;XYZ&#34;);
+fill(0); text(map.get(123), 10, 30);
+</code></pre>
+
+<p>関連項目：<a href="#ref-get">get</a>, <a href="#ref-put">put</a>, <a href="#ref-entrySet">entrySet</a>.</p>
+
+</div><div id="ref-get" class="section"><h1>get</h1>
+
+<p><code>get()</code>は複数の意味持っている。</p>
+
+<ul>
+<li><a href="#ref-HashMap">HashMap</a>の場合、キーに対して値を取り出す。</li>
+<li>画像の場合は、ピクセルデートを読み込みます。</li>
+</ul>
+
+<pre><code class="language-prerender">/* @pjs preload=&#34;images/Walker44.png&#34; */
+PImage img = loadImage(&#34;images/Walker44.png&#34;)
+image(img, 28, 28);
+
+// 画像データを抽出する。
+PImage frag = get(50, 50, 22, 22);
+// 画像データ写す
+image(frag, 72, 72, 28, 28);
+
+// ピクセルの色を抽出する。
+color c = get(50, 50);
+// 抽出された色で長方形を描く。
+rect(72, 0, 28, 28);
+</code></pre>
+
+</div><div id="ref-put" class="section"><h1>put</h1>
+
+<p><code>put</code>は複数の意味を持っている。</p>
+
+<ul>
+<li><a href="#ref-HashMap">HashMap</a>の場合、キーに対して与えられた値を保存する。</li>
+</ul>
+
+</div><div id="ref-entrySet" class="section"><h1>entrySet</h1>
+
+<p><a href="#ref-HashMap">HashMap</a>の場合、キーと値の組のセットを返す。そのセットはイテレータによって全ての組を取り出せる。</p>
+
+<pre><code class="language-prerender">size(90, 200); fill(0);
+HashMap hm = new HashMap();
+hm.put(1, &#34;one&#34;);
+hm.put(12, &#34;one two&#34;);
+hm.put(123, &#34;one two three&#34;);
+for (it = hm.entrySet().iterator(); it.hasNext(); ) {
+  Map.Entry en = it.next();
+  int y = en.getKey();
+  text(&#34;&#34; + en.getKey() + &#34;: &#34; + en.getValue(), 1, y+10);
+}
+</code></pre>
+
+<p>関連項目: <a href="#ref-iterator">iterator</a>.</p>
+
+</div><div id="ref-iterator" class="section"><h1>iterator</h1>
+
+<p><code>iterator</code>は<a href="#ref-entrySet">entrySet</a>などのデート構造から全ての値の組を取り出せる。</p>
+
+<p>関連項目: <a href="#ref-entrySet">entrySet</a>, <a href="#ref-getKey">getKey</a>, <a href="#ref-getValue">getValue</a>.</p>
+
+</div><div id="ref-getKey" class="section"><h1>getKey</h1>
+
+<p><a href="#ref-iterator">iterator</a>の場合、キーを返す。</p>
+
+</div><div id="ref-getValue" class="section"><h1>getValue</h1>
+
+<p><a href="#ref-iterator">iterator</a>の場合、値を返す。</p>
+
+</div><div id="ref-next" class="section"><h1>next</h1>
+
+<p><a href="#ref-iterator">iterator</a>の場合、次の組に進む命令する。</p>
+
+</div><div id="ref-hasNext" class="section"><h1>hasNext</h1>
+
+<p><a href="#ref-iterator">iterator</a>の場合、次の組が存在するかどうか判別する。</p>
+
+</div><div id="ref-Variable" class="section"><h1>変数</h1>
+
+<p>変数はプログラムの中に様々なデートを覚える仕組みである。</p>
+
+<pre><code class="language-prerender">int nenrei = 12;
+String namae = &#34;たろう&#34;;
+fill(0); textSize(12);
+text(namae + nenrei + &#34;才&#34;, 20, 20);
+</code></pre>
+
+</div><div id="ref-Object" class="section"><h1>オブジェクト</h1>
+
+<p><code>Object</code>は関連するデータを束ね、複雑のデータ構造を表現できる。<a href="#ref-Variable">変数</a>に<code>Object</code>の型を付けられたら、</p>
+
+<pre><code class="language-prerender">Object[] arr = {1, &#34;abc&#34;};
+for (int i = 0; i &lt; arr.length; i++) {
+  fill(0); text(str(arr[i]), 10, 20+i*20);
+}
+</code></pre>
+
+</div><div id="ref-String" class="section"><h1>String</h1>
+
+<p><code>String</code>は文字列の型を表し、言葉を覚える変数を作る。</p>
+
+<pre><code class="language-prerender">String namae = &#34;たろう&#34;;
+fill(0); text(namae, 20, 20);
+</code></pre>
+
+</div><div id="ref-PFont" class="section"><h1>PFont</h1>
+
+<p><code>PFont</code>はフォントのデートを保存できる。</p>
+
+<p>関連項目: <a href="#ref-loadFont">loadFont()</a>.</p>
+
+</div><div id="ref-loadFont" class="section"><h1>loadFont</h1>
+
+<p><code>loadFont</code>は書体データ(フォント)を読み込みする。</p>
+
+<pre><code class="language-prerender">fill(0);
+textFont(loadFont(&#34;Courier New&#34;), 12);
+text(&#34;Courier New&#34;, 10, 20);
+textFont(loadFont(&#34;Verdana&#34;), 15);
+text(&#34;Verdana&#34;, 10, 40);
+textFont(loadFont(&#34;Arial&#34;), 15);
+text(&#34;Arial&#34;, 10, 60);
+</code></pre>
+
+<p>関連項目: <a href="#ref-textFont">textFont</a>, <a href="#ref-textSize">textSize</a>, <a href="#ref-text">text</a>.</p>
+
+</div><div id="ref-textFont" class="section"><h1>textFont</h1>
+
+<p><code>textFont</code>は書体デート(フォント)を設定する。すぐは見える効果はないが、 次の<a href="#ref-text">text</a>の呼び出しに影響を与える。</p>
+
+<pre><code class="language-prerender">fill(0);
+textFont(loadFont(&#34;Courier New&#34;), 12);
+text(&#34;Courier New&#34;, 10, 20);
+textFont(loadFont(&#34;Verdana&#34;), 15);
+text(&#34;Verdana&#34;, 10, 40);
+textFont(loadFont(&#34;Arial&#34;), 15);
+text(&#34;Arial&#34;, 10, 60);
+</code></pre>
+
+<p>関連項目: <a href="#ref-text">text</a>, <a href="#ref-loadFont">loadFont</a>, <a href="#ref-textSize">textSize</a>.</p>
+
+</div><div id="ref-color" class="section"><h1>color</h1>
+
+<p><code>color</code>は色を表す。</p>
+
+<pre><code class="language-prerender">color red = color(255, 0, 0);
+color blue = color(0, 0, 255);
+fill(red);
+stroke(blue);
+rect(10, 10, 80, 80);
+</code></pre>
+
+<p>関連項目: <a href="#ref-fill">fill()</a>, <a href="#ref-background">background()</a>, <a href="#ref-red">red()</a>, <a href="#ref-green">green()</a>, <a href="#ref-blue">blue()</a>, <a href="#ref-hue">hue()</a>,
+<a href="#ref-saturation">saturation()</a>, <a href="#ref-brightness">brightness()</a>, <a href="#ref-colorMode">colorMode()</a>.</p>
+
+</div><div id="ref-abs" class="section"><h1>abs</h1>
+
+<p><code>abs</code>は数の絶対値を返す。</p>
+
+</div><div id="ref-alpha" class="section"><h1>alpha</h1>
+
+<p><code>alpha</code>は色から透明度を抽出する。</p>
+
+<pre><code class="language-prerender">color opaque = color(255, 0, 0);
+color transparent = color(255, 0, 0, 10);
+fill(0); text(alpha(opaque), 10, 20); // 255
+text(alpha(transparent), 20, 40); // 10
+fill(opaque);
+ellipse(50, 50, 20, 20);
+fill(transparent);
+rect(10, 10, 40, 40);
+</code></pre>
+
+</div><div id="ref-append" class="section"><h1>append</h1>
+
+<p><code>append()</code>は配列にもう一つの要素分を追加する。</p>
+
+<pre><code class="language-prerender">String[] namae = {&#34;たろう&#34;, &#34;花子&#34;};
+append(namae, &#34;次郎&#34;);
+fill(0); textSize(20);
+for (int i = 0; i &lt; namae.length; i++) {
+  text(namae[i], 10, 30+i*20);
+}
+</code></pre>
+
+</div><div id="ref-concat" class="section"><h1>concat</h1>
+
+<p><code>concat()</code>は２つの配列を結合する。</p>
+
+</div><div id="ref-arc" class="section"><h1>arc</h1>
+
+<p><code>arc</code>は弧を描く。</p>
+
+<pre><code class="language-prerender">arc(50, 50, 40, 20, PI/4, 2*PI);
+</code></pre>
+
+<p>呼び方:<code>arc(x, y, width, height, start, stop);</code></p>
+
+<ul>
+<li>x, y — 楕円の中心の座標。</li>
+<li>width, height — 楕円の横幅と縦幅。</li>
+<li>start, stop — 弧の角度を指定する。</li>
+</ul>
+
+<p>関連項目: <a href="#ref-ellipse">ellipse()</a>.</p>
+
+</div><div id="ref-point" class="section"><h1>point</h1>
+
+<p><code>point</code>は一点を描く。</p>
+
+<pre><code class="language-prerender">strokeWeight(5);
+point(50, 50);
+</code></pre>
+
+<p>呼び方:<code>point(x,y);</code></p>
+
+<ul>
+<li>x, y — 点の座標。</li>
+</ul>
+
+<p>関連項目: <a href="#ref-strokeWeight">strokeWeight()</a>, <a href="#ref-stroke">stroke()</a>, <a href="#ref-line">line()</a>.</p>
+
+</div><div id="ref-break" class="section"><h1>break</h1>
+
+<p>ループ(<a href="#ref-while">while</a>, <a href="#ref-for">for</a>, <a href="#ref-do">do</a>)や<a href="#ref-switch">switch</a>から脱出する命令。</p>
+
+</div><div id="ref-continue" class="section"><h1>continue</h1>
+
+<p>ループ(<a href="#ref-while">while</a>, <a href="#ref-for">for</a>, <a href="#ref-do">do</a>)の実行を一旦止めて、ループの頭から実行再開する。</p>
+
+<pre><code class="language-prerender">int i = 0;
+while (i &lt; 10) {
+  fill(0); text(str(i), 10, i*10);
+  i++;
+  continue;
+  text(&#34;絶対実行しない&#34;, 50, 50);
+}
+</code></pre>
+
+</div><div id="ref-binary" class="section"><h1>binary</h1>
+
+<p><code>binary</code>は数を２進法(バイナリー)で表現する。返す値は文字列(<a href="#ref-String">String</a>).</p>
+
+<pre><code class="language-prerender">x = 1023; // Binary 1111111111.
+fill(0); text(binary(x), 10, 20);
+text(binary(x, 5), 10, 40);
+</code></pre>
+
+<p>呼び方: <code>binary(input, num_digits)</code></p>
+
+<ul>
+<li><code>input</code> — 二進法で表現する数</li>
+<li><code>num_digits</code> — 最大返す数字の上限</li>
+</ul>
+
+</div><div id="ref-blue" class="section"><h1>blue</h1>
+
+<p><code>blue()</code>は色に対して青色の値を返す。</p>
+
+<p>関連項目: <a href="#ref-color">color</a>, <a href="#ref-red">red()</a>, <a href="#ref-green">green()</a>, <a href="#ref-alpha">alpha()</a>.</p>
+
+</div><div id="ref-green" class="section"><h1>green</h1>
+
+<p><code>green()</code>は色に対して緑色の値を返す。</p>
+
+<p>関連項目: <a href="#ref-color">color</a>, <a href="#ref-red">red()</a>, <a href="#ref-blue">blue()</a>, <a href="#ref-alpha">alpha()</a>.</p>
+
+</div><div id="ref-red" class="section"><h1>red</h1>
+
+<p><code>red()</code>は色に対して赤色の値を返す。</p>
+
+<p>関連項目: <a href="#ref-color">color</a>, <a href="#ref-green">green()</a>, <a href="#ref-blue">blue()</a>, <a href="#ref-alpha">alpha()</a>.</p>
+
+</div><div id="ref-hue" class="section"><h1>hue</h1>
+
+<p><code>hue()</code>は色に対して色相を返す。</p>
+
+<p>関連項目: <a href="#ref-color">color</a>, <a href="#ref-saturation">saturation()</a>, <a href="#ref-brightness">brightness()</a>.</p>
+
+</div><div id="ref-saturation" class="section"><h1>saturation</h1>
+
+<p><code>saturation()</code>は色に対して彩度を返す。</p>
+
+<p>関連項目: <a href="#ref-color">color</a>, <a href="#ref-hue">hue()</a>, <a href="#ref-brightness">brightness()</a>.</p>
+
+</div><div id="ref-brightness" class="section"><h1>brightness</h1>
+
+<p><code>brightness()</code>は色に対して明度を返す。</p>
+
+<p>関連項目: <a href="#ref-color">color</a>, <a href="#ref-saturation">saturation()</a>, <a href="#ref-hue">hue()</a>.</p>
+
+</div><div id="ref-ceil" class="section"><h1>ceil</h1>
+
+<p><code>ceil()</code>は数に対してそれ以上である最も近い整数を返す。</p>
+
+<pre><code>var x = 9.3;
+var c = ceil(x); // 10.0
+</code></pre>
+
+</div><div id="ref-floor" class="section"><h1>floor</h1>
+
+<p><code>floor()</code>は数に対してそれ以下である最も近い整数を返す。</p>
+
+<pre><code>var x = 9.3;
+var c = floor(x);  // 9.0
+</code></pre>
+
+</div><div id="ref-round" class="section"><h1>round</h1>
+
+<p><code>round()</code>は数に対して最も近い整数を返す。</p>
+
+<pre><code>var x = 9.3;
+var c = round(x);  // 9.0
+</code></pre>
+
+</div><div id="ref-sin" class="section"><h1>sin</h1>
+
+<p><code>sin()</code>は角度のサイン関数を計算する。</p>
+
+</div><div id="ref-cos" class="section"><h1>cos</h1>
+
+<p><code>cos()</code>は角度のコサイン関数を計算する。</p>
+
+</div><div id="ref-tan" class="section"><h1>tan</h1>
+
+<p><code>tan()</code>は角度のサインとコサインの比率を計算する。</p>
+
+</div><div id="ref-class" class="section"><h1>class</h1>
+
+<p><code>class</code>はオブジェクト指向のクラスの定義を表す。</p>
+
+<pre><code class="language-prerender">class Doubutsu {
+  Doubutsu(String namae, int nenrei) {
+    this.namae = namae;
+    this.nenrei = nenrei;
+  }
+
+  String toString() {
+    return this.namae + &#34;, &#34; + this.nenrei + &#34;才&#34;;
+  }
+}
+
+Doubutsu wanwan = new Doubutsu(&#34;ワンワン&#34;, 3);
+fill(0); text(wanwan, 10, 30);
+</code></pre>
+
+</div><div id="ref-this" class="section"><h1>this</h1>
+
+<p><a href="#ref-class">class</a>の定義の中に自分自身のオブジェクトに参照する方法。</p>
+
+<p>関連項目: <a href="#ref-class">class</a>.</p>
+
+</div><div id="ref-toString" class="section"><h1>toString</h1>
+
+<p>オブジェクトに対して、文字列を期待する文脈で呼ばれるメソッド。 例えば、<code>str()</code>にオブジェクトを渡されたとき。</p>
+
+<pre><code class="language-prerender">class Inu {
+  Inu(String namae) {
+    this.namae = namae;
+  }
+  String toString() {
+    return &#34;犬、名前:&#34; + this.namae;
+  }
+}
+
+size(150, 100); fill(0);
+fill(0); text(str(new Inu(&#34;ワンワン&#34;)), 10, 30);
+</code></pre>
+
+</div><div id="ref-final" class="section"><h1>final</h1>
+
+<p><code>final</code>は変数の値が固定して変えられないことを表す。</p>
+
+</div><div id="ref-dist" class="section"><h1>dist</h1>
+
+<p><code>dist()</code>は２つの点に対して距離を計算する。</p>
+
+<pre><code class="language-prerender">void draw() {
+  background(255); fill(0);
+  text(dist(50, 50, mouseX, mouseY), 50, 50);
+}
+</code></pre>
+
+</div><div id="ref-cursor" class="section"><h1>cursor</h1>
+
+<p><code>cursor()</code>はマウスのカーソルの形を指定する。</p>
+
+<pre><code class="language-prerender">void setup() {
+  frameRate(2);
+}
+// マウスのカーソルをキャンバス内に置きましょう。
+int i = 0;
+void draw() {
+  i++;
+  switch(i%6) {
+    case 0: cursor(HAND); break;
+    case 1: cursor(CROSS); break;
+    case 2: cursor(ARROW); break;
+    case 3: cursor(MOVE); break;
+    case 4: cursor(TEXT); break;
+    case 5: cursor(WAIT); break;
+  }
+}
+</code></pre>
+
+<p>関連項目: <a href="#ref-ARROW">ARROW</a>, <a href="#ref-CROSS">CROSS</a>, <a href="#ref-HAND">HAND</a>, <a href="#ref-MOVE">MOVE</a>, <a href="#ref-TEXT">TEXT</a>, <a href="#ref-WAIT">WAIT</a>.</p>
+
+</div><div id="ref-ARROW" class="section"><h1>ARROW</h1>
+
+<p>マウスカーソルの矢印の形を表す。</p>
+
+<p>関連項目: <a href="#ref-cursor">cursor()</a>.</p>
+
+</div><div id="ref-CROSS" class="section"><h1>CROSS</h1>
+
+<p>マウスカーソルの十字の形を表す。</p>
+
+<p>関連項目: <a href="#ref-cursor">cursor()</a>.</p>
+
+</div><div id="ref-HAND" class="section"><h1>HAND</h1>
+
+<p>マウスカーソルの手の形を表す。</p>
+
+<p>関連項目: <a href="#ref-cursor">cursor()</a>.</p>
+
+</div><div id="ref-MOVE" class="section"><h1>MOVE</h1>
+
+<p>マウスカーソルの移動矢印の形を表す。</p>
+
+<p>関連項目: <a href="#ref-cursor">cursor()</a>.</p>
+
+</div><div id="ref-TEXT" class="section"><h1>TEXT</h1>
+
+<p>マウスカーソルの縦線の形を表す。</p>
+
+<p>関連項目: <a href="#ref-cursor">cursor()</a>.</p>
+
+</div><div id="ref-WAIT" class="section"><h1>WAIT</h1>
+
+<p>マウスカーソルの砂時計の形を表す。</p>
+
+<p>関連項目: <a href="#ref-cursor">cursor()</a>.</p>
+
+</div><div id="ref-exit" class="section"><h1>exit</h1>
+
+<p><code>exit()</code>はスケッチの実行を終了する。</p>
+
+</div><div id="ref-copy" class="section"><h1>copy</h1>
+
+<p><code>copy()</code>画像の指定された部分をキャンバスの別のところでコピーする。</p>
+
+<pre><code class="language-prerender">ellipse(50, 50, 40, 40);
+copy(50, 50, 24, 24, 0, 0, 50, 50);
+</code></pre>
+
+<p>呼び方: <code>copy(x, y, w, h, dx, dy, dw, dh)</code></p>
+
+<ul>
+<li>x, y — コピーの元の長方形の左上の角のX,Y座標</li>
+<li>w, h — コピーする資格の横幅と縦幅</li>
+<li>dx, dy — コピーの目的地の長方形の左上の角のX,Y座標</li>
+<li>dw, dh — コピーの目的地の横幅と縦幅</li>
+</ul>
+
+</div><div id="ref-key" class="section"><h1>key</h1>
+
+<p>最後に押された文字または記号を文字列として保存している変数。 矢印などの文字ではないキーの判断</p>
+
+<p>関連項目: <a href="#ref-keyReleased">keyReleased()</a>, <a href="#ref-keyTyped">keyTyped()</a>, <a href="#ref-key">key</a>, <a href="#ref-keyCode">keyCode</a>, <a href="#ref-keyCodes">keyCodes</a>.</p>
+
+<pre><code class="language-example">void setup() {
+  size(200, 200);
+  fill(0);
+  textSize(30);
+}
+void draw() {
+  text(&#34;key &#34; + str(key), 10, 60);
+}
+</code></pre>
+
+</div><div id="ref-keyCode" class="section"><h1>keyCode</h1>
+
+<p>最後に押されたキーのコード。通常イベント関数で使います。 コードの一覧は<a href="#ref-keyCodes">keyCodes</a>に参照。</p>
+
+<p>関連項目: <a href="#ref-keyPressed">keyPressed()</a>, <a href="#ref-keyReleased">keyReleased()</a>, <a href="#ref-keyTyped">keyTyped()</a>.</p>
+
+<pre><code class="language-example">void setup() {
+  size(400, 200);
+  fill(0);
+  textSize(30);
+}
+void draw() {
+  background(220);
+  text(&#34;keyCode &#34; + keyCode, 10, 60);
+}
+</code></pre>
+
+</div><div id="ref-keyPressed" class="section"><h1>keyPressed</h1>
+
+<p><strong>関数</strong>: <code>keyPressed()</code>を定義すれば、キーが押されたたび に呼ばれる関数です。</p>
+
+<p><strong>変数</strong>: <code>keyPressed</code>は最後に押されたキーのコードです。</p>
+
+<p>関連項目: <a href="#ref-keyReleased">keyReleased()</a>, <a href="#ref-keyTyped">keyTyped()</a>, <a href="#ref-key">key</a>, <a href="#ref-keyCode">keyCode</a>, <a href="#ref-keyCodes">keyCodes</a>.</p>
+
+<pre><code class="language-example">void setup() {
+  size(400, 200);
+  fill(0);
+  textSize(20);
+}
+void draw() {
+  background(220);
+  text(&#34;keyPressed &#34; + keyPressed, 10, 60);
+}
+</code></pre>
+
+<pre><code class="language-example">void setup() {
+  size(400, 200);
+  fill(0);
+  textSize(10);
+  background(220);
+}
+int y = 10;
+void keyPressed() {
+  text(&#34;keyPressed() key &#34; + str(key) + &#34; keyCode &#34; + keyCode, 10, y);
+  y += 10;
+  if (y &gt; 200) {
+    background(220);
+    y = 10;
+  }
+}
+</code></pre>
+
+</div><div id="ref-keyTyped" class="section"><h1>keyTyped</h1>
+
+<p><code>keyTyped()</code>を定義すれば、キーボードの文字または数字や記号のキー 押されたときに呼ばれる関数です。</p>
+
+<p>関連項目: <a href="#ref-keyPressed">keyPressed()</a>, <a href="#ref-keyReleased">keyReleased()</a>, <a href="#ref-key">key</a>, <a href="#ref-keyCode">keyCode</a>, <a href="#ref-keyCodes">keyCodes</a>.</p>
+
+<pre><code class="language-example">void setup() {
+  size(400, 200);
+  fill(0);
+  textSize(10);
+  background(220);
+}
+int y = 10;
+void keyTyped() {
+  text(&#34;keyTyped() key &#34; + str(key) + &#34; keyCode &#34; + keyCode, 10, y);
+  y += 10;
+  if (y &gt; 200) {
+    background(220);
+    y = 10;
+  }
+}
+</code></pre>
+
+</div><div id="ref-keyReleased" class="section"><h1>keyReleased</h1>
+
+<p><code>keyReleased()</code>を定義すれば、キーが話されたたびに 呼ばれる関数です。</p>
+
+<p>関連項目: <a href="#ref-keyPressed">keyPressed()</a>, <a href="#ref-keyTyped">keyTyped()</a>, <a href="#ref-key">key</a>, <a href="#ref-keyCode">keyCode</a>, <a href="#ref-keyCodes">keyCodes</a>.</p>
+
+<pre><code class="language-example">void setup() {
+  size(400, 200);
+  fill(0);
+  textSize(10);
+  background(220);
+}
+int y = 10;
+void keyReleased() {
+  text(&#34;keyReleased() key &#34; + str(key) + &#34; keyCode &#34; + keyCode, 10, y);
+  y += 10;
+  if (y &gt; 200) {
+    background(220);
+    y = 10;
+  }
+}
+</code></pre>
+
+</div><div id="ref-keyCodes" class="section"><h1>keyCodes</h1>
+
+<p>以下のキーの条件を調べるときに先に<code>key == CODED</code>を確かめなければなりません。 <a href="#ref-CODED">CODED</a>に参照。</p>
+
+<ul>
+<li>矢印キー: <a href="#ref-UP">UP</a>, <a href="#ref-DOWN">DOWN</a>, <a href="#ref-RIGHT">RIGHT</a>, <a href="#ref-LEFT">LEFT</a>.</li>
+<li><a href="#ref-ALT">ALT</a>, <a href="#ref-CONTROL">CONTROL</a>, <a href="#ref-SHIFT">SHIFT</a>.</li>
+</ul>
+
+<p><strong>注意</strong>: Processing.jsではブラウザの環境によって使えないキーコードがあります。 以下のスケッチで確認ください。</p>
+
+<pre><code class="language-example">// Keycodes
+void setup() {
+  size(400, 200);
+  textSize(30);
+  textFont(loadFont(&#34;fixed&#34;));
+  fill(0);
+}
+
+void draw() {
+  background(220);
+  if (keyPressed) {
+    text(&#34;keyPressed&#34;, 10, 30);
+    String label;
+    if (key == CODED) {
+      label = &#34;keyCode &#34; + str(keyCode) + &#34; &#34;;
+      switch (keyCode) {
+        case UP: label = label + &#34;UP&#34;; break;
+        case DOWN: label = label + &#34;DOWN&#34;; break;
+        case LEFT: label = label + &#34;LEFT&#34;; break;
+        case RIGHT: label = label + &#34;RIGHT&#34;; break;
+        case ESC: label = label + &#34;ESC&#34;; break;
+        case ENTER: label = label + &#34;ENTER&#34;; break;
+        case SHIFT: label = label + &#34;SHIFT&#34;; break;
+        case ALT: label = label + &#34;ALT&#34;; break;
+        case CONTROL: label = label + &#34;CONTROL&#34;; break;
+        case RETURN: label = label + &#34;RETURN&#34;; break;
+        case ENTER: label = label + &#34;ENTER&#34;; break;
+        case DELETE: label = label + &#34;DELETE&#34;; break;
+        case BACKSPACE: label = label + &#34;BACKSPACE&#34;; break;
+      }
+      text(label, 10, 100);
+    } else {
+      label = &#34;key &#39;&#34; + str(key) + &#34;&#39;&#34;;
+      text(label, 10, 100);
+    }
+    return;
+  }
+}
+</code></pre>
+
+</div><div id="ref-UP" class="section"><h1>UP</h1>
+
+<p>上の矢印キーのコード。一覧は<a href="#ref-keyCodes">keyCodes</a>に参照。 <code>keyCode == UP</code>を調べる先に<code>key == CODED</code>を確かめなければなりません。</p>
+
+<p>関連項目: <a href="#ref-keyCode">keyCode</a>, <a href="#ref-keyCodes">keyCodes</a>.</p>
+
+</div><div id="ref-DOWN" class="section"><h1>DOWN</h1>
+
+<p>下の矢印キーのコード。一覧は<a href="#ref-keyCodes">keyCodes</a>に参照。 <code>keyCode == DOWN</code>を調べる先に<code>key == CODED</code>を確かめなければなりません。</p>
+
+<p>関連項目: <a href="#ref-keyCode">keyCode</a>, <a href="#ref-keyCodes">keyCodes</a>.</p>
+
+</div><div id="ref-ALT" class="section"><h1>ALT</h1>
+
+<p>「Alt」キーのコード。 <code>keyCode == ALT</code>を調べる先に<code>key == CODED</code>を確かめなければなりません。</p>
+
+<p>関連項目: <a href="#ref-keyCode">keyCode</a>, <a href="#ref-keyCodes">keyCodes</a>.</p>
+
+</div><div id="ref-CONTROL" class="section"><h1>CONTROL</h1>
+
+<p>「Ctrl」キーのコード。 <code>keyCode == CONTROL</code>を調べる先に<code>key == CODED</code>を確かめなければなりません。</p>
+
+<p>関連項目: <a href="#ref-keyCode">keyCode</a>, <a href="#ref-keyCodes">keyCodes</a>.</p>
+
+</div><div id="ref-SHIFT" class="section"><h1>SHIFT</h1>
+
+<p>「Shift」キーのコード。 <code>keyCode == SHIFT</code>を調べる先に<code>key == CODED</code>を確かめなければなりません。</p>
+
+<p>関連項目: <a href="#ref-keyCode">keyCode</a>, <a href="#ref-keyCodes">keyCodes</a>.</p>
+
+</div><div id="ref-BACKSPACE" class="section"><h1>BACKSPACE</h1>
+
+<p>「Backspace」キーのコード。</p>
+
+<p>関連項目: <a href="#ref-keyCode">keyCode</a>, <a href="#ref-keyCodes">keyCodes</a>.</p>
+
+</div><div id="ref-TAB" class="section"><h1>TAB</h1>
+
+<p>「Tab」キーのコード。</p>
+
+<p>関連項目: <a href="#ref-keyCode">keyCode</a>, <a href="#ref-keyCodes">keyCodes</a>.</p>
+
+</div><div id="ref-ENTER" class="section"><h1>ENTER</h1>
+
+<p>「Enter」キーのコード。</p>
+
+<p>関連項目: <a href="#ref-keyCode">keyCode</a>, <a href="#ref-keyCodes">keyCodes</a>.</p>
+
+</div><div id="ref-RETURN" class="section"><h1>RETURN</h1>
+
+<p>「Return」キーのコード。</p>
+
+<p>関連項目: <a href="#ref-keyCode">keyCode</a>, <a href="#ref-keyCodes">keyCodes</a>.</p>
+
+</div><div id="ref-ESC" class="section"><h1>ESC</h1>
+
+<p>「Esc」キーのコード。</p>
+
+<p>関連項目: <a href="#ref-keyCode">keyCode</a>, <a href="#ref-keyCodes">keyCodes</a>.</p>
+
+</div><div id="ref-DELETE" class="section"><h1>DELETE</h1>
+
+<p>「Delete」キーのコード。</p>
+
+<p>関連項目: <a href="#ref-keyCode">keyCode</a>, <a href="#ref-keyCodes">keyCodes</a>.</p>
+
+</div><div id="ref-CODED" class="section"><h1>CODED</h1>
+
+<p><a href="#ref-keyCode">keyCode</a>の値を調べるときに先<code>key == CODED</code>を確かめる必要なときがあります。 詳しく<a href="#ref-keyCodes">keyCodes</a>に参照。</p>
+
+<p>関連項目: <a href="#ref-key">key</a>, <a href="#ref-keyCodes">keyCodes</a>.</p>
+
+</div><div id="ref-loadImage" class="section"><h1>loadImage</h1>
+
+<p><code>loadImage()</code>は画像のデートを読み込んでいます。ないProcessing.jsでは
+ファイルシステムにアクセスできないので、画像データはサーバからダウンロード されます。ダウンロードは時間かかる場合があるので、<code>@pjs
+preload</code>の命令が 必要です。</p>
+
+<pre><code class="language-prerender">/* @pjs preload=&#34;images/Walker44.png&#34;; */
+PImage walker = loadImage(&#34;images/Walker44.png&#34;);
+image(walker, 10, 10, 80, 80);
+</code></pre>
+
+<p>関連項目: <a href="#ref-preload">@pjs preload</a>, <a href="#ref-image">image()</a>, <a href="#ref-createImage">createImage()</a>.</p>
+
+</div><div id="ref-PImage" class="section"><h1>PImage</h1>
+
+<p>画像の形。</p>
+
+<p>関連項目: <a href="#ref-loadImage">loadImage()</a>, <a href="#ref-image">image()</a>.</p>
+
+</div><div id="ref-PAudio" class="section"><h1>PAudio</h1>
+
+<p>音のデータ。</p>
+
+<pre><code class="language-prerender">PAudio sound = loadSound(&#34;images/explosion.ogg&#34;);
+
+void mouseClicked() {
+  sound.play();
+}
+
+void draw() {
+  if (sound.isPlaying()) {
+    background(50);
+  } else {
+    background(220);
+  }
+}
+</code></pre>
+
+<p><strong>注意</strong>：標準のProcessing.jsに存在しない。</p>
+
+<p>関連項目: <a href="#ref-SoundGallery">音のギャラリー</a></p>
+
+</div><div id="ref-loadSound" class="section"><h1>loadSound</h1>
+
+<p>音のデータをロードする。 <a href="#ref-PAudio">PAudio</a>に参照</p>
+
+<p><strong>注意</strong>：標準のProcessing.jsに存在しない。</p>
+
+</div><div id="ref-pixels" class="section"><h1>pixels</h1>
+
+<p><strong>画像データ</strong>: <a href="#ref-PImage">PImage</a>のフィルドとして画像データを保存します。</p>
+
+<pre><code class="language-prerender">PImage img = createImage(60, 60, RGB);
+for (int i = 0; i &lt; img.pixels.length; i++) {
+  int x = int(i/60);
+  int y = int(i % 60);
+  img.pixels[i] = color(dist(x, y, 0, 0)/sqrt(2*60*60)*255);
+}
+image(img, 20, 20);
+</code></pre>
+
+</div><div id="ref-preload" class="section"><h1>@pjs preload</h1>
+
+<p><code>@pjs preload</code>はProcessing.jsでは画像データを予めダウンロードするような
+命令です。<a href="#ref-loadImage">loadImage()</a>で読み込む画像のファイルが全て<code>@pjs preload</code>で ファイル名の記述が必要です。</p>
+
+<p>関連項目: <a href="#ref-loadImage">loadImage()</a>, <a href="#ref-image">image()</a>.</p>
+
+<pre><code class="language-prerender">/* @pjs preload=&#34;images/Walker44.png&#34;; */
+PImage walker = loadImage(&#34;images/Walker44.png&#34;);
+image(walker, 10, 10, 80, 80);
+</code></pre>
+
+</div><div id="ref-pjs" class="section"><h1>@pjs</h1>
+
+<p>Processing.jsのコンパイラーへの命令。</p>
+
+<ul>
+<li><a href="#ref-preload">@pjs preload</a></li>
+</ul>
+
+</div><div id="ref-imageMode" class="section"><h1>imageMode</h1>
+
+<p><code>imageMode()</code>は画像の移す位置を設定します。</p>
+
+<ul>
+<li><code>imageMode(CENTER)</code>は画像を写すときに中心点を使う設定します。</li>
+<li><code>imageMode(CORNER)</code>は画像を写すときに左上の角を使う設定します。</li>
+<li><code>imageMode(CORNERS)</code>は画像の左上と右下の角を使う設定します。</li>
+</ul>
+
+<pre><code class="language-prerender">/* @pjs preload=&#34;images/baloon1-170x200.png&#34;; */
+// SpriteExample
+PImage img = loadImage(&#34;images/baloon1-170x200.png&#34;);
+imageMode(CORNERS);
+image(img, 50, 50, 85, 100);
+</code></pre>
+
+<pre><code class="language-prerender">/* @pjs preload=&#34;images/baloon1-170x200.png&#34;; */
+// SpriteExample
+PImage img = loadImage(&#34;images/baloon1-170x200.png&#34;);
+imageMode(CORNER);
+image(img, 50, 50, 85, 100);
+</code></pre>
+
+<pre><code class="language-prerender">/* @pjs preload=&#34;images/baloon1-170x200.png&#34;; */
+// SpriteExample
+PImage img = loadImage(&#34;images/baloon1-170x200.png&#34;);
+imageMode(CENTER);
+image(img, 50, 50, 85, 100);
+</code></pre>
+
+</div><div id="ref-image" class="section"><h1>image</h1>
+
+<p><code>image()</code>は画像データをキャンバスにスタンプのように写します。</p>
+
+<p>呼び方:<code>image(img, x, y, width, height);</code></p>
+
+<ul>
+<li>x, y —
+画像を写す座標。<code>imageMode</code>は<code>CENTER</code>の設定の場合、画像の中心の座標。<code>imageMode</code>は<code>CORNER</code>または<code>CORNERS</code>の設定の場合、画像の左上の角の座標。</li>
+<li>width, height —
+画像の縦幅や横幅。<code>imageMode</code>は<code>CORNERS</code>の場合は<code>width</code>と<code>height</code>ではなく、右下の角の座標として使われます。</li>
+</ul>
+
+<p>関連項目: <a href="#ref-loadImage">loadImage()</a>, <a href="#ref-createImage">createImage()</a>, <a href="#ref-imageMode">imageMode()</a>.</p>
+
+</div><div id="ref-createImage" class="section"><h1>createImage</h1>
+
+<p><code>createImage()</code>は新しい空画像を作ります。</p>
+
+<pre><code class="language-prerender">PImage img = createImage(60, 60, RGB);
+for (int i = 0; i &lt; img.pixels.length; i++) {
+  int x = int(i/60);
+  var y = int(i % 60);
+  img.pixels[i] = color(dist(x, y, 0, 0)/sqrt(2*60*60)*255);
+}
+image(img, 20, 20);
+</code></pre>
+</div></body></html>
