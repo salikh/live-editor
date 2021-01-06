@@ -39,7 +39,7 @@ window["Handlebars"]["templates"]["image-picker"] = Handlebars.template({"1":fun
 
   return "<div class=\"current-media\"><img src=\""
     + container.escapeExpression(((helper = (helper = helpers.imagesDir || (depth0 != null ? depth0.imagesDir : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(alias1,{"name":"imagesDir","hash":{},"data":data}) : helper)))
-    + "cute/Blank.png\"/></div>\n<div class=\"media-groups\">\n    <div style=\"position: relative;\">\n"
+    + "cc0/Blank.png\"/></div>\n<div class=\"media-groups\">\n    <div style=\"position: relative;\">\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.groups : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "    </div>\n</div>";
+    + "    </div>\n</div>\n";
 },"useData":true,"useDepths":true});;

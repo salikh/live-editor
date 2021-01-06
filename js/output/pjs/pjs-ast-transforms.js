@@ -282,7 +282,8 @@ ASTTransforms.findResources = function(resources) {
                     cls.groups.forEach(group => {
                         group.sounds.forEach(sound => {
                             if (node.value.indexOf(sound) !== -1) {
-                                resources[`${group.groupName}/${sound}.mp3`] = true;
+				let suffix = sound.endsWith(".ogg") ? "" : ".mp3";
+			      resources[`${group.groupName}/${sound}${suffix}`] = true;
                             }
                         });
                     });

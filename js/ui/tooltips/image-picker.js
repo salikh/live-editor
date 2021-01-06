@@ -1,6 +1,6 @@
 // A description of general tooltip flow can be found in tooltip-engine.js
 TooltipEngine.classes.imagePicker = TooltipBase.extend({
-    defaultImage: "cute/None",
+    defaultImage: "cc0/Blank",
     
     initialize: function(options) {
         this.options = options;

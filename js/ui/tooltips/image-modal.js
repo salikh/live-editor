@@ -334,7 +334,8 @@
         updateTooltip: function(partialPath) {
             if (partialPath !== this.currentUrl) {
                 partialPath = partialPath.replace(/\"/g, "");
-                this.currentUrl = this.options.soundsDir + partialPath + ".mp3";
+		let suffix = partialPath.endsWith(".ogg") ? "" : ".mp3";
+                this.currentUrl = this.options.soundsDir + partialPath + suffix;
                 if (partialPath === "") {
                     this.$(".thumb-error").text(i18n._("Invalid sound file.")).show();
                     return;

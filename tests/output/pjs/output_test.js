@@ -42,17 +42,14 @@ describe("Scratchpad Output Exec", function() {
         getImage("avatars/leaf-green");
     });
 
-    // This test requires commercial codecs
-    if (supportsMpegAudio()) {
-        test("getSound with single quotes or double quotes", function() {
-            getSound('rpg/giant-no');
-            getSound("rpg/giant-no");
-        });
+    test("getSound with single quotes or double quotes", function() {
+	getSound('cc0/ding.ogg');
+	getSound("cc0/ding.ogg");
+    });
 
-        test("getSound with computed string", function() {
-            getSound('rpg/' + 'giant-no');
-        });
-    }
+    test("getSound with computed string", function() {
+	getSound('cc0/' + 'ding.ogg');
+    });
 
     // Check the actual contents of error message
     failingTest("Use object as function", function() {
@@ -179,7 +176,7 @@ describe("Scratchpad Output Exec", function() {
     });
 
     test("getImage with wonky spacing", function() {
-        var img = getImage( "cute/Blank" );
+        var img = getImage( "cc0/Blank" );
 
         var draw = function() {
             image( img, 0, 0);
@@ -187,7 +184,7 @@ describe("Scratchpad Output Exec", function() {
     });
 
     test("getImage with Draw Loop", function() {
-        var img = getImage("cute/Blank");
+        var img = getImage("cc0/Blank");
 
         var draw = function() {
             image(img, 0, 0);
@@ -196,7 +193,7 @@ describe("Scratchpad Output Exec", function() {
 
     test("getImage Inside Sub-Object", function() {
         var enemies = [{
-            test: getImage("cute/Blank")
+            test: getImage("cc0/Blank")
         }];
 
         var draw = function() {
@@ -207,7 +204,7 @@ describe("Scratchpad Output Exec", function() {
 
     test("getImage Inside Object", function() {
         var imageMap = {
-            0: getImage("cute/Blank")
+            0: getImage("cc0/Blank")
         };
 
         var draw = function() {
@@ -216,7 +213,7 @@ describe("Scratchpad Output Exec", function() {
     });
 
     test("getImage with computed string", function() {
-        var img = getImage("cute/" + "Blank" );
+        var img = getImage("cc0/" + "Blank" );
         image(img, 0, 0);
     });
 
@@ -588,7 +585,7 @@ describe("Scratchpad Output Exec", function() {
         test("Make sure object with getSound works in injection", function () {
                 var myObj = {
                     x: 5,
-                    sound: getSound("rpg/giant-no")
+                    sound: getSound("cc0/ding.ogg")
                 };
                 var mousePressed = function () {
                     myObj.x += 2;
@@ -599,7 +596,7 @@ describe("Scratchpad Output Exec", function() {
             function () {
                 var myObj = {
                     x: 5,
-                    sound: getSound("rpg/giant-no")
+                    sound: getSound("cc0/ding.ogg")
                 };
                 var mousePressed = function () {
                     myObj.x += 2;

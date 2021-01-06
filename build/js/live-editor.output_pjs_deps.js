@@ -87833,7 +87833,8 @@ ASTTransforms.findResources = function (resources) {
                     cls.groups.forEach(function (group) {
                         group.sounds.forEach(function (sound) {
                             if (node.value.indexOf(sound) !== -1) {
-                                resources[group.groupName + "/" + sound + ".mp3"] = true;
+                                var suffix = sound.endsWith(".ogg") ? "" : ".mp3";
+                                resources[group.groupName + "/" + sound + suffix] = true;
                             }
                         });
                     });

@@ -2215,7 +2215,8 @@ TooltipEngine.classes.colorPicker = TooltipBase.extend({
         updateTooltip: function updateTooltip(partialPath) {
             if (partialPath !== this.currentUrl) {
                 partialPath = partialPath.replace(/\"/g, "");
-                this.currentUrl = this.options.soundsDir + partialPath + ".mp3";
+                var suffix = partialPath.endsWith(".ogg") ? "" : ".mp3";
+                this.currentUrl = this.options.soundsDir + partialPath + suffix;
                 if (partialPath === "") {
                     this.$(".thumb-error").text(i18n._("Invalid sound file.")).show();
                     return;
@@ -2248,7 +2249,7 @@ TooltipEngine.classes.colorPicker = TooltipBase.extend({
 })();
 // A description of general tooltip flow can be found in tooltip-engine.js
 TooltipEngine.classes.imagePicker = TooltipBase.extend({
-    defaultImage: "cute/None",
+    defaultImage: "cc0/Blank",
 
     initialize: function initialize(options) {
         this.options = options;
@@ -2778,9 +2779,9 @@ window["Handlebars"]["templates"]["image-picker"] = Handlebars.template({"1":fun
 
   return "<div class=\"current-media\"><img src=\""
     + container.escapeExpression(((helper = (helper = helpers.imagesDir || (depth0 != null ? depth0.imagesDir : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(alias1,{"name":"imagesDir","hash":{},"data":data}) : helper)))
-    + "cute/Blank.png\"/></div>\n<div class=\"media-groups\">\n    <div style=\"position: relative;\">\n"
+    + "cc0/Blank.png\"/></div>\n<div class=\"media-groups\">\n    <div style=\"position: relative;\">\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.groups : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "    </div>\n</div>";
+    + "    </div>\n</div>\n";
 },"useData":true,"useDepths":true});;
 window["Handlebars"] = window["Handlebars"] || {};
 window["Handlebars"]["templates"] = window["Handlebars"]["templates"] || {};
@@ -2905,7 +2906,8 @@ window["Handlebars"]["templates"]["mediapicker-modal"] = Handlebars.template({"1
     + alias2(alias1((depths[1] != null ? depths[1].groupName : depths[1]), depth0))
     + "/"
     + alias2(alias1(depth0, depth0))
-    + ".mp3\" controls/>\n                    <span>"
+    + alias2(alias1(depth0, depth0)).endsWith(".ogg") ? "" : ".mp3"
+    + "\" controls/>\n                    <span>"
     + alias2(alias1(depth0, depth0))
     + "</span>\n                </div>\n";
 },"16":function(container,depth0,helpers,partials,data) {
@@ -2937,6 +2939,7 @@ window["Handlebars"]["templates"]["mediapicker-modal"] = Handlebars.template({"1
     + alias4(((helper = (helper = helpers.okMsg || (depth0 != null ? depth0.okMsg : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"okMsg","hash":{},"data":data}) : helper)))
     + "</button>\n    </div>\n</div>";
 },"useData":true,"useDepths":true});;
+
 (function () {
     var ESC = 27;
 

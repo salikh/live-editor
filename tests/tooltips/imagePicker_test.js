@@ -14,32 +14,32 @@ describe("imagePicker - detection", function() {
     });
 
     it("Doesn't match cursor before open paren", function() {
-        var line = 'getImage("cute/Blank");';
+        var line = 'getImage("cc0/Blank");';
         var pre = 'getImage';
         expect(testMockedTooltipDetection(sandbox, mockedImagePicker, line, pre)).to.be(false);
     });
 
     it("Does match cursor after open paren", function() {
-        var line = 'getImage("cute/Blank");';
+        var line = 'getImage("cc0/Blank");';
         var pre = 'getImage(';
         expect(testMockedTooltipDetection(sandbox, mockedImagePicker, line, pre)).to.be(true);
     });
 
     it("Does match cursor in middle of filename", function() {
-        var line = 'getImage("cute/Blank");';
-        var pre = 'getImage("cute';
+        var line = 'getImage("cc0/Blank");';
+        var pre = 'getImage("cc0';
         expect(testMockedTooltipDetection(sandbox, mockedImagePicker, line, pre)).to.be(true);
     });
 
     it("Does match cursor before close paren", function() {
-        var line = 'getImage("cute/Blank");';
-        var pre = 'getImage("cute/Blank"';
+        var line = 'getImage("cc0/Blank");';
+        var pre = 'getImage("cc0/Blank"';
         expect(testMockedTooltipDetection(sandbox, mockedImagePicker, line, pre)).to.be(true);
     });
 
     it("Doesn't match cursor after close paren", function() {
-        var line = 'getImage("cute/Blank");';
-        var pre = 'getImage("cute/Blank")';
+        var line = 'getImage("cc0/Blank");';
+        var pre = 'getImage("cc0/Blank")';
         expect(testMockedTooltipDetection(sandbox, mockedImagePicker, line, pre)).to.be(false);
     });
 
@@ -102,12 +102,12 @@ describe("imagePicker - selection (what it replaces)", function() {
 describe("imagePicker - Integration tests (running on a real editor)", function() {
     it("Autocomplete", function() {
         typeLine('bob getImage(');
-        expect(getLine()).to.be.equal('bob getImage("cute/None")');
+        expect(getLine()).to.be.equal('bob getImage("cc0/Blank")');
     });
 
     it("Autocomplete", function() {
         typeLine('var bob = getImage(');
-        expect(getLine()).to.be.equal('var bob = getImage("cute/None");');
+        expect(getLine()).to.be.equal('var bob = getImage("cc0/Blank");');
     });
 
     it("detection", function() {

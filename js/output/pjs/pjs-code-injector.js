@@ -1123,7 +1123,8 @@ class PJSCodeInjector {
                     p.height = 400;
 
                     p.getSound = function(sound) {
-                        return resourceCache[sound + ".mp3"];
+			let filename = sound.endsWith(".ogg") ? sound : sound + ".mp3";
+                        return resourceCache[sound];
                     };
 
                     p.playSound = function(sound) {

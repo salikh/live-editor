@@ -180,5 +180,8 @@
     "images": [
         "images/**",
         "external/structured-blocks/images/**"
+    ],
+    "sounds": [
+        "sounds/**"
     ]
 }

@@ -45,7 +45,7 @@ Blockly.p5js = {
             url: "https://www.khanacademy.org/cs/pointx-y/827809834",
             title: "Display image",
             args: [
-                { name: "image", type: "Image", fill: "getImage(\"cute/Blank\")"},
+                { name: "image", type: "Image", fill: "getImage(\"cc0/Blank\")"},
                 { name: "x", type: "Number", fill: 50, blank: 0 },
                 { name: "y", type: "Number", fill: 50, blank: 0 }
             ]

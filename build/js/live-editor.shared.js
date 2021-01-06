@@ -11,8 +11,8 @@ window.AllImages = [{
     "groupName": "creatures",
     "images": ["BabyWinston", "Hopper-Cool", "Hopper-Happy", "Hopper-Jumping", "OhNoes-Happy", "OhNoes-Hmm", "OhNoes", "Winston"]
 }, {
-    "groupName": "cute",
-    "images": ["Blank", "BrownBlock", "CharacterBoy", "CharacterCatGirl", "CharacterHornGirl", "CharacterPinkGirl", "CharacterPrincessGirl", "ChestClosed", "ChestLid", "ChestOpen", "DirtBlock", "DoorTallClosed", "DoorTallOpen", "EnemyBug", "GemBlue", "GemGreen", "GemOrange", "GrassBlock", "Heart", "Key", "None", "PlainBlock", "RampEast", "RampNorth", "RampSouth", "RampWest", "Rock", "RoofEast", "RoofNorth", "RoofNorthEast", "RoofNorthWest", "RoofSouth", "RoofSouthEast", "RoofSouthWest", "RoofWest", "Selector", "ShadowEast", "ShadowNorth", "ShadowNorthEast", "ShadowNorthWest", "ShadowSideWest", "ShadowSouth", "ShadowSouthEast", "ShadowSouthWest", "ShadowWest", "Star", "StoneBlock", "StoneBlockTall", "TreeShort", "TreeTall", "TreeUgly", "WallBlock", "WallBlockTall", "WaterBlock", "WindowTall", "WoodBlock"]
+    "groupName": "cc0",
+    "images": ["Blank", "baloon1-170x200", "baloon2-158x200", "banana-200x113", "baseball-200x171", "cat1-200x134", "cat2-185x200", "cat3-134x200", "colors", "dog1-200x188", "dog2-180x200", "dog3-179x200", "face1-150x200", "face2-171x200", "face3-188x200", "face4-106x200", "face5-163x200", "face6-155x200", "fire1-200x123", "fire2-134x200", "football1-200x200", "football2-200x200", "fuzzy-black-64x64", "fuzzy-white-64x64", "help-button-highlight", "kiwi-200x200", "labyrinth1", "Labyrinth2a", "labyrinth2", "Labyrinth3a", "labyrinth3", "labyrinth4", "line", "missing_semicolon", "new-sketch-button-highlight", "rect", "rocket1-168x300", "rocket-168x300", "rose-200x161", "scratch_method", "scratch_variable", "sketch-load", "smoke-200x195", "sunflower-130x200", "tennisball-200x197", "Walker44"]
 }, {
     "groupName": "food",
     "images": ["bananas", "berries", "broccoli", "brussels-sprouts", "cake", "chocolates", "coffee-beans", "croissant", "dumplings", "fish_grilled-snapper", "fruits", "grapes", "hamburger", "ice-cream", "mushroom", "oysters", "pasta", "potato-chips", "potatoes", "shish-kebab", "strawberries", "sushi", "tomatoes"]
@@ -49,21 +49,11 @@ if (!window.i18n) {
 // The master list of acceptable images
 // Build a list of all the available images
 window.OutputImages = [{
-    groupName: "avatars",
-    images: "aqualine-sapling aqualine-seed aqualine-seedling aqualine-tree aqualine-ultimate avatar-team duskpin-sapling duskpin-seed duskpin-seedling duskpin-tree duskpin-ultimate leaf-blue leaf-green leaf-grey leaf-orange leaf-red leaf-yellow leafers-sapling leafers-seed leafers-seedling leafers-tree leafers-ultimate marcimus marcimus-orange marcimus-purple marcimus-red mr-pants mr-pants-green mr-pants-orange mr-pants-pink mr-pants-purple mr-pants-with-hat mr-pink mr-pink-green mr-pink-orange old-spice-man old-spice-man-blue orange-juice-squid piceratops-sapling piceratops-seed piceratops-seedling piceratops-tree piceratops-ultimate primosaur-sapling primosaur-seed primosaur-seedling primosaur-tree primosaur-ultimate purple-pi purple-pi-pink purple-pi-teal questionmark robot_female_1 robot_female_2 robot_female_3 robot_male_1 robot_male_2 robot_male_3 spunky-sam spunky-sam-green spunky-sam-orange spunky-sam-red starky-sapling starky-seed starky-seedling starky-tree starky-ultimate".split(" ")
+    groupName: "cc0",
+    images: "Blank baloon1-170x200 baloon2-158x200 banana-200x113 baseball-200x171 cat1-200x134 cat2-185x200 cat3-134x200 colors dog1-200x188 dog2-180x200 dog3-179x200 face1-150x200 face2-171x200 face3-188x200 face4-106x200 face5-163x200 face6-155x200 fire1-200x123 fire2-134x200 football1-200x200 football2-200x200 fuzzy-black-64x64 fuzzy-white-64x64 help-button-highlight kiwi-200x200 labyrinth1 Labyrinth2a labyrinth2 Labyrinth3a labyrinth3 labyrinth4 line missing_semicolon new-sketch-button-highlight rect rocket1-168x300 rocket-168x300 rose-200x161 scratch_method scratch_variable sketch-load smoke-200x195 sunflower-130x200 tennisball-200x197 Walker44".split(" ")
 }, {
     groupName: "creatures",
     images: "Hopper-Happy Hopper-Cool Hopper-Jumping OhNoes OhNoes-Happy OhNoes-Hmm BabyWinston Winston".split(" ")
-}, {
-    groupName: "cute",
-    images: "Blank BrownBlock CharacterBoy CharacterCatGirl CharacterHornGirl CharacterPinkGirl CharacterPrincessGirl ChestClosed ChestLid ChestOpen DirtBlock DoorTallClosed DoorTallOpen EnemyBug GemBlue GemGreen GemOrange GrassBlock Heart Key PlainBlock RampEast RampNorth RampSouth RampWest Rock RoofEast RoofNorth RoofNorthEast RoofNorthWest RoofSouth RoofSouthEast RoofSouthWest RoofWest Selector ShadowEast ShadowNorth ShadowNorthEast ShadowNorthWest ShadowSideWest ShadowSouth ShadowSouthEast ShadowSouthWest ShadowWest Star StoneBlock StoneBlockTall TreeShort TreeTall TreeUgly WallBlock WallBlockTall WaterBlock WindowTall WoodBlock".split(" "),
-    cite: i18n._("'Planet Cute' art by Daniel Cook (Lostgarden.com)"),
-    citeLink: "http://lostgarden.com/2007/05/dancs-miraculously-flexible-game.html"
-}, {
-    groupName: "space",
-    images: "background beetleship collisioncircle girl1 girl2 girl3 girl4 girl5 healthheart minus octopus planet plus rocketship star 0 1 2 3 4 5 6 7 8 9".split(" "),
-    cite: i18n._("'Space Cute' art by Daniel Cook (Lostgarden.com)"),
-    citeLink: "http://lostgarden.com/2007/03/spacecute-prototyping-challenge.html"
 }];
 
 window.ExtendedOutputImages = [{
@@ -93,29 +83,34 @@ window.ExtendedOutputImages = [{
     }]
 }];
 if (!window.i18n) {
-    window.i18n = {
-        _: function _(msg) {
-            return msg;
-        }
-    };
+  window.i18n = {
+    _: function _(msg) {
+      return msg;
+    }
+  };
 }
 
 // The master list of acceptable sounds
 // Build a list of all the available sounds
 // TODO(kevinb) add methods to help query for sounds
 window.OutputSounds = [{
-    className: "Sound effects",
-    groups: [{
-        groupName: "rpg",
-        sounds: "battle-magic battle-spell battle-swing coin-jingle door-open giant-hyah giant-no giant-yah hit-clop hit-splat hit-thud hit-whack metal-chime metal-clink step-heavy water-bubble water-slosh".split(" "),
-        cite: i18n._("'RPG Sound Effects' sounds by artisticdude"),
-        citeLink: "http://opengameart.org/content/rpg-sound-pack"
-    }, {
-        groupName: "retro",
-        sounds: "boom1 boom2 coin hit1 hit2 jump1 jump2 laser1 laser2 laser3 laser4 rumble thruster-short thruster-long whistle1 whistle2".split(" "),
-        cite: i18n._("'Retro Game Sounds' sounds by spongejr"),
-        citeLink: "https://www.khanacademy.org/profile/spongejr/"
-    }]
+  className: "Sound effects",
+  groups: [{
+    groupName: "cc0",
+    sounds: "bang.ogg bells.ogg cannon.ogg clicks.ogg coin.ogg didin.ogg ding.ogg dog.ogg explosion.ogg fireworks.ogg frog.ogg FX01.ogg growl.ogg launch.ogg meow.ogg roar.ogg rocket.ogg rururun.ogg shot.ogg strings.ogg tututun.ogg ugh.ogg win.ogg".split(" "),
+    cite: i18n._("CC0 sounds from OpenGameArt"),
+    citeLink: "http://opengameart.org/"
+  }, {
+    groupName: "rpg",
+    sounds: "battle-magic battle-spell battle-swing coin-jingle door-open giant-hyah giant-no giant-yah hit-clop hit-splat hit-thud hit-whack metal-chime metal-clink step-heavy water-bubble water-slosh".split(" "),
+    cite: i18n._("'RPG Sound Effects' sounds by artisticdude"),
+    citeLink: "http://opengameart.org/content/rpg-sound-pack"
+  }, {
+    groupName: "retro",
+    sounds: "boom1 boom2 coin hit1 hit2 jump1 jump2 laser1 laser2 laser3 laser4 rumble thruster-short thruster-long whistle1 whistle2".split(" "),
+    cite: i18n._("'Retro Game Sounds' sounds by spongejr"),
+    citeLink: "https://www.khanacademy.org/profile/spongejr/"
+  }]
 }];
 // Note: All time measurements are handled in milliseconds
 window.ScratchpadRecord = Backbone.Model.extend({

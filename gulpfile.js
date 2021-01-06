@@ -110,6 +110,12 @@ function copyImages() {
         .pipe(gulp.dest("build/images"));
 }
 
+function copySounds() {
+    return gulp.src(paths.sounds)
+        .pipe(gulp.dest("build/sounds"));
+}
+
+
 var failureCount = 0;
 
 // We run tests in groups so that we don't require as much memory to run them
@@ -247,6 +253,7 @@ exports.build = gulp.series(
     generateWorkerFiles,
     generateStyles,
     copyImages,
+    copySounds,
     copyExternals
 );
 

@@ -100,7 +100,8 @@ window["Handlebars"]["templates"]["mediapicker-modal"] = Handlebars.template({"1
     + alias2(alias1((depths[1] != null ? depths[1].groupName : depths[1]), depth0))
     + "/"
     + alias2(alias1(depth0, depth0))
-    + ".mp3\" controls/>\n                    <span>"
+    + alias2(alias1(depth0, depth0)).endsWith(".ogg") ? "" : ".mp3"
+    + "\" controls/>\n                    <span>"
     + alias2(alias1(depth0, depth0))
     + "</span>\n                </div>\n";
 },"16":function(container,depth0,helpers,partials,data) {

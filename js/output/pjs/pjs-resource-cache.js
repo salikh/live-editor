@@ -39,6 +39,8 @@ PJSResourceCache.prototype.loadResource = function(filename) {
         return this.loadImage(filename);
     } else if (filename.endsWith(".mp3")) {
         return this.loadSound(filename);
+    } else if (filename.endsWith(".ogg")) {
+        return this.loadSound(filename);
     }
 };
 
@@ -64,10 +66,15 @@ PJSResourceCache.prototype.loadSound = function(filename) {
     return new Promise((resolve) => {
         var audio = document.createElement("audio");
         var parts = filename.split("/");
+	var basename = parts[1];
+        if (basename.endsWith(".mp3")) {
+	  basename = filename.replace(".mp3", "")
+	}
 
         var group = _.findWhere(OutputSounds[0].groups, { groupName: parts[0] });
-        var hasSound = group && group.sounds.includes(parts[1].replace(".mp3", ""));
+        var hasSound = group && group.sounds.includes(basename);
         if (!hasSound) {
+	    window.console.error("no sound: " + filename);
             resolve();
             return;
         }
@@ -102,7 +109,8 @@ PJSResourceCache.prototype.getResource = function(filename, type) {
 };
 
 PJSResourceCache.prototype.getImage = function(filename) {
-    var image = this.cache[filename + ".png"];
+    var fullname = filename.endsWith(".png") ? filename : filename + ".png";
+    var image = this.cache[fullname];
 
     if (!image) {
         throw {message:
@@ -120,11 +128,12 @@ PJSResourceCache.prototype.getImage = function(filename) {
 };
 
 PJSResourceCache.prototype.getSound = function(filename) {
-    var sound = this.cache[filename + ".mp3"];
+    var fullname = filename.endsWith(".ogg") ? filename : filename + ".mp3";
+    var sound = this.cache[fullname];
 
     if (!sound) {
         throw {message:
-            i18n._("Sound '%(file)s' was not found.", {file: filename})};
+            i18n._("Sound '%(file)s' was not found.", {file: fullname})};
     }
 
     return sound;
