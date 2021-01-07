@@ -1,0 +1,12 @@
+# pmouseX
+
+前のフレームでの[mouseX]の値。
+
+関連項目: [mouseX], [mouseY], [pmouseY].
+
+```prerender
+function draw() {
+  line(pmouseX, pmouseY, mouseX, mouseY);
+}
+```
+

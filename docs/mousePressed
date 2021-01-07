@@ -1,0 +1,34 @@
+# mousePressed
+
+ユーザがマウスのボタンを押すと`mousePressed()`関数が呼ばれます。 この関数を定義すれば、「マウスで絵を描く」のような操作が実装できます。
+
+```example
+function setup() {
+  background(20);
+  fill(240);
+}
+
+bool pressed = false;
+
+// キャンバスの中でマウスの左ボタンか右ボタンが押されたら、
+// それに対応して塗りつぶしとペンの色を設定する。
+function mousePressed() {
+  pressed = true;
+  if (mouseButton == LEFT) {
+    fill(0); stroke(0);
+  } else if (mouseButton == RIGHT) {
+    fill(255); stroke(255);
+  }
+}
+
+function mouseReleased() {
+  pressed = false;
+}
+
+function draw() {
+  if (pressed) {
+    ellipse(mouseX, mouseY, 5, 5);
+  }
+}
+```
+

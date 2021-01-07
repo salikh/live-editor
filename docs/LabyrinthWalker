@@ -1,0 +1,99 @@
+# LabyrinthWalker
+
+```example
+/* @pjs preload="images/Labyrinth2a.png"; */
+/* @pjs preload="images/Walker44.png"; */
+
+var imgLabyrinth = getImage("images/Labyrinth2a.png");
+var imgWalker = getImage("images/Walker44.png");
+
+var s = 44;
+
+var x = 190;
+var y = 310;
+
+var dx = 0;
+var dy = -1;
+
+function setup() {  // this is run once.
+    // canvas size (Variable aren't evaluated. Integers only, please.)
+    size(360, 360);
+
+    // Display the background (labyrinth).
+    image(imgLabyrinth, 1, 1, 360, 360);
+
+
+
+    // Use white fill color for drawing rectangles.
+    fill(255,255,255);
+    // Use white stroke color for drawing rectangles.
+    noStroke();
+    // Show image centered at (x,y).
+    imageMode(CENTER);
+    // Display the starting position of the walker.
+    image(imgWalker, x, y, s, s);
+}
+
+function turnLeft() {
+  var tmp = dx;
+  dx = dy;
+  dy = -tmp;
+}
+
+var wallAhead() {
+    var wallFound = false;
+    var rx = -dy;
+    var ry = dx;
+    for (var i = -s/2-1; i <= s/2+1; i++) {
+        color c = get(x+dx*(s/2+3)+rx*i, y+dy*(s/2+3)+ry*i);
+        wallFound = wallFound || brightness(c) < 50;
+    }
+    return wallFound;
+}
+
+function moveForward() {
+  rect(x-s/2, y-s/2, s, s);
+  x += dx;
+  y += dy;
+  image(imgWalker, x, y, s, s);
+}
+
+function turnRight() {
+  var tmp = dx;
+  dx = -dy;
+  dy = tmp;
+}
+
+var wallRight() {
+  var rx = -dy;
+  var ry = dx;
+  var wallFound = false;
+  for (var i = -s/2-1; i <= s/2+1; i++) {
+      color c = get(x + rx*(s/2+3)+dx*i, y + ry*(s/2+3)+dy*i);
+      wallFound = wallFound || brightness(c) < 50;
+  }
+  return wallFound;
+}
+
+var reachedGoal() {
+  color c = get(x+dx*(s/2+3), y+dy*(s/2+3));
+  return red(c) < 50 && green(c) > 50;
+}
+
+function draw() {
+  if (reachedGoal()) {
+      fill(0,0,0);  // black.
+      text("Finish!", x+s/2, y);
+      noLoop();
+  }
+  if (!wallRight()) {
+    turnRight();
+    moveForward();
+    moveForward();
+  } else if (wallAhead()) {
+    turnLeft();
+  }
+  moveForward();
+}
+```
+

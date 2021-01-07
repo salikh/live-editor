@@ -1,0 +1,16 @@
+# PI
+
+`PI`は円周率である。`3.141592653589793`.
+
+```prerender
+size(150, 150);
+var ps = 0;
+for (var x = 1; x < 150; x += 1) {
+  var s = sin(x/150*2*PI);
+  line(x-1, 50+40*ps, x, 50+40*s);
+  ps = s;
+}
+```
+
+関連項目: [HALF_PI], [QUARTER_PI], [TWO_PI].
+

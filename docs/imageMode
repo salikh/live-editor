@@ -1,0 +1,32 @@
+# imageMode
+
+`imageMode()`は画像の移す位置を設定します。
+
+*   `imageMode(CENTER)`は画像を写すときに中心点を使う設定します。
+*   `imageMode(CORNER)`は画像を写すときに左上の角を使う設定します。
+*   `imageMode(CORNERS)`は画像の左上と右下の角を使う設定します。
+
+```prerender
+/* @pjs preload="images/baloon1-170x200.png"; */
+// SpriteExample
+var img = getImage("images/baloon1-170x200.png");
+imageMode(CORNERS);
+image(img, 50, 50, 85, 100);
+```
+
+```prerender
+/* @pjs preload="images/baloon1-170x200.png"; */
+// SpriteExample
+var img = getImage("images/baloon1-170x200.png");
+imageMode(CORNER);
+image(img, 50, 50, 85, 100);
+```
+
+```prerender
+/* @pjs preload="images/baloon1-170x200.png"; */
+// SpriteExample
+var img = getImage("images/baloon1-170x200.png");
+imageMode(CENTER);
+image(img, 50, 50, 85, 100);
+```
+

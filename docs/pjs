@@ -1,0 +1,6 @@
+# @pjs {#ref-pjs}
+
+Processing.jsのコンパイラーへの命令。
+
+*   [@pjs preload][preload]
+

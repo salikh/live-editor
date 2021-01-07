@@ -1,0 +1,121 @@
+# TouchTheNumber
+
+```example
+// TouchTheNumber
+
+var N = 3;
+var numbers[][];
+
+// Draw the rectangles.
+function rectangles() {
+  fill(200);
+  for (var i = 0; i < N; i++) {
+    for (var j = 0; j < N; j++) {
+      rect(50+120*i, 50+120*j, 100, 100);
+    }
+  }
+}
+
+function printNumbers() {
+  fill(0);
+  textSize(50);
+  for (var i = 0; i < N; i++) {
+    for (var j = 0; j < N; j++) {
+      text(str(numbers[i][j]), 85+120*i, 118+120*j);
+    }
+  }
+}
+
+function shuffle() {
+  for (var i = 0; i < N; i++) {
+    for (var j = 0; j < N; j++) {
+      var x = int(random(N));
+      var y = int(random(N));
+      if (x != i || y != j) {
+        var tmp = numbers[i][j];
+        numbers[i][j] = numbers[x][y];
+        numbers[x][y] = tmp;
+      }
+    }
+  }
+}
+
+function setup() {
+  size(440, 440);
+  background(240);
+  textSize(50);
+  numbers = new int[N][];
+  for (var i = 0; i < N; i++) {
+    numbers[i] = new int[N];
+    for (var j = 0; j < N; j++) {
+      numbers[i][j] = i*3 + j + 1;
+    }
+  }
+  shuffle();
+  rectangles();
+  printNumbers();
+}
+
+var current = 1;
+var started = false;
+var started_ms = 0;
+
+function draw() {
+  noLoop();
+}
+
+function mouseOver() {
+  if (!started) {
+    started = true;
+    background(240);
+    rectangles();
+    started_ms = millis();
+  }
+}
+
+var lastClickMs;
+
+function mouseClicked() {
+  // Ignore click repeats (touch screen generates too many click events).
+  if (millis() - lastClickMs < 50) return;
+  lastClickMs = millis();
+  if (!started) {
+    started = true;
+    background(240);
+    rectangles();
+    started_ms = millis();
+  }
+  if (current == 10) {
+    background(240);
+    rectangles();
+    shuffle();
+    printNumbers();
+    current = 1;
+    started = false;
+    return;
+  }
+  var x = int((mouseX-60)/120);
+  var y = int((mouseY-60)/120);
+  if (x < 0) x = 0;
+  if (x >= N) x = N-1;
+  if (y < 0) y = 0;
+  if (y >= N) y = N-1;
+  //fill(240); stroke(240);
+  //rect(20, 20, 50, 20);
+  //textSize(20); fill(0); stroke(0);
+  //text(str(mouseX) + " " + str(mouseY)+" : " + str(x) + " " + str(y), 20, 20);
+  if (numbers[x][y] == current) {
+    textSize(50);
+    fill(0);
+    text(str(numbers[x][y]), 85+120*x, 118+120*y);
+    current++;
+    if (current == 10) {
+      background(240);
+      var t = millis() - started_ms;
+      fill(0); textSize(50);
+      text(str(int(t/1000)) + "." + str((int(t/100))%10) + str((int(t/10))%10) + "s", 100, 100);
+    }
+  }
+}
+```
+

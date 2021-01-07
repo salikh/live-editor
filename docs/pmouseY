@@ -1,0 +1,6 @@
+# pmouseY
+
+前のフレームでの[mouseY]の値。
+
+関連項目: [mouseX], [mouseY], [pmouseX].
+

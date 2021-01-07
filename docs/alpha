@@ -1,0 +1,15 @@
+# alpha
+
+`alpha`は色から透明度を抽出する。
+
+```prerender
+color opaque = color(255, 0, 0);
+color transparent = color(255, 0, 0, 10);
+fill(0); text(alpha(opaque), 10, 20); // 255
+text(alpha(transparent), 20, 40); // 10
+fill(opaque);
+ellipse(50, 50, 20, 20);
+fill(transparent);
+rect(10, 10, 40, 40);
+```
+

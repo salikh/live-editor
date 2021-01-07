@@ -1,0 +1,24 @@
+# keyTyped
+
+`keyTyped()`を定義すれば、キーボードの文字または数字や記号のキー 押されたときに呼ばれる関数です。
+
+関連項目: [keyPressed()], [keyReleased()], [key], [keyCode], [keyCodes].
+
+```example
+function setup() {
+  size(400, 200);
+  fill(0);
+  textSize(10);
+  background(220);
+}
+var y = 10;
+function keyTyped() {
+  text("keyTyped() key " + str(key) + " keyCode " + keyCode, 10, y);
+  y += 10;
+  if (y > 200) {
+    background(220);
+    y = 10;
+  }
+}
+```
+

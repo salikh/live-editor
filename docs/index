@@ -1,0 +1,114 @@
+# インデックス {#ref-index}
+
+正式なProcessing.jsのマニュアルはこちら:
+<a href='http://processingjs.org/reference/' target='_blank'>http://processingjs.org/reference/</a>.
+
+## 実行
+
+`setup()`と`draw()`はプログラムの中で定義する必要があります。
+
+*   [function setup() {...}][setup] 設定するための関数
+*   [function draw() {...}][draw] アニメーションのフレームを描くための関数
+*   [exit()] 実行を終了する
+
+## アニメーション
+
+*   [noLoop()] アニメーションの繰り返しを止める
+*   [loop()] アニメーションの繰り返しを再開する
+*   [millis()] 実行時間をミリ秒単位で返す
+*   [frameRate()] `draw()`の呼び方の頻度の設定
+*   [frameCount] `draw()`が何回呼ばれたかカウント
+
+## キャンバス
+
+*   [background()] キャンバスを色で塗る
+*   [size()] キャンバスの大きさを設定する
+*   [dist()] 2点間の距離を計算する
+*   [copy()] 画像の一部を別の位置にコピーする
+
+## 図形
+
+*   [ellipse()] 楕円
+*   [rect()] 長方形
+*   [triangle()] 三角形
+*   [line()] 直線
+*   [arc()] 円弧
+*   [point()] 点
+
+## 筆の設定
+
+*   [fill()] 塗りつぶしの色を設定する
+*   [stroke()] ペンの色を設定する
+*   [strokeCap()] ペンの端の形を設定する
+*   [strokeWeight()] ペンの太さを設定する
+
+## 画像
+
+*   [image()] 画像を写す
+*   [imageMode()] 画像の写し方の設定
+*   [getImage()], [@pjs preload][preload] 画像データを読み込む
+*   [createImage()] 空画像を作る
+*   [get()] 画像データをキャンバスから抽出する
+
+## 文字
+
+*   [text()] 文字を表示する
+*   [textSize()] 文字の大きさを設定する
+*   [textAlign()] 文字の写し方を設定する
+*   [textFont()] 字体を設定する
+*   [loadFont()] 字体を読み込みする
+
+## スピーチ
+
+*   [speak()] 声で話す
+
+## [マウス][Mouse]
+
+*   [mouseClicked()] マウスのボタンがクリックされたとき
+*   [mousePressed()] マウスのボタンが押されたとき
+*   [mouseReleased()] マウスのボタンが離されたとき
+*   [mouseOver()] マウスがキャンバス内に入ったとき
+*   [mouseOut()] マウスがキャンバスの外に出たとき
+*   [mouseX], [mouseY], [pmouseX], [pmouseY] マウスのX座標とY座標
+*   [mouseButton] マウスイベント関数の中で押されたボタンを表す
+*   [cursor()] マウスカーソルの形を変える
+
+## キーボード
+
+*   [keyPressed()], [keyReleased()], [keyTyped()] キーボードのイベント関数
+*   [key], [keyCode], [keyPressed] 押されたキーの変数
+*   [keyCodes] キーコードの一覧
+
+## データ
+
+*   単純な型
+    *   [int], [float], [boolean], [byte], [short], [double], [char]
+*   [Array]
+    *   [append()], [concat()]
+*   [HashMap]
+    *   [entrySet()]
+*   [PImage] 画像
+
+## 言語の基礎
+
+*   条件付き実行
+    *   [if], [else]
+*   [ループ][Loop]
+    *   [for], [while], [do]
+    *   [continue], [break]
+*   switch文
+    *   [switch], [case], [default]
+*   クラス
+    *   [class], [this]
+*   [final]
+
+## 定数
+
+*   [PI], [HALF_PI], [QUARTER_PI], [TWO_PI].
+
+## 数学関数
+
+*   [abs()]
+*   [ceil()], [floor()], [round()]
+*   [sin()], [cos()], [tan()]
+

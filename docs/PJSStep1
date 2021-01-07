@@ -1,0 +1,73 @@
+# ステップ１: キャンバスと図形 {#ref-PJSStep1}
+
+コンピューターグラフィックでは、x座標は数学と同じように右に向かって増えますが、y座標は普通の数学と反対で下に向かって増えます。
+
+```render
+function arrow(x1, y1, x2, y2) {
+  line(x1, y1, x2, y2);
+  var x = x2-x1;
+  var y = y2-y1;
+  var l = sqrt(x*x+y*y);
+  x = x / l * 10;
+  y = y / l * 10;
+  alpha = PI/4;
+  line(x2, y2, x2 - x*cos(alpha) + y*sin(alpha), y2 - x*sin(alpha) - y*cos(alpha));
+  line(x2, y2, x2 - x*cos(-alpha) + y*sin(-alpha), y2 - x*sin(-alpha) - y*cos(-alpha));
+}
+
+arrow(10, 20, width-10, 20);
+arrow(20, 10, 20, height-10);
+fill(0);
+text("(0,0)", 1, 11);
+text("x", width-20, 37);
+text("y", 30, height-15);
+```
+
+
+```example
+fill(0,0,0);
+textSize(15);
+text("width: " + width, 10, 50);
+text("height: " + height, 10, 80);
+```
+
+座標の数字を使って様々な図形を描けます。 よく使うのはrect(), ellipse(), line()です。
+
+![images/rect.png](images/rect.png)
+![images/ellipse.png](images/ellipse.png)
+![images/line.png](images/line.png)
+
+例えば、こちらのプログラムを打ってみましょう。
+
+```prerender
+rect(10, 10, 80, 40);
+ellipse(50, 75, 80, 40);
+line(10, 60, 90, 90);
+```
+
+実行してみましょう。キャンバスに右のような絵が出てきたでしょうか？
+プログラムを構成する一つ一つの行は命令といいます。Processingでは、各命令は必ずセミコロン(;)で終わらなければいけません。
+
+それでは、今習ったことを使ってみましょう。
+
+**問題１**: 雪だるまを描きましょう。 例に限らず、好きなような形の雪だるまにしましょう。
+
+例として以下の雪だるまいかがでしょうか。
+
+```render
+// Snowman
+size(300, 300, "2D");
+ellipse(150, 250, 100, 100);
+ellipse(150, 170, 80, 80);
+ellipse(150, 110, 60, 60);
+```
+
+```hidden
+// Snowman1
+ellipse(150, 250, 100, 100);
+ellipse(150, 170, 80, 80);
+ellipse(150, 110, 60, 60);
+```
+
+次は、[ステップ2][PJSStep2]へ。
+

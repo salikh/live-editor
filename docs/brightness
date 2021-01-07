@@ -1,0 +1,6 @@
+# brightness
+
+`brightness()`は色に対して明度を返す。
+
+関連項目: [color], [saturation()], [hue()].
+

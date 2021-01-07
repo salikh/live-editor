@@ -1,0 +1,6 @@
+# CODED
+
+[keyCode]の値を調べるときに先`key == CODED`を確かめる必要なときがあります。 詳しく[keyCodes]に参照。
+
+関連項目: [key], [keyCodes].
+

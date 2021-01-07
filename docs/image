@@ -1,0 +1,13 @@
+# image
+
+`image()`は画像データをキャンバスにスタンプのように写します。
+
+呼び方:`image(img, x, y, width, height);`
+
+*   x, y ---
+    画像を写す座標。`imageMode`は`CENTER`の設定の場合、画像の中心の座標。`imageMode`は`CORNER`または`CORNERS`の設定の場合、画像の左上の角の座標。
+*   width, height ---
+    画像の縦幅や横幅。`imageMode`は`CORNERS`の場合は`width`と`height`ではなく、右下の角の座標として使われます。
+
+関連項目: [getImage()], [createImage()], [imageMode()].
+

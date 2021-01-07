@@ -1,0 +1,162 @@
+# Step 2.2: 各円を表示するかどうかをランダムに決める {#ref-WhackACircle22}
+
+[前に戻る][WhackACircle21]
+
+コードを次のように書き換えて実行してみましょう。
+
+```
+// WhackACircle22
+// 円がそれぞれ現れているかを記憶する
+boolean[] shown = new boolean[9];
+
+// ずっと実行される
+function draw() {
+  // キャンバスを白で塗る
+  background(255, 255, 255);
+
+  // i を 0 から 8 まで繰り返す
+  var i = 0;
+  while (i < 9) {
+    // 50% の確率で表示される
+    if (random(100) < 50) {
+      // i 番の円を表示する
+      shown[i] = true;
+      drawCircle(circleX(i), circleY(i));
+    } else {
+      // i 番の円を表示しない
+      shown[i] = false;
+    }
+    i = i + 1;
+  }
+
+  // スコアの文字を表示する
+  drawScore();
+}
+
+// マウスをクリックしたら実行されるイベントハンドラ
+function mouseClicked() {
+  var i = 0;
+  while (i < 9) {
+    // 円の中心点とマウスをクリックした場所との距離が radius より小さかったら
+    if (shown[i] &&
+        dist(circleX(i), circleY(i), mouseX, mouseY) < radius) {
+      // score の値を増やす
+      score = score + 1;
+    }
+    i = i + 1;
+  }
+}
+```
+
+上記のコードでは、各円が表示されているかを記憶する変数を用意します。メソッドの外の定義文は以下のようになっています。
+
+    boolean[] shown = new boolean[9];
+
+これは今まで違う変数の種類です。`boolean` は真理値型を指します。値が `true`（真） あるいは `false`（偽）の 2
+つだけです。また`boolean` のあとの `[]` はこの変数を配列に定義する意味をします。配列は 1
+つの変数で複数の値を記憶できるような変数です。そして、配列のサイズは初期値の `new boolean[9]` で指定しています。サイズは 9 で番号は 0
+から 8 までになっています。
+
+この配列は `draw` の中で値が決まります。そして、`mouseClicked` の中で値を使っています。
+
+これでプログラムが完成です！実行して遊んでみてください。
+
+```hidden
+// WhackACircle22
+// 円の中心の座標
+var x;
+var y;
+
+// 円の半径
+var radius = 20;
+
+// スコアを初期化
+var score = 0;
+
+// 初期化・一回だけ実行される
+function setup() {
+  // キャンバスの大きさを 300 × 300 にする
+  size(300, 300);
+  // キャンバスを白で塗ります
+  background(255, 255, 255);
+  // 滑らかに描く
+  smooth();
+  // 1 秒間、1 回描く
+  frameRate(1);
+}
+
+// 座標 (x, y) に円を描く
+function drawCircle(x, y) {
+  // 円の中身を緑色にする
+  fill(0, 255, 0);
+  // 円周を赤にする
+  stroke(255, 0, 0);
+  // 線の太さを 2 にする
+  strokeWeight(2);
+  // 中心座標が (x, y)、直径が radius * 2 の円を描く
+  ellipse(x, y, radius * 2, radius * 2);
+}
+
+// スコアを表示
+function drawScore() {
+  // 文字の色を黒にする
+  fill(0, 0, 0);
+  // 文字の大きさを 15 にする
+  textSize(15);
+  // スコアを文字にして、座標 (10, 20) に表示する
+  text("スコア: " + str(score), 10, 20);
+}
+
+// i 番目の円の x 座標を返す (iは円の番号を表す0から8までの整数)
+var circleX(i) {
+  return (int)(i / 3) * 100 + 50;
+}
+// i 番目の円の y 座標を返す (iは円の番号を表す0から8までの整数)
+var circleY(i) {
+  return (i % 3) * 100 + 50;
+}
+
+// 円がそれぞれ現れているかを記憶する
+boolean[] shown = new boolean[9];
+
+// ずっと実行される
+function draw() {
+  // キャンバスを白で塗る
+  background(255, 255, 255);
+
+  // i を 0 から 8 まで繰り返す
+  var i = 0;
+  while (i < 9) {
+    // 50% の確率で表示される
+    if (random(100) < 50) {
+      // i 番の円を表示する
+      shown[i] = true;
+      drawCircle(circleX(i), circleY(i));
+    } else {
+      // i 番の円を表示しない
+      shown[i] = false;
+    }
+    i = i + 1;
+  }
+
+  // スコアの文字を表示する
+  drawScore();
+}
+
+// マウスをクリックしたら実行されるイベントハンドラ
+function mouseClicked() {
+  var i = 0;
+  while (i < 9) {
+    // 円の中心点とマウスをクリックした場所との距離が radius より小さかったら
+    if (shown[i] &&
+        dist(circleX(i), circleY(i), mouseX, mouseY) < radius) {
+      // score の値を増やす
+      score = score + 1;
+    }
+    i = i + 1;
+  }
+}
+```
+
+[Step 2.3: 課題][WhackACircle23]
+

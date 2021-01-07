@@ -1,0 +1,6 @@
+# getSound
+
+音のデータをロードする。 [PAudio]に参照
+
+**注意**：標準のProcessing.jsに存在しない。
+

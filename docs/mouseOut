@@ -1,0 +1,21 @@
+# mouseOut
+
+ユーザがマウスをキャンバスの中から外に動かすと`mouseOut()`関数が呼ばれます。
+
+```example
+function setup() {
+  background(0);
+  text("待っています", 20, 20);
+}
+
+function mouseOver() {
+  background(80);
+  text("スタート", 20, 20);
+}
+
+function mouseOut() {
+  background(0);
+  text("終わり", 20, 20);
+}
+```
+

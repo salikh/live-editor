@@ -1,0 +1,6 @@
+# saturation
+
+`saturation()`は色に対して彩度を返す。
+
+関連項目: [color], [hue()], [brightness()].
+

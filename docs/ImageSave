@@ -1,0 +1,24 @@
+# ImageSave
+
+このプログラムでは、キャンバスを消すことなく、一部だけを保存して、後もとに戻すことで 綺麗なアニメーションが成り立っています。
+
+```prerender
+// ImageSaveExample
+/* @pjs preload="images/cat2-185x200.png"; */
+var img = getImage("images/cat2-185x200.png");
+
+function setup() {
+  imageMode(CENTER);
+}
+
+var imgSave = null;
+
+function draw() {
+  if (imgSave != null) {
+    image(imgSave, pmouseX, pmouseY, 100, 100);
+  }
+  imgSave = get(mouseX-50, mouseY-50, 100, 100);
+  image(img, mouseX, mouseY, 92, 100);
+}
+```
+

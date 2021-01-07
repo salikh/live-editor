@@ -1,0 +1,171 @@
+# 3. 最短の道 {#ref-LabyrinthSearch}
+
+[前に戻る][LabyrinthMapper]
+
+このプログラムは幅優先探索を使って最短の道を探しています。
+
+```example
+/* @pjs preload="images/Labyrinth3a.png"; */
+var imgLabyrinth = getImage("images/Labyrinth3a.png");
+/* @pjs preload="images/Walker44.png"; */
+var imgWalker = getImage("images/Walker44.png");
+
+// Step in pixels.
+var s = 17;
+// Size of the grid.
+var n = 360/s;
+// The grid. 0 means the cell is blocked. >0 means the cell is open.
+var grid[][];
+
+var showMap = true;
+
+// The starting point;
+var sx = 0, sy = 0;
+// The goal.
+var gx = 0, gy = 0;
+
+function CreateMap() {
+    for (var i = 0; i < n; i++) {
+        for (var j = 0; j < n; j++) {
+            color c = get(i*s+s/2, j*s+s/2);
+            if (brightness(c) > 200) {
+                grid[i][j] = 999;
+            }
+            if (red(c) > 100 && green(c) < 100) {
+                sx = i;
+                sy = j;
+
+            } else if (green(c) > 100 & red(c) < 100) {
+                gx = i;
+                gy = j;
+
+            }
+        }
+    }
+    // Show the starting point.
+    fill(200, 0, 0);
+    rect(s*sx, s*sy, s/2, s/2);
+    // Show the goal.
+    fill(0, 200, 0);
+    rect(s*i, s*j, s/2, s/2);
+}
+
+// Fixed queue length for simplicity. The expected maximum queue size is
+// the the size of the grid, so should be well below 500.
+var queueLength = 500;
+var qx[] = new int[queueLength];
+var qy[] = new int[queueLength];
+var qhead = 0;
+var qtail = 0;
+
+function queuePush(x, y) {
+    qx[qtail] = x;
+    qy[qtail] = y;
+    qtail = (qtail+1) % queueLength;
+    // Note: in case of queue overflow, the queue contents will be lost
+    // (misinterpreted as empty queue).
+}
+
+function queuePop() {
+    if (qtail != qhead) {
+        qhead = (qhead+1) % queueLength;
+    }
+}
+
+var queueEmpty() {
+    return qtail == qhead;
+}
+
+function visitCell(x, y, distance) {
+    // Out of bounds checks.
+    if (x < 0 || x >= n) return;
+    if (y < 0 || y >= n) return;
+    // Wall check.
+    if (grid[x][y] == 0) return;
+    // Distance check. If we find a shorter distance,
+    // record it and return true. Note that all empty cells
+    // originally have 999 recorded.
+    if (grid[x][y] > distance) {
+        // Record the distance as shortest.
+        grid[x][y] = distance;
+        // Push the cell into the queue for further examination.
+        queuePush(x, y);
+        if (showMap) {
+            fill(0, 0, 0);
+        }
+    }
+}
+
+function StartSearch() {
+    // Using Breadth-first search in rectangular grid.
+    // Put the goal position into the queue and search back towards
+    // the start position.
+    queuePush(gx, gy);
+    grid[gx][gy] = 1;
+}
+
+function setup() {  // this is run once.
+    // canvas size (Variable aren't evaluated. Integers only, please.)
+    size(360, 360);
+
+    // Display the background (labyrinth).
+    image(imgLabyrinth, 1, 1, 360, 360);
+
+    // Allocate 2-dimensional array in 2 steps.
+    grid = new boolean[n][];
+    for (var i = 0; i < n; i++) {
+        grid[i] = new boolean[n];
+    }
+
+    CreateMap();
+    StartSearch();
+}
+
+var next = 0;
+var step = 250;
+bool found = false;
+
+// The position during backtracing.
+var bx, by;
+
+function searchStep() {
+    // While queue is not empty. Loop is implicit around draw().
+    if (!queueEmpty()) {
+        var x = qx[qhead];
+        var y = qy[qhead];
+        queuePop();
+
+        fill(200, 200, 180);
+        rect(s*x, s*y, s/2, s/2);
+        var distance = grid[x][y];
+        fill(0,0,0);
+        text("" + distance, x*s, y*s);
+
+        if (x == sx && y == sy) {
+            exit();
+            return;
+        }
+        // Go and try 4 neighbors.
+        visitCell(x+1, y, distance+1);
+        visitCell(x-1, y, distance+1);
+        visitCell(x, y-1, distance+1);
+        visitCell(x, y+1, distance+1);
+
+    } else {
+        // path not found.
+        noLoop();
+    }
+}
+
+function draw() {
+    if (showMap) {
+        while (millis() <= next) return;
+        next = millis() + step;
+    }
+
+    searchStep();
+}
+```
+
+[4. 道の作り直し][LabyrinthBacktrace]
+

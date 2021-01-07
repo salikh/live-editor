@@ -1,0 +1,100 @@
+# Step 1.9: 円をクリックしたらスコアを増やす {#ref-WhackACircle19}
+
+[前に戻る][WhackACircle18]
+
+mouseClicked メソッドのコードを次のように書き換えて実行してみましょう。
+
+    // ユーザーがマウスをクリックしたら実行されるイベントハンドラ
+    function mouseClicked() {
+      // 円の中心点とマウスをクリックした場所との距離が radius より小さかったら
+      if (dist(x, y, mouseX, mouseY) < radius) {
+        // score の値を増やす
+        score = score + 1;
+      }
+    }
+
+ここでは条件文を使っています。**条件文**の構成は `if( ... ) { ... }`
+です。括弧の中に条件を書きます。条件が満たされる場合、中括弧の中のコードが実行されます。
+
+上記で使われている条件はコメントで説明されています。`dist()` メソッドは Processing でもともと定義されているメソッドで、 2
+つの点の間の距離を計算します。
+
+これで最初のステップが完成です。
+
+今までの完成プログラムはこちらで確認できます。
+
+```hidden
+// WhackACircle19
+// 円の中心の座標
+var x;
+var y;
+
+// 円の半径
+var radius = 20;
+
+// スコアを初期化
+var score = 0;
+
+// 初期化・一回だけ実行される
+function setup() {
+  // キャンバスの大きさを 300 × 300 にする
+  size(300, 300);
+  // キャンバスを白で塗ります
+  background(255, 255, 255);
+  // 滑らかに描く
+  smooth();
+  // 1 秒間、1 回描く
+  frameRate(1);
+}
+
+// 座標 (x, y) に円を描く
+function drawCircle(x, y) {
+  // 円の中身を緑色にする
+  fill(0, 255, 0);
+  // 円周を赤にする
+  stroke(255, 0, 0);
+  // 線の太さを 2 にする
+  strokeWeight(2);
+  // 中心座標が (x, y)、直径が radius * 2 の円を描く
+  ellipse(x, y, radius * 2, radius * 2);
+}
+
+// スコアを表示
+function drawScore() {
+  // 文字の色を黒にする
+  fill(0, 0, 0);
+  // 文字の大きさを 15 にする
+  textSize(15);
+  // スコアを文字にして、座標 (20, 40) に表示する
+  text("スコア: " + str(score), 20, 40);
+}
+
+// ずっと実行される
+function draw() {
+  // キャンバスを白で塗ります
+  background(255, 255, 255);
+  // ランダムな座標を生成する
+  x = random(0, 300);
+  y = random(0, 300);
+  // 中心座標が (x, y) の円を描く
+  drawCircle(x, y);
+  // スコアの文字を表示する
+  drawScore();
+}
+
+// ユーザーがマウスをクリックしたら実行されるイベントハンドラ
+function mouseClicked() {
+  // 円の中心点とマウスをクリックした場所との距離が radius より小さかったら
+  if (dist(x, y, mouseX, mouseY) < radius) {
+    // score の値を増やす
+    score = score + 1;
+  }
+}
+```
+
+## Step 2: 円が 9 個
+
+円を９個に増やして、表示するかどうかをランダムに変えてみます。
+
+[Step 2.1: 9 個の円を一定の場所に表示する][WhackACircle21]
+

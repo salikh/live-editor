@@ -1,0 +1,13 @@
+# createImage
+
+`createImage()`は新しい空画像を作ります。
+
+```prerender
+var img = createImage(60, 60, RGB);
+for (var i = 0; i < img.pixels.length; i++) {
+  var x = int(i/60);
+  var y = int(i % 60);
+  img.pixels[i] = color(dist(x, y, 0, 0)/sqrt(2*60*60)*255);
+}
+image(img, 20, 20);
+```

@@ -1,0 +1,11 @@
+# 変数 {#ref-Variable}
+
+変数はプログラムの中に様々なデートを覚える仕組みである。
+
+```prerender
+var nenrei = 12;
+String namae = "たろう";
+fill(0); textSize(12);
+text(namae + nenrei + "才", 20, 20);
+```
+

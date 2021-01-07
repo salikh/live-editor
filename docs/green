@@ -1,0 +1,6 @@
+# green
+
+`green()`は色に対して緑色の値を返す。
+
+関連項目: [color], [red()], [blue()], [alpha()].
+

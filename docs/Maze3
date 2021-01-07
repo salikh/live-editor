@@ -1,0 +1,168 @@
+# 3. 壁の検出 {#ref-Maze3}
+
+[前に戻る][Maze2]
+
+壁を検出するには[get()]関数を利用して、指定した位置のピクセルの色を調べます。[imageMode]([CENTER])の設定によって、キャラクターの位置はスタンプの中心を示すようになるので、キャラクターの進行方向の前の位置を調べましょう。
+
+その前に、dx,
+dyには常に０か１の値しか与えないようにします。たとえば、下は（０，１）、上は（０，−１）、右は（１，０）、左は（−１，０）です。最初の設定では上方向にしましょう。
+
+    var dx = 0;
+    var dy = -1;
+
+こうしておくと、 `(x+(s/2)*dx, y+(s/2)*dy)`
+は常にキャラクターのちょうど前のピクセルを指すようになります。ここに３ピクセル足せば、キャラクターの少し前の位置になります。これが壁に当たったら[noLoop()]によってプログラムの実行を止めましょう。
+
+    function wallAhead() {
+      // キャラクターの３ピクセル前に調べよう.
+      color c = get(x+dx*(s/2+3), y+dy*(s/2+3));
+    　// 黒を検出しよう。
+      return brightness(c) < 50;
+    }
+
+    function draw() {
+      ...
+      if (wallAhead()) {
+        noLoop(); // 実行を停止する
+      }
+      ...
+    }
+
+スケッチこんな漢字になったでしょうか？
+
+```hidden
+// Maze3
+/* @pjs preload="images/labyrinth1.png"; */
+/* @pjs preload="images/Walker44.png"; */
+var imgLabyrinth = getImage("images/labyrinth1.png");
+var imgWalker = getImage("images/Walker44.png");
+function setup() {
+  size(360, 360);  // キャンバスの大きさの設定
+  image(imgLabyrinth, 1, 1, 360, 360); // 迷路の表示
+  imageMode(CENTER);
+}
+
+// キャラクターの大きさ、ピクセル単位
+var s = 44;
+
+// キャラクターの座標
+var x = 176, y = 314;
+
+// 進む方向
+var dx = 0;
+var dy = -1;
+
+var imgSave = null;
+function draw() {  // この関数は繰り返し呼ばれている.
+  if (imgSave != null) {
+    image(imgSave, x, y, s, s);
+  }
+  if (wallAhead()) {
+    noLoop(); // 実行を停止する
+  }
+  x += dx;
+  y += dy;
+  imgSave = get(x-s/2, y-s/2, s, s);
+  image(imgWalker, x, y);
+}
+
+var wallAhead() {
+  // キャラクターの３ピクセル前に調べよう.
+  color c = get(x+dx*(s/2+3), y+dy*(s/2+3));
+　// 黒を検出しよう。
+  return brightness(c) < 50;
+}
+```
+
+止まる代わりにその場で回ってみましょう。
+
+    function turnLeft() {
+      var tmp = dx;
+      dx = dy;
+      dy = -tmp;
+    }
+
+    function draw() {
+      ...
+      if (wallAhead()) {
+        turnLeft();
+      }
+      ...
+    }
+
+ついでなので、前に動かす指示を関数としてまとめましょう。
+
+    function moveForward() {
+      x += dx;
+      y += dy;
+    }
+
+    function draw() {
+      ...
+      if (wallAhead()) {
+        turnLeft();
+      }
+      moveForward();
+      ...
+    }
+
+完成スケッチはこちらです。
+
+```hidden
+// Maze3
+/* @pjs preload="images/labyrinth1.png"; */
+/* @pjs preload="images/Walker44.png"; */
+var imgLabyrinth = getImage("images/labyrinth1.png");
+var imgWalker = getImage("images/Walker44.png");
+function setup() {
+  size(360, 360);  // キャンバスの大きさの設定
+  image(imgLabyrinth, 1, 1, 360, 360); // 迷路の表示
+  imageMode(CENTER);
+}
+
+// キャラクターの大きさ、ピクセル単位
+var s = 44;
+
+// キャラクターの座標
+var x = 176, y = 314;
+
+// 進む方向
+var dx = 0;
+var dy = -1;
+
+var imgSave = null;
+function draw() {  // この関数は繰り返し呼ばれている.
+  if (imgSave != null) {
+    image(imgSave, x, y, s, s);
+  }
+  if (wallAhead()) {
+    turnLeft();
+  }
+  moveForward();
+  imgSave = get(x-s/2, y-s/2, s, s);
+  image(imgWalker, x, y);
+}
+
+var wallAhead() {
+  // キャラクターの３ピクセル前に調べよう.
+  color c = get(x+dx*(s/2+3), y+dy*(s/2+3));
+　// 黒を検出しよう。
+  return brightness(c) < 50;
+}
+
+function moveForward() {
+  x += dx;
+  y += dy;
+}
+
+function turnLeft() {
+  var tmp = dx;
+  dx = dy;
+  dy = -tmp;
+}
+```
+
+これだけでもキャラクターが少しは賢くみえてきましたが、動かしているとすぐに無限ループに入ってしまいます。
+
+次は[4. 右手法][Maze4]
+

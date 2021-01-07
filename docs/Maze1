@@ -1,0 +1,45 @@
+# 1. キャラクターを表示 {#ref-Maze1}
+
+まずは迷路を表示しましょう。 下にある「読み込む」ボタンを押してから画面の左上にある 「実行」ボタンをおしましょう。
+
+```example
+// Maze1
+/* @pjs preload="images/labyrinth1.png"; */
+var imgLabyrinth = getImage("images/labyrinth1.png");
+size(360, 360);  // キャンバスの大きさの設定
+image(imgLabyrinth, 1, 1, 360, 360); // 迷路の表示
+```
+
+そして、キャラクターを表示しましょう。キャラクターはマウスのカーソル のところに表示されます。Processing.jsでは画像はスクラッチのスプライトのよう
+ではなく、スタンプのようなものです。なので、もともとの背景を壊さないように [get()]を使って画像を保存して、あと背景を回復をしなければなりません。
+
+```example
+// Maze1
+/* @pjs preload="images/labyrinth1.png"; */
+/* @pjs preload="images/Walker44.png"; */
+var imgLabyrinth = getImage("images/labyrinth1.png");
+var imgWalker = getImage("images/Walker44.png");
+function setup() {
+  size(360, 360);  // キャンバスの大きさの設定
+  image(imgLabyrinth, 1, 1, 360, 360); // 迷路の表示
+  imageMode(CENTER);
+}
+
+// キャラクターの大きさ、ピクセル単位
+var s = 44;
+// キャラクターの座標。
+var x = 176, y = 314;
+var imgSave = null;
+function draw() {
+  if (imgSave != null) {
+    image(imgSave, x, y, s, s);
+  }
+  x = mouseX;
+  y = mouseY;
+  imgSave = get(x-s/2, y-s/2, s, s);
+  image(imgWalker, x, y, s, s);
+}
+```
+
+次は[2. キャラクターを動かす][Maze2]
+

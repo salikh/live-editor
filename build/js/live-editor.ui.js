@@ -2469,13 +2469,13 @@ function save() {
     saveNamed(data.name, code);
   } else {
     window.console.log('original_uid', data.original_uid, 'uid', data.uid);
-    var id = undefined;
+    var _id = undefined;
     if ('id' in params) {
-      id = params['id'];
+      _id = params['id'];
     } else {
-      id = generateBase62ID(5);
+      _id = generateBase62ID(5);
     }
-    saveSource(id, code);
+    saveSource(_id, code);
   }
 }
 
@@ -2502,7 +2502,7 @@ function addProcessingIframes($el) {
     // Add a fresh iframe.
     var iframe = document.createElement('iframe');
     // Create the iframe HTML.
-    var iframeHtml = '<!DOCTYPE html>\n' + '<body style="height: 100%; margin: 0; overflow: hidden;">' + '<canvas id="pjs"></canvas>' + '<script src="js/live-editor.core_deps.js"></script>' + '<script src="js/live-editor.shared.js"></script>' + '<script src="js/live-editor.output_pjs_deps.js"></script>' + '<script>' + 'var sketchProc = function(processingInstance) { with(processingInstance) {' + source + '}};' + 'var canvas = document.getElementById("pjs");' + 'var processingInstance = new Processing(canvas, sketchProc);' + '</script>' + '</body>';
+    var iframeHtml = '<!DOCTYPE html>\n' + '<body style="height: 100%; margin: 0; overflow: hidden;">' + '<canvas id="pjs"></canvas>' + '<script src="js/live-editor.core_deps.js"></script>' + '<script src="js/live-editor.shared.js"></script>' + '<script src="js/live-editor.output_pjs_deps.js"></script>' + '<script>' + 'var sketchProc = function(processingInstance) { with(processingInstance) {' + source + '}};' + 'var canvas = document.getElementById("pjs");' + 'var processingInstance = new Processing(canvas, sketchProc);' + 'processingInstance.loop();' + '</script>' + '</body>';
     pre.appendChild(iframe);
     if ($(code).hasClass('language-render')) {
       // Hide the code for code blocks marked with 'render'.
@@ -2640,9 +2640,10 @@ window.addEventListener('load', function () {
         } else if ('load' in params) {
           fragment = '#id=' + params['load'];
         } else {
-          data.message = 'The sketch is not saved yet.';
-          window.console.error(data.message);
-          return;
+          // Save with a new id.
+          id = generateBase62ID(5);
+          saveSource(id, code);
+          fragment = '#id=' + id;
         }
         var win = window.open('play.html' + fragment, '_blank');
         win.focus();

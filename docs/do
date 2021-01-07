@@ -1,0 +1,13 @@
+# do
+
+ループの一つの種類。[while]と違って、初めて条件を調べる前に一回ループの本体 を実行する。
+
+```prerender
+do {
+  fill(0);
+  text("一回だけ実行する!", 5, 50);
+} while (false);
+```
+
+関連項目: [while], [for], [break], [continue].
+

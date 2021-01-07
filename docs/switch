@@ -1,0 +1,17 @@
+# switch
+
+`switch`文は一つの変数の値を検出して、複数の値に対して比べて多重分岐から 一つの分岐を実行する。
+
+```prerender
+fill(0); textSize(30);
+var x = 2;
+switch (x) {
+  case 0: text("〇", 10, 50); break;
+  case 1: text("一", 10, 50); break;
+  case 2: text("二", 10, 50); break;
+  default: text("他", 10, 50); break;
+}
+```
+
+関連項目: [case], [default].
+

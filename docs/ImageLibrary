@@ -1,0 +1,70 @@
+# 画像リスト {#ref-ImageLibrary}
+
+```prerender
+// ImageExample
+/* @pjs preload="images/baloon1-170x200.png"; */
+var img = getImage("images/baloon1-170x200.png");
+imageMode(CENTER);
+image(img, 50, 50, 85, 100);
+```
+
+*   images/baloon1-170x200.png
+    ![static/baloon1-170x200.png](images/baloon1-170x200.png)
+*   images/baloon2-158x200.png
+    ![images/baloon2-158x200.png](images/baloon2-158x200.png)
+*   images/banana-200x113.png
+    ![images/banana-200x113.png](images/banana-200x113.png)
+*   images/baseball-200x171.png
+    ![images/baseball-200x171.png](images/baseball-200x171.png)
+*   images/cat1-200x134.png
+    ![images/cat1-200x134.png](images/cat1-200x134.png)
+*   images/cat2-185x200.png
+    ![images/cat2-185x200.png](images/cat2-185x200.png)
+*   images/cat3-134x200.png
+    ![images/cat3-134x200.png](images/cat3-134x200.png)
+*   images/dog1-200x188.png
+    ![images/dog1-200x188.png](images/dog1-200x188.png)
+*   images/dog2-180x200.png
+    ![images/dog2-180x200.png](images/dog2-180x200.png)
+*   images/dog3-179x200.png
+    ![images/dog3-179x200.png](images/dog3-179x200.png)
+*   images/face1-150x200.png
+    ![images/face1-150x200.png](images/face1-150x200.png)
+*   images/face2-171x200.png
+    ![images/face2-171x200.png](images/face2-171x200.png)
+*   images/face3-188x200.png
+    ![images/face3-188x200.png](images/face3-188x200.png)
+*   images/face4-106x200.png
+    ![images/face4-106x200.png](images/face4-106x200.png)
+*   images/face5-163x200.png
+    ![images/face5-163x200.png](images/face5-163x200.png)
+*   images/face6-155x200.png
+    ![images/face6-155x200.png](images/face6-155x200.png)
+*   images/fire1-200x123.png
+    ![images/fire1-200x123.png](images/fire1-200x123.png)
+*   images/fire2-134x200.png
+    ![images/fire2-134x200.png](images/fire2-134x200.png)
+*   images/football1-200x200.png
+    ![images/football1-200x200.png](images/football1-200x200.png)
+*   images/football2-200x200.png
+    ![images/football2-200x200.png](images/football2-200x200.png)
+*   images/kiwi-200x200.png
+    ![images/kiwi-200x200.png](images/kiwi-200x200.png)
+*   images/rose-200x161.png
+    ![images/rose-200x161.png](images/rose-200x161.png)
+*   images/rocket-168x300.png
+    ![images/rocket-168x300.png](images/rocket-168x300.png)
+*   images/rocket1-168x300.png
+    ![images/rocket1-168x300.png](images/rocket1-168x300.png)
+*   images/smoke-200x195.png
+    ![images/smoke-200x195.png](images/smoke-200x195.png)
+*   images/sunflower-130x200.png
+    ![images/sunflower-130x200.png](images/sunflower-130x200.png)
+*   images/tennisball-200x197.png
+    ![images/tennisball-200x197.png](images/tennisball-200x197.png)
+*   images/Walker44.png ![images/Walker44.png](images/Walker44.png)
+*   images/fuzzy-white-64x64.png
+    ![images/fuzzy-white-64x64.png](images/fuzzy-white-64x64.png)
+*   images/fuzzy-black-64x64.png
+    ![images/fuzzy-black-64x64.png](images/fuzzy-black-64x64.png)
+

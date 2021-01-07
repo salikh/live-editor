@@ -1,0 +1,131 @@
+# Step 2.1: 9 個の円を一定の場所に表示する {#ref-WhackACircle21}
+
+[前に戻る][WhackACircle19]
+
+コードを次のように書き換えて実行してみましょう。 `circleX` と `circleY` は新しいメソッドです。古い `draw`
+メソッドは消してください。
+
+```
+// WhackACircle21
+// i 番目の円の x 座標を返す (iは円の番号を表す0から8までの整数)
+var circleX(i) {
+  return (int)(i / 3) * 100 + 50;
+}
+// i 番目の円の y 座標を返す (iは円の番号を表す0から8までの整数)
+var circleY(i) {
+  return (i % 3) * 100 + 50;
+}
+
+// ずっと実行される
+function draw() {
+  // キャンバスを白で塗る
+  background(255, 255, 255);
+
+  // i を 0 から 8 まで繰り返す
+  var i = 0;
+  while (i < 9) {
+    // 座標 (circleX(i), circleY(i)) に円を描く
+    drawCircle(circleX(i), circleY(i));
+    // 次の円に移る
+    i = i + 1;
+  }
+
+  // スコアの文字を表示する
+  drawScore();
+}
+```
+
+上記のコードは 9 個の円を描きます。円は 0 番から 8 番までの番号にします。各円の x 座標と y 座標はそれぞれ `circleX` と
+`circleY` で計算します。`draw`
+メソッド内では、`while`-ループを使って円を描きます。これは繰り返しを意味します。`while`-文の構成は `while( ... ) { ... }`
+です。条件分岐の `if`
+に近いですが、条件が満たされる限り中括弧のコードが永遠に実行されます。このようなプログラムを書くときには、ループからいつか出るように条件を設定する注意をしなければなりません。上記のコードでは、最初は
+`i` を 0 に設定して、中括弧の最後のコードで 1 ずつ `i` を増やしています。
+
+今までの完成プログラムはこちらで確認できます。
+
+```hidden
+// WhackACircle21
+// 円の中心の座標
+var x;
+var y;
+
+// 円の半径
+var radius = 20;
+
+// スコアを初期化
+var score = 0;
+
+// 初期化・一回だけ実行される
+function setup() {
+  // キャンバスの大きさを 300 × 300 にする
+  size(300, 300);
+  // キャンバスを白で塗ります
+  background(255, 255, 255);
+  // 滑らかに描く
+  smooth();
+  // 1 秒間、1 回描く
+  frameRate(1);
+}
+
+// 座標 (x, y) に円を描く
+function drawCircle(x, y) {
+  // 円の中身を緑色にする
+  fill(0, 255, 0);
+  // 円周を赤にする
+  stroke(255, 0, 0);
+  // 線の太さを 2 にする
+  strokeWeight(2);
+  // 中心座標が (x, y)、直径が radius * 2 の円を描く
+  ellipse(x, y, radius * 2, radius * 2);
+}
+
+// スコアを表示
+function drawScore() {
+  // 文字の色を黒にする
+  fill(0, 0, 0);
+  // 文字の大きさを 15 にする
+  textSize(15);
+  // スコアを文字にして、座標 (10, 20) に表示する
+  text("スコア: " + str(score), 10, 20);
+}
+
+// i 番目の円の x 座標を返す (iは円の番号を表す0から8までの整数)
+var circleX(i) {
+  return (int)(i / 3) * 100 + 50;
+}
+// i 番目の円の y 座標を返す (iは円の番号を表す0から8までの整数)
+var circleY(i) {
+  return (i % 3) * 100 + 50;
+}
+
+// ずっと実行される
+function draw() {
+  // キャンバスを白で塗る
+  background(255, 255, 255);
+
+  // i を 0 から 8 まで繰り返す
+  var i = 0;
+  while (i < 9) {
+    // 座標 (circleX(i), circleY(i)) に円を描く
+    drawCircle(circleX(i), circleY(i));
+    // 次の円に移る
+    i = i + 1;
+  }
+
+  // スコアの文字を表示する
+  drawScore();
+}
+
+// ユーザーがマウスをクリックしたら実行されるイベントハンドラ
+function mouseClicked() {
+  // 円の中心点とマウスをクリックした場所との距離が radius より小さかったら
+  if (dist(x, y, mouseX, mouseY) < radius) {
+    // score の値を増やす
+    score = score + 1;
+  }
+}
+```
+
+[Step 2.2: 各円を表示するかどうかをランダムに決める][WhackACircle22]
+

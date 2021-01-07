@@ -1,0 +1,24 @@
+# PAudio
+
+音のデータ。
+
+```prerender
+var sound = getSound("images/explosion.ogg");
+
+function mouseClicked() {
+  sound.play();
+}
+
+function draw() {
+  if (sound.isPlaying()) {
+    background(50);
+  } else {
+    background(220);
+  }
+}
+```
+
+**注意**：標準のProcessing.jsに存在しない。
+
+関連項目: [音のギャラリー][SoundGallery]
+

@@ -1,0 +1,11 @@
+# dist
+
+`dist()`は２つの点に対して距離を計算する。
+
+```prerender
+function draw() {
+  background(255); fill(0);
+  text(dist(50, 50, mouseX, mouseY), 50, 50);
+}
+```
+

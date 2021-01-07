@@ -1,0 +1,50 @@
+# keyCodes
+
+以下のキーの条件を調べるときに先に`key == CODED`を確かめなければなりません。 [CODED]に参照。
+
+*   矢印キー: [UP], [DOWN], [RIGHT], [LEFT].
+*   [ALT], [CONTROL], [SHIFT].
+
+**注意**: Processing.jsではブラウザの環境によって使えないキーコードがあります。 以下のスケッチで確認ください。
+
+```example
+// Keycodes
+function setup() {
+  size(400, 200);
+  textSize(30);
+  textFont(loadFont("fixed"));
+  fill(0);
+}
+
+function draw() {
+  background(220);
+  if (keyPressed) {
+    text("keyPressed", 10, 30);
+    String label;
+    if (key == CODED) {
+      label = "keyCode " + str(keyCode) + " ";
+      switch (keyCode) {
+        case UP: label = label + "UP"; break;
+        case DOWN: label = label + "DOWN"; break;
+        case LEFT: label = label + "LEFT"; break;
+        case RIGHT: label = label + "RIGHT"; break;
+        case ESC: label = label + "ESC"; break;
+        case ENTER: label = label + "ENTER"; break;
+        case SHIFT: label = label + "SHIFT"; break;
+        case ALT: label = label + "ALT"; break;
+        case CONTROL: label = label + "CONTROL"; break;
+        case RETURN: label = label + "RETURN"; break;
+        case ENTER: label = label + "ENTER"; break;
+        case DELETE: label = label + "DELETE"; break;
+        case BACKSPACE: label = label + "BACKSPACE"; break;
+      }
+      text(label, 10, 100);
+    } else {
+      label = "key '" + str(key) + "'";
+      text(label, 10, 100);
+    }
+    return;
+  }
+}
+```
+

@@ -1,0 +1,13 @@
+# @pjs preload {#ref-preload}
+
+`@pjs preload`はProcessing.jsでは画像データを予めダウンロードするような
+命令です。[getImage()]で読み込む画像のファイルが全て`@pjs preload`で ファイル名の記述が必要です。
+
+関連項目: [getImage()], [image()].
+
+```prerender
+/* @pjs preload="images/Walker44.png"; */
+var walker = getImage("images/Walker44.png");
+image(walker, 10, 10, 80, 80);
+```
+

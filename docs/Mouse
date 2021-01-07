@@ -1,0 +1,14 @@
+# マウス {#ref-Mouse}
+
+マウスの入力は[イベント][Events]によって行う。イベントのリスト:
+
+*   [mouseClicked()] マウスはクリックされたとき
+*   [mousePressed()] マウスのボタンが押されたとき
+*   [mouseReleased()] マウスのボタンが話されたとき
+*   [mouseMoved()] マウスが動いたとき
+*   [mouseDragged()] マウスが押されたままに動いたとき
+*   [mouseOver()] マウスのカーソルはキャンバスに入ったとき
+*   [mouseOut()] マウスのカーソルがキャンバスから離れたとき
+*   [mouseX], [mouseY] マウスのXとY座標
+*   [mouseButton] マウスイベントの関数の中は押されたボタンを表す
+

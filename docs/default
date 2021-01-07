@@ -1,0 +1,6 @@
+# default
+
+`default`は、[switch]文の中でどの値でも当たらなかった場合の分岐を表す。
+
+関連項目: [switch], [case].
+

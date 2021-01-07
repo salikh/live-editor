@@ -1,0 +1,40 @@
+# Step 1.7: クリック回数を表示する {#ref-WhackACircle17}
+
+[前に戻る][WhackACircle16]
+
+以下のコードを入力して実行してみましょう。
+
+```example
+// WhackACircle17
+var score = 0;
+
+function setup() {
+  size(300,300);
+  background(255, 255, 255);
+  frameRate(1);
+}
+
+function draw() {
+  // キャンバスを白で塗る
+  background(255, 255, 255);
+  // 文字の色を黒にする
+  fill(0, 0, 0);
+  // 文字の大きさを 15 にする
+  textSize(15);
+  // 座標 (10, 20) にスコアを表示
+  text("スコア: " + str(score), 10, 20);
+}
+
+// マウスをクリックしたら実行されるイベントハンドラ
+function mouseClicked() {
+  // score の値を増やす
+  score = score + 1;
+}
+```
+
+上記のプログラムはメソッドの外で `score` という変数を定義しています。そして、マウスをクリックするたびにその値を 1
+ずつ増やして表示します。値を増やす命令は、`score = score + 1`
+と数学的にはありえない等式のようですが、これは等式ではなくて右の値を左の変数に代入する命令です。
+
+[Step 1.8: コードを整理しよう][WhackACircle18]
+

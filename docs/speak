@@ -1,0 +1,21 @@
+# speak
+
+テキストを読み上げます。
+
+```example
+// こんにちはと言います。
+speak("こんにちは");
+```
+
+他の言語のテキストを話させたいときは、テキストの後に`"en"`, `"it"`などの言語コードを指定します。
+
+```example
+speak("Ciao!", "it");
+speak("Hallo!", "en-GB");
+speak("Hello!", "en-US");
+```
+
+### 注意
+
+`speak()`は標準的なProcessing.jsの一部ではありません。このシステム以外のProcessing.jsの環境では使えません。
+

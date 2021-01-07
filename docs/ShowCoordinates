@@ -1,0 +1,18 @@
+# ShowCoordinates
+
+このプログラムは座標をお見せします。マウスをキャンバス内で動かしてみてください。
+
+```prerender
+// ShowCoordinates
+function setup() {
+  size(200, 200);
+}
+
+function draw() {
+  background(220);
+  textSize(20);
+  fill(0);
+  text("("+mouseX+","+mouseY+")", 80, 110);
+}
+```
+

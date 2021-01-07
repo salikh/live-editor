@@ -1,0 +1,6 @@
+# DOWN
+
+下の矢印キーのコード。一覧は[keyCodes]に参照。 `keyCode == DOWN`を調べる先に`key == CODED`を確かめなければなりません。
+
+関連項目: [keyCode], [keyCodes].
+

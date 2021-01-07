@@ -1,0 +1,89 @@
+# ステップ7: ゲームサンプル {#ref-PJSStep8}
+
+次のプログラムをサンプルとして使って自由自在ゲームを作ってみましょう。 以下に部分ごとに説明あります。
+
+```example
+// RocketLandingExample
+
+/* @pjs preload="images/fire2-134x200.png"; */
+/* @pjs preload="images/rocket-168x300.png"; */
+/* @pjs preload="images/rocket1-168x300.png"; */
+var fire = getImage("cc0/fire2-134x200");
+var rocket = getImage("cc0/rocket-168x300");
+var rocket_fire = getImage("cc0/rocket1-168x300");
+var explosion = getSound("cc0/explosion.ogg");
+var roar = getSound("cc0/roar.ogg");
+var win = getSound("cc0/win.ogg");
+
+var x;
+var y;
+var vy;
+
+var burning = false;
+var gameOver = false;
+
+function initVars() {
+  x = 100;
+  y = 10;
+  vy = 0;
+  gameOver = false;
+  burning = false;
+}
+
+frameRate(20);
+imageMode(CENTER);
+initVars();
+
+function draw() {
+  y = y + vy;
+  vy = vy + 0.2;
+  
+  if (y > height - 30) {
+    if (abs(vy) > 3) {
+      background(200);
+      image(fire, x, y-25, 65, 100);
+      playSound(explosion);
+    } else {
+      playSound(win);
+    }
+    noLoop();
+    gameOver = true;
+    return;
+  }
+  
+  background(100);
+  if (burning) {
+    image(rocket_fire, x, y, 34, 60);
+    burning = false;
+  } else {
+    image(rocket, x, y, 34, 60);
+  }
+}
+
+function burn() {
+  burning = true;
+  vy -= 2;
+  playSound(roar);
+}
+
+function keyPressed() {
+  if (gameOver) {
+    initVars();
+    loop();
+    return;
+  }
+  burn();
+}
+
+function mousePressed() {
+  if (gameOver) {
+    initVars();
+    loop();
+    return;
+  }
+  burn();
+}
+```
+
+次は[サンプルゲーム][Games]を参照。
+

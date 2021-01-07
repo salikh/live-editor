@@ -1,0 +1,6 @@
+# frameCount
+
+`frameCount`は`draw()`は何回呼ばれたかカウントします。
+
+関連項目: [frameRate()], [draw()].
+

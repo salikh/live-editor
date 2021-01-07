@@ -1,0 +1,6 @@
+# iterator
+
+`iterator`は[entrySet]などのデート構造から全ての値の組を取り出せる。
+
+関連項目: [entrySet], [getKey], [getValue].
+

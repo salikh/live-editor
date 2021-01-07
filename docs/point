@@ -1,0 +1,15 @@
+# point
+
+`point`は一点を描く。
+
+```prerender
+strokeWeight(5);
+point(50, 50);
+```
+
+呼び方:`point(x,y);`
+
+*   x, y --- 点の座標。
+
+関連項目: [strokeWeight()], [stroke()], [line()].
+

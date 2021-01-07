@@ -1,0 +1,14 @@
+# textSize
+
+`textSize()`は文字の大きさを設定します。この関数を呼んでから次の[text()]の命令に反映されます。
+
+```prerender
+fill(0);
+textSize(50);
+text("あ", 20, 80);
+textSize(20);
+text("か", 70, 30);
+```
+
+関連項目: [text], [textFont].
+

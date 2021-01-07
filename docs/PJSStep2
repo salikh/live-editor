@@ -1,0 +1,93 @@
+# ステップ2: 色 {#ref-PJSStep2}
+
+今までの絵は白黒でしたが、それではつまらないので、色を加えてみましょう。ProcessingではRGBまたはRGBAカラーモデルを採用しています。RGBはR=Red
+(赤)、G=Green (緑)、B=Blue (青)から成り立っています。次の図はRGBのカラーミックスのイメージです。
+
+```render
+function posToColor(x, y) {
+  if (x < width/2 && y < height/2) {
+    return color((width/2-x)/width*512, (height/2-y)/height*512, 0);
+  } else if (x < width/2) {
+    return color(220);
+  } else if (y < height/2) {
+    return color(0, (height/2-y)/height*512, (x-width/2)/width*512);
+  } else {
+    return color((y-height/2)/height*512, 0, (x-width/2)/width*512);
+  }
+}
+
+size(200, 200, "2D");
+
+for (var x = 0; x < width; x++) {
+  for (var y = 0; y < height; y++) {
+    set(x, y, posToColor(x, y));
+  }
+}
+
+fill(255);
+textSize(height/20);
+text("(255,0,0)", 5, height/2-5);
+fill(0);
+textAlign(LEFT, TOP);
+text("(255,255,0)", 5, 2);
+textAlign(RIGHT, TOP);
+text("(0,255,255)", width-5, 2);
+textAlign(CENTER, TOP);
+text("(0,255,0)", width/2, 2);
+textAlign(LEFT, BASELINE);
+fill(255);
+text("(0,0,0)", width/2+2, height/2-2);
+textAlign(RIGHT, BASELINE);
+text("(0,0,255)", width-2, height/2);
+fill(0);
+textAlign(LEFT, BOTTOM);
+text("(255,0,0)", width/2+2, height-2);
+textAlign(RIGHT, BOTTOM);
+text("(255,0,255)", width-2, height-2);
+```
+
+自分のお好みの色選ぶときに[色ツール][ColorTool]を使ってみてください。
+
+色の設定は２つあります。各図形を描くときは外線や内部を別々の色で塗ります。外線の色は`stroke()`で設定し、内部の色は`fill()`で設定します。
+
+例えば、こちらのプログラムを打って実行してみましょう。
+
+```prerender
+fill(0, 255, 0);  // 内部の色は緑
+stroke(0, 0, 255);  // 端の色は青
+ellipse(50, 50, 80, 80);
+```
+
+右側にあるの絵のようになりましたか？
+このプログラムの中に出てくる、`//`から始まる文章は、コメントと呼びます。コンピューターはコメントを無視するので、プログラムについて説明を入れたいときに便利です。
+
+RGBAカラーモデルはRGBに加えてA=Alpha(透明度)を設定します。例えば、中を塗らない楕円を描くために使えます：
+
+```prerender
+fill(0, 0, 0, 0);  // アルファは0だから、内部を塗らない
+ellipse(50, 50, 80, 80);
+```
+
+色を使わないで、明るさだけの設定するときに3つの数は同じなので、略できます:
+`fill(50);`は`fill(50,50,50);`と同じ意味で、グレー色を設定します。また、`fill(60,60,60,150);`は
+`fill(60,150);`と同じ意味です。
+
+図形を塗りつぶしたくないときに`noFill();`も使えます。端を描かないように`noStroke();`を使えます。
+
+では、雪だるまに色を加えましょう。
+
+**問題２**：前に作った雪だるまに色をつけたり、アイテムをあげたりしてみましょう。
+
+```hidden
+// SnowmanColor
+strokeWeight(5);
+stroke(255, 100, 100);
+ellipse(150, 250, 100, 100);
+stroke(100, 255, 100);
+ellipse(150, 170, 80, 80);
+stroke(100, 100, 255);
+ellipse(150, 110, 60, 60);
+```
+
+次は[ステップ3][PJSStep3]へ。
+

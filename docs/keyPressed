@@ -1,0 +1,38 @@
+# keyPressed
+
+**関数**: `keyPressed()`を定義すれば、キーが押されたたび に呼ばれる関数です。
+
+**変数**: `keyPressed`は最後に押されたキーのコードです。
+
+関連項目: [keyReleased()], [keyTyped()], [key], [keyCode], [keyCodes].
+
+```example
+function setup() {
+  size(400, 200);
+  fill(0);
+  textSize(20);
+}
+function draw() {
+  background(220);
+  text("keyPressed " + keyPressed, 10, 60);
+}
+```
+
+```example
+function setup() {
+  size(400, 200);
+  fill(0);
+  textSize(10);
+  background(220);
+}
+var y = 10;
+function keyPressed() {
+  text("keyPressed() key " + str(key) + " keyCode " + keyCode, 10, y);
+  y += 10;
+  if (y > 200) {
+    background(220);
+    y = 10;
+  }
+}
+```
+

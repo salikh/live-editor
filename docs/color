@@ -1,0 +1,15 @@
+# color
+
+`color`は色を表す。
+
+```prerender
+color red = color(255, 0, 0);
+color blue = color(0, 0, 255);
+fill(red);
+stroke(blue);
+rect(10, 10, 80, 80);
+```
+
+関連項目: [fill()], [background()], [red()], [green()], [blue()], [hue()],
+[saturation()], [brightness()], [colorMode()].
+

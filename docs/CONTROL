@@ -1,0 +1,6 @@
+# CONTROL
+
+「Ctrl」キーのコード。 `keyCode == CONTROL`を調べる先に`key == CODED`を確かめなければなりません。
+
+関連項目: [keyCode], [keyCodes].
+

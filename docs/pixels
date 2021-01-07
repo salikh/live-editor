@@ -1,0 +1,14 @@
+# pixels
+
+**画像データ**: [PImage]のフィルドとして画像データを保存します。
+
+```prerender
+var img = createImage(60, 60, RGB);
+for (var i = 0; i < img.pixels.length; i++) {
+  var x = int(i/60);
+  var y = int(i % 60);
+  img.pixels[i] = color(dist(x, y, 0, 0)/sqrt(2*60*60)*255);
+}
+image(img, 20, 20);
+```
+

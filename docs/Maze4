@@ -1,0 +1,158 @@
+# 4. 右手法 {#ref-Maze4}
+
+[前に戻る][Maze3]
+
+右手法を実装するには、右側の壁を検出し、壁がない場合は右側に曲がることが必要になります。だいたいこのような感じでしょうか。
+
+    function turnRight() {
+      var tmp = dx;
+      dx = -dy;
+      dy = tmp;
+    }
+
+    function wallRight() {
+      var rx = -dy;
+      var ry = dx;
+      color c = get(x + rx*(s/2+4), y + ry*(s/2+4));
+      return brightness(c) < 50;
+    }
+
+    function draw() {
+      ...
+      if (!wallRight()) {
+        turnRight();
+      } else if (wallAhead()) {
+        turnLeft();
+      }
+      moveForward();
+      ...
+    }
+
+上のプログラムは一回右に曲がってしまうと、キャラクターが無限ループに入ってしまうため上手く動きません。原因は右側を検出する関数が1ピクセルしか確認していないため、キャラクター全体が曲がった先に入れないときにも
+true を返してしまうからです。
+
+キャラクターのサイズに合わせて検出してみましょう。
+
+    function wallAhead() {
+      var wallFound = false;
+      var rx = -dy;
+      var ry = dx;
+      for (var i = -s/2-1; i < s/2+1; i++) {
+        color c = get(x+dx*(s/2+3)+rx*i, y+dy*(s/2+3)+ry*i);
+        wallFound = wallFound || brightness(c) < 50;
+      }
+      return wallFound;
+    }
+
+    function wallRight() {
+      var rx = -dy;
+      var ry = dx;
+      var wallFound = false;
+      for (var i = -s/2-1; i <= s/2+1; i++) {
+        color c = get(x + rx*(s/2+3)+dx*i, y + ry*(s/2+3)+dy*i);
+        wallFound = wallFound || brightness(c) < 50;
+      }
+      return wallFound;
+    }
+
+それでも他にも問題が残ってます。右に空き通路を検出すると、キャラクターはまた無限ループに入ってしまいます。今度の原因は、右に曲がったすぐ後に右側に壁がないとキャラクターがすぐにまた右に曲がってしまうことです。これを直すには、曲がってから数ピクセルはまっすぐに進む必要があります。
+
+    function draw() {
+      if (!wallRight()) {
+        turnRight();
+        moveForward();
+        moveForward();
+      } else if (wallAhead()) {
+        turnLeft();
+      }
+      moveForward();
+    }
+
+完成スケッチこちらです。
+
+```hidden
+// Maze4
+/* @pjs preload="images/labyrinth1.png"; */
+/* @pjs preload="images/Walker44.png"; */
+var imgLabyrinth = getImage("images/labyrinth1.png");
+var imgWalker = getImage("images/Walker44.png");
+function setup() {
+  size(360, 360);  // キャンバスの大きさの設定
+  image(imgLabyrinth, 1, 1, 360, 360); // 迷路の表示
+  imageMode(CENTER);
+}
+
+// キャラクターの大きさ、ピクセル単位
+var s = 44;
+
+// キャラクターの座標
+var x = 176, y = 314;
+
+// 進む方向
+var dx = 0;
+var dy = -1;
+
+var imgSave = null;
+function draw() {  // この関数は繰り返し呼ばれている.
+  if (imgSave != null) {
+    image(imgSave, x, y, s, s);
+  }
+  if (!wallRight()) {
+    turnRight();
+    moveForward();
+    moveForward();
+  } else if (wallAhead()) {
+    turnLeft();
+  }
+  moveForward();
+  imgSave = get(x-s/2, y-s/2, s, s);
+  image(imgWalker, x, y);
+}
+
+var wallAhead() {
+  var wallFound = false;
+  var rx = -dy;
+  var ry = dx;
+  for (var i = -s/2-1; i < s/2+1; i++) {
+    color c = get(x+dx*(s/2+3)+rx*i, y+dy*(s/2+3)+ry*i);
+    wallFound = wallFound || brightness(c) < 50;
+  }
+  return wallFound;
+}
+
+var wallRight() {
+  var rx = -dy;
+  var ry = dx;
+  var wallFound = false;
+  for (var i = -s/2-1; i <= s/2+1; i++) {
+    color c = get(x + rx*(s/2+3)+dx*i, y + ry*(s/2+3)+dy*i);
+    wallFound = wallFound || brightness(c) < 50;
+  }
+  return wallFound;
+}
+
+function moveForward() {
+  x += dx;
+  y += dy;
+}
+
+function turnLeft() {
+  var tmp = dx;
+  dx = dy;
+  dy = -tmp;
+}
+
+function turnRight() {
+  var tmp = dx;
+  dx = -dy;
+  dy = tmp;
+}
+```
+
+ここまでのプログラムで、キャラクターは迷路の中をうまく動くはずです。まだ問題がある場合、以下の点を確認しましょう。
+
+*   `dx`, `dy`には-1/0/1の以外の値を与えない。
+*   右側に空き通路を検出する関数はキャラクターが確実に入れる広さか確認する。
+
+次は[5. ゴールの判定][Maze5]
+

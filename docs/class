@@ -1,0 +1,20 @@
+# class
+
+`class`はオブジェクト指向のクラスの定義を表す。
+
+```prerender
+class Doubutsu {
+  Doubutsu(String namae, nenrei) {
+    this.namae = namae;
+    this.nenrei = nenrei;
+  }
+
+  String toString() {
+    return this.namae + ", " + this.nenrei + "才";
+  }
+}
+
+Doubutsu wanwan = new Doubutsu("ワンワン", 3);
+fill(0); text(wanwan, 10, 30);
+```
+

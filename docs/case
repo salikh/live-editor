@@ -1,0 +1,6 @@
+# case
+
+`case`は、`switch`文の中で一つの値の分岐を表す。
+
+関連項目: [switch], [default].
+

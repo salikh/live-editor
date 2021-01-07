@@ -1,0 +1,17 @@
+# key
+
+最後に押された文字または記号を文字列として保存している変数。 矢印などの文字ではないキーの判断
+
+関連項目: [keyReleased()], [keyTyped()], [key], [keyCode], [keyCodes].
+
+```example
+function setup() {
+  size(200, 200);
+  fill(0);
+  textSize(30);
+}
+function draw() {
+  text("key " + str(key), 10, 60);
+}
+```
+

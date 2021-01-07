@@ -1,0 +1,6 @@
+# mouseMoved
+
+**マウスイベント**: `mouseMoved()`を定義すれば、マウスカーソルが動いたときに呼ばれる関数。
+
+関連項目: [mouseClicked()], [mouseDragged()], [mouseOver()], [mouseOut()].
+

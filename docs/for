@@ -1,0 +1,13 @@
+# for
+
+ループといい、ある条件を満たすまでの繰り返し命令である。
+
+```prerender
+fill(0);
+for (var i = 0; i < 10; i++) {
+  text(str(i), 10, i*10);
+}
+```
+
+関連項目: [while], [do], [break], [continue].
+

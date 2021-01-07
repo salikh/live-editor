@@ -1,0 +1,25 @@
+# ImageRotate
+
+このプログラムは、画像を回しています。
+
+```prerender
+// ImageRotateExample
+/* @pjs preload="images/cat2-185x200.png"; */
+var img = getImage("images/cat2-185x200.png");
+
+function setup() {
+  imageMode(CENTER);
+}
+
+function draw() {
+  var angle = (mouseX+mouseY)/45*PI;
+  var x = 50, y = 50;
+  background(220);
+  translate(x, y);
+  rotate(frameCount/180*PI);
+  image(img, 0, 0, 92, 100);
+  rotate(-angle);
+  translate(-x, -y);
+}
+```
+

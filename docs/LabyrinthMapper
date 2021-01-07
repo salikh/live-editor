@@ -1,0 +1,93 @@
+# 2. 地図作り {#ref-LabyrinthMapper}
+
+[前に戻る][LabyrinthBlank]
+
+このプログラムは迷路の画像を解析して地図を作っていきます。
+迷路の上に点をおいて、縦横にピクセルを調べながらグリッド形式で地図を作成します。迷路によってはもっと細かく地形を調べなければいけない場合があります。
+
+```example
+/* @pjs preload="images/Labyrinth3a.png"; */
+var imgLabyrinth = getImage("images/Labyrinth3a.png");
+/* @pjs preload="images/Walker44.png"; */
+var imgWalker = getImage("images/Walker44.png");
+
+// Step in pixels.
+var s = 17;
+// Size of the grid.
+var n = 360/s;
+// The grid. 0 means the cell is blocked. >0 means the cell is open.
+var grid[][];
+
+var showMap = true;
+
+// The starting point;
+var sx = 0, sy = 0;
+// The goal.
+var gx = 0, gy = 0;
+
+function setup() {  // this is run once.
+    // canvas size (Variable aren't evaluated. Integers only, please.)
+    size(360, 360);
+
+    // Display the background (labyrinth).
+    image(imgLabyrinth, 1, 1, 360, 360);
+
+    // Allocate 2-dimensional array in 2 steps.
+    grid = new boolean[n][];
+    for (var i = 0; i < n; i++) {
+        grid[i] = new boolean[n];
+    }
+}
+
+// The loop counters that live across multiple mapStep invocations.
+var i = 0, j = 0;
+
+function mapStep() {
+            color c = get(i*s+s/2, j*s+s/2);
+            if (brightness(c) > 200) {
+                grid[i][j] = 999;
+                if (showMap) {
+                    fill(255, 255, 255);
+                    rect(s*i, s*j, s/2, s/2);
+                }
+            }
+            if (red(c) > 100 && green(c) < 100) {
+                sx = i;
+                sy = j;
+                if (showMap) {
+                    fill(200, 0, 0);
+                    rect(s*i, s*j, s/2, s/2);
+                }
+            } else if (green(c) > 100 & red(c) < 100) {
+                gx = i;
+                gy = j;
+                if (showMap) {
+                    fill(0, 200, 0);
+                    rect(s*i, s*j, s/2, s/2);
+                }
+            }
+     j++;
+     if (j >= n) {
+         j = 0;
+         i++;
+         if (i >= n) {
+             noLoop();
+         }
+     }
+}
+
+
+var next = 0;
+var step = 50;
+
+function draw() {
+    if (showMap) {
+        while (millis() <= next) return;
+        next = millis() + step;
+    }
+    mapStep();
+}
+```
+
+[3. 最短の道][LabyrinthSearch]
+

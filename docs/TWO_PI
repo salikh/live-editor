@@ -1,0 +1,10 @@
+# TWO_PI
+
+`TWO_PI`は円周率の二倍である。`6.283185307179586`.
+
+```prerender
+arc(50, 50, 45, 45, HALF_PI, TWO_PI);
+```
+
+関連項目: [PI], [HALF_PI], [QUARTER_PI].
+

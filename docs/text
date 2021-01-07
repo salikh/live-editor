@@ -1,0 +1,11 @@
+# text
+
+`text()`はキャンバスに言葉を表示します。表示する位置を座標で指定します。
+
+```prerender
+size(150, 100); fill(0); textSize(20);
+text("こんにちは", 20, 50);
+```
+
+関連項目: [textSize], [fill], [textFont].
+

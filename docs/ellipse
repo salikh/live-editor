@@ -1,0 +1,31 @@
+# ellipse
+
+円または楕円を描きます。
+
+```prerender
+size(100, 50);
+ellipse(50, 25, 90, 20);
+```
+
+```prerender
+fill(255, 0, 0); // 赤
+// 横に細長い赤い楕円を描きます。
+ellipse(50, 10, 100, 20);
+fill(0, 0, 255); // 青
+// 縦の細長い楕円を描きます。
+ellipse(10, 50, 20, 100);
+fill(255);  // 白
+ellipse(50, 50, 40, 40);
+```
+
+呼び方: `ellipse(x, y, width, height)`
+
+*   x --- 中心のX座標
+*   y --- 中心のY座標
+*   width --- 楕円の幅
+*   height --- 楕円の高さ
+
+weightとheightを等しくすれば円になります。
+
+関連項目: [arc()], [triangle()], [rect()], [ellipse()].
+

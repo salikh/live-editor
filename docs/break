@@ -1,0 +1,4 @@
+# break
+
+ループ([while], [for], [do])や[switch]から脱出する命令。
+

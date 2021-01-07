@@ -1,0 +1,18 @@
+# strokeCap
+
+`strokeCap()`はペンの端の形を設定します。次の[line()]命令に反映されます。
+
+```prerender
+strokeCap(ROUND);
+strokeWeight(20);
+line(20, 20, 80, 80);
+```
+
+関連項目: [stroke], [fill], [ROUND], [SQUARE], [PROJECT].
+
+選択できる形は
+
+*   `ROUND` - 丸い
+*   `SQUARE` - 四角い。線は座標で表している点までぴったり及びます。
+*   `PROJECT` - 四角い。線は座標で表している点から筆の大きさの部分まで出ています。
+

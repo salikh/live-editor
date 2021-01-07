@@ -1,0 +1,11 @@
+# LEFT
+
+**マウス**: `LEFT`は[mouseButton]を参照するときにマウスの左ボタンを表す。
+
+関連項目: [mouseButton], [mousePressed()], [mouseReleased()], [mouseClicked()].
+
+**キーボード**: 左の矢印キーのコード。一覧は[keyCodes]に参照。 `keyCode == LEFT`を調べる先に`key ==
+CODED`を確かめなければなりません。
+
+関連項目: [keyCode], [keyCodes].
+

@@ -1,0 +1,18 @@
+# toString
+
+オブジェクトに対して、文字列を期待する文脈で呼ばれるメソッド。 例えば、`str()`にオブジェクトを渡されたとき。
+
+```prerender
+class Inu {
+  Inu(String namae) {
+    this.namae = namae;
+  }
+  String toString() {
+    return "犬、名前:" + this.namae;
+  }
+}
+
+size(150, 100); fill(0);
+fill(0); text(str(new Inu("ワンワン")), 10, 30);
+```
+

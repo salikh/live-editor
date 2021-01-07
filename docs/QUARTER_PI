@@ -1,0 +1,10 @@
+# QUARTER_PI
+
+`QUARTER_PI`は円周率の4分の1である。 `0.7853981633974483`.
+
+```prerender
+arc(50, 50, 45, 45, 0, QUARTER_PI, HALF_PI);
+```
+
+関連項目: [PI], [HALF_PI], [TWO_PI].
+

@@ -1,0 +1,27 @@
+# mouseReleased
+
+ユーザがマウスのボタンを離すと`mouseReleased()`関数が呼ばれます。 この関数を定義すれば、「マウスで絵を描く」のような操作が実装できます。
+
+```example
+function setup() {
+  background(20);
+  fill(240);
+}
+
+bool pressed = false;
+
+function mousePressed() {
+  pressed = true;
+}
+
+function mouseReleased() {
+  pressed = true;
+}
+
+function draw() {
+  if (pressed) {
+    ellipse(mouseX, mouseY, 10, 10);
+  }
+}
+```
+

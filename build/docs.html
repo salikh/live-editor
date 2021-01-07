@@ -192,7 +192,7 @@ ellipse(50, 50, 80, 80);
 
 <p><strong>問題２</strong>：前に作った雪だるまに色をつけたり、アイテムをあげたりしてみましょう。</p>
 
-<pre><code class="language-hidden">// Snowman2Color
+<pre><code class="language-hidden">// SnowmanColor
 strokeWeight(5);
 stroke(255, 100, 100);
 ellipse(150, 250, 100, 100);
@@ -210,32 +210,29 @@ ellipse(150, 110, 60, 60);
 
 <p>そのためには、同じプログラムを何回も繰り返し実行する必要があります。Processingにはアニメーションを作るのための仕組みがすでに含まれています。</p>
 
-<p>一回だけ実行したいプログラムの部分は<code>void setup() { ... }</code> の中に書き、何回も繰り返しで実行したい部分は<code>void draw() {
+<p>一回だけ実行したいプログラムの部分は<code>function setup() { ... }</code> の中に書き、何回も繰り返しで実行したい部分は<code>function draw() {
 ... }</code>の中に書くと、簡単なアニメーションを作れます。 このように<code>{}</code>で囲ったプログラムの部分は「関数」といいます。</p>
 
-<p><img src="images/execute-diagram.png" alt="images/execute-diagram.png"/></p>
+<p><img src="images/execution-diagram.png" alt="execution diagram"/></p>
 
 <p>いくつかの例を見てみましょう。</p>
 
-<pre><code class="language-example">void setup() {
-  textSize(50); // 文字を大きくする
-  fill(0);      // 文字を黒にする
-}
+<pre><code class="language-example">textSize(50); // 文字を大きくする
+fill(0);      // 文字を黒にする
 
-void draw() {
+function draw() {
   text(frameCount, 10, 50);
 }
 </code></pre>
 
 <p>早すぎて何が起きたかよくわかりません。実行をもう少し遅くするには<code>frameRate()</code>が便利です。<code>draw()</code>を一回実行されたときに一つのフレームとして考えると、フレーム・レートは一秒あたり何回<code>draw()</code>が呼ばれるかを示します。</p>
 
-<pre><code class="language-example">void setup() {
-  textSize(50);
-  fill(0);
-  frameRate(1);
-}
+<pre><code class="language-example">textSize(50);
+fill(0);
+frameRate(1);
+background(255);
 
-void draw() {
+function draw() {
   text(frameCount, 10, 50);
 }
 </code></pre>
@@ -244,13 +241,11 @@ void draw() {
 
 <p>番号がはっきり見えるようにしましょう。新しい番号を見せる前にキャンバスを消すことで、新しい番号がはっきり見えます。キャンバスを消すためには<code>background()</code>を使います。<code>background()</code>には前と同様にRGBの形式色を指定できます。</p>
 
-<pre><code class="language-example">void setup() {
-  textSize(50);
-  fill(0);
-  frameRate(1);
-}
+<pre><code class="language-example">textSize(50);
+fill(0);
+frameRate(1);
 
-void draw() {
+function draw() {
   background(200);  // キャンバスをグレーに塗りつぶす
   text(frameCount, 10, 50);
 }
@@ -261,21 +256,19 @@ void draw() {
 <p><strong>問題３</strong>:
 <code>draw()</code>や<code>frameCount</code>や図形の命令を使って好きなように雪だるまのアニメーションを作りましょう。何か分からないことがあったら質問してください。</p>
 
-<pre><code class="language-hidden">// Snowman3Animated
-void setup() {
-  size(300, 300);
-}
+<pre><code class="language-hidden">size(300, 300, &#34;2D&#34;);
+frameRate(30);
+var x = 150, y = 170;
 
-void draw() {
+function draw() {
   background(220);
-  var x = 150, y = 170;
   strokeWeight(5);
   stroke(255, 100, 100);
   ellipse(x, y+80, 100, 100);
   stroke(100, 255, 100);
-  ellipse(x-5*cos(frameCount/18), y, 80, 80);
+  ellipse(x-10*cos(frameCount*5), y, 80, 80);
   stroke(100, 100, 255);
-  ellipse(x+5*sin(frameCount/18), y-60, 60, 60);
+  ellipse(x+10*sin(frameCount*5), y-60, 60, 60);
 }
 </code></pre>
 
@@ -285,10 +278,10 @@ void draw() {
 
 <p>ゲームを作るにはユーザーからの入力を処理する必要があります。まずはマウスを使ってみましょう。プログラムの実行中にマウスがキャンバスの中に入ると、<code>mouseX</code>と<code>mouseY</code>の変数にマウスの位置が設定されます。</p>
 
-<pre><code class="language-prerender">void draw() {
+<pre><code class="language-prerender">draw = function() {
   background(255);  // 白
   ellipse(mouseX, mouseY, 10, 10);
-}
+};
 </code></pre>
 
 <p>マウスをキャンバス内で動かしてみましょう。丸がマウスについてくるのがわかるでしょう。</p>
@@ -296,13 +289,13 @@ void draw() {
 <p>では、ユーザーがマウスをクリックしたらキャンバスを黒くしてみましょう。
 ユーザーがマウスをクリックしたことに反応するためには、<code>mousePressed()</code>関数を定義します。この関数は、マウスのボタンが押されたときに呼ばれます。次のプログラムを実行して、マウスをキャンバス内でクリックすると、一瞬だけキャンバスが黒くなります。</p>
 
-<pre><code class="language-prerender">void draw() {
+<pre><code class="language-prerender">draw = function() {
   background(255);  // 白
   ellipse(mouseX, mouseY, 10, 10);
   frameRate(10);
-}
+};
 
-void mousePressed() {
+mousePressed = function() {
   background(0);  // 黒
 }
 </code></pre>
@@ -318,15 +311,15 @@ void mousePressed() {
 
 <pre><code class="language-prerender">var c = 255;
 
-void draw() {
+draw = function() {
   background(c);
   ellipse(mouseX, mouseY, 10, 10);
   frameRate(10);
-}
+};
 
-void mousePressed() {
+mousePressed = function() {
   c = 0;
-}
+};
 </code></pre>
 
 <p>ここでは、プログラムの実行を始めた時に変数cが作られて、最初の値は255になっています。変数の値は255なので、<code>background(c);</code>はキャンバスを白く塗りつぶします。ユーザがマウスをクリックすると、<code>mousePressed()</code>が呼ばれて、変数cの値が0になります。その後は、<code>background(c);</code>という命令はキャンバスを黒く塗りつぶすことになります。</p>
@@ -334,16 +327,14 @@ void mousePressed() {
 <p><strong>問題4</strong>: 雪だるまをマウスと一緒に動かしてみましょう。</p>
 
 <pre><code class="language-hidden">// SnowmanMouse
-void setup() {
-  size(300, 300);
-}
+size(300, 300, &#34;2D&#34;);
 
-void draw() {
+draw = function() {
   background(220);
   ellipse(mouseX, mouseY+80, 100, 100);
   ellipse(mouseX, mouseY, 80, 80);
   ellipse(mouseX, mouseY-60, 60, 60);
-}
+};
 </code></pre>
 
 <p>次は<a href="#ref-PJSStep5">ステップ5</a>へ。</p>
@@ -356,16 +347,16 @@ void draw() {
 
 <pre><code class="language-prerender">var x = 50;
 
-void draw() {
+function draw() {
   background(220);
   ellipse(x, 50, 30, 30);
 }
 
-void keyPressed() {
-  if (keyCode == LEFT) {
+function keyPressed() {
+  if (keyCode === LEFT) {
     x = x - 5;
   }
-  if (keyCode == RIGHT) {
+  if (keyCode === RIGHT) {
       x = x + 5;
   }
 }
@@ -377,18 +368,18 @@ void keyPressed() {
 
 var x = 150;
 
-void setup() {
+function setup() {
   size(300, 300);
 }
 
-void draw() {
+function draw() {
   background(220);
   ellipse(x, 250, 100, 100);
   ellipse(x, 170, 80, 80);
   ellipse(x, 110, 60, 60);
 }
 
-void keyPressed() {
+function keyPressed() {
   if (keyCode == LEFT) {
     x = x - 5;
   }
@@ -407,7 +398,7 @@ void keyPressed() {
 <pre><code class="language-example">var y = 10;
 var vy = 0;
 
-void draw() {
+function draw() {
   // シミュレーション
   y = y + vy;     // 縦位置
   vy = vy + 0.1;  // 加速
@@ -425,12 +416,12 @@ void draw() {
 <pre><code class="language-example">var y = 10;
 var vy = 0;
 
-void draw() {
+function draw() {
   y = y + vy;     // 縦位置
   vy = vy + 0.1;  // 加速
   if (y &gt; height) {  // 床に当たる条件
     y = height;
-    vy = -4;
+    vy = -8;
   }
   background(220);
   ellipse(50, y, 30, 30);
@@ -447,20 +438,15 @@ void draw() {
 <pre><code class="language-hidden">// SnowmanBounce
 
 var x = 150;
-var y;
+var y = height;
 var vy = -2;
 
-void setup() {
-  size(300, 300);
-  y = height;
-}
-
-void draw() {
+function draw() {
   y = y + vy;
   vy = vy + 0.1;
   if (y &gt; height) {
     y = height;
-    vy = -4;
+    vy = -5;
   }
   background(220);
   ellipse(x, y-50, 100, 100);
@@ -468,11 +454,11 @@ void draw() {
   ellipse(x, y-190, 60, 60);
 }
 
-void keyPressed() {
-  if (keyCode == LEFT) {
+function keyPressed() {
+  if (keyCode === LEFT) {
     x = x - 5;
   }
-  if (keyCode == RIGHT) {
+  if (keyCode === RIGHT) {
       x = x + 5;
   }
 }
@@ -487,10 +473,8 @@ void keyPressed() {
 <p>画像を使うにはそれをロードしなければいけません。 このプログラムでは、<code>@pjs preload=&#34;...&#34;;</code>と<code>loadImage(&#34;...&#34;)</code>
 二箇所で画像名を入れて、画像データを用意します。</p>
 
-<pre><code class="language-prerender">/* @pjs preload=&#34;images/baloon1-170x200.png&#34;; */
-PImage img = loadImage(&#34;images/baloon1-170x200.png&#34;);
-imageMode(CENTER);
-image(img, 50, 50, 85, 100);
+<pre><code class="language-prerender">imageMode(CENTER);
+image(getImage(&#34;cc0/banana-200x113&#34;), 100, 100);
 </code></pre>
 
 <p><code>imageMode</code>は画像の写し方を設定します。 <code>CENTER</code>(中心)を設定すると座標の(x,y)の点に画像の中心が写します。
@@ -498,7 +482,7 @@ image(img, 50, 50, 85, 100);
 
 <pre><code class="language-render">/* @pjs preload=&#34;images/baloon1-170x200.png&#34;; */
 PImage img = loadImage(&#34;images/baloon1-170x200.png&#34;);
-void setup() {
+function setup() {
   size(300, 200);
   frameRate(1);
   textSize(16);
@@ -506,7 +490,7 @@ void setup() {
   textAlign(LEFT, TOP);
   strokeWeight(5);
 }
-void draw() {
+function draw() {
   background(220);
   if (frameCount % 2 == 0) {
     imageMode(CENTER);
@@ -530,10 +514,10 @@ void draw() {
 次のプログラムを実行して、 キャンバス内でクリックしてみてください。</p>
 
 <pre><code class="language-prerender">PAudio sound = loadSound(&#34;images/meow.ogg&#34;);
-void mouseClicked() {
+function mouseClicked() {
   sound.play();
 }
-void draw() {
+function draw() {
   if (sound.isPlaying()) {
     background(220);
     fill(0); textSize(20);
@@ -557,21 +541,21 @@ void draw() {
 /* @pjs preload=&#34;images/fire2-134x200.png&#34;; */
 /* @pjs preload=&#34;images/rocket-168x300.png&#34;; */
 /* @pjs preload=&#34;images/rocket1-168x300.png&#34;; */
-PImage fire = loadImage(&#34;images/fire2-134x200.png&#34;);
-PImage rocket = loadImage(&#34;images/rocket-168x300.png&#34;);
-PImage rocket_fire = loadImage(&#34;images/rocket1-168x300.png&#34;);
-PAudio explosion = loadSound(&#34;images/explosion.ogg&#34;);
-PAudio roar = loadSound(&#34;images/roar.ogg&#34;);
-PAudio win = loadSound(&#34;images/win.ogg&#34;);
+var fire = getImage(&#34;cc0/fire2-134x200&#34;);
+var rocket = getImage(&#34;cc0/rocket-168x300&#34;);
+var rocket_fire = getImage(&#34;cc0/rocket1-168x300&#34;);
+var explosion = getSound(&#34;cc0/explosion.ogg&#34;);
+var roar = getSound(&#34;cc0/roar.ogg&#34;);
+var win = getSound(&#34;cc0/win.ogg&#34;);
 
 var x;
 var y;
 var vy;
 
-boolean burning = false;
-boolean gameOver = false;
+var burning = false;
+var gameOver = false;
 
-void initVars() {
+function initVars() {
   x = 100;
   y = 10;
   vy = 0;
@@ -579,14 +563,11 @@ void initVars() {
   burning = false;
 }
 
-void setup() {
-  size(200, 200);
-  frameRate(20);
-  imageMode(CENTER);
-  initVars();
-}
+frameRate(20);
+imageMode(CENTER);
+initVars();
 
-void draw() {
+function draw() {
   y = y + vy;
   vy = vy + 0.2;
   
@@ -594,9 +575,9 @@ void draw() {
     if (abs(vy) &gt; 3) {
       background(200);
       image(fire, x, y-25, 65, 100);
-      explosion.play();
+      playSound(explosion);
     } else {
-      win.play();
+      playSound(win);
     }
     noLoop();
     gameOver = true;
@@ -612,13 +593,13 @@ void draw() {
   }
 }
 
-void burn() {
+function burn() {
   burning = true;
   vy -= 2;
-  roar.play();
+  playSound(roar);
 }
 
-void keyPressed() {
+function keyPressed() {
   if (gameOver) {
     initVars();
     loop();
@@ -627,9 +608,8 @@ void keyPressed() {
   burn();
 }
 
-void mousePressed() {
+function mousePressed() {
   if (gameOver) {
-    explosion.pause();
     initVars();
     loop();
     return;
@@ -656,7 +636,7 @@ void mousePressed() {
 <p>このプログラムは軸をお見せします。</p>
 
 <pre><code class="language-prerender">// CanvasAxes
-void arrow(x1, y1, x2, y2) {
+function arrow(x1, y1, x2, y2) {
   line(x1, y1, x2, y2);
   var x = x2-x1;
   var y = y2-y1;
@@ -681,11 +661,11 @@ text(&#34;y&#34;, 30, 85);
 <p>このプログラムは座標をお見せします。マウスをキャンバス内で動かしてみてください。</p>
 
 <pre><code class="language-prerender">// ShowCoordinates
-void setup() {
+function setup() {
   size(200, 200);
 }
 
-void draw() {
+function draw() {
   background(220);
   textSize(20);
   fill(0);
@@ -710,7 +690,7 @@ color posToColor(x, y) {
   }
 }
 
-void setup() {
+function setup() {
   size(300, 300);
   for (var x = 0; x &lt; width; x++) {
     for (var y = 0; y &lt; height; y++) {
@@ -738,7 +718,7 @@ void setup() {
   text(&#34;(255,0,255)&#34;, width-2, height-2);
 }
 
-void draw() {
+function draw() {
   color c = posToColor(mouseX, mouseY);
   noStroke();
   fill(c);
@@ -757,14 +737,14 @@ void draw() {
 <p>このプログラムは楕円を書く命令をお見せします。キャンバス内でマウス・ドラッグしてみてください。</p>
 
 <pre><code class="language-prerender">// EllipseTool
-void setup() {
+function setup() {
   size(200, 200);
 }
 
 var x1, y1, x2, y2;
 var pressed = false;
 
-void draw() {
+function draw() {
   background(220);
   if (pressed) {
     x2 = mouseX;
@@ -779,7 +759,7 @@ void draw() {
   text(&#34;ellipse(&#34;+x1+&#34;,&#34;+y1+&#34;,&#34;+((x2-x1)*2)+&#34;,&#34;+((y2-y1)*2)+&#34;)&#34;, 10, height-10);
 }
 
-void mousePressed() {
+function mousePressed() {
   if (!pressed) {
     x1 = mouseX;
     y1 = mouseY;
@@ -787,7 +767,7 @@ void mousePressed() {
   }
 }
 
-void mouseReleased() {
+function mouseReleased() {
   if (pressed) {
     x2 = mouseX;
     y2 = mouseY;
@@ -801,14 +781,14 @@ void mouseReleased() {
 <p>このプログラムは長方形を書く命令をお見せします。キャンバス内でマウス・ドラッグしてみてください。</p>
 
 <pre><code class="language-prerender">// RectangleTool
-void setup() {
+function setup() {
   size(200, 200);
 }
 
 var x1, y1, x2, y2;
-boolean pressed = false;
+var pressed = false;
 
-void draw() {
+function draw() {
   background(220);
   if (pressed) {
     x2 = mouseX;
@@ -823,7 +803,7 @@ void draw() {
   text(&#34;rect(&#34;+x1+&#34;,&#34;+y1+&#34;,&#34;+(x2-x1)+&#34;,&#34;+(y2-y1)+&#34;)&#34;, 10, height-10);
 }
 
-void mousePressed() {
+function mousePressed() {
   if (!pressed) {
     x1 = mouseX;
     y1 = mouseY;
@@ -831,7 +811,7 @@ void mousePressed() {
   }
 }
 
-void mouseReleased() {
+function mouseReleased() {
   if (pressed) {
     x2 = mouseX;
     y2 = mouseY;
@@ -844,7 +824,7 @@ void mouseReleased() {
 
 <pre><code class="language-prerender">// SoundExample
 PAudio sound = loadSound(&#34;images/explosion.ogg&#34;);
-void mousePressed() {
+function mousePressed() {
   sound.play();
 }
 </code></pre>
@@ -999,19 +979,19 @@ image(img, 50, 50, 85, 100);
 <p>このゲームは午前中に Scratch で作った「猫たたき」のように円が現れたり消えたりして、円をクリックできたら得点がもらえるゲームです。</p>
 
 <pre><code class="language-render">// WhackACircle0
-void circle(x, y, r) {
+function circle(x, y, r) {
 }
-int width = 300;
-int margin = 50;
-int radius = 50;
-int step = (width - 2*margin)/2;
-void maru(int col, int row) {
+var width = 300;
+var margin = 50;
+var radius = 50;
+var step = (width - 2*margin)/2;
+function maru(col, row) {
   fill(0, 255, 0);
   stroke(255, 0, 0);
   strokeWeight(3);
   ellipse(margin + col*step, margin + row*step, radius, radius);
 }
-void setup() {
+function setup() {
   size(300, 300);
   background(255);
   maru(0, 0);
@@ -1024,7 +1004,7 @@ void setup() {
   textSize(18);
   text(&#34;スコア:2&#34;, 10, 20);
 }
-void draw() {
+function draw() {
   exit();
 }
 </code></pre>
@@ -1139,14 +1119,14 @@ stroke(255, 0, 0);
 strokeWeight(2);
 
 // ランダムな座標を生成する
-int x = random(0, 300);
-int y = random(0, 300);
+var x = random(0, 300);
+var y = random(0, 300);
 
 // 中心座標が (x, y)、直径が 40 の円を描く
 ellipse(x, y, 40, 40);
 </code></pre>
 
-<p>実行される度に円の場所が変わることがわかります。そこで <code>int x = random(0, 300);</code>
+<p>実行される度に円の場所が変わることがわかります。そこで <code>var x = random(0, 300);</code>
 という命令に注目してください。この命令は変数を定義します。変数はデータを一時的に保存するものです。Scratch
 ではこのように変数を作って様々なブロックが現れますね。</p>
 
@@ -1154,7 +1134,7 @@ ellipse(x, y, 40, 40);
 
 <p>変数を初めて使うときには、変数を「<strong>定義</strong>」して、変数の名前・型・初期値を決めます。名前と型は定義した後で変更できませんが、値は後から変更できます。</p>
 
-<pre><code>int x = random(0, 300);
+<pre><code>var x = random(0, 300);
 </code></pre>
 
 <p>上記の文は、 <code>int</code>（整数）型の変数 <code>x</code> を定義し、初期値を <code>random(0, 300)</code>、つまり 0 から 300 までの乱数とします。<code>x</code> と
@@ -1171,7 +1151,7 @@ ellipse(x, y, 40, 40);
 
 <pre><code class="language-example">// WhackACircle15
 // 初期化・一回だけ実行される
-void setup() {
+function setup() {
   // キャンバスの大きさを 300 × 300 にする
   size(300, 300);
   // 滑らかに描く
@@ -1181,7 +1161,7 @@ void setup() {
 }
 
 // ずっと実行される
-void draw() {
+function draw() {
   // キャンバスを白で塗る
   background(255, 255, 255);
   // 円の内部を緑色で塗る
@@ -1192,15 +1172,15 @@ void draw() {
   strokeWeight(2);
 
   // ランダムな座標を生成する
-  int x = random(0, 300);
-  int y = random(0, 300);
+  var x = random(0, 300);
+  var y = random(0, 300);
 
   // 中心座標が (x, y)、直径が 40 の円を描く
   ellipse(x, y, 40, 40);
 }
 </code></pre>
 
-<p>実行すると、円が高速でランダムな場所で現れます。今回のプログラムには、<code>void setup() { ... }</code> と <code>void draw() { ...
+<p>実行すると、円が高速でランダムな場所で現れます。今回のプログラムには、<code>function draw() { ...
 }</code> という書き方が出てきます。これらは<strong>メソッド</strong>と呼びます。メソッドは複数の命令をまとめて、１個の命令として使えるようにします。</p>
 
 <p>Scratch では、各ブロック（例：ペンを下ろす）がメソッドだと考えても間違いではないでしょう。Processing
@@ -1231,13 +1211,11 @@ void draw() {
 <p>以下のコードを入力して実行してみましょう。</p>
 
 <pre><code class="language-example">// WhackACircle16
-void setup() {
-  size(300,300);
-  framerate(1);
-}
+size(300,300, &#34;2D&#34;);
+framerate(1);
 
 // マウスをクリックしたら実行される
-void mouseClicked() {
+function mouseClicked() {
   // 文字の色を黒にする
   fill(0, 0, 0);
   // 文字の大きさを 30 にする
@@ -1259,15 +1237,15 @@ void mouseClicked() {
 <p>以下のコードを入力して実行してみましょう。</p>
 
 <pre><code class="language-example">// WhackACircle17
-int score = 0;
+var score = 0;
 
-void setup() {
+function setup() {
   size(300,300);
   background(255, 255, 255);
   frameRate(1);
 }
 
-void draw() {
+function draw() {
   // キャンバスを白で塗る
   background(255, 255, 255);
   // 文字の色を黒にする
@@ -1279,7 +1257,7 @@ void draw() {
 }
 
 // マウスをクリックしたら実行されるイベントハンドラ
-void mouseClicked() {
+function mouseClicked() {
   // score の値を増やす
   score = score + 1;
 }
@@ -1299,17 +1277,17 @@ void mouseClicked() {
 
 <pre><code class="language-example">// WhackACircle18
 // 円の中心の座標
-int x;
-int y;
+var x;
+var y;
 
 // 円の半径
-int radius = 20;
+var radius = 20;
 
 // スコアを初期化
-int score = 0;
+var score = 0;
 
 // 初期化・一回だけ実行される
-void setup() {
+function setup() {
   // キャンバスの大きさを 300 × 300 にする
   size(300, 300);
   // キャンバスを白で塗ります
@@ -1321,7 +1299,7 @@ void setup() {
 }
 
 // 座標 (x, y) に円を描く
-void drawCircle(int x, int y) {
+function drawCircle(x, y) {
   // 円の中身を緑色にする
   fill(0, 255, 0);
   // 円周を赤にする
@@ -1333,7 +1311,7 @@ void drawCircle(int x, int y) {
 }
 
 // スコアを表示
-void drawScore() {
+function drawScore() {
   // 文字の色を黒にする
   fill(0, 0, 0);
   // 文字の大きさを 15 にする
@@ -1343,7 +1321,7 @@ void drawScore() {
 }
 
 // ずっと実行される
-void draw() {
+function draw() {
   // キャンバスを白で塗ります
   background(255, 255, 255);
   // ランダムな座標を生成する
@@ -1356,7 +1334,7 @@ void draw() {
 }
 
 // マウスをクリックしたら実行されるイベントハンドラ
-void mouseClicked() {
+function mouseClicked() {
   // score の値を増やす
   score = score + 1;
 }
@@ -1377,7 +1355,7 @@ void mouseClicked() {
 <p>mouseClicked メソッドのコードを次のように書き換えて実行してみましょう。</p>
 
 <pre><code>// ユーザーがマウスをクリックしたら実行されるイベントハンドラ
-void mouseClicked() {
+function mouseClicked() {
   // 円の中心点とマウスをクリックした場所との距離が radius より小さかったら
   if (dist(x, y, mouseX, mouseY) &lt; radius) {
     // score の値を増やす
@@ -1398,17 +1376,17 @@ void mouseClicked() {
 
 <pre><code class="language-hidden">// WhackACircle19
 // 円の中心の座標
-int x;
-int y;
+var x;
+var y;
 
 // 円の半径
-int radius = 20;
+var radius = 20;
 
 // スコアを初期化
-int score = 0;
+var score = 0;
 
 // 初期化・一回だけ実行される
-void setup() {
+function setup() {
   // キャンバスの大きさを 300 × 300 にする
   size(300, 300);
   // キャンバスを白で塗ります
@@ -1420,7 +1398,7 @@ void setup() {
 }
 
 // 座標 (x, y) に円を描く
-void drawCircle(int x, int y) {
+function drawCircle(x, y) {
   // 円の中身を緑色にする
   fill(0, 255, 0);
   // 円周を赤にする
@@ -1432,7 +1410,7 @@ void drawCircle(int x, int y) {
 }
 
 // スコアを表示
-void drawScore() {
+function drawScore() {
   // 文字の色を黒にする
   fill(0, 0, 0);
   // 文字の大きさを 15 にする
@@ -1442,7 +1420,7 @@ void drawScore() {
 }
 
 // ずっと実行される
-void draw() {
+function draw() {
   // キャンバスを白で塗ります
   background(255, 255, 255);
   // ランダムな座標を生成する
@@ -1455,7 +1433,7 @@ void draw() {
 }
 
 // ユーザーがマウスをクリックしたら実行されるイベントハンドラ
-void mouseClicked() {
+function mouseClicked() {
   // 円の中心点とマウスをクリックした場所との距離が radius より小さかったら
   if (dist(x, y, mouseX, mouseY) &lt; radius) {
     // score の値を増やす
@@ -1479,21 +1457,21 @@ void mouseClicked() {
 
 <pre><code>// WhackACircle21
 // i 番目の円の x 座標を返す (iは円の番号を表す0から8までの整数)
-int circleX(int i) {
+var circleX(i) {
   return (int)(i / 3) * 100 + 50;
 }
 // i 番目の円の y 座標を返す (iは円の番号を表す0から8までの整数)
-int circleY(int i) {
+var circleY(i) {
   return (i % 3) * 100 + 50;
 }
 
 // ずっと実行される
-void draw() {
+function draw() {
   // キャンバスを白で塗る
   background(255, 255, 255);
 
   // i を 0 から 8 まで繰り返す
-  int i = 0;
+  var i = 0;
   while (i &lt; 9) {
     // 座標 (circleX(i), circleY(i)) に円を描く
     drawCircle(circleX(i), circleY(i));
@@ -1517,17 +1495,17 @@ void draw() {
 
 <pre><code class="language-hidden">// WhackACircle21
 // 円の中心の座標
-int x;
-int y;
+var x;
+var y;
 
 // 円の半径
-int radius = 20;
+var radius = 20;
 
 // スコアを初期化
-int score = 0;
+var score = 0;
 
 // 初期化・一回だけ実行される
-void setup() {
+function setup() {
   // キャンバスの大きさを 300 × 300 にする
   size(300, 300);
   // キャンバスを白で塗ります
@@ -1539,7 +1517,7 @@ void setup() {
 }
 
 // 座標 (x, y) に円を描く
-void drawCircle(int x, int y) {
+function drawCircle(x, y) {
   // 円の中身を緑色にする
   fill(0, 255, 0);
   // 円周を赤にする
@@ -1551,7 +1529,7 @@ void drawCircle(int x, int y) {
 }
 
 // スコアを表示
-void drawScore() {
+function drawScore() {
   // 文字の色を黒にする
   fill(0, 0, 0);
   // 文字の大きさを 15 にする
@@ -1561,21 +1539,21 @@ void drawScore() {
 }
 
 // i 番目の円の x 座標を返す (iは円の番号を表す0から8までの整数)
-int circleX(int i) {
+var circleX(i) {
   return (int)(i / 3) * 100 + 50;
 }
 // i 番目の円の y 座標を返す (iは円の番号を表す0から8までの整数)
-int circleY(int i) {
+var circleY(i) {
   return (i % 3) * 100 + 50;
 }
 
 // ずっと実行される
-void draw() {
+function draw() {
   // キャンバスを白で塗る
   background(255, 255, 255);
 
   // i を 0 から 8 まで繰り返す
-  int i = 0;
+  var i = 0;
   while (i &lt; 9) {
     // 座標 (circleX(i), circleY(i)) に円を描く
     drawCircle(circleX(i), circleY(i));
@@ -1588,7 +1566,7 @@ void draw() {
 }
 
 // ユーザーがマウスをクリックしたら実行されるイベントハンドラ
-void mouseClicked() {
+function mouseClicked() {
   // 円の中心点とマウスをクリックした場所との距離が radius より小さかったら
   if (dist(x, y, mouseX, mouseY) &lt; radius) {
     // score の値を増やす
@@ -1610,12 +1588,12 @@ void mouseClicked() {
 boolean[] shown = new boolean[9];
 
 // ずっと実行される
-void draw() {
+function draw() {
   // キャンバスを白で塗る
   background(255, 255, 255);
 
   // i を 0 から 8 まで繰り返す
-  int i = 0;
+  var i = 0;
   while (i &lt; 9) {
     // 50% の確率で表示される
     if (random(100) &lt; 50) {
@@ -1634,8 +1612,8 @@ void draw() {
 }
 
 // マウスをクリックしたら実行されるイベントハンドラ
-void mouseClicked() {
-  int i = 0;
+function mouseClicked() {
+  var i = 0;
   while (i &lt; 9) {
     // 円の中心点とマウスをクリックした場所との距離が radius より小さかったら
     if (shown[i] &amp;&amp;
@@ -1664,17 +1642,17 @@ void mouseClicked() {
 
 <pre><code class="language-hidden">// WhackACircle22
 // 円の中心の座標
-int x;
-int y;
+var x;
+var y;
 
 // 円の半径
-int radius = 20;
+var radius = 20;
 
 // スコアを初期化
-int score = 0;
+var score = 0;
 
 // 初期化・一回だけ実行される
-void setup() {
+function setup() {
   // キャンバスの大きさを 300 × 300 にする
   size(300, 300);
   // キャンバスを白で塗ります
@@ -1686,7 +1664,7 @@ void setup() {
 }
 
 // 座標 (x, y) に円を描く
-void drawCircle(int x, int y) {
+function drawCircle(x, y) {
   // 円の中身を緑色にする
   fill(0, 255, 0);
   // 円周を赤にする
@@ -1698,7 +1676,7 @@ void drawCircle(int x, int y) {
 }
 
 // スコアを表示
-void drawScore() {
+function drawScore() {
   // 文字の色を黒にする
   fill(0, 0, 0);
   // 文字の大きさを 15 にする
@@ -1708,11 +1686,11 @@ void drawScore() {
 }
 
 // i 番目の円の x 座標を返す (iは円の番号を表す0から8までの整数)
-int circleX(int i) {
+var circleX(i) {
   return (int)(i / 3) * 100 + 50;
 }
 // i 番目の円の y 座標を返す (iは円の番号を表す0から8までの整数)
-int circleY(int i) {
+var circleY(i) {
   return (i % 3) * 100 + 50;
 }
 
@@ -1720,12 +1698,12 @@ int circleY(int i) {
 boolean[] shown = new boolean[9];
 
 // ずっと実行される
-void draw() {
+function draw() {
   // キャンバスを白で塗る
   background(255, 255, 255);
 
   // i を 0 から 8 まで繰り返す
-  int i = 0;
+  var i = 0;
   while (i &lt; 9) {
     // 50% の確率で表示される
     if (random(100) &lt; 50) {
@@ -1744,8 +1722,8 @@ void draw() {
 }
 
 // マウスをクリックしたら実行されるイベントハンドラ
-void mouseClicked() {
-  int i = 0;
+function mouseClicked() {
+  var i = 0;
   while (i &lt; 9) {
     // 円の中心点とマウスをクリックした場所との距離が radius より小さかったら
     if (shown[i] &amp;&amp;
@@ -1793,18 +1771,18 @@ image(imgLabyrinth, 1, 1, 360, 360); // 迷路の表示
 /* @pjs preload=&#34;images/Walker44.png&#34;; */
 PImage imgLabyrinth = loadImage(&#34;images/labyrinth1.png&#34;);
 PImage imgWalker = loadImage(&#34;images/Walker44.png&#34;);
-void setup() {
+function setup() {
   size(360, 360);  // キャンバスの大きさの設定
   image(imgLabyrinth, 1, 1, 360, 360); // 迷路の表示
   imageMode(CENTER);
 }
 
 // キャラクターの大きさ、ピクセル単位
-int s = 44;
+var s = 44;
 // キャラクターの座標。
-int x = 176, y = 314;
+var x = 176, y = 314;
 PImage imgSave = null;
-void draw() {
+function draw() {
   if (imgSave != null) {
     image(imgSave, x, y, s, s);
   }
@@ -1824,10 +1802,10 @@ void draw() {
 <p>キャラクターを動かすために、次のコードを足してみましょう。</p>
 
 <pre><code>// 進む方向
-int dx = 0;
-int dy = -1;
+var dx = 0;
+var dy = -1;
 
-void draw() {  // この関数は繰り返し呼ばれている.
+function draw() {  // この関数は繰り返し呼ばれている.
   image(imgWalker, x, y);
   x += dx;
   y += dy;
@@ -1841,23 +1819,23 @@ void draw() {  // この関数は繰り返し呼ばれている.
 /* @pjs preload=&#34;images/Walker44.png&#34;; */
 PImage imgLabyrinth = loadImage(&#34;images/labyrinth1.png&#34;);
 PImage imgWalker = loadImage(&#34;images/Walker44.png&#34;);
-void setup() {
+function setup() {
   size(360, 360);  // キャンバスの大きさの設定
   image(imgLabyrinth, 1, 1, 360, 360); // 迷路の表示
   imageMode(CENTER);
 }
 
 // キャラクターの大きさ、ピクセル単位
-int s = 44;
+var s = 44;
 // キャラクターの座標
-int x = 176, y = 314;
+var x = 176, y = 314;
 
 // 進む方向
-int dx = 0;
-int dy = -1;
+var dx = 0;
+var dy = -1;
 
 PImage imgSave = null;
-void draw() {  // この関数は繰り返し呼ばれている.
+function draw() {  // この関数は繰り返し呼ばれている.
   if (imgSave != null) {
     image(imgSave, x, y, s, s);
   }
@@ -1883,21 +1861,21 @@ get(...)</code>や<code>image(imgSave,...)</code>をしなければ、キャラ�
 <p>その前に、dx,
 dyには常に０か１の値しか与えないようにします。たとえば、下は（０，１）、上は（０，−１）、右は（１，０）、左は（−１，０）です。最初の設定では上方向にしましょう。</p>
 
-<pre><code>int dx = 0;
-int dy = -1;
+<pre><code>var dx = 0;
+var dy = -1;
 </code></pre>
 
 <p>こうしておくと、 <code>(x+(s/2)*dx, y+(s/2)*dy)</code>
 は常にキャラクターのちょうど前のピクセルを指すようになります。ここに３ピクセル足せば、キャラクターの少し前の位置になります。これが壁に当たったら<a href="#ref-noLoop">noLoop()</a>によってプログラムの実行を止めましょう。</p>
 
-<pre><code>boolean wallAhead() {
+<pre><code>function wallAhead() {
   // キャラクターの３ピクセル前に調べよう.
   color c = get(x+dx*(s/2+3), y+dy*(s/2+3));
 　// 黒を検出しよう。
   return brightness(c) &lt; 50;
 }
 
-void draw() {
+function draw() {
   ...
   if (wallAhead()) {
     noLoop(); // 実行を停止する
@@ -1913,24 +1891,24 @@ void draw() {
 /* @pjs preload=&#34;images/Walker44.png&#34;; */
 PImage imgLabyrinth = loadImage(&#34;images/labyrinth1.png&#34;);
 PImage imgWalker = loadImage(&#34;images/Walker44.png&#34;);
-void setup() {
+function setup() {
   size(360, 360);  // キャンバスの大きさの設定
   image(imgLabyrinth, 1, 1, 360, 360); // 迷路の表示
   imageMode(CENTER);
 }
 
 // キャラクターの大きさ、ピクセル単位
-int s = 44;
+var s = 44;
 
 // キャラクターの座標
-int x = 176, y = 314;
+var x = 176, y = 314;
 
 // 進む方向
-int dx = 0;
-int dy = -1;
+var dx = 0;
+var dy = -1;
 
 PImage imgSave = null;
-void draw() {  // この関数は繰り返し呼ばれている.
+function draw() {  // この関数は繰り返し呼ばれている.
   if (imgSave != null) {
     image(imgSave, x, y, s, s);
   }
@@ -1943,7 +1921,7 @@ void draw() {  // この関数は繰り返し呼ばれている.
   image(imgWalker, x, y);
 }
 
-boolean wallAhead() {
+var wallAhead() {
   // キャラクターの３ピクセル前に調べよう.
   color c = get(x+dx*(s/2+3), y+dy*(s/2+3));
 　// 黒を検出しよう。
@@ -1953,13 +1931,13 @@ boolean wallAhead() {
 
 <p>止まる代わりにその場で回ってみましょう。</p>
 
-<pre><code>void turnLeft() {
-  int tmp = dx;
+<pre><code>function turnLeft() {
+  var tmp = dx;
   dx = dy;
   dy = -tmp;
 }
 
-void draw() {
+function draw() {
   ...
   if (wallAhead()) {
     turnLeft();
@@ -1970,12 +1948,12 @@ void draw() {
 
 <p>ついでなので、前に動かす指示を関数としてまとめましょう。</p>
 
-<pre><code>void moveForward() {
+<pre><code>function moveForward() {
   x += dx;
   y += dy;
 }
 
-void draw() {
+function draw() {
   ...
   if (wallAhead()) {
     turnLeft();
@@ -1992,24 +1970,24 @@ void draw() {
 /* @pjs preload=&#34;images/Walker44.png&#34;; */
 PImage imgLabyrinth = loadImage(&#34;images/labyrinth1.png&#34;);
 PImage imgWalker = loadImage(&#34;images/Walker44.png&#34;);
-void setup() {
+function setup() {
   size(360, 360);  // キャンバスの大きさの設定
   image(imgLabyrinth, 1, 1, 360, 360); // 迷路の表示
   imageMode(CENTER);
 }
 
 // キャラクターの大きさ、ピクセル単位
-int s = 44;
+var s = 44;
 
 // キャラクターの座標
-int x = 176, y = 314;
+var x = 176, y = 314;
 
 // 進む方向
-int dx = 0;
-int dy = -1;
+var dx = 0;
+var dy = -1;
 
 PImage imgSave = null;
-void draw() {  // この関数は繰り返し呼ばれている.
+function draw() {  // この関数は繰り返し呼ばれている.
   if (imgSave != null) {
     image(imgSave, x, y, s, s);
   }
@@ -2021,20 +1999,20 @@ void draw() {  // この関数は繰り返し呼ばれている.
   image(imgWalker, x, y);
 }
 
-boolean wallAhead() {
+var wallAhead() {
   // キャラクターの３ピクセル前に調べよう.
   color c = get(x+dx*(s/2+3), y+dy*(s/2+3));
 　// 黒を検出しよう。
   return brightness(c) &lt; 50;
 }
 
-void moveForward() {
+function moveForward() {
   x += dx;
   y += dy;
 }
 
-void turnLeft() {
-  int tmp = dx;
+function turnLeft() {
+  var tmp = dx;
   dx = dy;
   dy = -tmp;
 }
@@ -2050,20 +2028,20 @@ void turnLeft() {
 
 <p>右手法を実装するには、右側の壁を検出し、壁がない場合は右側に曲がることが必要になります。だいたいこのような感じでしょうか。</p>
 
-<pre><code>void turnRight() {
-  int tmp = dx;
+<pre><code>function turnRight() {
+  var tmp = dx;
   dx = -dy;
   dy = tmp;
 }
 
-boolean wallRight() {
-  int rx = -dy;
-  int ry = dx;
+function wallRight() {
+  var rx = -dy;
+  var ry = dx;
   color c = get(x + rx*(s/2+4), y + ry*(s/2+4));
   return brightness(c) &lt; 50;
 }
 
-void draw() {
+function draw() {
   ...
   if (!wallRight()) {
     turnRight();
@@ -2080,22 +2058,22 @@ true を返してしまうからです。</p>
 
 <p>キャラクターのサイズに合わせて検出してみましょう。</p>
 
-<pre><code>boolean wallAhead() {
-  boolean wallFound = false;
-  int rx = -dy;
-  int ry = dx;
-  for (int i = -s/2-1; i &lt; s/2+1; i++) {
+<pre><code>function wallAhead() {
+  var wallFound = false;
+  var rx = -dy;
+  var ry = dx;
+  for (var i = -s/2-1; i &lt; s/2+1; i++) {
     color c = get(x+dx*(s/2+3)+rx*i, y+dy*(s/2+3)+ry*i);
     wallFound = wallFound || brightness(c) &lt; 50;
   }
   return wallFound;
 }
 
-boolean wallRight() {
-  int rx = -dy;
-  int ry = dx;
-  boolean wallFound = false;
-  for (int i = -s/2-1; i &lt;= s/2+1; i++) {
+function wallRight() {
+  var rx = -dy;
+  var ry = dx;
+  var wallFound = false;
+  for (var i = -s/2-1; i &lt;= s/2+1; i++) {
     color c = get(x + rx*(s/2+3)+dx*i, y + ry*(s/2+3)+dy*i);
     wallFound = wallFound || brightness(c) &lt; 50;
   }
@@ -2105,7 +2083,7 @@ boolean wallRight() {
 
 <p>それでも他にも問題が残ってます。右に空き通路を検出すると、キャラクターはまた無限ループに入ってしまいます。今度の原因は、右に曲がったすぐ後に右側に壁がないとキャラクターがすぐにまた右に曲がってしまうことです。これを直すには、曲がってから数ピクセルはまっすぐに進む必要があります。</p>
 
-<pre><code>void draw() {
+<pre><code>function draw() {
   if (!wallRight()) {
     turnRight();
     moveForward();
@@ -2124,24 +2102,24 @@ boolean wallRight() {
 /* @pjs preload=&#34;images/Walker44.png&#34;; */
 PImage imgLabyrinth = loadImage(&#34;images/labyrinth1.png&#34;);
 PImage imgWalker = loadImage(&#34;images/Walker44.png&#34;);
-void setup() {
+function setup() {
   size(360, 360);  // キャンバスの大きさの設定
   image(imgLabyrinth, 1, 1, 360, 360); // 迷路の表示
   imageMode(CENTER);
 }
 
 // キャラクターの大きさ、ピクセル単位
-int s = 44;
+var s = 44;
 
 // キャラクターの座標
-int x = 176, y = 314;
+var x = 176, y = 314;
 
 // 進む方向
-int dx = 0;
-int dy = -1;
+var dx = 0;
+var dy = -1;
 
 PImage imgSave = null;
-void draw() {  // この関数は繰り返し呼ばれている.
+function draw() {  // この関数は繰り返し呼ばれている.
   if (imgSave != null) {
     image(imgSave, x, y, s, s);
   }
@@ -2157,41 +2135,41 @@ void draw() {  // この関数は繰り返し呼ばれている.
   image(imgWalker, x, y);
 }
 
-boolean wallAhead() {
-  boolean wallFound = false;
-  int rx = -dy;
-  int ry = dx;
-  for (int i = -s/2-1; i &lt; s/2+1; i++) {
+var wallAhead() {
+  var wallFound = false;
+  var rx = -dy;
+  var ry = dx;
+  for (var i = -s/2-1; i &lt; s/2+1; i++) {
     color c = get(x+dx*(s/2+3)+rx*i, y+dy*(s/2+3)+ry*i);
     wallFound = wallFound || brightness(c) &lt; 50;
   }
   return wallFound;
 }
 
-boolean wallRight() {
-  int rx = -dy;
-  int ry = dx;
-  boolean wallFound = false;
-  for (int i = -s/2-1; i &lt;= s/2+1; i++) {
+var wallRight() {
+  var rx = -dy;
+  var ry = dx;
+  var wallFound = false;
+  for (var i = -s/2-1; i &lt;= s/2+1; i++) {
     color c = get(x + rx*(s/2+3)+dx*i, y + ry*(s/2+3)+dy*i);
     wallFound = wallFound || brightness(c) &lt; 50;
   }
   return wallFound;
 }
 
-void moveForward() {
+function moveForward() {
   x += dx;
   y += dy;
 }
 
-void turnLeft() {
-  int tmp = dx;
+function turnLeft() {
+  var tmp = dx;
   dx = dy;
   dy = -tmp;
 }
 
-void turnRight() {
-  int tmp = dx;
+function turnRight() {
+  var tmp = dx;
   dx = -dy;
   dy = tmp;
 }
@@ -2212,12 +2190,12 @@ void turnRight() {
 
 <p>最後にゴールの判定をする機能を加えてみましょう。ゴールの判定は壁の検出に似ていますが、黒の代わりに緑か調べなければなりません。</p>
 
-<pre><code>boolean reachedGoal() {
+<pre><code>function reachedGoal() {
   color c = get(x+dx*(s/2+3), y+dy*(s/2+3));
   return red(c) &lt; 50 &amp;&amp; green(c) &gt; 50;
 }
 
-void draw() {
+function draw() {
   ...
   if (reachedGoal()) {
     fill(0,0,0);  // black.
@@ -2252,24 +2230,24 @@ void draw() {
 /* @pjs preload=&#34;images/Walker44.png&#34;; */
 PImage imgLabyrinth = loadImage(&#34;images/labyrinth1.png&#34;);
 PImage imgWalker = loadImage(&#34;images/Walker44.png&#34;);
-void setup() {
+function setup() {
   size(360, 360);  // キャンバスの大きさの設定
   image(imgLabyrinth, 1, 1, 360, 360); // 迷路の表示
   imageMode(CENTER);
 }
 
 // キャラクターの大きさ、ピクセル単位
-int s = 44;
+var s = 44;
 
 // キャラクターの座標
-int x = 176, y = 314;
+var x = 176, y = 314;
 
 // 進む方向
-int dx = 0;
-int dy = -1;
+var dx = 0;
+var dy = -1;
 
 PImage imgSave = null;
-void draw() {  // この関数は繰り返し呼ばれている.
+function draw() {  // この関数は繰り返し呼ばれている.
   if (imgSave != null) {
     image(imgSave, x, y, s, s);
   }
@@ -2280,8 +2258,8 @@ void draw() {  // この関数は繰り返し呼ばれている.
   }
   if (!wallRight() &amp;&amp; !wallAhead()) {
     turnRight();
-    boolean hitWall = false;
-    for (int i = 0; i &lt; 2; i++) {
+    var hitWall = false;
+    for (var i = 0; i &lt; 2; i++) {
       if (!wallAhead() &amp;&amp; !wallRight()) {
         moveForward(1);
       } else {
@@ -2301,46 +2279,46 @@ void draw() {  // この関数は繰り返し呼ばれている.
   image(imgWalker, x, y);
 }
 
-boolean reachedGoal() {
+var reachedGoal() {
   color c = get(x+dx*(s/2+3), y+dy*(s/2+3));
   return red(c) &lt; 50 &amp;&amp; green(c) &gt; 50;
 }
 
-boolean wallAhead() {
-  boolean wallFound = false;
-  int rx = -dy;
-  int ry = dx;
-  for (int i = -s/2-1; i &lt; s/2+1; i++) {
+var wallAhead() {
+  var wallFound = false;
+  var rx = -dy;
+  var ry = dx;
+  for (var i = -s/2-1; i &lt; s/2+1; i++) {
     color c = get(x+dx*(s/2+3)+rx*i, y+dy*(s/2+3)+ry*i);
     wallFound = wallFound || brightness(c) &lt; 50;
   }
   return wallFound;
 }
 
-boolean wallRight() {
-  int rx = -dy;
-  int ry = dx;
-  boolean wallFound = false;
-  for (int i = -s/2-1; i &lt;= s/2+1; i++) {
+var wallRight() {
+  var rx = -dy;
+  var ry = dx;
+  var wallFound = false;
+  for (var i = -s/2-1; i &lt;= s/2+1; i++) {
     color c = get(x + rx*(s/2+3)+dx*i, y + ry*(s/2+3)+dy*i);
     wallFound = wallFound || brightness(c) &lt; 50;
   }
   return wallFound;
 }
 
-void moveForward(int c) {
+function moveForward(c) {
   x += c*dx;
   y += c*dy;
 }
 
-void turnLeft() {
-  int tmp = dx;
+function turnLeft() {
+  var tmp = dx;
   dx = dy;
   dy = -tmp;
 }
 
-void turnRight() {
-  int tmp = dx;
+function turnRight() {
+  var tmp = dx;
   dx = -dy;
   dy = tmp;
 }
@@ -2475,10 +2453,10 @@ size(400, 200);
 fill(0);
 textSize(25);
 
-int itsuBangou = int(random(itsu.length));
-int daregaBangou = int(random(darega.length));
-int dokodeBangou = int(random(dokode.length));
-int doushitaBangou = int(random(doushita.length));
+var itsuBangou = int(random(itsu.length));
+var daregaBangou = int(random(darega.length));
+var dokodeBangou = int(random(dokode.length));
+var doushitaBangou = int(random(doushita.length));
 
 String phrase = itsu[itsuBangou] + darega[daregaBangou] + dokode[dokodeBangou] + doushita[doushitaBangou];
 text(phrase, 10, 100);
@@ -2562,14 +2540,14 @@ ellipse(100, 160, 60, 15); // 口
 
 <p>同じ命令を何回も繰り返すためにループを使います。</p>
 
-<pre><code class="language-prerender">for (int i = 1; i &lt;= 5; i++) {　// 1から5まで数えます。
+<pre><code class="language-prerender">for (var i = 1; i &lt;= 5; i++) {　// 1から5まで数えます。
   text(str(i), 10, 10+i*10);
 }
 </code></pre>
 
 <p>条件を調べることは「if」文でできます。</p>
 
-<pre><code class="language-prerender">for (int i = 1; i &lt;= 5; i++) {　// 1から5まで数えます。
+<pre><code class="language-prerender">for (var i = 1; i &lt;= 5; i++) {　// 1から5まで数えます。
   if (i % 2 == 1) {  // 奇数かどうか調べます
     text(str(i), 10, 10+i*10);
   }
@@ -2582,7 +2560,7 @@ ellipse(100, 160, 60, 15); // 口
 <a href="#ref-mouseClicked">mouseClicked()</a>という関数が呼ばれます。</p>
 
 <pre><code class="language-example">// マウスがクリックした時に実行されます。
-void mouseClicked() {　
+function mouseClicked() {　
   // 長方形の中か外か判断する。
   if (60 &lt;= mouseX &amp;&amp; mouseX &lt;= 140 &amp;&amp;
       60 &lt;= mouseY &amp;&amp; mouseY &lt;= 140) {
@@ -2593,7 +2571,7 @@ void mouseClicked() {　
 }
 
 // 設定。実行の最初に実行されます。
-void setup() {
+function setup() {
   size(200, 200);   // キャンバスの大きさを設定する。
   background(200);　// 灰色に塗る。
   stroke(0);　　　　 // 筆色を黒にする。
@@ -2629,10 +2607,10 @@ String shapes[] = new String[3];
 shapes[0] = &#34;circle&#34;;
 shapes[1] = &#34;square&#34;;
 shapes[2] = &#34;triangle&#34;;
-int next = -1;
+var next = -1;
 
-void mouseClicked() {
-  int x = int(mouseX/100);  // どっちの形状に近いか計算します。
+function mouseClicked() {
+  var x = int(mouseX/100);  // どっちの形状に近いか計算します。
   if (x != next) {  // 間違った場合
     speak(&#34;ぶぶ&#34;);
     speak(&#34;もう一回いいます&#34;);
@@ -2644,7 +2622,7 @@ void mouseClicked() {
 }
 
 // 設定します。この関数は実行の頭で一回だけ実行されます。
-void setup() {
+function setup() {
   size(300, 210);  // 大きさの設定
   background(200); // 灰色で塗ります。
   stroke(0);  // 筆の色を黒にします。
@@ -2653,7 +2631,7 @@ void setup() {
   triangle(240, 100, 210, 150, 270, 150); // 三角を描きます。
 }
 
-void draw() {
+function draw() {
   if (next == -1) {
     speak(&#34;つぎの問題&#34;);
     next = int(random(3));　　// 次の問題を定めます。
@@ -2689,14 +2667,14 @@ while(noLoop()は呼ばれていない) {
 <code>draw()</code>関数の中で画面を更新することでアニメーションを実現することができます。
 <code>draw()</code>関数を1秒間に何回呼ぶかは<a href="#ref-frameRate">frameRate()</a>で設定できます。</p>
 
-<pre><code class="language-prerender">int i = 0;
-void draw() {
+<pre><code class="language-prerender">var i = 0;
+function draw() {
   background(200);
   text(str(int(millis()/1000)), 10, 30);
   i++;
 }
 
-void setup() {
+function setup() {
   frameRate(1);
   fill(0);  // 描画色を黒に設定。
   textSize(30);
@@ -2753,8 +2731,8 @@ void setup() {
 <p><code>setup()</code>と<code>draw()</code>はプログラムの中で定義する必要があります。</p>
 
 <ul>
-<li><a href="#ref-setup">void setup() {…}</a> 設定するための関数</li>
-<li><a href="#ref-draw">void draw() {…}</a> アニメーションのフレームを描くための関数</li>
+<li><a href="#ref-setup">function setup() {…}</a> 設定するための関数</li>
+<li><a href="#ref-draw">function draw() {…}</a> アニメーションのフレームを描くための関数</li>
 <li><a href="#ref-exit">exit()</a> 実行を終了する</li>
 </ul>
 
@@ -2975,11 +2953,11 @@ background(255, 0, 0);
 /* @pjs preload=&#34;images/cat2-185x200.png&#34;; */
 PImage img = loadImage(&#34;images/cat2-185x200.png&#34;);
 
-void setup() {
+function setup() {
   imageMode(CENTER);
 }
 
-void draw() {
+function draw() {
   var angle = (mouseX+mouseY)/45*PI;
   var x = 50, y = 50;
   background(220);
@@ -2999,13 +2977,13 @@ void draw() {
 /* @pjs preload=&#34;images/cat2-185x200.png&#34;; */
 PImage img = loadImage(&#34;images/cat2-185x200.png&#34;);
 
-void setup() {
+function setup() {
   imageMode(CENTER);
 }
 
 PImage imgSave = null;
 
-void draw() {
+function draw() {
   if (imgSave != null) {
     image(imgSave, pmouseX, pmouseY, 100, 100);
   }
@@ -3019,7 +2997,7 @@ void draw() {
 <p>このスケッチでマウスで描くことができます。</p>
 
 <pre><code class="language-example">// Drawing
-void setup() {
+function setup() {
   size(300, 300);
   stroke(200, 0, 0);
   strokeCap(ROUND);
@@ -3028,7 +3006,7 @@ void setup() {
 
 var penDown = false;
 
-void mousePressed() {
+function mousePressed() {
   if (mouseButton == RIGHT) {
     background(200);
     return;
@@ -3036,14 +3014,14 @@ void mousePressed() {
   penDown = true;
 }
 
-void mouseReleased() {
+function mouseReleased() {
   penDown = false;
 }
 
 var prevX = 0;
 var prevY = 0;
 
-void draw() {
+function draw() {
   if (penDown) {
     if (prevX != 0) {
       line(prevX, prevY, mouseX, mouseY);
@@ -3067,13 +3045,13 @@ var y2 = 250;
 // Larger -&gt; faster.
 var easing = 0.1;
 
-void setup() {
+function setup() {
   size(500, 500);
   frameRate(60);
   stroke(0);
 }
 
-void draw() {
+function draw() {
   // Paint the background.
   background(40, 40, 100);
 
@@ -3131,10 +3109,10 @@ var x;
 var y;
 var vy;
 
-boolean burning = false;
-boolean gameOver = false;
+var burning = false;
+var gameOver = false;
 
-void initVars() {
+function initVars() {
   x = 100;
   y = 10;
   vy = 0;
@@ -3142,14 +3120,14 @@ void initVars() {
   burning = false;
 }
 
-void setup() {
+function setup() {
   size(200, 200);
   frameRate(20);
   imageMode(CENTER);
   initVars();
 }
 
-void draw() {
+function draw() {
   y = y + vy;
   vy = vy + 0.2;
 
@@ -3175,13 +3153,13 @@ void draw() {
   }
 }
 
-void burn() {
+function burn() {
   burning = true;
   vy -= 2;
   roar.play();
 }
 
-void keyPressed() {
+function keyPressed() {
   if (gameOver) {
     initVars();
     loop();
@@ -3190,7 +3168,7 @@ void keyPressed() {
   burn();
 }
 
-void mousePressed() {
+function mousePressed() {
   if (gameOver) {
     initVars();
     loop();
@@ -3203,7 +3181,7 @@ void mousePressed() {
 </div><div id="ref-PingPong" class="section"><h1>PingPong</h1>
 
 <pre><code class="language-example">// PingPong
-void setup() {
+function setup() {
   size(360, 360, P2D);
   background(250);
   frameRate(30);
@@ -3215,7 +3193,7 @@ var paddleHeight = 90;
 
 var sleepUntil = 0;
 
-void drawBall(x, y) {
+function drawBall(x, y) {
   fill(200);
   stroke(0);
   var deform = 0;
@@ -3231,7 +3209,7 @@ void drawBall(x, y) {
   ellipse(x, y, ballDiameter-deform, ballDiameter+deform);
 }
 
-void drawPaddle(x, y) {
+function drawPaddle(x, y) {
   fill(100);
   stroke(0);
   rect(x - paddleWidth/2, y - paddleHeight/2, paddleWidth, paddleHeight);
@@ -3244,7 +3222,7 @@ var vx = 5, vy = 5;
 var lastPlayer1inputMs = 0;
 var lastPlayer2inputMs = 0;
 
-boolean updateBall() {
+var updateBall() {
   if (y &lt; 10 &amp;&amp; vy &lt; 0) {
     vy = -vy - 1 + random(2);
   }
@@ -3283,7 +3261,7 @@ boolean updateBall() {
   return true;
 }
 
-void draw() {
+function draw() {
   if (millis() &lt; sleepUntil) {
     return;
   }
@@ -3306,12 +3284,12 @@ void draw() {
 var y1 = 180;
 var y2 = 180;
 
-void mouseMoved() {
+function mouseMoved() {
   y1 = mouseY;
   lastPlayer1inputMs = millis();
 }
 
-void keyPressed() {
+function keyPressed() {
   var ms = millis() - lastPlayer2inputMs;
   if (keyCode == UP) {
     if (ms &lt; 100) {
@@ -3341,7 +3319,7 @@ var location = 0;
 var sizes = [30, 30, 20, 30, 20, 10, 30];
 var N = sizes.length;
 
-void setup() {
+function setup() {
   frameRate(10);
   stroke(0);
   fill(255);
@@ -3360,10 +3338,10 @@ var humanWidth = 20;
 var humanHeadR = 10;
 var humanY = islandH;
 
-boolean gameOver = false;
+var gameOver = false;
 String message = &#34;GAME OVER&#34;;
 
-void initialize() {
+function initialize() {
   location = 0;
   gameOver = false;
   humanY = islandH;
@@ -3371,7 +3349,7 @@ void initialize() {
 }
 
 
-void drawHuman(x, y) {
+function drawHuman(x, y) {
   line(x, y-humanHeight/3, x, y-humanHeight);
   line(x-humanWidth/2, y, x, y-humanHeight/3);
   line(x+humanWidth/2, y, x, y-humanHeight/3);
@@ -3379,11 +3357,11 @@ void drawHuman(x, y) {
   ellipse(x, y-humanHeight-humanHeadR, humanHeadR*2, humanHeadR*2);
 }
 
-void drawIsland(x, s) {
+function drawIsland(x, s) {
   ellipse(x, islandH, s, islandW);
 }
 
-void redraw() {
+function redraw() {
   background(200);
   drawHuman(margin + location*step, humanY);
   for (var i = 0; i &lt; N; i++) {
@@ -3402,7 +3380,7 @@ void redraw() {
   }
 }
 
-void shrinkIslands() {
+function shrinkIslands() {
   for (var i = 1; i &lt; N-1; i++) {
     if (sizes[i] &gt; -random(negSizeThreshold)) {
       sizes[i] -= 1;
@@ -3412,7 +3390,7 @@ void shrinkIslands() {
   }
 }
 
-void pullHuman() {
+function pullHuman() {
   if (humanY &lt; islandH) {
     humanY += humanHeight/10;
   }
@@ -3421,12 +3399,12 @@ void pullHuman() {
   }
 }
 
-void advanceTime() {
+function advanceTime() {
   shrinkIslands();
   pullHuman();
 }
 
-void checkGround() {
+function checkGround() {
   var s = sizes[location];
   if (humanY == islandH &amp;&amp; s &lt; humanWidth-2) {
     humanY = height;
@@ -3441,14 +3419,14 @@ void checkGround() {
   }
 }
 
-void draw() {
+function draw() {
   if (gameOver) return;
   advanceTime();
   checkGround();
   redraw();
 }
 
-void keyPressed() {
+function keyPressed() {
   if (gameOver) {
     if (keyCode == &#39; &#39;) {
       initialize();
@@ -3469,7 +3447,7 @@ void keyPressed() {
   redraw();
 }
 
-void mouseClicked() {
+function mouseClicked() {
   if (gameOver) {
     initialize();
     loop();
@@ -3487,22 +3465,27 @@ var skyHeight = height - groundHeight - 10;
 var walls = [];
 var ball;
 
-void setup() {
-  ball = new Ball(40, 20, 20);
-  walls = [];
+var Wall = function(init_x, init_y) {
+  this.x = init_x;
+  this.y = init_y;
+};
+
+function drawGround() {
+  for (var start = -(4 * frameCount % 11); start &lt; width; start += 11) {
+    fill(100, 100, 100);
+    rect(start, skyHeight, 11, groundHeight);
+  }
 }
 
-void draw() {
+function draw() {
   background(255, 255, 255);
-
-  if (frameCount % 50 == 0 &amp;&amp; random(100) &lt; 50) {
-   walls.add(new Wall(width, int(random(skyHeight / 2))));
+  if (frameCount % 50 === 0) {
+    walls.push(new Wall(width, random(skyHeight / 2)));
   }
 
   for (var i = 0; i &lt; walls.length; ++i) {
    walls[i].update();
-    if (ball.hit(walls.get(i))) {
-      speak(&#34;ゲームオーバー&#34;);
+    if (ball.hit(walls[i])) {
       noLoop();
     }
     if (walls[i].x &lt; 0) {
@@ -3518,25 +3501,19 @@ void draw() {
   ball.draw();
 }
 
-void mouseClicked() {
+function mouseClicked() {
   if (ball.y &lt;= ball.r) {
    ball.v = 20;
   }
 }
 
-void drawGround() {
-  for (var start = -(4 * frameCount % 11); start &lt; width; start += 11) {
-    fill(100, 100, 100);
-    rect(start, skyHeight, 11, groundHeight);
-  }
-}
 
 var Ball = function(init_x, init_y, init_r) {
   this.x = init_x;
   this.y = init_y;
   this.r = init_r;
   this.v = 0;
-}
+};
 
 Ball.prototype.update = function() {
   if (this.v &lt; 0 &amp;&amp; this.y - this.r &lt;= 0) {
@@ -3546,22 +3523,20 @@ Ball.prototype.update = function() {
     this.y += this.v;
     this.v--;
   }
-}
+};
 
 Ball.prototype.hit = function(w) {
-  if (w.x &gt; this.x + this.r || w.x &lt; this.x - this.r) return false;
+  if (w.x &gt; this.x + this.r || w.x &lt; this.x - this.r) {
+      return false;
+  }
   return this.y - this.r &lt; w.y;
-}
+};
 
-void draw() {
+Ball.prototype.draw = function() {
   fill(0, 0, 0);
   ellipse(this.x, skyHeight - 1 - this.y, this.r*2, this.r*2);
-}
-
-var Wall = function(init_x, init_y) {
-  this.x = init_x;
-  this.y = init_y;
 };
+
 
 Wall.prototype.update = function() {
   this.x -= 4;
@@ -3571,6 +3546,11 @@ Wall.prototype.draw = function() {
   fill(0, 255, 0);
   rect(this.x, skyHeight - 1 - this.y, 5, this.y);
 };
+
+
+var ball = new Ball(40, 20, 20);
+var walls = [];
+
 </code></pre>
 
 </div><div id="ref-JumpingBall2" class="section"><h1>JumpingBall2</h1>
@@ -3602,28 +3582,28 @@ var fireAngle = 0;
 var goalX = 450;
 var goalY = 465;
 
-boolean gameOver = false;
+var gameOver = false;
 String gameMessage = &#34;&#34;;
 
-void initializeVars() {
+function initializeVars() {
   x = 100;
   y = 100;
   vx = 0;
   vy = 0;
 }
 
-void setup() {
+function setup() {
   size(500, 500);
   initializeVars();
 }
 
-void draw() {
+function draw() {
   updatePosition();
   drawFrame();
 }
 
 
-void updatePosition() {
+function updatePosition() {
   // 座標や速度の計算。
   x = x + vx;
   y = y + vy;
@@ -3672,7 +3652,7 @@ void updatePosition() {
 }
 
 
-void drawFrame() {
+function drawFrame() {
   if (gameOver) {
     background(220);
     fill(0);
@@ -3693,7 +3673,7 @@ void drawFrame() {
   translate(-fireX, -fireY);
 }
 
-void keyPressed() {
+function keyPressed() {
   if (gameOver) {
     gameOver = false;
     initializeVars();
@@ -3732,36 +3712,36 @@ void keyPressed() {
 
 <pre><code class="language-example">// TouchTheNumber
 
-int N = 3;
-int numbers[][];
+var N = 3;
+var numbers[][];
 
 // Draw the rectangles.
-void rectangles() {
+function rectangles() {
   fill(200);
-  for (int i = 0; i &lt; N; i++) {
-    for (int j = 0; j &lt; N; j++) {
+  for (var i = 0; i &lt; N; i++) {
+    for (var j = 0; j &lt; N; j++) {
       rect(50+120*i, 50+120*j, 100, 100);
     }
   }
 }
 
-void printNumbers() {
+function printNumbers() {
   fill(0);
   textSize(50);
-  for (int i = 0; i &lt; N; i++) {
-    for (int j = 0; j &lt; N; j++) {
+  for (var i = 0; i &lt; N; i++) {
+    for (var j = 0; j &lt; N; j++) {
       text(str(numbers[i][j]), 85+120*i, 118+120*j);
     }
   }
 }
 
-void shuffle() {
-  for (int i = 0; i &lt; N; i++) {
-    for (int j = 0; j &lt; N; j++) {
-      int x = int(random(N));
-      int y = int(random(N));
+function shuffle() {
+  for (var i = 0; i &lt; N; i++) {
+    for (var j = 0; j &lt; N; j++) {
+      var x = int(random(N));
+      var y = int(random(N));
       if (x != i || y != j) {
-        int tmp = numbers[i][j];
+        var tmp = numbers[i][j];
         numbers[i][j] = numbers[x][y];
         numbers[x][y] = tmp;
       }
@@ -3769,14 +3749,14 @@ void shuffle() {
   }
 }
 
-void setup() {
+function setup() {
   size(440, 440);
   background(240);
   textSize(50);
   numbers = new int[N][];
-  for (int i = 0; i &lt; N; i++) {
+  for (var i = 0; i &lt; N; i++) {
     numbers[i] = new int[N];
-    for (int j = 0; j &lt; N; j++) {
+    for (var j = 0; j &lt; N; j++) {
       numbers[i][j] = i*3 + j + 1;
     }
   }
@@ -3785,15 +3765,15 @@ void setup() {
   printNumbers();
 }
 
-int current = 1;
-int started = false;
-int started_ms = 0;
+var current = 1;
+var started = false;
+var started_ms = 0;
 
-void draw() {
+function draw() {
   noLoop();
 }
 
-void mouseOver() {
+function mouseOver() {
   if (!started) {
     started = true;
     background(240);
@@ -3802,9 +3782,9 @@ void mouseOver() {
   }
 }
 
-int lastClickMs;
+var lastClickMs;
 
-void mouseClicked() {
+function mouseClicked() {
   // Ignore click repeats (touch screen generates too many click events).
   if (millis() - lastClickMs &lt; 50) return;
   lastClickMs = millis();
@@ -3823,8 +3803,8 @@ void mouseClicked() {
     started = false;
     return;
   }
-  int x = int((mouseX-60)/120);
-  int y = int((mouseY-60)/120);
+  var x = int((mouseX-60)/120);
+  var y = int((mouseY-60)/120);
   if (x &lt; 0) x = 0;
   if (x &gt;= N) x = N-1;
   if (y &lt; 0) y = 0;
@@ -3840,7 +3820,7 @@ void mouseClicked() {
     current++;
     if (current == 10) {
       background(240);
-      int t = millis() - started_ms;
+      var t = millis() - started_ms;
       fill(0); textSize(50);
       text(str(int(t/1000)) + &#34;.&#34; + str((int(t/100))%10) + str((int(t/10))%10) + &#34;s&#34;, 100, 100);
     }
@@ -3910,10 +3890,10 @@ size(400, 200);
 fill(0);
 textSize(25);
 
-int itsuBangou = int(random(itsu.length));
-int daregaBangou = int(random(darega.length));
-int dokodeBangou = int(random(dokode.length));
-int doushitaBangou = int(random(doushita.length));
+var itsuBangou = int(random(itsu.length));
+var daregaBangou = int(random(darega.length));
+var dokodeBangou = int(random(dokode.length));
+var doushitaBangou = int(random(doushita.length));
 
 String phrase = itsu[itsuBangou] + darega[daregaBangou] + dokode[dokodeBangou] + doushita[doushitaBangou];
 text(phrase, 10, 100);
@@ -4019,7 +3999,7 @@ text(str(x), 10, 30);
 
 <p><code>line()</code>はキャンバスに直線を描きます。</p>
 
-<pre><code class="language-prerender">int x1 = 10, y1 = 10, y2 = 100, x2 = 50;
+<pre><code class="language-prerender">var x1 = 10, y1 = 10, y2 = 100, x2 = 50;
 // (x1, y1)から(x2, y2)までの直線を描きます。
 line(x1, y1, x2, y2);
 </code></pre>
@@ -4033,7 +4013,7 @@ line(x1, y1, x2, y2);
 <p>例えば、このプログラムは実行を始めてから2秒後に赤い円を描きます。</p>
 
 <pre><code class="language-prerender">// millis
-void setup() {
+function setup() {
   size(150, 100);
   background(255);  // キャンバスを白で塗ります
   fill(0);
@@ -4041,7 +4021,7 @@ void setup() {
   text(&#34;2秒待って&#34;, 10, 50);
 }
 
-void draw() {
+function draw() {
   if (millis() &gt; 2000) {  // 2000ミリ秒=2秒
     background(255);
     fill(255, 0, 0); // 赤
@@ -4058,11 +4038,11 @@ void draw() {
 カーソルの位置は<code>mouseX</code>と<code>mouseY</code>変数を使って調べることができます。
 クリックされたボタンは<a href="#ref-mouseButton">mouseButton</a>変数を使って調べることができます。クリックされたボタンによって<code>mouseButton</code>の値は<a href="#ref-LEFT">LEFT</a>か<a href="#ref-RIGHT">RIGHT</a>かになります。</p>
 
-<pre><code class="language-example">void setup() {
+<pre><code class="language-example">function setup() {
   background(255);
 }
 
-void mouseClicked() {
+function mouseClicked() {
   fill(0);
   ellipse(mouseX, mouseY, 20, 20);
 }
@@ -4084,17 +4064,17 @@ void mouseClicked() {
 
 <p>ユーザがマウスをキャンバスの外から中に動かすと<code>mouseOver()</code>関数が呼ばれます。</p>
 
-<pre><code class="language-example">void setup() {
+<pre><code class="language-example">function setup() {
   background(0);
   text(&#34;待っています&#34;, 20, 20);
 }
 
-void mouseOver() {
+function mouseOver() {
   background(80);
   text(&#34;スタート&#34;, 20, 20);
 }
 
-void mouseOut() {
+function mouseOut() {
   background(0);
   text(&#34;終わり&#34;, 20, 20);
 }
@@ -4104,17 +4084,17 @@ void mouseOut() {
 
 <p>ユーザがマウスをキャンバスの中から外に動かすと<code>mouseOut()</code>関数が呼ばれます。</p>
 
-<pre><code class="language-example">void setup() {
+<pre><code class="language-example">function setup() {
   background(0);
   text(&#34;待っています&#34;, 20, 20);
 }
 
-void mouseOver() {
+function mouseOver() {
   background(80);
   text(&#34;スタート&#34;, 20, 20);
 }
 
-void mouseOut() {
+function mouseOut() {
   background(0);
   text(&#34;終わり&#34;, 20, 20);
 }
@@ -4124,7 +4104,7 @@ void mouseOut() {
 
 <p>ユーザがマウスのボタンを押すと<code>mousePressed()</code>関数が呼ばれます。 この関数を定義すれば、「マウスで絵を描く」のような操作が実装できます。</p>
 
-<pre><code class="language-example">void setup() {
+<pre><code class="language-example">function setup() {
   background(20);
   fill(240);
 }
@@ -4133,7 +4113,7 @@ bool pressed = false;
 
 // キャンバスの中でマウスの左ボタンか右ボタンが押されたら、
 // それに対応して塗りつぶしとペンの色を設定する。
-void mousePressed() {
+function mousePressed() {
   pressed = true;
   if (mouseButton == LEFT) {
     fill(0); stroke(0);
@@ -4142,11 +4122,11 @@ void mousePressed() {
   }
 }
 
-void mouseReleased() {
+function mouseReleased() {
   pressed = false;
 }
 
-void draw() {
+function draw() {
   if (pressed) {
     ellipse(mouseX, mouseY, 5, 5);
   }
@@ -4157,22 +4137,22 @@ void draw() {
 
 <p>ユーザがマウスのボタンを離すと<code>mouseReleased()</code>関数が呼ばれます。 この関数を定義すれば、「マウスで絵を描く」のような操作が実装できます。</p>
 
-<pre><code class="language-example">void setup() {
+<pre><code class="language-example">function setup() {
   background(20);
   fill(240);
 }
 
 bool pressed = false;
 
-void mousePressed() {
+function mousePressed() {
   pressed = true;
 }
 
-void mouseReleased() {
+function mouseReleased() {
   pressed = true;
 }
 
-void draw() {
+function draw() {
   if (pressed) {
     ellipse(mouseX, mouseY, 10, 10);
   }
@@ -4184,7 +4164,7 @@ void draw() {
 <p><a href="#ref-Mouse">マウスイベント</a>の中で使い、押されたボタンを表す。 押されたボタンが左ボタンのときは<a href="#ref-LEFT">LEFT</a>に、右ボタンがときは<a href="#ref-RIGHT">RIGHT</a>になる。</p>
 
 <pre><code class="language-prerender">// キャンバスの中でマウスボタンが押してみましょう。
-void mousePressed() {
+function mousePressed() {
   if (mouseButton == LEFT) {
     fill(0);
     rect(5,5,40,90);
@@ -4197,7 +4177,7 @@ void mousePressed() {
   }
 }
 
-void mouseReleased() {
+function mouseReleased() {
   background(200);
 }
 </code></pre>
@@ -4209,7 +4189,7 @@ void mouseReleased() {
 <p>関連項目: <a href="#ref-mouseX">mouseX</a>, <a href="#ref-pmouseX">pmouseX</a>, <a href="#ref-pmouseY">pmouseY</a>, <a href="#ref-mousePressed">mousePressed()</a>, <a href="#ref-mouseReleased">mouseReleased()</a>,
 <a href="#ref-mouseClicked">mouseClicked()</a>.</p>
 
-<pre><code class="language-prerender">void draw() {
+<pre><code class="language-prerender">function draw() {
   ellipse(mouseX, mouseY, 5, 5);
 }
 </code></pre>
@@ -4220,7 +4200,7 @@ void mouseReleased() {
 
 <p>関連項目: <a href="#ref-mouseX">mouseX</a>, <a href="#ref-mouseY">mouseY</a>, <a href="#ref-pmouseY">pmouseY</a>.</p>
 
-<pre><code class="language-prerender">void draw() {
+<pre><code class="language-prerender">function draw() {
   line(pmouseX, pmouseY, mouseX, mouseY);
 }
 </code></pre>
@@ -4238,7 +4218,7 @@ void mouseReleased() {
 <p>関連項目: <a href="#ref-mouseX">mouseX</a>, <a href="#ref-pmouseX">pmouseX</a>, <a href="#ref-pmouseY">pmouseY</a>, <a href="#ref-mousePressed">mousePressed()</a>, <a href="#ref-mouseReleased">mouseReleased()</a>,
 <a href="#ref-mouseClicked">mouseClicked()</a>.</p>
 
-<pre><code class="language-prerender">void draw() {
+<pre><code class="language-prerender">function draw() {
   ellipse(mouseX, mouseY, 5, 5);
 }
 </code></pre>
@@ -4402,7 +4382,7 @@ text(&#34;こんにちは&#34;, 20, 50);
 
 <p><code>textAlign()</code>は文字を移り方を設定する。</p>
 
-<pre><code class="language-render">void setup() {
+<pre><code class="language-render">function setup() {
   size(300, 130);
   stroke(0);
   fill(0);
@@ -4412,7 +4392,7 @@ text(&#34;こんにちは&#34;, 20, 50);
   frameRate(1);
 }
 
-void draw() {
+function draw() {
   background(220);
   point(width/2, height/2);
   switch (frameCount % 12) {
@@ -4513,7 +4493,7 @@ text(&#34;か&#34;, 70, 30);
 <p>指定された条件が真である間、 { … } の間に書いた文を繰り返します。</p>
 
 <pre><code class="language-prerender">fill(0);
-int x = 0;
+var x = 0;
 while (x &lt; 10) {
   text(str(x), 10+x*7, 15+x*8);
   x = x+1;
@@ -4527,7 +4507,7 @@ while (x &lt; 10) {
 <p>ループといい、ある条件を満たすまでの繰り返し命令である。</p>
 
 <pre><code class="language-prerender">fill(0);
-for (int i = 0; i &lt; 10; i++) {
+for (var i = 0; i &lt; 10; i++) {
   text(str(i), 10, i*10);
 }
 </code></pre>
@@ -4586,7 +4566,7 @@ if (10 &lt; 5) {
 <p><code>switch</code>文は一つの変数の値を検出して、複数の値に対して比べて多重分岐から 一つの分岐を実行する。</p>
 
 <pre><code class="language-prerender">fill(0); textSize(30);
-int x = 2;
+var x = 2;
 switch (x) {
   case 0: text(&#34;〇&#34;, 10, 50); break;
   case 1: text(&#34;一&#34;, 10, 50); break;
@@ -4621,15 +4601,15 @@ switch (x) {
 PImage imgLabyrinth = loadImage(&#34;images/Labyrinth2a.png&#34;);
 PImage imgWalker = loadImage(&#34;images/Walker44.png&#34;);
 
-int s = 44;
+var s = 44;
 
-int x = 190;
-int y = 310;
+var x = 190;
+var y = 310;
 
-int dx = 0;
-int dy = -1;
+var dx = 0;
+var dy = -1;
 
-void setup() {  // this is run once.
+function setup() {  // this is run once.
     // canvas size (Variable aren&#39;t evaluated. Integers only, please.)
     size(360, 360);
 
@@ -4648,53 +4628,53 @@ void setup() {  // this is run once.
     image(imgWalker, x, y, s, s);
 }
 
-void turnLeft() {
-  int tmp = dx;
+function turnLeft() {
+  var tmp = dx;
   dx = dy;
   dy = -tmp;
 }
 
-boolean wallAhead() {
-    boolean wallFound = false;
-    int rx = -dy;
-    int ry = dx;
-    for (int i = -s/2-1; i &lt;= s/2+1; i++) {
+var wallAhead() {
+    var wallFound = false;
+    var rx = -dy;
+    var ry = dx;
+    for (var i = -s/2-1; i &lt;= s/2+1; i++) {
         color c = get(x+dx*(s/2+3)+rx*i, y+dy*(s/2+3)+ry*i);
         wallFound = wallFound || brightness(c) &lt; 50;
     }
     return wallFound;
 }
 
-void moveForward() {
+function moveForward() {
   rect(x-s/2, y-s/2, s, s);
   x += dx;
   y += dy;
   image(imgWalker, x, y, s, s);
 }
 
-void turnRight() {
-  int tmp = dx;
+function turnRight() {
+  var tmp = dx;
   dx = -dy;
   dy = tmp;
 }
 
-boolean wallRight() {
-  int rx = -dy;
-  int ry = dx;
-  boolean wallFound = false;
-  for (int i = -s/2-1; i &lt;= s/2+1; i++) {
+var wallRight() {
+  var rx = -dy;
+  var ry = dx;
+  var wallFound = false;
+  for (var i = -s/2-1; i &lt;= s/2+1; i++) {
       color c = get(x + rx*(s/2+3)+dx*i, y + ry*(s/2+3)+dy*i);
       wallFound = wallFound || brightness(c) &lt; 50;
   }
   return wallFound;
 }
 
-boolean reachedGoal() {
+var reachedGoal() {
   color c = get(x+dx*(s/2+3), y+dy*(s/2+3));
   return red(c) &lt; 50 &amp;&amp; green(c) &gt; 50;
 }
 
-void draw() {
+function draw() {
   if (reachedGoal()) {
       fill(0,0,0);  // black.
       text(&#34;Finish!&#34;, x+s/2, y);
@@ -4720,7 +4700,7 @@ PImage imgLabyrinth = loadImage(&#34;images/Labyrinth3a.png&#34;);
 /* @pjs preload=&#34;images/Walker44.png&#34;; */
 PImage imgWalker = loadImage(&#34;images/Walker44.png&#34;);
 
-void setup() {  // this is run once.
+function setup() {  // this is run once.
     // Set up canvas size.
     size(360, 360);
     // Display the background (labyrinth).
@@ -4728,7 +4708,7 @@ void setup() {  // this is run once.
 }
 
 PImage imgSave = null;
-void draw() {
+function draw() {
   if (imgSave != null) {
     image(imgSave, pmouseX, pmouseY, 44, 44);
   }
@@ -4752,20 +4732,20 @@ PImage imgLabyrinth = loadImage(&#34;images/Labyrinth3a.png&#34;);
 PImage imgWalker = loadImage(&#34;images/Walker44.png&#34;);
 
 // Step in pixels.
-int s = 17;
+var s = 17;
 // Size of the grid.
-int n = 360/s;
+var n = 360/s;
 // The grid. 0 means the cell is blocked. &gt;0 means the cell is open.
-int grid[][];
+var grid[][];
 
-boolean showMap = true;
+var showMap = true;
 
 // The starting point;
-int sx = 0, sy = 0;
+var sx = 0, sy = 0;
 // The goal.
-int gx = 0, gy = 0;
+var gx = 0, gy = 0;
 
-void setup() {  // this is run once.
+function setup() {  // this is run once.
     // canvas size (Variable aren&#39;t evaluated. Integers only, please.)
     size(360, 360);
 
@@ -4774,15 +4754,15 @@ void setup() {  // this is run once.
 
     // Allocate 2-dimensional array in 2 steps.
     grid = new boolean[n][];
-    for (int i = 0; i &lt; n; i++) {
+    for (var i = 0; i &lt; n; i++) {
         grid[i] = new boolean[n];
     }
 }
 
 // The loop counters that live across multiple mapStep invocations.
-int i = 0, j = 0;
+var i = 0, j = 0;
 
-void mapStep() {
+function mapStep() {
             color c = get(i*s+s/2, j*s+s/2);
             if (brightness(c) &gt; 200) {
                 grid[i][j] = 999;
@@ -4817,10 +4797,10 @@ void mapStep() {
 }
 
 
-int next = 0;
-int step = 50;
+var next = 0;
+var step = 50;
 
-void draw() {
+function draw() {
     if (showMap) {
         while (millis() &lt;= next) return;
         next = millis() + step;
@@ -4843,22 +4823,22 @@ PImage imgLabyrinth = loadImage(&#34;images/Labyrinth3a.png&#34;);
 PImage imgWalker = loadImage(&#34;images/Walker44.png&#34;);
 
 // Step in pixels.
-int s = 17;
+var s = 17;
 // Size of the grid.
-int n = 360/s;
+var n = 360/s;
 // The grid. 0 means the cell is blocked. &gt;0 means the cell is open.
-int grid[][];
+var grid[][];
 
-boolean showMap = true;
+var showMap = true;
 
 // The starting point;
-int sx = 0, sy = 0;
+var sx = 0, sy = 0;
 // The goal.
-int gx = 0, gy = 0;
+var gx = 0, gy = 0;
 
-void CreateMap() {
-    for (int i = 0; i &lt; n; i++) {
-        for (int j = 0; j &lt; n; j++) {
+function CreateMap() {
+    for (var i = 0; i &lt; n; i++) {
+        for (var j = 0; j &lt; n; j++) {
             color c = get(i*s+s/2, j*s+s/2);
             if (brightness(c) &gt; 200) {
                 grid[i][j] = 999;
@@ -4884,13 +4864,13 @@ void CreateMap() {
 
 // Fixed queue length for simplicity. The expected maximum queue size is
 // the the size of the grid, so should be well below 500.
-int queueLength = 500;
-int qx[] = new int[queueLength];
-int qy[] = new int[queueLength];
-int qhead = 0;
-int qtail = 0;
+var queueLength = 500;
+var qx[] = new int[queueLength];
+var qy[] = new int[queueLength];
+var qhead = 0;
+var qtail = 0;
 
-void queuePush(int x, int y) {
+function queuePush(x, y) {
     qx[qtail] = x;
     qy[qtail] = y;
     qtail = (qtail+1) % queueLength;
@@ -4898,17 +4878,17 @@ void queuePush(int x, int y) {
     // (misinterpreted as empty queue).
 }
 
-void queuePop() {
+function queuePop() {
     if (qtail != qhead) {
         qhead = (qhead+1) % queueLength;
     }
 }
 
-boolean queueEmpty() {
+var queueEmpty() {
     return qtail == qhead;
 }
 
-void visitCell(int x, int y, int distance) {
+function visitCell(x, y, distance) {
     // Out of bounds checks.
     if (x &lt; 0 || x &gt;= n) return;
     if (y &lt; 0 || y &gt;= n) return;
@@ -4928,7 +4908,7 @@ void visitCell(int x, int y, int distance) {
     }
 }
 
-void StartSearch() {
+function StartSearch() {
     // Using Breadth-first search in rectangular grid.
     // Put the goal position into the queue and search back towards
     // the start position.
@@ -4936,7 +4916,7 @@ void StartSearch() {
     grid[gx][gy] = 1;
 }
 
-void setup() {  // this is run once.
+function setup() {  // this is run once.
     // canvas size (Variable aren&#39;t evaluated. Integers only, please.)
     size(360, 360);
 
@@ -4945,7 +4925,7 @@ void setup() {  // this is run once.
 
     // Allocate 2-dimensional array in 2 steps.
     grid = new boolean[n][];
-    for (int i = 0; i &lt; n; i++) {
+    for (var i = 0; i &lt; n; i++) {
         grid[i] = new boolean[n];
     }
 
@@ -4953,23 +4933,23 @@ void setup() {  // this is run once.
     StartSearch();
 }
 
-int next = 0;
-int step = 250;
+var next = 0;
+var step = 250;
 bool found = false;
 
 // The position during backtracing.
-int bx, by;
+var bx, by;
 
-void searchStep() {
+function searchStep() {
     // While queue is not empty. Loop is implicit around draw().
     if (!queueEmpty()) {
-        int x = qx[qhead];
-        int y = qy[qhead];
+        var x = qx[qhead];
+        var y = qy[qhead];
         queuePop();
 
         fill(200, 200, 180);
         rect(s*x, s*y, s/2, s/2);
-        int distance = grid[x][y];
+        var distance = grid[x][y];
         fill(0,0,0);
         text(&#34;&#34; + distance, x*s, y*s);
 
@@ -4989,7 +4969,7 @@ void searchStep() {
     }
 }
 
-void draw() {
+function draw() {
     if (showMap) {
         while (millis() &lt;= next) return;
         next = millis() + step;
@@ -5013,22 +4993,22 @@ PImage imgLabyrinth = loadImage(&#34;images/Labyrinth3a.png&#34;);
 PImage imgWalker = loadImage(&#34;images/Walker44.png&#34;);
 
 // Step in pixels.
-int s = 17;
+var s = 17;
 // Size of the grid.
-int n = 360/s;
+var n = 360/s;
 // The grid. 0 means the cell is blocked. &gt;0 means the cell is open.
-int grid[][];
+var grid[][];
 
-boolean showMap = true;
+var showMap = true;
 
 // The starting point;
-int sx = 0, sy = 0;
+var sx = 0, sy = 0;
 // The goal.
-int gx = 0, gy = 0;
+var gx = 0, gy = 0;
 
-void CreateMap() {
-    for (int i = 0; i &lt; n; i++) {
-        for (int j = 0; j &lt; n; j++) {
+function CreateMap() {
+    for (var i = 0; i &lt; n; i++) {
+        for (var j = 0; j &lt; n; j++) {
             color c = get(i*s+s/2, j*s+s/2);
             if (brightness(c) &gt; 200) {
                 grid[i][j] = 999;
@@ -5046,13 +5026,13 @@ void CreateMap() {
 
 // Fixed queue length for simplicity. The expected maximum queue size is
 // the the size of the grid, so should be well below 500.
-int queueLength = 500;
-int qx[] = new int[queueLength];
-int qy[] = new int[queueLength];
-int qhead = 0;
-int qtail = 0;
+var queueLength = 500;
+var qx[] = new int[queueLength];
+var qy[] = new int[queueLength];
+var qhead = 0;
+var qtail = 0;
 
-void queuePush(int x, int y) {
+function queuePush(x, y) {
     qx[qtail] = x;
     qy[qtail] = y;
     qtail = (qtail+1) % queueLength;
@@ -5060,17 +5040,17 @@ void queuePush(int x, int y) {
     // (misinterpreted as empty queue).
 }
 
-void queuePop() {
+function queuePop() {
     if (qtail != qhead) {
         qhead = (qhead+1) % queueLength;
     }
 }
 
-boolean queueEmpty() {
+var queueEmpty() {
     return qtail == qhead;
 }
 
-void visitCell(int x, int y, int distance) {
+function visitCell(x, y, distance) {
     // Out of bounds checks.
     if (x &lt; 0 || x &gt;= n) return;
     if (y &lt; 0 || y &gt;= n) return;
@@ -5091,7 +5071,7 @@ void visitCell(int x, int y, int distance) {
     }
 }
 
-void StartSearch() {
+function StartSearch() {
     // Using Breadth-first search in rectangular grid.
     // Put the goal position into the queue and search back towards
     // the start position.
@@ -5099,7 +5079,7 @@ void StartSearch() {
     grid[gx][gy] = 1;
 }
 
-void setup() {  // this is run once.
+function setup() {  // this is run once.
     // canvas size (Variable aren&#39;t evaluated. Integers only, please.)
     size(360, 360);
 
@@ -5108,7 +5088,7 @@ void setup() {  // this is run once.
 
     // Allocate 2-dimensional array in 2 steps.
     grid = new boolean[n][];
-    for (int i = 0; i &lt; n; i++) {
+    for (var i = 0; i &lt; n; i++) {
         grid[i] = new boolean[n];
     }
 
@@ -5116,23 +5096,23 @@ void setup() {  // this is run once.
     StartSearch();
 }
 
-int next = 0;
-int step = 250;
+var next = 0;
+var step = 250;
 bool found = false;
 
 // The position during backtracing.
-int bx, by;
+var bx, by;
 
-void searchStep() {
+function searchStep() {
     // While queue is not empty. Loop is implicit around draw().
     if (!queueEmpty()) {
-        int x = qx[qhead];
-        int y = qy[qhead];
+        var x = qx[qhead];
+        var y = qy[qhead];
         queuePop();
 
         fill(200, 200, 180);
         rect(s*x, s*y, s/2, s/2);
-        int distance = grid[x][y];
+        var distance = grid[x][y];
 
         if (x == sx &amp;&amp; y == sy) {
             found = true;
@@ -5153,7 +5133,7 @@ void searchStep() {
     }
 }
 
-boolean backTrace(int nx, int ny, int distance) {
+var backTrace(nx, ny, distance) {
     if (nx &lt; 0 || nx &gt;= n) return false;
     if (ny &lt; 0 || ny &gt;= n) return false;
     if (grid[nx][ny] != distance) return false;
@@ -5167,13 +5147,13 @@ boolean backTrace(int nx, int ny, int distance) {
     return true;
 }
 
-void backTraceStep() {
+function backTraceStep() {
     fill(255, 255, 100);
     rect(bx*s+s/4, by*s+s/4, s/2, s/2);
     if (bx == gx &amp;&amp; by == gy) {
         noLoop();
     }
-    int distance = grid[bx][by];
+    var distance = grid[bx][by];
     stroke(255, 255, 0);
     if (backTrace(bx-1, by, distance-1));
     else if (backTrace(bx+1, by, distance-1));
@@ -5181,7 +5161,7 @@ void backTraceStep() {
     else if (backTrace(bx, by+1, distance-1));
 }
 
-void draw() {
+function draw() {
     if (found) {
         while (millis() &lt;= next) return;
         next = millis() + step;
@@ -5208,22 +5188,22 @@ PImage imgLabyrinth = loadImage(&#34;images/Labyrinth2a.png&#34;);
 PImage imgWalker = loadImage(&#34;images/Walker44.png&#34;);
 
 // Step in pixels.
-int s = 17;
+var s = 17;
 // Size of the grid.
-int n = 360/s;
+var n = 360/s;
 // The grid. 0 means the cell is blocked. &gt;0 means the cell is open.
-int grid[][];
+var grid[][];
 
-boolean showMap = true;
+var showMap = true;
 
 // The starting point;
-int sx = 0, sy = 0;
+var sx = 0, sy = 0;
 // The goal.
-int gx = 0, gy = 0;
+var gx = 0, gy = 0;
 
-void CreateMap() {
-    for (int i = 0; i &lt; n; i++) {
-        for (int j = 0; j &lt; n; j++) {
+function CreateMap() {
+    for (var i = 0; i &lt; n; i++) {
+        for (var j = 0; j &lt; n; j++) {
             color c = get(i*s+s/2, j*s+s/2);
             if (brightness(c) &gt; 200) {
                 grid[i][j] = 999;
@@ -5253,13 +5233,13 @@ void CreateMap() {
 
 // Fixed queue length for simplicity. The expected maximum queue size is
 // the the size of the grid, so should be well below 500.
-int queueLength = 500;
-int qx[] = new int[queueLength];
-int qy[] = new int[queueLength];
-int qhead = 0;
-int qtail = 0;
+var queueLength = 500;
+var qx[] = new int[queueLength];
+var qy[] = new int[queueLength];
+var qhead = 0;
+var qtail = 0;
 
-void queuePush(int x, int y) {
+function queuePush(var x, var y) {
     qx[qtail] = x;
     qy[qtail] = y;
     qtail = (qtail+1) % queueLength;
@@ -5267,17 +5247,17 @@ void queuePush(int x, int y) {
     // (misinterpreted as empty queue).
 }
 
-void queuePop() {
+function queuePop() {
     if (qtail != qhead) {
         qhead = (qhead+1) % queueLength;
     }
 }
 
-boolean queueEmpty() {
+var queueEmpty() {
     return qtail == qhead;
 }
 
-void visitCell(int x, int y, int distance) {
+function visitCell(var x, var y, var distance) {
     // Out of bounds checks.
     if (x &lt; 0 || x &gt;= n) return;
     if (y &lt; 0 || y &gt;= n) return;
@@ -5298,7 +5278,7 @@ void visitCell(int x, int y, int distance) {
     }
 }
 
-void StartSearch() {
+function StartSearch() {
     // Using Breadth-first search in rectangular grid.
     // Put the goal position into the queue and search back towards
     // the start position.
@@ -5306,7 +5286,7 @@ void StartSearch() {
     grid[gx][gy] = 1;
 }
 
-void setup() {  // this is run once.
+function setup() {  // this is run once.
     // canvas size (Variable aren&#39;t evaluated. Integers only, please.)
     size(360, 360);
 
@@ -5315,7 +5295,7 @@ void setup() {  // this is run once.
 
     // Allocate 2-dimensional array in 2 steps.
     grid = new boolean[n][];
-    for (int i = 0; i &lt; n; i++) {
+    for (var i = 0; i &lt; n; i++) {
         grid[i] = new boolean[n];
     }
 
@@ -5323,23 +5303,23 @@ void setup() {  // this is run once.
     StartSearch();
 }
 
-int next = 0;
-int step = 10;
+var next = 0;
+var step = 10;
 bool found = false;
 
 // The position during backtracing.
-int bx, by;
+var bx, by;
 
-void searchStep() {
+function searchStep() {
     // While queue is not empty. Loop is implicit around draw().
     if (!queueEmpty()) {
-        int x = qx[qhead];
-        int y = qy[qhead];
+        var x = qx[qhead];
+        var y = qy[qhead];
         queuePop();
 
         fill(200, 200, 180);
         rect(s*x, s*y, s/2, s/2);
-        int distance = grid[x][y];
+        var distance = grid[x][y];
 
         if (x == sx &amp;&amp; y == sy) {
             found = true;
@@ -5360,7 +5340,7 @@ void searchStep() {
     }
 }
 
-boolean backTrace(int nx, int ny, int distance) {
+var backTrace(var nx, var ny, var distance) {
     if (nx &lt; 0 || nx &gt;= n) return false;
     if (ny &lt; 0 || ny &gt;= n) return false;
     if (grid[nx][ny] != distance) return false;
@@ -5374,13 +5354,13 @@ boolean backTrace(int nx, int ny, int distance) {
     return true;
 }
 
-void backTraceStep() {
+function backTraceStep() {
     fill(255, 255, 100);
     rect(bx*s+s/4, by*s+s/4, s/2, s/2);
     if (bx == gx &amp;&amp; by == gy) {
         noLoop();
     }
-    int distance = grid[bx][by];
+    var distance = grid[bx][by];
     stroke(255, 255, 0);
     if (backTrace(bx-1, by, distance-1));
     else if (backTrace(bx+1, by, distance-1));
@@ -5388,7 +5368,7 @@ void backTraceStep() {
     else if (backTrace(bx, by+1, distance-1));
 }
 
-void draw() {
+function draw() {
     if (showMap) {
         while (millis() &lt;= next) return;
         next = millis() + step;
@@ -5406,10 +5386,10 @@ void draw() {
 
 <p><code>Array</code>は配列といい、データのリストを持っている。複数のデータを保存するとき、 番号を使って取り出せるのだ。</p>
 
-<pre><code class="language-prerender">int x[] = {1, 2, 3};  // 配列をつくる
+<pre><code class="language-prerender">var x[] = {1, 2, 3};  // 配列をつくる
 fill(0); text(x[0], 10, 20);
 text(x[2], 10, 40);
-int y[] = new int[10]; // 別の配列を作る
+var y[] = new int[10]; // 別の配列を作る
 text(y[0], 10, 80);  // 最初は０が入っています。
 </code></pre>
 
@@ -5509,7 +5489,7 @@ hm.put(12, &#34;one two&#34;);
 hm.put(123, &#34;one two three&#34;);
 for (it = hm.entrySet().iterator(); it.hasNext(); ) {
   Map.Entry en = it.next();
-  int y = en.getKey();
+  var y = en.getKey();
   text(&#34;&#34; + en.getKey() + &#34;: &#34; + en.getValue(), 1, y+10);
 }
 </code></pre>
@@ -5542,7 +5522,7 @@ for (it = hm.entrySet().iterator(); it.hasNext(); ) {
 
 <p>変数はプログラムの中に様々なデートを覚える仕組みである。</p>
 
-<pre><code class="language-prerender">int nenrei = 12;
+<pre><code class="language-prerender">var nenrei = 12;
 String namae = &#34;たろう&#34;;
 fill(0); textSize(12);
 text(namae + nenrei + &#34;才&#34;, 20, 20);
@@ -5553,7 +5533,7 @@ text(namae + nenrei + &#34;才&#34;, 20, 20);
 <p><code>Object</code>は関連するデータを束ね、複雑のデータ構造を表現できる。<a href="#ref-Variable">変数</a>に<code>Object</code>の型を付けられたら、</p>
 
 <pre><code class="language-prerender">Object[] arr = {1, &#34;abc&#34;};
-for (int i = 0; i &lt; arr.length; i++) {
+for (var i = 0; i &lt; arr.length; i++) {
   fill(0); text(str(arr[i]), 10, 20+i*20);
 }
 </code></pre>
@@ -5641,7 +5621,7 @@ rect(10, 10, 40, 40);
 <pre><code class="language-prerender">String[] namae = {&#34;たろう&#34;, &#34;花子&#34;};
 append(namae, &#34;次郎&#34;);
 fill(0); textSize(20);
-for (int i = 0; i &lt; namae.length; i++) {
+for (var i = 0; i &lt; namae.length; i++) {
   text(namae[i], 10, 30+i*20);
 }
 </code></pre>
@@ -5691,7 +5671,7 @@ point(50, 50);
 
 <p>ループ(<a href="#ref-while">while</a>, <a href="#ref-for">for</a>, <a href="#ref-do">do</a>)の実行を一旦止めて、ループの頭から実行再開する。</p>
 
-<pre><code class="language-prerender">int i = 0;
+<pre><code class="language-prerender">var i = 0;
 while (i &lt; 10) {
   fill(0); text(str(i), 10, i*10);
   i++;
@@ -5793,7 +5773,7 @@ var c = round(x);  // 9.0
 <p><code>class</code>はオブジェクト指向のクラスの定義を表す。</p>
 
 <pre><code class="language-prerender">class Doubutsu {
-  Doubutsu(String namae, int nenrei) {
+  Doubutsu(String namae, nenrei) {
     this.namae = namae;
     this.nenrei = nenrei;
   }
@@ -5838,7 +5818,7 @@ fill(0); text(str(new Inu(&#34;ワンワン&#34;)), 10, 30);
 
 <p><code>dist()</code>は２つの点に対して距離を計算する。</p>
 
-<pre><code class="language-prerender">void draw() {
+<pre><code class="language-prerender">function draw() {
   background(255); fill(0);
   text(dist(50, 50, mouseX, mouseY), 50, 50);
 }
@@ -5848,12 +5828,12 @@ fill(0); text(str(new Inu(&#34;ワンワン&#34;)), 10, 30);
 
 <p><code>cursor()</code>はマウスのカーソルの形を指定する。</p>
 
-<pre><code class="language-prerender">void setup() {
+<pre><code class="language-prerender">function setup() {
   frameRate(2);
 }
 // マウスのカーソルをキャンバス内に置きましょう。
-int i = 0;
-void draw() {
+var i = 0;
+function draw() {
   i++;
   switch(i%6) {
     case 0: cursor(HAND); break;
@@ -5931,12 +5911,12 @@ copy(50, 50, 24, 24, 0, 0, 50, 50);
 
 <p>関連項目: <a href="#ref-keyReleased">keyReleased()</a>, <a href="#ref-keyTyped">keyTyped()</a>, <a href="#ref-key">key</a>, <a href="#ref-keyCode">keyCode</a>, <a href="#ref-keyCodes">keyCodes</a>.</p>
 
-<pre><code class="language-example">void setup() {
+<pre><code class="language-example">function setup() {
   size(200, 200);
   fill(0);
   textSize(30);
 }
-void draw() {
+function draw() {
   text(&#34;key &#34; + str(key), 10, 60);
 }
 </code></pre>
@@ -5947,12 +5927,12 @@ void draw() {
 
 <p>関連項目: <a href="#ref-keyPressed">keyPressed()</a>, <a href="#ref-keyReleased">keyReleased()</a>, <a href="#ref-keyTyped">keyTyped()</a>.</p>
 
-<pre><code class="language-example">void setup() {
+<pre><code class="language-example">function setup() {
   size(400, 200);
   fill(0);
   textSize(30);
 }
-void draw() {
+function draw() {
   background(220);
   text(&#34;keyCode &#34; + keyCode, 10, 60);
 }
@@ -5966,25 +5946,25 @@ void draw() {
 
 <p>関連項目: <a href="#ref-keyReleased">keyReleased()</a>, <a href="#ref-keyTyped">keyTyped()</a>, <a href="#ref-key">key</a>, <a href="#ref-keyCode">keyCode</a>, <a href="#ref-keyCodes">keyCodes</a>.</p>
 
-<pre><code class="language-example">void setup() {
+<pre><code class="language-example">function setup() {
   size(400, 200);
   fill(0);
   textSize(20);
 }
-void draw() {
+function draw() {
   background(220);
   text(&#34;keyPressed &#34; + keyPressed, 10, 60);
 }
 </code></pre>
 
-<pre><code class="language-example">void setup() {
+<pre><code class="language-example">function setup() {
   size(400, 200);
   fill(0);
   textSize(10);
   background(220);
 }
-int y = 10;
-void keyPressed() {
+var y = 10;
+function keyPressed() {
   text(&#34;keyPressed() key &#34; + str(key) + &#34; keyCode &#34; + keyCode, 10, y);
   y += 10;
   if (y &gt; 200) {
@@ -6000,14 +5980,14 @@ void keyPressed() {
 
 <p>関連項目: <a href="#ref-keyPressed">keyPressed()</a>, <a href="#ref-keyReleased">keyReleased()</a>, <a href="#ref-key">key</a>, <a href="#ref-keyCode">keyCode</a>, <a href="#ref-keyCodes">keyCodes</a>.</p>
 
-<pre><code class="language-example">void setup() {
+<pre><code class="language-example">function setup() {
   size(400, 200);
   fill(0);
   textSize(10);
   background(220);
 }
-int y = 10;
-void keyTyped() {
+var y = 10;
+function keyTyped() {
   text(&#34;keyTyped() key &#34; + str(key) + &#34; keyCode &#34; + keyCode, 10, y);
   y += 10;
   if (y &gt; 200) {
@@ -6023,14 +6003,14 @@ void keyTyped() {
 
 <p>関連項目: <a href="#ref-keyPressed">keyPressed()</a>, <a href="#ref-keyTyped">keyTyped()</a>, <a href="#ref-key">key</a>, <a href="#ref-keyCode">keyCode</a>, <a href="#ref-keyCodes">keyCodes</a>.</p>
 
-<pre><code class="language-example">void setup() {
+<pre><code class="language-example">function setup() {
   size(400, 200);
   fill(0);
   textSize(10);
   background(220);
 }
-int y = 10;
-void keyReleased() {
+var y = 10;
+function keyReleased() {
   text(&#34;keyReleased() key &#34; + str(key) + &#34; keyCode &#34; + keyCode, 10, y);
   y += 10;
   if (y &gt; 200) {
@@ -6052,14 +6032,14 @@ void keyReleased() {
 <p><strong>注意</strong>: Processing.jsではブラウザの環境によって使えないキーコードがあります。 以下のスケッチで確認ください。</p>
 
 <pre><code class="language-example">// Keycodes
-void setup() {
+function setup() {
   size(400, 200);
   textSize(30);
   textFont(loadFont(&#34;fixed&#34;));
   fill(0);
 }
 
-void draw() {
+function draw() {
   background(220);
   if (keyPressed) {
     text(&#34;keyPressed&#34;, 10, 30);
@@ -6188,11 +6168,11 @@ image(walker, 10, 10, 80, 80);
 
 <pre><code class="language-prerender">PAudio sound = loadSound(&#34;images/explosion.ogg&#34;);
 
-void mouseClicked() {
+function mouseClicked() {
   sound.play();
 }
 
-void draw() {
+function draw() {
   if (sound.isPlaying()) {
     background(50);
   } else {
@@ -6216,9 +6196,9 @@ void draw() {
 <p><strong>画像データ</strong>: <a href="#ref-PImage">PImage</a>のフィルドとして画像データを保存します。</p>
 
 <pre><code class="language-prerender">PImage img = createImage(60, 60, RGB);
-for (int i = 0; i &lt; img.pixels.length; i++) {
-  int x = int(i/60);
-  int y = int(i % 60);
+for (var i = 0; i &lt; img.pixels.length; i++) {
+  var x = int(i/60);
+  var y = int(i % 60);
   img.pixels[i] = color(dist(x, y, 0, 0)/sqrt(2*60*60)*255);
 }
 image(img, 20, 20);
@@ -6295,8 +6275,8 @@ image(img, 50, 50, 85, 100);
 <p><code>createImage()</code>は新しい空画像を作ります。</p>
 
 <pre><code class="language-prerender">PImage img = createImage(60, 60, RGB);
-for (int i = 0; i &lt; img.pixels.length; i++) {
-  int x = int(i/60);
+for (var i = 0; i &lt; img.pixels.length; i++) {
+  var x = int(i/60);
   var y = int(i % 60);
   img.pixels[i] = color(dist(x, y, 0, 0)/sqrt(2*60*60)*255);
 }

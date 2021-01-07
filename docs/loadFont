@@ -1,0 +1,16 @@
+# loadFont
+
+`loadFont`は書体データ(フォント)を読み込みする。
+
+```prerender
+fill(0);
+textFont(loadFont("Courier New"), 12);
+text("Courier New", 10, 20);
+textFont(loadFont("Verdana"), 15);
+text("Verdana", 10, 40);
+textFont(loadFont("Arial"), 15);
+text("Arial", 10, 60);
+```
+
+関連項目: [textFont], [textSize], [text].
+

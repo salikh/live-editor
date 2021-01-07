@@ -1,0 +1,23 @@
+# draw
+
+スケッチを実行すると、`setup()`関数が1回呼ばれた後、`draw()`関数が繰り返し呼ばれます。
+`draw()`関数の中で画面を更新することでアニメーションを実現することができます。
+`draw()`関数を1秒間に何回呼ぶかは[frameRate()]で設定できます。
+
+```prerender
+var i = 0;
+function draw() {
+  background(200);
+  text(str(int(millis()/1000)), 10, 30);
+  i++;
+}
+
+function setup() {
+  frameRate(1);
+  fill(0);  // 描画色を黒に設定。
+  textSize(30);
+}
+```
+
+関連項目: [frameRate()]。
+

@@ -1,0 +1,53 @@
+# はじめに {#ref-WhackACircle0}
+
+今回は Scratch のようにブロックでコードを書くプログラミング言語ではなく、文字で書かれたプログラミング言語で、簡単なゲームを作ってみましょう。
+
+このゲームは午前中に Scratch で作った「猫たたき」のように円が現れたり消えたりして、円をクリックできたら得点がもらえるゲームです。
+
+```render
+// WhackACircle0
+function circle(x, y, r) {
+}
+var width = 300;
+var margin = 50;
+var radius = 50;
+var step = (width - 2*margin)/2;
+function maru(col, row) {
+  fill(0, 255, 0);
+  stroke(255, 0, 0);
+  strokeWeight(3);
+  ellipse(margin + col*step, margin + row*step, radius, radius);
+}
+function setup() {
+  size(300, 300);
+  background(255);
+  maru(0, 0);
+  maru(1, 0);
+  maru(1, 1);
+  maru(2, 1);
+  maru(0, 2);
+  maru(2, 2);
+  fill(0);
+  textSize(18);
+  text("スコア:2", 10, 20);
+}
+function draw() {
+  exit();
+}
+```
+
+## Processing って何？
+
+Processing は絵などを描けるプログラミング言語です。アプリ開発などで広く使われている Java
+というプログラミング言語に近いので、Processing をマスターできたらあと一歩で Java でプログラムを書いて実際のエンジニアになれます。
+
+## Processing で作る <strike>「猫たたき」</strike> 「◯たたき」
+
+では、本番に入って Processing のコードを書いてみましょう！
+
+## Step 1: 円が１個
+
+最初のステップでは円１個だけをランダムに表示し、ユーザーがクリックできたらスコアを１増やします。
+
+[Step 1.1: 円を描いてみる][WhackACircle11]
+

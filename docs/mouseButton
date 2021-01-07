@@ -1,0 +1,24 @@
+# mouseButton
+
+[マウスイベント][Mouse]の中で使い、押されたボタンを表す。 押されたボタンが左ボタンのときは[LEFT]に、右ボタンがときは[RIGHT]になる。
+
+```prerender
+// キャンバスの中でマウスボタンが押してみましょう。
+function mousePressed() {
+  if (mouseButton == LEFT) {
+    fill(0);
+    rect(5,5,40,90);
+  } else if (mouseButton == RIGHT) {
+    fill(0);
+    rect(55,5,40,90);
+  } else {
+    fill(0);
+    rect(45,5,10,90);
+  }
+}
+
+function mouseReleased() {
+  background(200);
+}
+```
+

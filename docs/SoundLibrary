@@ -1,0 +1,32 @@
+# 音のリスト {#ref-SoundLibrary}
+
+```prerender
+// SoundExample
+var sound = getSound("cc0/explosion.ogg");
+function mousePressed() {
+  playSound(sound);
+}
+```
+
+*   `cc0/coin.ogg` <audio src="sounds/cc0/coin.ogg" controls/>
+*   `cc0/tututun.ogg` <audio src="sounds/cc0/tututun.ogg" controls/>
+*   `cc0/didin.ogg` <audio src="sounds/cc0/didin.ogg" controls/>
+*   `cc0/rururun.ogg` <audio src="sounds/cc0/rururun.ogg" controls/>
+*   `cc0/bells.ogg` <audio src="sounds/cc0/bells.ogg" controls/>
+*   `cc0/strings.ogg` <audio src="sounds/cc0/strings.ogg" controls/>
+*   `cc0/ugh.ogg` <audio src="sounds/cc0/ugh.ogg" controls/>
+*   `cc0/bang.ogg` <audio src="sounds/cc0/bang.ogg" controls/>
+*   `cc0/ding.ogg` <audio src="sounds/cc0/ding.ogg" controls/>
+*   `cc0/cannon.ogg` <audio src="sounds/cc0/cannon.ogg" controls/>
+*   `cc0/growl.ogg` <audio src="sounds/cc0/growl.ogg" controls/>
+*   `cc0/explosion.ogg` <audio src="sounds/cc0/explosion.ogg" controls/>
+*   `cc0/clicks.ogg` <audio src="sounds/cc0/clicks.ogg" controls/>
+*   `cc0/fireworks.ogg` <audio src="sounds/cc0/fireworks.ogg" controls/>
+*   `cc0/meow.ogg` <audio src="sounds/cc0/meow.ogg" controls/>
+*   `cc0/dog.ogg` <audio src="sounds/cc0/dog.ogg" controls/>
+*   `cc0/frog.ogg` <audio src="sounds/cc0/frog.ogg" controls/>
+*   `cc0/roar.ogg` <audio src="sounds/cc0/roar.ogg" controls/>
+*   `cc0/launch.ogg` <audio src="sounds/cc0/launch.ogg" controls/>
+*   `cc0/shot.ogg` <audio src="sounds/cc0/shot.ogg" controls/>
+*   `cc0/win.ogg` <audio src="sounds/cc0/win.ogg" controls/>
+

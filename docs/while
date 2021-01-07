@@ -1,0 +1,15 @@
+# while
+
+指定された条件が真である間、 { ... } の間に書いた文を繰り返します。
+
+```prerender
+fill(0);
+var x = 0;
+while (x < 10) {
+  text(str(x), 10+x*7, 15+x*8);
+  x = x+1;
+}
+```
+
+関連項目: [for], [do], [break], [continue].
+

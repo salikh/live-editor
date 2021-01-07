@@ -1,0 +1,18 @@
+# mouseClicked
+
+ユーザがマウスをクリックすると`mouseClicked()`関数が呼ばれます。
+マウスのクリックに反応するプログラムを作るにはこの関数を定義しなければなりません。
+カーソルの位置は`mouseX`と`mouseY`変数を使って調べることができます。
+クリックされたボタンは[mouseButton]変数を使って調べることができます。クリックされたボタンによって`mouseButton`の値は[LEFT]か[RIGHT]かになります。
+
+```example
+function setup() {
+  background(255);
+}
+
+function mouseClicked() {
+  fill(0);
+  ellipse(mouseX, mouseY, 20, 20);
+}
+```
+

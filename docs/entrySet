@@ -1,0 +1,19 @@
+# entrySet
+
+[HashMap]の場合、キーと値の組のセットを返す。そのセットはイテレータによって全ての組を取り出せる。
+
+```prerender
+size(90, 200); fill(0);
+HashMap hm = new HashMap();
+hm.put(1, "one");
+hm.put(12, "one two");
+hm.put(123, "one two three");
+for (it = hm.entrySet().iterator(); it.hasNext(); ) {
+  Map.Entry en = it.next();
+  var y = en.getKey();
+  text("" + en.getKey() + ": " + en.getValue(), 1, y+10);
+}
+```
+
+関連項目: [iterator].
+

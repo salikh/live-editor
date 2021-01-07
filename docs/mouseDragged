@@ -1,0 +1,6 @@
+# mouseDragged
+
+**マウスイベント**: `mouseDragged()`を定義すれば、マウスが押されたままに動いたときに呼ばれる関数。
+
+関連項目: [mouseClicked()], [mouseMoved()], [mouseOver()], [mouseOut()].
+

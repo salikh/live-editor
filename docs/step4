@@ -1,0 +1,39 @@
+# ステップ4：「いつだれがどこでどうした」ゲーム {#ref-step4}
+
+[ステップ3][step3]に戻る。
+
+今回はいままでのステップで学んだことを活かして「いつだれがどこでどうした」というゲームを作ってみましょう。プログラムは長くなりましたので、タイピング代わりにヘルプの画面で
+「トップ」→「ステップ4」を押してから「読み込む」ボタンを押してプログラムを読み込みましょう。
+
+```example
+// 「いつだれがどこでどうした」ゲーム
+String itsu[] = {"昨日", "2年前", "今朝"};
+String darega[] = {"太郎が", "花子が"};
+String dokode[] = {"外で", "学校で", "とつぜん", "大きく"};
+String doushita[] = {"起きました",  "叫びました",  "転びました",  "輝きました"};
+
+size(400, 200);
+fill(0);
+textSize(25);
+
+var itsuBangou = int(random(itsu.length));
+var daregaBangou = int(random(darega.length));
+var dokodeBangou = int(random(dokode.length));
+var doushitaBangou = int(random(doushita.length));
+
+String phrase = itsu[itsuBangou] + darega[daregaBangou] + dokode[dokodeBangou] + doushita[doushitaBangou];
+text(phrase, 10, 100);
+speak(phrase);
+```
+
+文しょうを作るのための部分を変えてみましょう。
+
+詳しく知りたい人へ：
+
+*   「random(...)」は乱数といい、実行するごとに違う数字を返します。例えば、「random(5)」は0から5までの数字を返します。
+*   「int(...)」は数字の整数部分を抽出します。例えば、「int(4.5)」=
+    4。「random」は整数ではない数字を返しますが、[配列][Array]にアクセスするには整数は必要です。
+
+それでプログラミング体験のステップ終わりです。 もし、時間の余裕と興味があったら、[補足][Addendum]を見てみてください。
+または、[デモ][Demos]や[ゲーム][Games]を実行してみましょう。
+

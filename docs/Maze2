@@ -1,0 +1,57 @@
+# 2. キャラクターを動かす {#ref-Maze2}
+
+[前に戻る][Maze1]
+
+キャラクターを動かすために、次のコードを足してみましょう。
+
+    // 進む方向
+    var dx = 0;
+    var dy = -1;
+
+    function draw() {  // この関数は繰り返し呼ばれている.
+      image(imgWalker, x, y);
+      x += dx;
+      y += dy;
+    }
+
+結果はこのようなスケッチになります。
+
+```hidden
+// Maze2
+/* @pjs preload="images/labyrinth1.png"; */
+/* @pjs preload="images/Walker44.png"; */
+var imgLabyrinth = getImage("images/labyrinth1.png");
+var imgWalker = getImage("images/Walker44.png");
+function setup() {
+  size(360, 360);  // キャンバスの大きさの設定
+  image(imgLabyrinth, 1, 1, 360, 360); // 迷路の表示
+  imageMode(CENTER);
+}
+
+// キャラクターの大きさ、ピクセル単位
+var s = 44;
+// キャラクターの座標
+var x = 176, y = 314;
+
+// 進む方向
+var dx = 0;
+var dy = -1;
+
+var imgSave = null;
+function draw() {  // この関数は繰り返し呼ばれている.
+  if (imgSave != null) {
+    image(imgSave, x, y, s, s);
+  }
+  x += dx;
+  y += dy;
+  imgSave = get(x-s/2, y-s/2, s, s);
+  image(imgWalker, x, y);
+}
+```
+
+キャラクターは壁を無視して動いてます。 `imgSave =
+get(...)`や`image(imgSave,...)`をしなければ、キャラクターは壁に当たると壁を消して穴を開けてしまいます。
+これは、実際には壁ではなくてただの背景画像が表示されているだけだからです。壁が実際にあるように見せるのが、プログラマの仕事です。
+
+次は[3. 壁の検出][Maze3]
+

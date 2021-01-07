@@ -1,0 +1,12 @@
+# SQUARE
+
+線を描く筆を四角い形に設定します。 [strokeCap()]を見てください。
+
+```prerender
+strokeCap(SQUARE);
+strokeWeight(20);
+line(20, 20, 80, 80);
+```
+
+関連項目: [strokeCap], [strokeWeight], [stroke], [ROUND], [PROJECT].
+

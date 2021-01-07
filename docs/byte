@@ -1,0 +1,12 @@
+# byte
+
+-128以上127以下の整数の型です。
+
+**注意:** Processing.jsでは変数につけている型は倍精度(double)であるため、使う時点で`byte()`で変換が必要である。
+
+```prerender
+fill(0); textSize(20);
+byte x = byte(257);
+text(str(x), 10, 30);
+```
+

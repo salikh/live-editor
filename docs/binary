@@ -1,0 +1,15 @@
+# binary
+
+`binary`は数を２進法(バイナリー)で表現する。返す値は文字列([String]).
+
+```prerender
+x = 1023; // Binary 1111111111.
+fill(0); text(binary(x), 10, 20);
+text(binary(x, 5), 10, 40);
+```
+
+呼び方: `binary(input, num_digits)`
+
+*   `input` --- 二進法で表現する数
+*   `num_digits` --- 最大返す数字の上限
+

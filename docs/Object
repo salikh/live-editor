@@ -1,0 +1,11 @@
+# オブジェクト {#ref-Object}
+
+`Object`は関連するデータを束ね、複雑のデータ構造を表現できる。[変数][Variable]に`Object`の型を付けられたら、
+
+```prerender
+Object[] arr = {1, "abc"};
+for (var i = 0; i < arr.length; i++) {
+  fill(0); text(str(arr[i]), 10, 20+i*20);
+}
+```
+

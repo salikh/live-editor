@@ -1,0 +1,144 @@
+# IslandHopper
+
+```example
+// IslandHopper
+var location = 0;
+var sizes = [30, 30, 20, 30, 20, 10, 30];
+var N = sizes.length;
+
+function setup() {
+  frameRate(10);
+  stroke(0);
+  fill(255);
+}
+
+var margin = 30;
+var islandR = 30;
+var islandAspect = 4;
+var islandH = height-20;
+var step = (width - 2*margin) / (N-1);
+
+var negSizeThreshold = -3;
+
+var humanHeight = 50;
+var humanWidth = 20;
+var humanHeadR = 10;
+var humanY = islandH;
+
+var gameOver = false;
+String message = "GAME OVER";
+
+function initialize() {
+  location = 0;
+  gameOver = false;
+  humanY = islandH;
+  message = "GAME OVER";
+}
+
+
+function drawHuman(x, y) {
+  line(x, y-humanHeight/3, x, y-humanHeight);
+  line(x-humanWidth/2, y, x, y-humanHeight/3);
+  line(x+humanWidth/2, y, x, y-humanHeight/3);
+  line(x-humanWidth/2, y-humanHeight*4/5, x+humanWidth/2, y-humanHeight*4/5);
+  ellipse(x, y-humanHeight-humanHeadR, humanHeadR*2, humanHeadR*2);
+}
+
+function drawIsland(x, s) {
+  ellipse(x, islandH, s, islandW);
+}
+
+function redraw() {
+  background(200);
+  drawHuman(margin + location*step, humanY);
+  for (var i = 0; i < N; i++) {
+    var s = sizes[i];
+    if (s > 0) {
+      if (s > islandR) s = islandR;
+      ellipse(margin + i*step, islandH, s, s/islandAspect);
+    }
+  }
+  drawHuman(margin + location*step, humanY);
+  if (gameOver) {
+    textSize(40);
+    fill(0);
+    text(message, 30, height/2+10);
+    fill(255);
+  }
+}
+
+function shrinkIslands() {
+  for (var i = 1; i < N-1; i++) {
+    if (sizes[i] > -random(negSizeThreshold)) {
+      sizes[i] -= 1;
+    } else {
+      sizes[i] = random(islandR) + islandR;
+    }
+  }
+}
+
+function pullHuman() {
+  if (humanY < islandH) {
+    humanY += humanHeight/10;
+  }
+  if (humanY > islandH) {
+    humanY = islandH;
+  }
+}
+
+function advanceTime() {
+  shrinkIslands();
+  pullHuman();
+}
+
+function checkGround() {
+  var s = sizes[location];
+  if (humanY == islandH && s < humanWidth-2) {
+    humanY = height;
+    gameOver = true;
+    redraw();
+    noLoop();
+    return;
+  }
+  if (location == sizes.length-1 && humanY == islandH) {
+    message = "YOU WON";
+    gameOver = true;
+  }
+}
+
+function draw() {
+  if (gameOver) return;
+  advanceTime();
+  checkGround();
+  redraw();
+}
+
+function keyPressed() {
+  if (gameOver) {
+    if (keyCode == ' ') {
+      initialize();
+      loop();
+    }
+    return;
+  }
+  switch (keyCode) {
+    case LEFT: if (location > 0) location--; break;
+    case RIGHT: if (location < sizes.length-1) location++; break;
+    case 32:
+      if (humanY == islandH) {
+        humanY -= humanHeight;
+      }
+      break;
+  }
+  checkGround();
+  redraw();
+}
+
+function mouseClicked() {
+  if (gameOver) {
+    initialize();
+    loop();
+  }
+}
+```
+

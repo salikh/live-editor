@@ -1,0 +1,6 @@
+# UP
+
+上の矢印キーのコード。一覧は[keyCodes]に参照。 `keyCode == UP`を調べる先に`key == CODED`を確かめなければなりません。
+
+関連項目: [keyCode], [keyCodes].
+

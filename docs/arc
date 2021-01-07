@@ -1,0 +1,16 @@
+# arc
+
+`arc`は弧を描く。
+
+```prerender
+arc(50, 50, 40, 20, PI/4, 2*PI);
+```
+
+呼び方:`arc(x, y, width, height, start, stop);`
+
+*   x, y --- 楕円の中心の座標。
+*   width, height --- 楕円の横幅と縦幅。
+*   start, stop --- 弧の角度を指定する。
+
+関連項目: [ellipse()].
+

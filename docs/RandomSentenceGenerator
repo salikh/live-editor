@@ -1,0 +1,23 @@
+# RandomSentenceGenerator
+
+```example
+// RandomSentenceGenerator
+String itsu[] = {"昨日", "2年前", "今朝"};
+String darega[] = {"太郎が", "花子が"};
+String dokode[] = {"外で", "学校で", "とつぜん", "大きく"};
+String doushita[] = {"起きました",  "叫びました",  "転びました",  "輝きました"};
+
+size(400, 200);
+fill(0);
+textSize(25);
+
+var itsuBangou = int(random(itsu.length));
+var daregaBangou = int(random(darega.length));
+var dokodeBangou = int(random(dokode.length));
+var doushitaBangou = int(random(doushita.length));
+
+String phrase = itsu[itsuBangou] + darega[daregaBangou] + dokode[dokodeBangou] + doushita[doushitaBangou];
+text(phrase, 10, 100);
+speak(phrase);
+```
+

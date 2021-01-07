@@ -1,0 +1,18 @@
+# keyCode
+
+最後に押されたキーのコード。通常イベント関数で使います。 コードの一覧は[keyCodes]に参照。
+
+関連項目: [keyPressed()], [keyReleased()], [keyTyped()].
+
+```example
+function setup() {
+  size(400, 200);
+  fill(0);
+  textSize(30);
+}
+function draw() {
+  background(220);
+  text("keyCode " + keyCode, 10, 60);
+}
+```
+

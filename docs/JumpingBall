@@ -1,0 +1,99 @@
+# JumpingBall
+
+```example
+// JumpingBall
+
+var groundHeight = 10;
+var skyHeight = height - groundHeight - 10;
+
+var walls = [];
+var ball;
+
+var Wall = function(init_x, init_y) {
+  this.x = init_x;
+  this.y = init_y;
+};
+
+function drawGround() {
+  for (var start = -(4 * frameCount % 11); start < width; start += 11) {
+    fill(100, 100, 100);
+    rect(start, skyHeight, 11, groundHeight);
+  }
+}
+
+function draw() {
+  background(255, 255, 255);
+  if (frameCount % 50 === 0) {
+    walls.push(new Wall(width, random(skyHeight / 2)));
+  }
+
+  for (var i = 0; i < walls.length; ++i) {
+   walls[i].update();
+    if (ball.hit(walls[i])) {
+      noLoop();
+    }
+    if (walls[i].x < 0) {
+      walls.shift();
+      i--;
+      continue;
+    }
+    walls[i].draw();
+  }
+
+  drawGround();
+  ball.update();
+  ball.draw();
+}
+
+function mouseClicked() {
+  if (ball.y <= ball.r) {
+   ball.v = 20;
+  }
+}
+
+
+var Ball = function(init_x, init_y, init_r) {
+  this.x = init_x;
+  this.y = init_y;
+  this.r = init_r;
+  this.v = 0;
+};
+
+Ball.prototype.update = function() {
+  if (this.v < 0 && this.y - this.r <= 0) {
+    this.v = 0;
+    this.y = this.r;
+  } else {
+    this.y += this.v;
+    this.v--;
+  }
+};
+
+Ball.prototype.hit = function(w) {
+  if (w.x > this.x + this.r || w.x < this.x - this.r) {
+      return false;
+  }
+  return this.y - this.r < w.y;
+};
+
+Ball.prototype.draw = function() {
+  fill(0, 0, 0);
+  ellipse(this.x, skyHeight - 1 - this.y, this.r*2, this.r*2);
+};
+
+
+Wall.prototype.update = function() {
+  this.x -= 4;
+};
+
+Wall.prototype.draw = function() {
+  fill(0, 255, 0);
+  rect(this.x, skyHeight - 1 - this.y, 5, this.y);
+};
+
+
+var ball = new Ball(40, 20, 20);
+var walls = [];
+
+```
+

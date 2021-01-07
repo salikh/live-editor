@@ -1,0 +1,9 @@
+# noStroke
+
+`noStroke()`は端を書かないように設定する。
+
+```prerender
+noStroke();
+rect(20, 20, 60, 60);
+```
+

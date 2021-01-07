@@ -1,0 +1,87 @@
+# RocketLanding
+
+```example
+// RocketLanding
+/* @pjs preload="images/fire2-134x200.png"; */
+/* @pjs preload="images/rocket-168x300.png"; */
+/* @pjs preload="images/rocket1-168x300.png"; */
+var fire = getImage("images/fire2-134x200.png");
+var rocket = getImage("images/rocket-168x300.png");
+var rocket_fire = getImage("images/rocket1-168x300.png");
+var explosion = getSound("images/explosion.ogg");
+var roar = getSound("images/roar.ogg");
+var win = getSound("images/win.ogg");
+
+var x;
+var y;
+var vy;
+
+var burning = false;
+var gameOver = false;
+
+function initVars() {
+  x = 100;
+  y = 10;
+  vy = 0;
+  gameOver = false;
+  burning = false;
+}
+
+function setup() {
+  size(200, 200);
+  frameRate(20);
+  imageMode(CENTER);
+  initVars();
+}
+
+function draw() {
+  y = y + vy;
+  vy = vy + 0.2;
+
+  if (y > height - 30) {
+    if (abs(vy) > 3) {
+      background(200);
+      image(fire, x, y-25, 65, 100);
+      explosion.play();
+    } else {
+      win.play();
+    }
+    noLoop();
+    gameOver = true;
+    return;
+  }
+
+  background(100);
+  if (burning) {
+    image(rocket_fire, x, y, 34, 60);
+    burning = false;
+  } else {
+    image(rocket, x, y, 34, 60);
+  }
+}
+
+function burn() {
+  burning = true;
+  vy -= 2;
+  roar.play();
+}
+
+function keyPressed() {
+  if (gameOver) {
+    initVars();
+    loop();
+    return;
+  }
+  burn();
+}
+
+function mousePressed() {
+  if (gameOver) {
+    initVars();
+    loop();
+    return;
+  }
+  burn();
+}
+```
+

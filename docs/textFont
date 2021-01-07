@@ -1,0 +1,16 @@
+# textFont
+
+`textFont`は書体デート(フォント)を設定する。すぐは見える効果はないが、 次の[text]の呼び出しに影響を与える。
+
+```prerender
+fill(0);
+textFont(loadFont("Courier New"), 12);
+text("Courier New", 10, 20);
+textFont(loadFont("Verdana"), 15);
+text("Verdana", 10, 40);
+textFont(loadFont("Arial"), 15);
+text("Arial", 10, 60);
+```
+
+関連項目: [text], [loadFont], [textSize].
+

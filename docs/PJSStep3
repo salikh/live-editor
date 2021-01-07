@@ -1,0 +1,75 @@
+# ステップ3: アニメーション {#ref-PJSStep3}
+
+今日のワークショップの目的は皆さんに自分で簡単なゲームを作ってもらうことなので、単に図形を描くだけでは足りません。図形を動かしてみましょう。
+
+そのためには、同じプログラムを何回も繰り返し実行する必要があります。Processingにはアニメーションを作るのための仕組みがすでに含まれています。
+
+一回だけ実行したいプログラムの部分は`function setup() { ... }` の中に書き、何回も繰り返しで実行したい部分は`function draw() {
+... }`の中に書くと、簡単なアニメーションを作れます。 このように`{}`で囲ったプログラムの部分は「関数」といいます。
+
+![execution diagram](images/execution-diagram.png)
+
+いくつかの例を見てみましょう。
+
+```example
+textSize(50); // 文字を大きくする
+fill(0);      // 文字を黒にする
+
+function draw() {
+  text(frameCount, 10, 50);
+}
+```
+
+早すぎて何が起きたかよくわかりません。実行をもう少し遅くするには`frameRate()`が便利です。`draw()`を一回実行されたときに一つのフレームとして考えると、フレーム・レートは一秒あたり何回`draw()`が呼ばれるかを示します。
+
+```example
+textSize(50);
+fill(0);
+frameRate(1);
+background(255);
+
+function draw() {
+  text(frameCount, 10, 50);
+}
+```
+
+今回は分かりやすくなりましたね。同じところに連続で１、２、３などの数字を表示します。`frameCount`は毎回フレーム番号を表しています。`draw()`の実行ごとに違う数が表示されます。
+
+番号がはっきり見えるようにしましょう。新しい番号を見せる前にキャンバスを消すことで、新しい番号がはっきり見えます。キャンバスを消すためには`background()`を使います。`background()`には前と同様にRGBの形式色を指定できます。
+
+```example
+textSize(50);
+fill(0);
+frameRate(1);
+
+function draw() {
+  background(200);  // キャンバスをグレーに塗りつぶす
+  text(frameCount, 10, 50);
+}
+```
+
+この例で出てきた`frameCount`は変数といいます。
+
+**問題３**:
+`draw()`や`frameCount`や図形の命令を使って好きなように雪だるまのアニメーションを作りましょう。何か分からないことがあったら質問してください。
+
+
+```hidden
+size(300, 300, "2D");
+frameRate(30);
+var x = 150, y = 170;
+
+function draw() {
+  background(220);
+  strokeWeight(5);
+  stroke(255, 100, 100);
+  ellipse(x, y+80, 100, 100);
+  stroke(100, 255, 100);
+  ellipse(x-10*cos(frameCount*5), y, 80, 80);
+  stroke(100, 100, 255);
+  ellipse(x+10*sin(frameCount*5), y-60, 60, 60);
+}
+```
+
+次は[ステップ4][PJSStep4]へ。
+

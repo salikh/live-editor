@@ -1,0 +1,24 @@
+# keyReleased
+
+`keyReleased()`を定義すれば、キーが話されたたびに 呼ばれる関数です。
+
+関連項目: [keyPressed()], [keyTyped()], [key], [keyCode], [keyCodes].
+
+```example
+function setup() {
+  size(400, 200);
+  fill(0);
+  textSize(10);
+  background(220);
+}
+var y = 10;
+function keyReleased() {
+  text("keyReleased() key " + str(key) + " keyCode " + keyCode, 10, y);
+  y += 10;
+  if (y > 200) {
+    background(220);
+    y = 10;
+  }
+}
+```
+

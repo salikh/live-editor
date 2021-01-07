@@ -1,0 +1,10 @@
+# HALF_PI
+
+`HALF_PI`は円周率の半分である。 `1.5707963267948966`.
+
+```prerender
+arc(50, 50, 45, 45, 0, HALF_PI);
+```
+
+関連項目: [PI], [QUARTER_PI], [TWO_PI].
+

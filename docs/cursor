@@ -1,0 +1,25 @@
+# cursor
+
+`cursor()`はマウスのカーソルの形を指定する。
+
+```prerender
+function setup() {
+  frameRate(2);
+}
+// マウスのカーソルをキャンバス内に置きましょう。
+var i = 0;
+function draw() {
+  i++;
+  switch(i%6) {
+    case 0: cursor(HAND); break;
+    case 1: cursor(CROSS); break;
+    case 2: cursor(ARROW); break;
+    case 3: cursor(MOVE); break;
+    case 4: cursor(TEXT); break;
+    case 5: cursor(WAIT); break;
+  }
+}
+```
+
+関連項目: [ARROW], [CROSS], [HAND], [MOVE], [TEXT], [WAIT].
+

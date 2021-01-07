@@ -1,0 +1,8 @@
+# frameRate
+
+`frameRate(x)`は`setup()`の中で使える関数で、`draw()`が呼ばれる頻度を設定します。
+括弧の中には`draw()`関数を1秒間に何回呼ぶかを指定します。 たとえば、`frameRate(10)`を実行すると、`draw()`の実行が終わってから
+次に`draw()`を呼ぶまで0.1秒待ちます。`frameRate(1)`では1秒待ちます。
+
+関連項目: [frameCount], [draw()].
+

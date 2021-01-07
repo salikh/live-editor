@@ -1,0 +1,26 @@
+# ShowAxes
+
+このプログラムは軸をお見せします。
+
+```prerender
+// CanvasAxes
+function arrow(x1, y1, x2, y2) {
+  line(x1, y1, x2, y2);
+  var x = x2-x1;
+  var y = y2-y1;
+  var l = sqrt(x*x+y*y);
+  x = x / l * 10;
+  y = y / l * 10;
+  alpha = PI/4;
+  line(x2, y2, x2 - x*cos(alpha) + y*sin(alpha), y2 - x*sin(alpha) - y*cos(alpha));
+  line(x2, y2, x2 - x*cos(-alpha) + y*sin(-alpha), y2 - x*sin(-alpha) - y*cos(-alpha));
+}
+
+arrow(10, 20, 90, 20);
+arrow(20, 10, 20, 90);
+fill(0);
+text("(0,0)", 1, 11);
+text("x", 80, 37);
+text("y", 30, 85);
+```
+

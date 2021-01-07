@@ -1,0 +1,45 @@
+# RectangleTool
+
+このプログラムは長方形を書く命令をお見せします。キャンバス内でマウス・ドラッグしてみてください。
+
+```prerender
+// RectangleTool
+function setup() {
+  size(200, 200);
+}
+
+var x1, y1, x2, y2;
+var pressed = false;
+
+function draw() {
+  background(220);
+  if (pressed) {
+    x2 = mouseX;
+    y2 = mouseY;
+  }
+  if (x2 != x1) {
+    fill(255);
+    rect(x1, y1, (x2-x1), (y2-y1));
+  }
+  textSize(20);
+  fill(0);
+  text("rect("+x1+","+y1+","+(x2-x1)+","+(y2-y1)+")", 10, height-10);
+}
+
+function mousePressed() {
+  if (!pressed) {
+    x1 = mouseX;
+    y1 = mouseY;
+    pressed = true;
+  }
+}
+
+function mouseReleased() {
+  if (pressed) {
+    x2 = mouseX;
+    y2 = mouseY;
+    pressed = false;
+  }
+}
+```
+

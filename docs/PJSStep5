@@ -1,0 +1,54 @@
+# ステップ5: キーボードの使い方 {#ref-PJSStep5}
+
+ゲーム機には普通マウスはついてないので、キーパッドで遊ぶことが多いでしょう。では、ゲーム機のようにキーボードを使って遊べるようにするにはどうすればいいでしょう。
+
+Processingでは、キーボードの使い方はマウスととても似ています。キーボードのボタンが押されるたびに`keyPressed()`関数が呼ばれます。次の例を見ましょう。その関数の中に`keyCode`を参照すれば、押されたキーが分かります。次のプログラムは丸を描いています。実行したら、キャンバス内をクリックして、左右の矢印キーを押してみましょう。
+
+```prerender
+var x = 50;
+
+function draw() {
+  background(220);
+  ellipse(x, 50, 30, 30);
+}
+
+function keyPressed() {
+  if (keyCode === LEFT) {
+    x = x - 5;
+  }
+  if (keyCode === RIGHT) {
+      x = x + 5;
+  }
+}
+```
+
+**問題5**: 雪だるまをキーボードの左右矢印キーで動かしてみましょう。
+
+```hidden
+// SnowmanKeyboard
+
+var x = 150;
+
+function setup() {
+  size(300, 300);
+}
+
+function draw() {
+  background(220);
+  ellipse(x, 250, 100, 100);
+  ellipse(x, 170, 80, 80);
+  ellipse(x, 110, 60, 60);
+}
+
+function keyPressed() {
+  if (keyCode == LEFT) {
+    x = x - 5;
+  }
+  if (keyCode == RIGHT) {
+      x = x + 5;
+  }
+}
+```
+
+次は[ステップ6][PJSStep6]へ。
+

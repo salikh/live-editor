@@ -1,0 +1,115 @@
+# 6. 完成プログラム {#ref-Maze6}
+
+[前に戻る][Maze5]
+
+**挑戦**: 別の迷路を解いてみよう
+
+別の迷路を解いてみましょう。2箇所の「labyrinth1.png」をに変えたら、別の迷路に挑戦できます。使用可能の迷路は
+
+*   `labyrinth1.png`
+*   `labyrinth2.png`
+*   `labyrinth3.png`
+*   `labyrinth4.png`
+
+完成させたプログラムは全ての迷路を解けるでしょうか？
+
+```example
+// Maze5
+/* @pjs preload="images/labyrinth1.png"; */
+/* @pjs preload="images/Walker44.png"; */
+var imgLabyrinth = getImage("images/labyrinth1.png");
+var imgWalker = getImage("images/Walker44.png");
+function setup() {
+  size(360, 360);  // キャンバスの大きさの設定
+  image(imgLabyrinth, 1, 1, 360, 360); // 迷路の表示
+  imageMode(CENTER);
+}
+
+// キャラクターの大きさ、ピクセル単位
+var s = 44;
+
+// キャラクターの座標
+var x = 176, y = 314;
+
+// 進む方向
+var dx = 0;
+var dy = -1;
+
+var imgSave = null;
+function draw() {  // この関数は繰り返し呼ばれている.
+  if (imgSave != null) {
+    image(imgSave, x, y, s, s);
+  }
+  if (reachedGoal()) {
+    fill(0,0,0);  // black.
+    text("Finish!", x+s/2, y);
+    exit();
+  }
+  if (!wallRight() && !wallAhead()) {
+    turnRight();
+    var hitWall = false;
+    for (var i = 0; i < 2; i++) {
+      if (!wallAhead() && !wallRight()) {
+        moveForward(1);
+      } else {
+        hitWall = true;
+        break;
+      }
+    }
+    if (!hitWall) {
+      //moveForward(-2);
+      turnLeft();
+    }
+  } else if (wallAhead()) {
+    turnLeft();
+  }
+  moveForward(1);
+  imgSave = get(x-s/2, y-s/2, s, s);
+  image(imgWalker, x, y);
+}
+
+var reachedGoal() {
+  color c = get(x+dx*(s/2+3), y+dy*(s/2+3));
+  return red(c) < 50 && green(c) > 50;
+}
+
+var wallAhead() {
+  var wallFound = false;
+  var rx = -dy;
+  var ry = dx;
+  for (var i = -s/2-1; i < s/2+1; i++) {
+    color c = get(x+dx*(s/2+3)+rx*i, y+dy*(s/2+3)+ry*i);
+    wallFound = wallFound || brightness(c) < 50;
+  }
+  return wallFound;
+}
+
+var wallRight() {
+  var rx = -dy;
+  var ry = dx;
+  var wallFound = false;
+  for (var i = -s/2-1; i <= s/2+1; i++) {
+    color c = get(x + rx*(s/2+3)+dx*i, y + ry*(s/2+3)+dy*i);
+    wallFound = wallFound || brightness(c) < 50;
+  }
+  return wallFound;
+}
+
+function moveForward(c) {
+  x += c*dx;
+  y += c*dy;
+}
+
+function turnLeft() {
+  var tmp = dx;
+  dx = dy;
+  dy = -tmp;
+}
+
+function turnRight() {
+  var tmp = dx;
+  dx = -dy;
+  dy = tmp;
+}
+```
+

@@ -1,0 +1,12 @@
+# HashMap
+
+`HashMap`はハッシュテーブルデータ構造である。データはキーと値の組で保存され、 キーに対して値を素早く参照できる。
+
+```prerender
+HashMap<Integer, String> map = new HashMap();
+map.put(123, "XYZ");
+fill(0); text(map.get(123), 10, 30);
+```
+
+関連項目：[get], [put], [entrySet].
+

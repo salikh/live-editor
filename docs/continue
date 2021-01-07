@@ -1,0 +1,14 @@
+# continue
+
+ループ([while], [for], [do])の実行を一旦止めて、ループの頭から実行再開する。
+
+```prerender
+var i = 0;
+while (i < 10) {
+  fill(0); text(str(i), 10, i*10);
+  i++;
+  continue;
+  text("絶対実行しない", 50, 50);
+}
+```
+

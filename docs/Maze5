@@ -1,0 +1,23 @@
+# 5. ゴールの判定 {#ref-Maze5}
+
+[前に戻る][Maze4]
+
+最後にゴールの判定をする機能を加えてみましょう。ゴールの判定は壁の検出に似ていますが、黒の代わりに緑か調べなければなりません。
+
+    function reachedGoal() {
+      color c = get(x+dx*(s/2+3), y+dy*(s/2+3));
+      return red(c) < 50 && green(c) > 50;
+    }
+
+    function draw() {
+      ...
+      if (reachedGoal()) {
+        fill(0,0,0);  // black.
+        text("Finish!", x+s/2, y);
+        exit();
+      }
+      ...
+    }
+
+次は[6. 完成プログラム][Maze6]
+

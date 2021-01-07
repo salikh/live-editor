@@ -1,0 +1,14 @@
+# getImage
+
+`getImage()`は画像のデートを読み込んでいます。ないProcessing.jsでは
+ファイルシステムにアクセスできないので、画像データはサーバからダウンロード されます。ダウンロードは時間かかる場合があるので、`@pjs
+preload`の命令が 必要です。
+
+```prerender
+/* @pjs preload="images/Walker44.png"; */
+var walker = getImage("images/Walker44.png");
+image(walker, 10, 10, 80, 80);
+```
+
+関連項目: [@pjs preload][preload], [image()], [createImage()].
+

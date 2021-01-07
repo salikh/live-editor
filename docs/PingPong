@@ -1,0 +1,135 @@
+# PingPong
+
+```example
+// PingPong
+function setup() {
+  size(360, 360, P2D);
+  background(250);
+  frameRate(30);
+}
+
+var ballDiameter = 30;
+var paddleWidth = 10;
+var paddleHeight = 90;
+
+var sleepUntil = 0;
+
+function drawBall(x, y) {
+  fill(200);
+  stroke(0);
+  var deform = 0;
+  if (x <= paddleWidth*2 + ballDiameter/2 &&
+      y1 - paddleHeight/2 - ballDiameter/2 < y &&
+      y < y1 + paddleHeight/2 + ballDiameter/2) {
+    deform = (paddleWidth*2 + ballDiameter/2 - x);
+  } else if (x >= 360-paddleWidth*2 - ballDiameter/2 &&
+             y2 - paddleHeight/2 -ballDiameter/2< y &&
+             y < y2 + paddleHeight/2 + ballDiameter/2) {
+    deform = (paddleWidth*2 + ballDiameter/2 - (360-x));
+  }
+  ellipse(x, y, ballDiameter-deform, ballDiameter+deform);
+}
+
+function drawPaddle(x, y) {
+  fill(100);
+  stroke(0);
+  rect(x - paddleWidth/2, y - paddleHeight/2, paddleWidth, paddleHeight);
+}
+
+// Ball coordinates.
+var x = 180, y = 180;
+// Ball velocity.
+var vx = 5, vy = 5;
+var lastPlayer1inputMs = 0;
+var lastPlayer2inputMs = 0;
+
+var updateBall() {
+  if (y < 10 && vy < 0) {
+    vy = -vy - 1 + random(2);
+  }
+  if (y > 350 && vy > 0) {
+    vy = -vy - 1 + random(2);
+  }
+  if (x <= paddleWidth + ballDiameter/2 &&
+      y1 - paddleHeight/2 - ballDiameter/2 < y &&
+      y < y1 + paddleHeight/2 + ballDiameter/2) {
+    vx = 5 + random(2);
+  }
+  if (x >= 360-paddleWidth - ballDiameter/2 &&
+      y2 - paddleHeight/2 -ballDiameter/2< y &&
+      y < y2 + paddleHeight/2 + ballDiameter/2) {
+    vx = -7 + random(2);
+  }
+  x += vx;
+  y += vy;
+  if (x < 10 || x > 350) {
+    sleepUntil = millis() + 2000;
+    background(250);
+    textSize(30);
+    fill(0);
+    if (x < 10) {
+      text("Player B won!", 100, 180);
+       speak("Player B won!", "en");
+    } else {
+      text("Player A won!", 100, 180);
+       speak("Player A won!", "en");
+    }
+    x = 180;
+    y = 0;
+    vx = -5;
+    return false;
+  }
+  return true;
+}
+
+function draw() {
+  if (millis() < sleepUntil) {
+    return;
+  }
+  if (!updateBall()) {
+    return;
+  }
+  background(255);
+  drawPaddle(10, y1);
+  drawPaddle(345, y2);
+  drawBall(x, y);
+  textSize(10);
+  text(str(x) + "," + str(y)+"  "+y1+" " + y2, 10, 10);
+  if (random(70) < 10 && millis() - lastPlayer1inputMs > 5000) {
+    y1 = y;
+  } else if (random(90) < 10 && millis() - lastPlayer2inputMs > 5000) {
+    y2 = y;
+  }
+}
+
+var y1 = 180;
+var y2 = 180;
+
+function mouseMoved() {
+  y1 = mouseY;
+  lastPlayer1inputMs = millis();
+}
+
+function keyPressed() {
+  var ms = millis() - lastPlayer2inputMs;
+  if (keyCode == UP) {
+    if (ms < 100) {
+      y2 -= 100;
+    } else if (ms < 200) {
+      y2 -= 50;
+    } else {
+      y2 -= 10;
+    }
+  } else if (keyCode = DOWN) {
+    if (ms < 100) {
+      y2 += 100;
+    } else if (ms < 200) {
+      y2 += 50;
+    } else {
+      y2 += 10;
+    }
+  }
+  lastPlayer2inputMs = millis();
+}
+```
+

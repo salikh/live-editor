@@ -1,0 +1,6 @@
+# CENTER
+
+**マウス**: `CENTER`は[mouseButton]を参照するときにマウスの真ん中ボタンを表す。
+
+関連項目: [mouseButton], [mousePressed()], [mouseReleased()], [mouseClicked()].
+

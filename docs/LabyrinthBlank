@@ -1,0 +1,29 @@
+# 1. 空迷路 {#ref-LabyrinthBlank}
+
+今回は、キャラクターの周りだけではなくて、動かす前に迷路全体を調べてみましょう。地図を作って、スタートやゴールの位置が判明してから、最短ルートを探します。プログラムは複雑になってくるので、アルゴリズムの面白い部分を見ることができます。以下のプログラムを読み込みしてから、「実行」のボタンを押してみましょう。
+
+```example
+/* @pjs preload="images/Labyrinth3a.png"; */
+var imgLabyrinth = getImage("images/Labyrinth3a.png");
+/* @pjs preload="images/Walker44.png"; */
+var imgWalker = getImage("images/Walker44.png");
+
+function setup() {  // this is run once.
+    // Set up canvas size.
+    size(360, 360);
+    // Display the background (labyrinth).
+    image(imgLabyrinth, 1, 1, 360, 360);
+}
+
+var imgSave = null;
+function draw() {
+  if (imgSave != null) {
+    image(imgSave, pmouseX, pmouseY, 44, 44);
+  }
+  imgSave = get(mouseX, mouseY, 44, 44);
+  image(imgWalker, mouseX, mouseY, 44, 44);
+}
+```
+
+[2. 地図作り][LabyrinthMapper]
+

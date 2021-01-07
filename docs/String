@@ -1,0 +1,9 @@
+# String
+
+`String`は文字列の型を表し、言葉を覚える変数を作る。
+
+```prerender
+String namae = "たろう";
+fill(0); text(namae, 20, 20);
+```
+

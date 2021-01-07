@@ -1,0 +1,6 @@
+# hue
+
+`hue()`は色に対して色相を返す。
+
+関連項目: [color], [saturation()], [brightness()].
+

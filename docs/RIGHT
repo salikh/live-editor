@@ -1,0 +1,11 @@
+# RIGHT
+
+**マウス**: `RIGHT`は[mouseButton]を参照するときにマウスの右ボタンを表す。
+
+関連項目: [mouseButton], [mousePressed()], [mouseReleased()], [mouseClicked()].
+
+**キーボード**: 右の矢印キーのコード。一覧は[keyCodes]に参照。 `keyCode == RIGHT`を調べる先に`key ==
+CODED`を確かめなければなりません。
+
+関連項目: [keyCode], [keyCodes].
+

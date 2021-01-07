@@ -1,0 +1,13 @@
+# append
+
+`append()`は配列にもう一つの要素分を追加する。
+
+```prerender
+String[] namae = {"たろう", "花子"};
+append(namae, "次郎");
+fill(0); textSize(20);
+for (var i = 0; i < namae.length; i++) {
+  text(namae[i], 10, 30+i*20);
+}
+```
+

@@ -1,0 +1,13 @@
+# mouseY
+
+マウスのY座標。[draw()]からも[マウスイベント][Mouse]からも参照できます。
+
+関連項目: [mouseX], [pmouseX], [pmouseY], [mousePressed()], [mouseReleased()],
+[mouseClicked()].
+
+```prerender
+function draw() {
+  ellipse(mouseX, mouseY, 5, 5);
+}
+```
+

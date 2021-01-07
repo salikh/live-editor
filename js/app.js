@@ -180,6 +180,7 @@ function addProcessingIframes($el) {
       '}};'+
       'var canvas = document.getElementById("pjs");'+
       'var processingInstance = new Processing(canvas, sketchProc);'+
+      'processingInstance.loop();'+
       '</script>'+
       '</body>';
     pre.appendChild(iframe);
@@ -317,9 +318,10 @@ window.addEventListener('load', function() {
 	} else if ('load' in params) {
 	  fragment = '#id=' + params['load'];
 	} else {
-	  data.message = 'The sketch is not saved yet.'
-	  window.console.error(data.message);
-	  return;
+	  // Save with a new id.
+	  id = generateBase62ID(5);
+	  saveSource(id, code);
+	  fragment = '#id=' + id;
 	}
 	let win = window.open('play.html' + fragment, '_blank');
 	win.focus();

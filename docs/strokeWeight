@@ -1,0 +1,16 @@
+# strokeWeight
+
+`strokeWeight()`はペンの太さを設定します。次の線や図形を描く命令に反映されます。
+
+```prerender
+strokeCap(SQUARE);
+strokeWeight(5);
+line(15, 20, 85, 20);
+strokeWeight(10);
+line(15, 40, 85, 40);
+strokeWeight(20);
+line(15, 70, 85, 70);
+```
+
+関連項目: [stroke], [strokeWeight], [SQUARE].
+
