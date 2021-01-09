@@ -2586,8 +2586,8 @@ Vue.component('help-div', Vue.extend({
 
 // Reloads the list of projects belonging to this user.
 function updateProjects() {
-  data.projects = [];
   firebase.database().ref('/code').orderByChild('time').on('value', function (snapshot) {
+    data.projects = [];
     snapshot.forEach(function (child) {
       if (child.val().uid == data.uid) {
         data.projects.push({

@@ -513,7 +513,7 @@ function mouseClicked() {
   playSound(sound);
 }
 function draw() {
-  if (sound.audio.duration != 0 &amp;&amp; !sound.audio.paused) {
+  if (sound.audio.duration !== 0 &amp;&amp; !sound.audio.paused) {
     background(220);
     fill(0); textSize(20);
     text(&#34;Meow&#34;, 5, 20);
@@ -533,9 +533,6 @@ function draw() {
 
 <pre><code class="language-example">// RocketLandingExample
 
-/* @pjs preload=&#34;cc0/fire2-134x200.png&#34;; */
-/* @pjs preload=&#34;cc0/rocket-168x300.png&#34;; */
-/* @pjs preload=&#34;cc0/rocket1-168x300.png&#34;; */
 var fire = getImage(&#34;cc0/fire2-134x200&#34;);
 var rocket = getImage(&#34;cc0/rocket-168x300&#34;);
 var rocket_fire = getImage(&#34;cc0/rocket1-168x300&#34;);
@@ -846,6 +843,39 @@ function mousePressed() {
 <li><code>cc0/launch.ogg</code> <audio src="sounds/cc0/launch.ogg" controls=""></audio></li>
 <li><code>cc0/shot.ogg</code> <audio src="sounds/cc0/shot.ogg" controls=""></audio></li>
 <li><code>cc0/win.ogg</code> <audio src="sounds/cc0/win.ogg" controls=""></audio></li>
+<li><code>sounds/rpg/battle-magic.mp3</code> <audio src="sounds/rpg/battle-magic.mp3" controls=""></audio></li>
+<li><code>sounds/rpg/battle-spell.mp3</code> <audio src="sounds/rpg/battle-spell.mp3" controls=""></audio></li>
+<li><code>sounds/rpg/giant-yah.mp3</code> <audio src="sounds/rpg/giant-yah.mp3" controls=""></audio></li>
+<li><code>sounds/rpg/coin-jingle.mp3</code> <audio src="sounds/rpg/coin-jingle.mp3" controls=""></audio></li>
+<li><code>sounds/rpg/hit-thud.mp3</code> <audio src="sounds/rpg/hit-thud.mp3" controls=""></audio></li>
+<li><code>sounds/rpg/hit-whack.mp3</code> <audio src="sounds/rpg/hit-whack.mp3" controls=""></audio></li>
+<li><code>sounds/rpg/battle-swing.mp3</code> <audio src="sounds/rpg/battle-swing.mp3" controls=""></audio></li>
+<li><code>sounds/rpg/metal-chime.mp3</code> <audio src="sounds/rpg/metal-chime.mp3" controls=""></audio></li>
+<li><code>sounds/rpg/water-slosh.mp3</code> <audio src="sounds/rpg/water-slosh.mp3" controls=""></audio></li>
+<li><code>sounds/rpg/hit-clop.mp3</code> <audio src="sounds/rpg/hit-clop.mp3" controls=""></audio></li>
+<li><code>sounds/rpg/metal-clink.mp3</code> <audio src="sounds/rpg/metal-clink.mp3" controls=""></audio></li>
+<li><code>sounds/rpg/step-heavy.mp3</code> <audio src="sounds/rpg/step-heavy.mp3" controls=""></audio></li>
+<li><code>sounds/rpg/water-bubble.mp3</code> <audio src="sounds/rpg/water-bubble.mp3" controls=""></audio></li>
+<li><code>sounds/rpg/door-open.mp3</code> <audio src="sounds/rpg/door-open.mp3" controls=""></audio></li>
+<li><code>sounds/rpg/hit-splat.mp3</code> <audio src="sounds/rpg/hit-splat.mp3" controls=""></audio></li>
+<li><code>sounds/rpg/giant-no.mp3</code> <audio src="sounds/rpg/giant-no.mp3" controls=""></audio></li>
+<li><code>sounds/rpg/giant-hyah.mp3</code> <audio src="sounds/rpg/giant-hyah.mp3" controls=""></audio></li>
+<li><code>sounds/retro/whistle2.mp3</code> <audio src="sounds/retro/whistle2.mp3" controls=""></audio></li>
+<li><code>sounds/retro/hit1.mp3</code> <audio src="sounds/retro/hit1.mp3" controls=""></audio></li>
+<li><code>sounds/retro/thruster-short.mp3</code> <audio src="sounds/retro/thruster-short.mp3" controls=""></audio></li>
+<li><code>sounds/retro/jump1.mp3</code> <audio src="sounds/retro/jump1.mp3" controls=""></audio></li>
+<li><code>sounds/retro/whistle1.mp3</code> <audio src="sounds/retro/whistle1.mp3" controls=""></audio></li>
+<li><code>sounds/retro/hit2.mp3</code> <audio src="sounds/retro/hit2.mp3" controls=""></audio></li>
+<li><code>sounds/retro/laser2.mp3</code> <audio src="sounds/retro/laser2.mp3" controls=""></audio></li>
+<li><code>sounds/retro/boom2.mp3</code> <audio src="sounds/retro/boom2.mp3" controls=""></audio></li>
+<li><code>sounds/retro/coin.mp3</code> <audio src="sounds/retro/coin.mp3" controls=""></audio></li>
+<li><code>sounds/retro/laser1.mp3</code> <audio src="sounds/retro/laser1.mp3" controls=""></audio></li>
+<li><code>sounds/retro/laser4.mp3</code> <audio src="sounds/retro/laser4.mp3" controls=""></audio></li>
+<li><code>sounds/retro/jump2.mp3</code> <audio src="sounds/retro/jump2.mp3" controls=""></audio></li>
+<li><code>sounds/retro/rumble.mp3</code> <audio src="sounds/retro/rumble.mp3" controls=""></audio></li>
+<li><code>sounds/retro/laser3.mp3</code> <audio src="sounds/retro/laser3.mp3" controls=""></audio></li>
+<li><code>sounds/retro/thruster-long.mp3</code> <audio src="sounds/retro/thruster-long.mp3" controls=""></audio></li>
+<li><code>sounds/retro/boom1.mp3</code> <audio src="sounds/retro/boom1.mp3" controls=""></audio></li>
 </ul>
 
 </div><div id="ref-ImageLibrary" class="section"><h1>画像リスト</h1>
@@ -916,6 +946,111 @@ image(img, 50, 50, 85, 100);
 <img src="images/cc0/fuzzy-white-64x64.png" alt="cc0/fuzzy-white-64x64.png"/></li>
 <li>cc0/fuzzy-black-64x64.png
 <img src="images/cc0/fuzzy-black-64x64.png" alt="cc0/fuzzy-black-64x64.png"/></li>
+<li>seasonal/xmas-ornament-boat.png <img src="images/seasonal/xmas-ornament-boat.png" alt="seasonal/xmas-ornament-boat.png"/></li>
+<li>seasonal/hannukah-dreidel.png <img src="images/seasonal/hannukah-dreidel.png" alt="seasonal/hannukah-dreidel.png"/></li>
+<li>seasonal/gingerbread-house.png <img src="images/seasonal/gingerbread-house.png" alt="seasonal/gingerbread-house.png"/></li>
+<li>seasonal/fireworks-2015.png <img src="images/seasonal/fireworks-2015.png" alt="seasonal/fireworks-2015.png"/></li>
+<li>seasonal/xmas-cookies.png <img src="images/seasonal/xmas-cookies.png" alt="seasonal/xmas-cookies.png"/></li>
+<li>seasonal/hannukah-menorah.png <img src="images/seasonal/hannukah-menorah.png" alt="seasonal/hannukah-menorah.png"/></li>
+<li>seasonal/xmas-scene-holly-border.png <img src="images/seasonal/xmas-scene-holly-border.png" alt="seasonal/xmas-scene-holly-border.png"/></li>
+<li>seasonal/fireworks-scattered.png <img src="images/seasonal/fireworks-scattered.png" alt="seasonal/fireworks-scattered.png"/></li>
+<li>seasonal/gingerbread-houses.png <img src="images/seasonal/gingerbread-houses.png" alt="seasonal/gingerbread-houses.png"/></li>
+<li>seasonal/penguin-with-presents.png <img src="images/seasonal/penguin-with-presents.png" alt="seasonal/penguin-with-presents.png"/></li>
+<li>seasonal/fireworks-over-harbor.png <img src="images/seasonal/fireworks-over-harbor.png" alt="seasonal/fireworks-over-harbor.png"/></li>
+<li>seasonal/snow-crystal3.png <img src="images/seasonal/snow-crystal3.png" alt="seasonal/snow-crystal3.png"/></li>
+<li>seasonal/fireworks-in-sky.png <img src="images/seasonal/fireworks-in-sky.png" alt="seasonal/fireworks-in-sky.png"/></li>
+<li>seasonal/xmas-tree.png <img src="images/seasonal/xmas-tree.png" alt="seasonal/xmas-tree.png"/></li>
+<li>seasonal/disco-ball.png <img src="images/seasonal/disco-ball.png" alt="seasonal/disco-ball.png"/></li>
+<li>seasonal/xmas-wreath.png <img src="images/seasonal/xmas-wreath.png" alt="seasonal/xmas-wreath.png"/></li>
+<li>seasonal/snownoes.png <img src="images/seasonal/snownoes.png" alt="seasonal/snownoes.png"/></li>
+<li>seasonal/xmas-tree-with-presents.png <img src="images/seasonal/xmas-tree-with-presents.png" alt="seasonal/xmas-tree-with-presents.png"/></li>
+<li>seasonal/stocking-empty.png <img src="images/seasonal/stocking-empty.png" alt="seasonal/stocking-empty.png"/></li>
+<li>seasonal/xmas-ornaments.png <img src="images/seasonal/xmas-ornaments.png" alt="seasonal/xmas-ornaments.png"/></li>
+<li>seasonal/father-winston.png <img src="images/seasonal/father-winston.png" alt="seasonal/father-winston.png"/></li>
+<li>seasonal/reindeer.png <img src="images/seasonal/reindeer.png" alt="seasonal/reindeer.png"/></li>
+<li>seasonal/xmas-ornament-on-tree.png <img src="images/seasonal/xmas-ornament-on-tree.png" alt="seasonal/xmas-ornament-on-tree.png"/></li>
+<li>seasonal/hopper-partying.png <img src="images/seasonal/hopper-partying.png" alt="seasonal/hopper-partying.png"/></li>
+<li>seasonal/gingerbread-family.png <img src="images/seasonal/gingerbread-family.png" alt="seasonal/gingerbread-family.png"/></li>
+<li>seasonal/reindeer-with-hat.png <img src="images/seasonal/reindeer-with-hat.png" alt="seasonal/reindeer-with-hat.png"/></li>
+<li>seasonal/hopper-elfer.png <img src="images/seasonal/hopper-elfer.png" alt="seasonal/hopper-elfer.png"/></li>
+<li>seasonal/gingerbread-man.png <img src="images/seasonal/gingerbread-man.png" alt="seasonal/gingerbread-man.png"/></li>
+<li>seasonal/hopper-reindeer.png <img src="images/seasonal/hopper-reindeer.png" alt="seasonal/hopper-reindeer.png"/></li>
+<li>seasonal/snow-crystal1.png <img src="images/seasonal/snow-crystal1.png" alt="seasonal/snow-crystal1.png"/></li>
+<li>seasonal/snowy-slope-with-trees.png <img src="images/seasonal/snowy-slope-with-trees.png" alt="seasonal/snowy-slope-with-trees.png"/></li>
+<li>seasonal/xmas-presents.png <img src="images/seasonal/xmas-presents.png" alt="seasonal/xmas-presents.png"/></li>
+<li>seasonal/snowman.png <img src="images/seasonal/snowman.png" alt="seasonal/snowman.png"/></li>
+<li>seasonal/santa-with-bag.png <img src="images/seasonal/santa-with-bag.png" alt="seasonal/santa-with-bag.png"/></li>
+<li>seasonal/snow-crystal2.png <img src="images/seasonal/snow-crystal2.png" alt="seasonal/snow-crystal2.png"/></li>
+<li>seasonal/red-nosed-winston.png <img src="images/seasonal/red-nosed-winston.png" alt="seasonal/red-nosed-winston.png"/></li>
+<li>seasonal/house-with-lights.png <img src="images/seasonal/house-with-lights.png" alt="seasonal/house-with-lights.png"/></li>
+<li>animals/cheetah.png <img src="images/animals/cheetah.png" alt="animals/cheetah.png"/></li>
+<li>animals/birds<em>rainbow-lorakeets.png ![animals/birds</em>rainbow-lorakeets.png](images/animals/birds_rainbow-lorakeets.png)</li>
+<li>animals/butterfly<em>monarch.png ![animals/butterfly</em>monarch.png](images/animals/butterfly_monarch.png)</li>
+<li>animals/sleeping-puppy.png <img src="images/animals/sleeping-puppy.png" alt="animals/sleeping-puppy.png"/></li>
+<li>animals/boxer-laying-down.png <img src="images/animals/boxer-laying-down.png" alt="animals/boxer-laying-down.png"/></li>
+<li>animals/spider.png <img src="images/animals/spider.png" alt="animals/spider.png"/></li>
+<li>animals/collies.png <img src="images/animals/collies.png" alt="animals/collies.png"/></li>
+<li>animals/boxer-getting-tan.png <img src="images/animals/boxer-getting-tan.png" alt="animals/boxer-getting-tan.png"/></li>
+<li>animals/penguins.png <img src="images/animals/penguins.png" alt="animals/penguins.png"/></li>
+<li>animals/retriever.png <img src="images/animals/retriever.png" alt="animals/retriever.png"/></li>
+<li>animals/fox.png <img src="images/animals/fox.png" alt="animals/fox.png"/></li>
+<li>animals/boxer-wagging-tongue.png <img src="images/animals/boxer-wagging-tongue.png" alt="animals/boxer-wagging-tongue.png"/></li>
+<li>animals/komodo-dragon.png <img src="images/animals/komodo-dragon.png" alt="animals/komodo-dragon.png"/></li>
+<li>animals/butterfly.png <img src="images/animals/butterfly.png" alt="animals/butterfly.png"/></li>
+<li>animals/dog<em>sleeping-puppy.png ![animals/dog</em>sleeping-puppy.png](images/animals/dog_sleeping-puppy.png)</li>
+<li>animals/snake<em>green-tree-boa.png ![animals/snake</em>green-tree-boa.png](images/animals/snake_green-tree-boa.png)</li>
+<li>animals/cat.png <img src="images/animals/cat.png" alt="animals/cat.png"/></li>
+<li>animals/shark.png <img src="images/animals/shark.png" alt="animals/shark.png"/></li>
+<li>animals/dogs<em>collies.png ![animals/dogs</em>collies.png](images/animals/dogs_collies.png)</li>
+<li>animals/crocodiles.png <img src="images/animals/crocodiles.png" alt="animals/crocodiles.png"/></li>
+<li>animals/kangaroos.png <img src="images/animals/kangaroos.png" alt="animals/kangaroos.png"/></li>
+<li>animals/horse.png <img src="images/animals/horse.png" alt="animals/horse.png"/></li>
+<li>animals/rabbit.png <img src="images/animals/rabbit.png" alt="animals/rabbit.png"/></li>
+<li>landscapes/lotus-garden.png <img src="images/landscapes/lotus-garden.png" alt="landscapes/lotus-garden.png"/></li>
+<li>landscapes/mountains-and-lake.png <img src="images/landscapes/mountains-and-lake.png" alt="landscapes/mountains-and-lake.png"/></li>
+<li>landscapes/clouds-from-plane.png <img src="images/landscapes/clouds-from-plane.png" alt="landscapes/clouds-from-plane.png"/></li>
+<li>landscapes/beach-waves-at-sunset2.png <img src="images/landscapes/beach-waves-at-sunset2.png" alt="landscapes/beach-waves-at-sunset2.png"/></li>
+<li>landscapes/mountains-in-hawaii.png <img src="images/landscapes/mountains-in-hawaii.png" alt="landscapes/mountains-in-hawaii.png"/></li>
+<li>landscapes/crop-circle.png <img src="images/landscapes/crop-circle.png" alt="landscapes/crop-circle.png"/></li>
+<li>landscapes/mountains-sunset.png <img src="images/landscapes/mountains-sunset.png" alt="landscapes/mountains-sunset.png"/></li>
+<li>landscapes/beach-waves-daytime.png <img src="images/landscapes/beach-waves-daytime.png" alt="landscapes/beach-waves-daytime.png"/></li>
+<li>landscapes/beach.png <img src="images/landscapes/beach.png" alt="landscapes/beach.png"/></li>
+<li>landscapes/beach-with-palm-trees.png <img src="images/landscapes/beach-with-palm-trees.png" alt="landscapes/beach-with-palm-trees.png"/></li>
+<li>landscapes/beach-sunset.png <img src="images/landscapes/beach-sunset.png" alt="landscapes/beach-sunset.png"/></li>
+<li>landscapes/fields-of-wine.png <img src="images/landscapes/fields-of-wine.png" alt="landscapes/fields-of-wine.png"/></li>
+<li>landscapes/beach-at-dusk.png <img src="images/landscapes/beach-at-dusk.png" alt="landscapes/beach-at-dusk.png"/></li>
+<li>landscapes/lava.png <img src="images/landscapes/lava.png" alt="landscapes/lava.png"/></li>
+<li>landscapes/sand-dunes.png <img src="images/landscapes/sand-dunes.png" alt="landscapes/sand-dunes.png"/></li>
+<li>landscapes/mountain<em>matterhorn.png ![landscapes/mountain</em>matterhorn.png](images/landscapes/mountain_matterhorn.png)</li>
+<li>landscapes/fields-of-grain.png <img src="images/landscapes/fields-of-grain.png" alt="landscapes/fields-of-grain.png"/></li>
+<li>landscapes/lake-steam-rising.png <img src="images/landscapes/lake-steam-rising.png" alt="landscapes/lake-steam-rising.png"/></li>
+<li>landscapes/waterfall<em>niagara-falls.png ![landscapes/waterfall</em>niagara-falls.png](images/landscapes/waterfall_niagara-falls.png)</li>
+<li>landscapes/beach-waves-at-sunset.png <img src="images/landscapes/beach-waves-at-sunset.png" alt="landscapes/beach-waves-at-sunset.png"/></li>
+<li>landscapes/beach-in-hawaii.png <img src="images/landscapes/beach-in-hawaii.png" alt="landscapes/beach-in-hawaii.png"/></li>
+<li>landscapes/lake.png <img src="images/landscapes/lake.png" alt="landscapes/lake.png"/></li>
+<li>food/grapes.png <img src="images/food/grapes.png" alt="food/grapes.png"/></li>
+<li>food/strawberries.png <img src="images/food/strawberries.png" alt="food/strawberries.png"/></li>
+<li>food/dumplings.png <img src="images/food/dumplings.png" alt="food/dumplings.png"/></li>
+<li>food/potato-chips.png <img src="images/food/potato-chips.png" alt="food/potato-chips.png"/></li>
+<li>food/ice-cream.png <img src="images/food/ice-cream.png" alt="food/ice-cream.png"/></li>
+<li>food/mushroom.png <img src="images/food/mushroom.png" alt="food/mushroom.png"/></li>
+<li>food/berries.png <img src="images/food/berries.png" alt="food/berries.png"/></li>
+<li>food/cake.png <img src="images/food/cake.png" alt="food/cake.png"/></li>
+<li>food/oysters.png <img src="images/food/oysters.png" alt="food/oysters.png"/></li>
+<li>food/pasta.png <img src="images/food/pasta.png" alt="food/pasta.png"/></li>
+<li>food/tomatoes.png <img src="images/food/tomatoes.png" alt="food/tomatoes.png"/></li>
+<li>food/sushi.png <img src="images/food/sushi.png" alt="food/sushi.png"/></li>
+<li>food/broccoli.png <img src="images/food/broccoli.png" alt="food/broccoli.png"/></li>
+<li>food/chocolates.png <img src="images/food/chocolates.png" alt="food/chocolates.png"/></li>
+<li>food/fish<em>grilled-snapper.png ![food/fish</em>grilled-snapper.png](images/food/fish_grilled-snapper.png)</li>
+<li>food/croissant.png <img src="images/food/croissant.png" alt="food/croissant.png"/></li>
+<li>food/brussels-sprouts.png <img src="images/food/brussels-sprouts.png" alt="food/brussels-sprouts.png"/></li>
+<li>food/fruits.png <img src="images/food/fruits.png" alt="food/fruits.png"/></li>
+<li>food/potatoes.png <img src="images/food/potatoes.png" alt="food/potatoes.png"/></li>
+<li>food/shish-kebab.png <img src="images/food/shish-kebab.png" alt="food/shish-kebab.png"/></li>
+<li>food/bananas.png <img src="images/food/bananas.png" alt="food/bananas.png"/></li>
+<li>food/hamburger.png <img src="images/food/hamburger.png" alt="food/hamburger.png"/></li>
+<li>food/coffee-beans.png <img src="images/food/coffee-beans.png" alt="food/coffee-beans.png"/></li>
 </ul>
 
 </div><div id="ref-workshopSep" class="section"><h1>Processing.js 夏期ワークショップ</h1>
@@ -2761,7 +2896,7 @@ function setup() {
 <ul>
 <li><a href="#ref-image">image()</a> 画像を写す</li>
 <li><a href="#ref-imageMode">imageMode()</a> 画像の写し方の設定</li>
-<li><a href="#ref-getImage">getImage()</a>, <a href="#ref-preload">@pjs preload</a> 画像データを読み込む</li>
+<li><a href="#ref-getImage">getImage()</a>  画像データを読み込む</li>
 <li><a href="#ref-createImage">createImage()</a> 空画像を作る</li>
 <li><a href="#ref-get">get()</a> 画像データをキャンバスから抽出する</li>
 </ul>
@@ -6109,7 +6244,7 @@ preload</code>の命令が 必要です。</p>
 image(walker, 10, 10, 80, 80);
 </code></pre>
 
-<p>関連項目: <a href="#ref-preload">@pjs preload</a>, <a href="#ref-image">image()</a>, <a href="#ref-createImage">createImage()</a>.</p>
+<p>関連項目: <a href="#ref-image">image()</a>, <a href="#ref-createImage">createImage()</a>.</p>
 
 </div><div id="ref-PImage" class="section"><h1>PImage</h1>
 
@@ -6128,7 +6263,7 @@ function mouseClicked() {
 }
 
 function draw() {
-  if (sound.audio.duration != 0 &amp;&amp; !sound.audio.paused) {
+  if (sound.audio.duration !== 0 &amp;&amp; !sound.audio.paused) {
     background(50);
   } else {
     background(220);
@@ -6158,25 +6293,6 @@ for (var i = 0; i &lt; img.pixels.length; i++) {
 }
 image(img, 20, 20);
 </code></pre>
-
-</div><div id="ref-preload" class="section"><h1>@pjs preload</h1>
-
-<p><code>@pjs preload</code>はProcessing.jsでは画像データを予めダウンロードするような
-命令です。<a href="#ref-getImage">getImage()</a>で読み込む画像のファイルが全て<code>@pjs preload</code>で ファイル名の記述が必要です。</p>
-
-<p>関連項目: <a href="#ref-getImage">getImage()</a>, <a href="#ref-image">image()</a>.</p>
-
-<pre><code class="language-prerender">var walker = getImage(&#34;cc0/Walker44.png&#34;);
-image(walker, 10, 10, 80, 80);
-</code></pre>
-
-</div><div id="ref-pjs" class="section"><h1>@pjs</h1>
-
-<p>Processing.jsのコンパイラーへの命令。</p>
-
-<ul>
-<li><a href="#ref-preload">@pjs preload</a></li>
-</ul>
 
 </div><div id="ref-imageMode" class="section"><h1>imageMode</h1>
 
