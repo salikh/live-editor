@@ -1,15 +1,23 @@
 var data = {
   name: null,
-  help_on: false,
+  // Currently shown modal window: help|my-projects|share
+  modal: null,
   help_page: 'ref-help',
   message: null,
-  fullname: null,
-  uid: null,
-  original_code: 'rect(10, 20, 100, 100);',
+  // The current program link to share,
+  link: null,
+  // This user ID.
+  uid: localStorage["uid"],
+  // The original code to skip saving if there were no changes.
+  original_code: '// Loading...',
+  // The original name of the program.
   original_name: null,
-  original_uid: null,
-  name_error: false,
+  // The uid of the owner of the script.
+  original_owner: null,
+  // The dictionary of reference documentation.
   ref: {},
+  // The list of projects to show in My Projects modal.
+  projects: [],
 };
 
 /**
@@ -24,65 +32,27 @@ function generateBase62ID(numchars) {
   return ret;
 }
 
-function loadNamed(name) {
-  firebase.database().ref('/shared/' + name).once('value').then(function(snapshot) {
-    if (snapshot.val() === null) {
-      window.console.error('did not find ' + name);
-      return;
-    }
-    window.liveEditor.editor.text(snapshot.val().code);
-    data.original_code = snapshot.val().code;
-    data.original_name = name;
-    data.original_uid = snapshot.val().uid;
-    if (snapshot.val().uid == data.uid) {
-      data.name = name;
-    }
-  }).catch(function(error) {
-    window.console.error('could not load named program ' + name, error);
-  })
-}
-
 function clearMessage() {
   Vue.set(data, 'message', null);
 }
 
-/** Stores the source code by name */
-function saveNamed(name, code) {
-  clearMessage();
-  // Should not happen as 'Save' button is disabled in UI.
-  if (firebase.auth().currentUser.uid == null) {
-    window.console.error('Not logged in');
-    return; 
+/** Loads the given source code text */
+function loadCode(code) {
+  window.liveEditor.editor.text(code);
+  // Avoid autosaving unless there were changes.
+  data.original_code = code;
+  data.original_owner = data.uid;
+  let m = code.match(/^\/\/ *([a-zA-Z0-9_.-]*)/);
+  window.console.log(m);
+  if (m != null) {
+    // Pick the program name from the first comment.
+    data.name = m[1];
+    data.original_name = data.name;
   }
-  firebase.database().ref('/shared/' + name).once('value').then(function(snapshot) {
-    if (snapshot.val() != null && snapshot.val().uid != data.uid) {
-      data.message = 'Name ' + name + ' is already taken';
-      window.console.error('Name ' + name + ' is already taken');
-      data.name_error = true;
-      return;
-    }
-    var updates = {} 
-    updates["/shared/" + name] = {
-      code: code,
-      time: firebase.database.ServerValue.TIMESTAMP,
-      uid: firebase.auth().currentUser.uid
-    };
-    firebase.database().ref().update(updates).then(function(){
-      updateFragment('load', null);
-      updateFragment('id', null);
-      updateFragment('', name);
-      data.original_code = code;
-      data.original_name = name;
-      data.original_uid = firebase.auth().currentUser.uid;
-      data.name_error = false;
-      window.console.log('Saved named: ' + name);
-    }).catch(function(error){
-      window.console.error('Could not save ' + name, error);
-      data.message = "Unable to save project: " + error;
-    });
-  });
+  // Forget the previous program id.
+  updateFragment('', null);
+  data.link = null;
 }
-
 
 /** Loads the source code by id */
 function loadSource(id) {
@@ -93,60 +63,73 @@ function loadSource(id) {
     }
     window.liveEditor.editor.text(snapshot.val().code);
     data.original_code = snapshot.val().code;
+    data.original_owner = snapshot.val().uid;
+    data.original_name = snapshot.val().name;
+    data.name = data.original_name;
   }).catch(function(error) {
     window.console.error('could not load ' + id, error);
   })
 }
 
+/** Generates a link for the current program to share. */
+function getLink(id) {
+  return (document.location.protocol + '//' +
+          document.location.host +
+	  document.location.pathname +
+	  "#" + id);
+}
+
 /** Stores the source code by id */
-function saveSource(id, code) {
+function saveSource(id, name, code, callback = null) {
   var updates = {} 
   updates["/code/" + id] = {
     code: code,
     time: firebase.database.ServerValue.TIMESTAMP,
-    uid: firebase.auth().currentUser && firebase.auth().currentUser.uid
+    uid: data.uid,
+    name: name,
   };
   firebase.database().ref().update(updates).then(function(){
-    updateFragment('load', null);
-    updateFragment('', null);
-    updateFragment('id', id);
+    updateFragment('', id);
     data.original_code = code;
-    data.original_name = null;
-    data.original_uid = null;
+    data.original_name = name;
+    data.original_owner = data.uid;
+    data.link = getLink(id);
     window.console.log('Saved ' + id);
+    if (callback) {
+      callback();
+    }
   }).catch(function(error){
     window.console.error('could not save ' + id, error);
     data.message = "Unable to save project: " + error;
+    data.link = null;
   });
 }
 
 function save() {
   let code = window.liveEditor.editor.text();
-  if (code == data.original_code && (data.name == data.original_name || !data.name)) {
+  if (code == data.original_code && data.name == data.original_name) {
+    // If called by the button, report no changes too.
     window.console.log('no changes');
     return;
   }
   let params = parseFragment();
-  if (data.name) {
-    saveNamed(data.name, code);
-  } else if ('' in params && data.original_uid == data.uid) {
-    data.name = params[''];
-    saveNamed(data.name, code);
+  let id;
+  if ('' in params && data.original_owner == data.uid) {
+    // Reuse program id if it exists and we are the original owner.
+    id = params[''];
   } else {
-    window.console.log('original_uid', data.original_uid, 'uid', data.uid);
-    let id;
-    if ('id' in params) {
-      id = params['id'];
-    } else {
-      id = generateBase62ID(5);
-    }
-    saveSource(id, code);
+    // Otherwise generate a new ID:
+    // - either id did not exist (new program),
+    // - or we were not the owner, so need to fork.
+    id = generateBase62ID(5);
   }
+  saveSource(id, data.name, code);
 }
 
-function updateRegularly() {
+function saveRegularly() {
   let code = window.liveEditor.editor.text();
-  if (code == data.original_code && (data.name == data.original_name || !data.name)) {
+  if (code == data.original_code && data.name == data.original_name) {
+    // No spamming log when invoked automatically by timer.
     return;
   }
   save();
@@ -276,31 +259,73 @@ Vue.component('help-div', Vue.extend({
   template: '<div id="help-div"><a href="#ref-help">Top</a> <a href="#ref-index">Index</a> <a href="docs.html" target="_blank">One-page</a></div>',
 }));
 
+// Reloads the list of projects belonging to this user.
+function updateProjects() {
+    data.projects = []
+    firebase.database().ref('/code').orderByChild('time').on('value', function(snapshot) {
+      snapshot.forEach(function(child) {
+	if (child.val().uid == data.uid) {
+	  data.projects.push({
+	    id: child.key,
+	    name: child.val().name,
+	  });
+	  //window.console.log(child.key);
+	  //window.console.log(child.val());
+	}
+      });
+    });
+}
+
 window.addEventListener('load', function() {
   window.data = data;
+  if (localStorage["uid"] === undefined || localStorage["uid"] === null) {
+    // Generate a random user id and store it in localStorage.
+    let uid = generateBase62ID(4);
+    localStorage["uid"] = uid;
+    data.uid = uid;
+  }
   window.app = new Vue({
     el: "#app",
     data: data,
     methods: {
-      help: function(help_on) {
-	data.help_on = help_on;
+      setModal: function(val) {
+	if (val == "my-projects") {
+	  updateProjects();
+	} else if (val == "share") {
+	  // Make sure the project is saved (and thus data.link is filled).
+	  let params = parseFragment();
+	  if (!'' in params || !params['']) {
+	    // Save with a new id, even if the code is unchanged.
+	    let id = generateBase62ID(5);
+	    saveSource(id, data.name, code, function() {
+	      data.link = getLink(id);
+	    });
+	  }
+	}
+	Vue.set(data, 'modal', val); 
       },
-      name_change: function() {
-	data.name_error = false;
+      selectAndCopy: function(target) {
+	target.select();
+	document.execCommand('copy');
       },
       save: save,
+      load: function(id) {
+	loadSource(id);
+	updateFragment('', id);
+	data.link = getLink(id);
+	data.modal = null;
+      },
       new_program: function() {
 	window.open('#', '_blank');
 	/*
-	updateFragment('id', null);
-	updateFragment('load', null);
 	updateFragment('', null);
+	data.link = getLink(id);
 	let code = 'rect(10, 20, 100, 100);'
 	window.liveEditor.editor.text(code);
 	data.original_code = code;
-	data.original_name = null;
-	data.original_uid = null;
-	data.name = null;
+	data.original_name = '';
+	data.name = '';
+	data.original_owner = data.uid;
 	*/
       },
       clear_message: function() {
@@ -309,72 +334,38 @@ window.addEventListener('load', function() {
       fullscreen: function() {
 	let fragment;
 	let params = parseFragment();
-	if (data.name) {
-	  fragment = '#' + data.name;
-	} else if ('' in params) {
-	  fragment = '#' + params[''];
-	} else if ('id' in params) {
-	  fragment = '#id=' + params['id'];
-	} else if ('load' in params) {
-	  fragment = '#id=' + params['load'];
+	if ('' in params) {
+	  // The program is already saved.
+	  let fragment = '#' + params[''];
+	  let win = window.open('play.html' + fragment, '_blank');
+	  win.focus();
 	} else {
-	  // Save with a new id.
-	  id = generateBase62ID(5);
-	  saveSource(id, code);
-	  fragment = '#id=' + id;
+	  // Save with a new id, even if the code is unchanged.
+	  let id = generateBase62ID(5);
+	  saveSource(id, data.name, code, function() {
+	    let win = window.open('play.html#' + id, '_blank');
+	    win.focus();
+	  });
 	}
 	let win = window.open('play.html' + fragment, '_blank');
 	win.focus();
       },
-      login: function() {
-	let provider = new firebase.auth.GoogleAuthProvider();
-	firebase.auth().useDeviceLanguage();
-	firebase.auth().signInWithPopup(provider).then(function(result) {
-	  // This gives you a Google Access Token. You can use it to access the Google API.
-	  //var token = result.credential.accessToken;
-	  // The signed-in user info.
-	  window.console.log(result.user);
-	  data.fullname = result.user.displayName;
-	  data.uid = result.user.uid;
-	  if (data.original_uid == data.uid && data.original_name) {
-	    data.name = data.original_name;
-	  }
-	}).catch(function(error) {
-	  window.console.log(error);
-	  data.message = 'Error logging in: ' + error.message;
-	  data.fullname = null;
-	  data.uid = null;
-	});
-
-      },
-      logout: function() {
-	firebase.auth().signOut().then(() => {
-	  data.fullname = null;
-	  data.uid = null;
-	}).catch((error) => {
-	  window.console.log(error);
-	  data.message = 'Error logging out: ' + error.message;
-	  data.fullname = null;
-	  data.uid = null;
-	});
-      },
     },
   });
+  // Convetion:
+  // '' => program id (e.g. #abc12)
+  // 'help' => last viewed help page (e.g. #help=help)
   let params = parseFragment();
   if ('' in params) {
-    loadNamed(params['']);
-    if ('id' in params) updateFragment('id', null);
-    if ('load' in params) updateFragment('load', null);
-  } else if ('id' in params) {
-    loadSource(params['id']);
-    if ('load' in params) updateFragment('load', null);
-  } else if ('load' in params) {
-    loadSource(params['load']);
+    loadSource(params['']);
+    data.link = getLink(params['']);
+  } else {
+    loadCode('// Rect\nrect(10,10,100,100);');
   }
   if ('help' in params) {
     data.help_page = 'ref-' + params['help'];
   }
-  window.setInterval(updateRegularly, 5000);
+  window.setInterval(saveRegularly, 5000);
   /*
   // TODO(salikh): Implement help on hover.
   window.liveEditor.editor.editor.on('mousemove', function(e) {
@@ -407,13 +398,7 @@ window.addEventListener('load', function() {
 	    $(button).text('読み込む');
 	    $(button).click(function(ev) {
 	      ev.preventDefault();
-	      window.liveEditor.editor.text(source);
-	      // Avoid autosaving unless there were changes.
-	      data.original_code = source;
-	      // Forget the previous program id.
-	      updateFragment('id', null);
-	      updateFragment('load', null);
-	      updateFragment('', null);
+	      loadCode(source);
 	    });
 	    $(elt).prepend($('<br>'));
 	    $(elt).prepend(button);
@@ -437,12 +422,12 @@ window.addEventListener('load', function() {
   // Dismiss help on 'Esc' key.
   document.addEventListener('keydown', function(e) {
     let keyCode = e.keyCode || e.which;
-    if (e.key === 'Escape' && data.help_on) {
+    if (e.key === 'Escape' && data.modal != null) {
       e.preventDefault();
-      Vue.set(data, 'help_on', false);
-    } else if (keyCode == 112 && !data.help_on) {
+      Vue.set(data, 'modal', null);
+    } else if (keyCode == 112) {
       e.preventDefault();
-      Vue.set(data, 'help_on', true);
+      Vue.set(data, 'modal', 'help');
     }
   });
 })

@@ -25,6 +25,46 @@
   position: relative;
   width: 100%;
 }
+.relative-zero {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+  overflow: visible;
+  z-index: 3;
+}
+#share-project {
+  position: absolute;
+  top: -1em;
+  left: 0;
+  width: 580px;
+  height: auto;
+  padding: 6pt;
+  /* transition: all 0.5s ease-in-out; */
+  transition: opacity 1s linear;
+  background: white;
+  border: solid 2px #ccc;
+  background-color: #f4f4f4;
+  border-radius: 10px;
+}
+#share-project input {
+  font-size: 16pt;
+  padding-right: 40px;
+}
+#my-projects {
+  position: absolute;
+  top: -1em;
+  left: 0;
+  width: 300px;
+  height: auto;
+  padding: 6pt;
+  /* transition: all 0.5s ease-in-out; */
+  transition: opacity 1s linear;
+  background: white;
+  border: solid 2px #ccc;
+  background-color: #f4f4f4;
+  border-radius: 10px;
+}
 .close-icon {
   position: absolute;
   top: 1px;
