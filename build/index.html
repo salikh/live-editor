@@ -29,7 +29,7 @@
 	</td>
 	<td>
 	  <input type='text' size='20' :placeholder='"Program name"' v-model='name'>
-	  <div class='relative-zero' v-if='modal == "share"' v-cloak>
+	  <div class='relative-zero' v-if='modal == "share"' v-cloak v-click-outside='dismiss_share_project'>
 	    <div id='share-project'>
 	      <div class='relative'><a class='close-icon' v-on:click='setModal(null)'>&#x2715;</a></div>
 	      <input size='45' type='text' :value='link' @focus="selectAndCopy($event.target);">
@@ -37,7 +37,7 @@
 	  </div>
 	  <button v-on:click='setModal("share")'>Share</button>
 	  &nbsp;&nbsp;&nbsp;
-	  <div class='relative-zero' v-if='modal == "my-projects"' v-cloak>
+	  <div class='relative-zero' v-if='modal == "my-projects"' v-cloak v-click-outside='dismiss_my_projects'>
 	    <div id='my-projects'>
 	      <div class='relative'><a class='close-icon' v-on:click='setModal(null)'>&#x2715;</a></div>
 	      <h2>My Projects</h2>
@@ -61,7 +61,7 @@
 	</div>
 	<pre>{{ message }}</pre>
       </div>
-      <div class='help-pane' v-if='modal == "help"' v-cloak>
+      <div class='help-pane' v-if='modal == "help"' v-cloak v-click-outside='dismiss_help'>
 	<div class='relative'>
 	  <a class='close-icon' v-on:click='setModal(null)'>&#x2715;</a>
 	  <help-div>

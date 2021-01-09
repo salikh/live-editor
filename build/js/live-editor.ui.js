@@ -2535,6 +2535,42 @@ function resetHiddenSnippets($el) {
   });
 }
 
+function isVisible(e) {
+  var _window$getComputedStyle = window.getComputedStyle(e);
+
+  var display = _window$getComputedStyle.display;
+  var visibility = _window$getComputedStyle.visibility;
+
+  return display != 'none' && visibility != 'hidden';
+}
+
+Vue.directive('click-outside', {
+  bind: function bind(el, binding, vnode) {
+    window.console.log('binding', binding);
+    window.console.log('vnode', vnode);
+    if (typeof binding.value !== 'function') {
+      var detail = '';
+      if (vnode.context.name) {
+        detail = '. Found in component ' + vnode.context.name;
+      }
+      console.warn('v-click-outside: provided expression \'' + binding.expression + '\' is not a function, but a ' + typeof binding.value + detail);
+    }
+    el.clickOutsideEvent = function (event) {
+      window.console.log(event.target);
+      // Check that click is outside of element el, and is not a button.
+      if (isVisible(el) && event.target.tagName != 'BUTTON' && event.target.tagName != 'A' && !(el == event.target || el.contains(event.target))) {
+        binding.value(event);
+      }
+    };
+    document.body.addEventListener('click', el.clickOutsideEvent);
+    document.body.addEventListener('touchstart', el.clickOutsideEvent);
+  },
+  unbind: function unbind(el) {
+    document.body.removeEventListener('click', el.clickOutsideEvent);
+    document.body.removeEventListener('touchstart', el.clickOutsideEvent);
+  }
+});
+
 Vue.component('help-div', Vue.extend({
   data: data,
   mounted: function mounted() {
@@ -2630,6 +2666,24 @@ window.addEventListener('load', function () {
           }
         }
         Vue.set(data, 'modal', val);
+      },
+      dismiss_share_project: function dismiss_share_project() {
+        if (data.modal == 'share') {
+          window.console.log('dismiss share');
+          data.modal = null;
+        }
+      },
+      dismiss_my_projects: function dismiss_my_projects() {
+        if (data.modal == 'my-projects') {
+          window.console.log('dismiss my-projects');
+          data.modal = null;
+        }
+      },
+      dismiss_help: function dismiss_help() {
+        if (data.modal == 'help') {
+          window.console.log('dismiss help');
+          data.modal = null;
+        }
       },
       selectAndCopy: function selectAndCopy(target) {
         target.select();
