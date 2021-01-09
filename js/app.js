@@ -48,6 +48,7 @@ function loadCode(code) {
     // Pick the program name from the first comment.
     data.name = m[1];
     data.original_name = data.name;
+    document.title = data.name;
   }
   // Forget the previous program id.
   updateFragment('', null);
@@ -66,6 +67,7 @@ function loadSource(id) {
     data.original_owner = snapshot.val().uid;
     data.original_name = snapshot.val().name;
     data.name = data.original_name;
+    document.title = data.name;
   }).catch(function(error) {
     window.console.error('could not load ' + id, error);
   })
@@ -98,6 +100,7 @@ function saveSource(id, name, code, callback = null) {
     if (callback) {
       callback();
     }
+    document.title = name;
   }).catch(function(error){
     window.console.error('could not save ' + id, error);
     data.message = "Unable to save project: " + error;
@@ -325,6 +328,7 @@ window.addEventListener('load', function() {
 	data.original_code = code;
 	data.original_name = '';
 	data.name = '';
+	document.title = 'Processing.js';
 	data.original_owner = data.uid;
 	*/
       },
@@ -347,8 +351,6 @@ window.addEventListener('load', function() {
 	    win.focus();
 	  });
 	}
-	let win = window.open('play.html' + fragment, '_blank');
-	win.focus();
       },
     },
   });

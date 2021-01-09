@@ -66,22 +66,6 @@
     });
   }
 
-  function loadNamed(name) {
-    firebase.database().ref('/shared/' + name).once('value').then(function(snapshot) {
-      if (snapshot.val() === null) {
-	window.console.error('did not find ' + name);
-	return;
-      }
-      let code = snapshot.val().code;
-      createOutput(code);
-      window.liveEditorOutput.firstLint = true;
-      window.liveEditorOutput.runCode(code);
-      window.console.log('loaded ' + name);
-    }).catch(function(error) {
-      window.console.error('could not load named program ' + name, error);
-    })
-  }
-
   /** Loads the source code by id */
   function loadSource(id) {
     firebase.database().ref('/code/' + id ).once('value').then(function(snapshot) {
@@ -90,11 +74,13 @@
 	return;
       }
       let code = snapshot.val().code;
+      let name = snapshot.val().name;
       createOutput(code);
       //window.console.log(code);
       window.liveEditorOutput.firstLint = true;
       window.liveEditorOutput.runCode(code);
       window.console.log('loaded ' + id);
+      document.title = name;
     }).catch(function(error) {
       window.console.error('could not load ' + id, error);
     })
