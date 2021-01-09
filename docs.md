@@ -289,10 +289,10 @@ function draw() {
 ゲームを作るにはユーザーからの入力を処理する必要があります。まずはマウスを使ってみましょう。プログラムの実行中にマウスがキャンバスの中に入ると、`mouseX`と`mouseY`の変数にマウスの位置が設定されます。
 
 ```prerender
-draw = function() {
+function draw() {
   background(255);  // 白
   ellipse(mouseX, mouseY, 10, 10);
-};
+}
 ```
 
 マウスをキャンバス内で動かしてみましょう。丸がマウスについてくるのがわかるでしょう。
@@ -301,13 +301,13 @@ draw = function() {
 ユーザーがマウスをクリックしたことに反応するためには、`mousePressed()`関数を定義します。この関数は、マウスのボタンが押されたときに呼ばれます。次のプログラムを実行して、マウスをキャンバス内でクリックすると、一瞬だけキャンバスが黒くなります。
 
 ```prerender
-draw = function() {
+function draw() {
   background(255);  // 白
   ellipse(mouseX, mouseY, 10, 10);
   frameRate(10);
-};
+}
 
-mousePressed = function() {
+function mousePressed() {
   background(0);  // 黒
 }
 ```
@@ -324,15 +324,15 @@ mousePressed = function() {
 ```prerender
 var c = 255;
 
-draw = function() {
+function draw() {
   background(c);
   ellipse(mouseX, mouseY, 10, 10);
   frameRate(10);
-};
+}
 
-mousePressed = function() {
+function mousePressed() {
   c = 0;
-};
+}
 ```
 
 ここでは、プログラムの実行を始めた時に変数cが作られて、最初の値は255になっています。変数の値は255なので、`background(c);`はキャンバスを白く塗りつぶします。ユーザがマウスをクリックすると、`mousePressed()`が呼ばれて、変数cの値が0になります。その後は、`background(c);`という命令はキャンバスを黒く塗りつぶすことになります。
@@ -491,26 +491,24 @@ function keyPressed() {
 
 ```prerender
 imageMode(CENTER);
-image(getImage("cc0/banana-200x113"), 100, 100);
+image(getImage("cc0/banana-200x113"), 50, 50, 100, 85);
 ```
 
 `imageMode`は画像の写し方を設定します。 `CENTER`(中心)を設定すると座標の(x,y)の点に画像の中心が写します。
 `CORNER`(角)を設定すると(x,y)の点に左上角が写します。
 
 ```render
-/* @pjs preload="images/baloon1-170x200.png"; */
-var img = getImage("images/baloon1-170x200.png");
-function setup() {
-  size(300, 200);
-  frameRate(1);
-  textSize(16);
-  fill(0);
-  textAlign(LEFT, TOP);
-  strokeWeight(5);
-}
+var img = getImage("cc0/baloon1-170x200.png");
+size(300, 200, "2D");
+frameRate(1);
+textSize(16);
+fill(0);
+textAlign(LEFT, TOP);
+strokeWeight(5);
 function draw() {
   background(220);
-  if (frameCount % 2 == 0) {
+  fill(0);
+  if (frameCount % 2 === 0) {
     imageMode(CENTER);
     image(img, width/2, height/2, 85, 100);
     text("imageMode(CENTER);", 2, 5);
@@ -532,12 +530,12 @@ function draw() {
 次のプログラムを実行して、 キャンバス内でクリックしてみてください。
 
 ```prerender
-var sound = getSound("images/meow.ogg");
+var sound = getSound("cc0/meow.ogg");
 function mouseClicked() {
-  sound.play();
+  playSound(sound);
 }
 function draw() {
-  if (sound.isPlaying()) {
+  if (sound.audio.duration !== 0 && !sound.audio.paused) {
     background(220);
     fill(0); textSize(20);
     text("Meow", 5, 20);
@@ -558,9 +556,9 @@ function draw() {
 ```example
 // RocketLandingExample
 
-/* @pjs preload="images/fire2-134x200.png"; */
-/* @pjs preload="images/rocket-168x300.png"; */
-/* @pjs preload="images/rocket1-168x300.png"; */
+/* @pjs preload="cc0/fire2-134x200.png"; */
+/* @pjs preload="cc0/rocket-168x300.png"; */
+/* @pjs preload="cc0/rocket1-168x300.png"; */
 var fire = getImage("cc0/fire2-134x200");
 var rocket = getImage("cc0/rocket-168x300");
 var rocket_fire = getImage("cc0/rocket1-168x300");
@@ -879,71 +877,70 @@ function mousePressed() {
 
 ```prerender
 // ImageExample
-/* @pjs preload="images/baloon1-170x200.png"; */
-var img = getImage("images/baloon1-170x200.png");
 imageMode(CENTER);
+var img = getImage("cc0/baloon1-170x200.png");
 image(img, 50, 50, 85, 100);
 ```
 
-*   images/baloon1-170x200.png
-    ![static/baloon1-170x200.png](images/baloon1-170x200.png)
-*   images/baloon2-158x200.png
-    ![images/baloon2-158x200.png](images/baloon2-158x200.png)
-*   images/banana-200x113.png
-    ![images/banana-200x113.png](images/banana-200x113.png)
-*   images/baseball-200x171.png
-    ![images/baseball-200x171.png](images/baseball-200x171.png)
-*   images/cat1-200x134.png
-    ![images/cat1-200x134.png](images/cat1-200x134.png)
-*   images/cat2-185x200.png
-    ![images/cat2-185x200.png](images/cat2-185x200.png)
-*   images/cat3-134x200.png
-    ![images/cat3-134x200.png](images/cat3-134x200.png)
-*   images/dog1-200x188.png
-    ![images/dog1-200x188.png](images/dog1-200x188.png)
-*   images/dog2-180x200.png
-    ![images/dog2-180x200.png](images/dog2-180x200.png)
-*   images/dog3-179x200.png
-    ![images/dog3-179x200.png](images/dog3-179x200.png)
-*   images/face1-150x200.png
-    ![images/face1-150x200.png](images/face1-150x200.png)
-*   images/face2-171x200.png
-    ![images/face2-171x200.png](images/face2-171x200.png)
-*   images/face3-188x200.png
-    ![images/face3-188x200.png](images/face3-188x200.png)
-*   images/face4-106x200.png
-    ![images/face4-106x200.png](images/face4-106x200.png)
-*   images/face5-163x200.png
-    ![images/face5-163x200.png](images/face5-163x200.png)
-*   images/face6-155x200.png
-    ![images/face6-155x200.png](images/face6-155x200.png)
-*   images/fire1-200x123.png
-    ![images/fire1-200x123.png](images/fire1-200x123.png)
-*   images/fire2-134x200.png
-    ![images/fire2-134x200.png](images/fire2-134x200.png)
-*   images/football1-200x200.png
-    ![images/football1-200x200.png](images/football1-200x200.png)
-*   images/football2-200x200.png
-    ![images/football2-200x200.png](images/football2-200x200.png)
-*   images/kiwi-200x200.png
-    ![images/kiwi-200x200.png](images/kiwi-200x200.png)
-*   images/rose-200x161.png
-    ![images/rose-200x161.png](images/rose-200x161.png)
-*   images/rocket-168x300.png
-    ![images/rocket-168x300.png](images/rocket-168x300.png)
-*   images/rocket1-168x300.png
-    ![images/rocket1-168x300.png](images/rocket1-168x300.png)
-*   images/smoke-200x195.png
-    ![images/smoke-200x195.png](images/smoke-200x195.png)
-*   images/sunflower-130x200.png
-    ![images/sunflower-130x200.png](images/sunflower-130x200.png)
-*   images/tennisball-200x197.png
-    ![images/tennisball-200x197.png](images/tennisball-200x197.png)
-*   images/Walker44.png ![images/Walker44.png](images/Walker44.png)
-*   images/fuzzy-white-64x64.png
-    ![images/fuzzy-white-64x64.png](images/fuzzy-white-64x64.png)
-*   images/fuzzy-black-64x64.png
-    ![images/fuzzy-black-64x64.png](images/fuzzy-black-64x64.png)
+*   cc0/baloon1-170x200.png
+    ![cc0/baloon1-170x200.png](images/cc0/baloon1-170x200.png)
+*   cc0/baloon2-158x200.png
+    ![cc0/baloon2-158x200.png](images/cc0/baloon2-158x200.png)
+*   cc0/banana-200x113.png
+    ![cc0/banana-200x113.png](images/cc0/banana-200x113.png)
+*   cc0/baseball-200x171.png
+    ![cc0/baseball-200x171.png](images/cc0/baseball-200x171.png)
+*   cc0/cat1-200x134.png
+    ![cc0/cat1-200x134.png](images/cc0/cat1-200x134.png)
+*   cc0/cat2-185x200.png
+    ![cc0/cat2-185x200.png](images/cc0/cat2-185x200.png)
+*   cc0/cat3-134x200.png
+    ![cc0/cat3-134x200.png](images/cc0/cat3-134x200.png)
+*   cc0/dog1-200x188.png
+    ![cc0/dog1-200x188.png](images/cc0/dog1-200x188.png)
+*   cc0/dog2-180x200.png
+    ![cc0/dog2-180x200.png](images/cc0/dog2-180x200.png)
+*   cc0/dog3-179x200.png
+    ![cc0/dog3-179x200.png](images/cc0/dog3-179x200.png)
+*   cc0/face1-150x200.png
+    ![cc0/face1-150x200.png](images/cc0/face1-150x200.png)
+*   cc0/face2-171x200.png
+    ![cc0/face2-171x200.png](images/cc0/face2-171x200.png)
+*   cc0/face3-188x200.png
+    ![cc0/face3-188x200.png](images/cc0/face3-188x200.png)
+*   cc0/face4-106x200.png
+    ![cc0/face4-106x200.png](images/cc0/face4-106x200.png)
+*   cc0/face5-163x200.png
+    ![cc0/face5-163x200.png](images/cc0/face5-163x200.png)
+*   cc0/face6-155x200.png
+    ![cc0/face6-155x200.png](images/cc0/face6-155x200.png)
+*   cc0/fire1-200x123.png
+    ![cc0/fire1-200x123.png](images/cc0/fire1-200x123.png)
+*   cc0/fire2-134x200.png
+    ![cc0/fire2-134x200.png](images/cc0/fire2-134x200.png)
+*   cc0/football1-200x200.png
+    ![cc0/football1-200x200.png](images/cc0/football1-200x200.png)
+*   cc0/football2-200x200.png
+    ![cc0/football2-200x200.png](images/cc0/football2-200x200.png)
+*   cc0/kiwi-200x200.png
+    ![cc0/kiwi-200x200.png](images/cc0/kiwi-200x200.png)
+*   cc0/rose-200x161.png
+    ![cc0/rose-200x161.png](images/cc0/rose-200x161.png)
+*   cc0/rocket-168x300.png
+    ![cc0/rocket-168x300.png](images/cc0/rocket-168x300.png)
+*   cc0/rocket1-168x300.png
+    ![cc0/rocket1-168x300.png](images/cc0/rocket1-168x300.png)
+*   cc0/smoke-200x195.png
+    ![cc0/smoke-200x195.png](images/cc0/smoke-200x195.png)
+*   cc0/sunflower-130x200.png
+    ![cc0/sunflower-130x200.png](images/cc0/sunflower-130x200.png)
+*   cc0/tennisball-200x197.png
+    ![cc0/tennisball-200x197.png](images/cc0/tennisball-200x197.png)
+*   cc0/Walker44.png ![cc0/Walker44.png](images/cc0/Walker44.png)
+*   cc0/fuzzy-white-64x64.png
+    ![cc0/fuzzy-white-64x64.png](images/cc0/fuzzy-white-64x64.png)
+*   cc0/fuzzy-black-64x64.png
+    ![cc0/fuzzy-black-64x64.png](images/cc0/fuzzy-black-64x64.png)
 
 # Processing.js 夏期ワークショップ {#ref-workshopSep}
 
@@ -1774,8 +1771,7 @@ function mouseClicked() {
 
 ```example
 // Maze1
-/* @pjs preload="images/labyrinth1.png"; */
-var imgLabyrinth = getImage("images/labyrinth1.png");
+var imgLabyrinth = getImage("cc0/labyrinth1.png");
 size(360, 360);  // キャンバスの大きさの設定
 image(imgLabyrinth, 1, 1, 360, 360); // 迷路の表示
 ```
@@ -1785,10 +1781,8 @@ image(imgLabyrinth, 1, 1, 360, 360); // 迷路の表示
 
 ```example
 // Maze1
-/* @pjs preload="images/labyrinth1.png"; */
-/* @pjs preload="images/Walker44.png"; */
-var imgLabyrinth = getImage("images/labyrinth1.png");
-var imgWalker = getImage("images/Walker44.png");
+var imgLabyrinth = getImage("cc0/labyrinth1.png");
+var imgWalker = getImage("cc0/Walker44.png");
 function setup() {
   size(360, 360);  // キャンバスの大きさの設定
   image(imgLabyrinth, 1, 1, 360, 360); // 迷路の表示
@@ -1833,10 +1827,8 @@ function draw() {
 
 ```hidden
 // Maze2
-/* @pjs preload="images/labyrinth1.png"; */
-/* @pjs preload="images/Walker44.png"; */
-var imgLabyrinth = getImage("images/labyrinth1.png");
-var imgWalker = getImage("images/Walker44.png");
+var imgLabyrinth = getImage("cc0/labyrinth1.png");
+var imgWalker = getImage("cc0/Walker44.png");
 function setup() {
   size(360, 360);  // キャンバスの大きさの設定
   image(imgLabyrinth, 1, 1, 360, 360); // 迷路の表示
@@ -1904,10 +1896,8 @@ dyには常に０か１の値しか与えないようにします。たとえば
 
 ```hidden
 // Maze3
-/* @pjs preload="images/labyrinth1.png"; */
-/* @pjs preload="images/Walker44.png"; */
-var imgLabyrinth = getImage("images/labyrinth1.png");
-var imgWalker = getImage("images/Walker44.png");
+var imgLabyrinth = getImage("cc0/labyrinth1.png");
+var imgWalker = getImage("cc0/Walker44.png");
 function setup() {
   size(360, 360);  // キャンバスの大きさの設定
   image(imgLabyrinth, 1, 1, 360, 360); // 迷路の表示
@@ -1982,10 +1972,8 @@ var wallAhead() {
 
 ```hidden
 // Maze3
-/* @pjs preload="images/labyrinth1.png"; */
-/* @pjs preload="images/Walker44.png"; */
-var imgLabyrinth = getImage("images/labyrinth1.png");
-var imgWalker = getImage("images/Walker44.png");
+var imgLabyrinth = getImage("cc0/labyrinth1.png");
+var imgWalker = getImage("cc0/Walker44.png");
 function setup() {
   size(360, 360);  // キャンバスの大きさの設定
   image(imgLabyrinth, 1, 1, 360, 360); // 迷路の表示
@@ -2112,10 +2100,8 @@ true を返してしまうからです。
 
 ```hidden
 // Maze4
-/* @pjs preload="images/labyrinth1.png"; */
-/* @pjs preload="images/Walker44.png"; */
-var imgLabyrinth = getImage("images/labyrinth1.png");
-var imgWalker = getImage("images/Walker44.png");
+var imgLabyrinth = getImage("cc0/labyrinth1.png");
+var imgWalker = getImage("cc0/Walker44.png");
 function setup() {
   size(360, 360);  // キャンバスの大きさの設定
   image(imgLabyrinth, 1, 1, 360, 360); // 迷路の表示
@@ -2236,10 +2222,8 @@ function turnRight() {
 
 ```example
 // Maze5
-/* @pjs preload="images/labyrinth1.png"; */
-/* @pjs preload="images/Walker44.png"; */
-var imgLabyrinth = getImage("images/labyrinth1.png");
-var imgWalker = getImage("images/Walker44.png");
+var imgLabyrinth = getImage("cc0/labyrinth1.png");
+var imgWalker = getImage("cc0/Walker44.png");
 function setup() {
   size(360, 360);  // キャンバスの大きさの設定
   image(imgLabyrinth, 1, 1, 360, 360); // 迷路の表示
@@ -2904,12 +2888,8 @@ background(255, 0, 0);
 
 ```prerender
 // ImageRotateExample
-/* @pjs preload="images/cat2-185x200.png"; */
-var img = getImage("images/cat2-185x200.png");
-
-function setup() {
-  imageMode(CENTER);
-}
+var img = getImage("cc0/cat2-185x200.png");
+imageMode(CENTER);
 
 function draw() {
   var angle = (mouseX+mouseY)/45*PI;
@@ -2929,8 +2909,7 @@ function draw() {
 
 ```prerender
 // ImageSaveExample
-/* @pjs preload="images/cat2-185x200.png"; */
-var img = getImage("images/cat2-185x200.png");
+var img = getImage("cc0/cat2-185x200.png");
 
 function setup() {
   imageMode(CENTER);
@@ -3048,15 +3027,12 @@ function draw() {
 
 ```example
 // RocketLanding
-/* @pjs preload="images/fire2-134x200.png"; */
-/* @pjs preload="images/rocket-168x300.png"; */
-/* @pjs preload="images/rocket1-168x300.png"; */
-var fire = getImage("images/fire2-134x200.png");
-var rocket = getImage("images/rocket-168x300.png");
-var rocket_fire = getImage("images/rocket1-168x300.png");
-var explosion = getSound("images/explosion.ogg");
-var roar = getSound("images/roar.ogg");
-var win = getSound("images/win.ogg");
+var fire = getImage("cc0/fire2-134x200.png");
+var rocket = getImage("cc0/rocket-168x300.png");
+var rocket_fire = getImage("cc0/rocket1-168x300.png");
+var explosion = getSound("cc0/explosion.ogg");
+var roar = getSound("cc0/roar.ogg");
+var win = getSound("cc0/win.ogg");
 
 var x;
 var y;
@@ -3513,10 +3489,8 @@ var walls = [];
 
 ```example
 // JumpingBall2
-/* @pjs preload="images/football1-200x200.png"; */
-/* @pjs preload="images/fire1-200x123.png"; */
-var img = getImage("images/football1-200x200.png");
-var fire = getImage("images/fire1-200x123.png");
+var img = getImage("cc0/football1-200x200.png");
+var fire = getImage("cc0/fire1-200x123.png");
 imageMode(CENTER);
 
 // 座標
@@ -4583,11 +4557,8 @@ switch (x) {
 # LabyrinthWalker
 
 ```example
-/* @pjs preload="images/Labyrinth2a.png"; */
-/* @pjs preload="images/Walker44.png"; */
-
-var imgLabyrinth = getImage("images/Labyrinth2a.png");
-var imgWalker = getImage("images/Walker44.png");
+var imgLabyrinth = getImage("cc0/Labyrinth2a.png");
+var imgWalker = getImage("cc0/Walker44.png");
 
 var s = 44;
 
@@ -4684,10 +4655,8 @@ function draw() {
 今回は、キャラクターの周りだけではなくて、動かす前に迷路全体を調べてみましょう。地図を作って、スタートやゴールの位置が判明してから、最短ルートを探します。プログラムは複雑になってくるので、アルゴリズムの面白い部分を見ることができます。以下のプログラムを読み込みしてから、「実行」のボタンを押してみましょう。
 
 ```example
-/* @pjs preload="images/Labyrinth3a.png"; */
-var imgLabyrinth = getImage("images/Labyrinth3a.png");
-/* @pjs preload="images/Walker44.png"; */
-var imgWalker = getImage("images/Walker44.png");
+var imgLabyrinth = getImage("cc0/Labyrinth3a.png");
+var imgWalker = getImage("cc0/Walker44.png");
 
 function setup() {  // this is run once.
     // Set up canvas size.
@@ -4716,10 +4685,8 @@ function draw() {
 迷路の上に点をおいて、縦横にピクセルを調べながらグリッド形式で地図を作成します。迷路によってはもっと細かく地形を調べなければいけない場合があります。
 
 ```example
-/* @pjs preload="images/Labyrinth3a.png"; */
-var imgLabyrinth = getImage("images/Labyrinth3a.png");
-/* @pjs preload="images/Walker44.png"; */
-var imgWalker = getImage("images/Walker44.png");
+var imgLabyrinth = getImage("cc0/Labyrinth3a.png");
+var imgWalker = getImage("cc0/Walker44.png");
 
 // Step in pixels.
 var s = 17;
@@ -4808,10 +4775,8 @@ function draw() {
 このプログラムは幅優先探索を使って最短の道を探しています。
 
 ```example
-/* @pjs preload="images/Labyrinth3a.png"; */
-var imgLabyrinth = getImage("images/Labyrinth3a.png");
-/* @pjs preload="images/Walker44.png"; */
-var imgWalker = getImage("images/Walker44.png");
+var imgLabyrinth = getImage("cc0/Labyrinth3a.png");
+var imgWalker = getImage("cc0/Walker44.png");
 
 // Step in pixels.
 var s = 17;
@@ -4979,10 +4944,8 @@ function draw() {
 このプログラムは最短のルートを見つけてから後ろから道を作り直します。
 
 ```example
-/* @pjs preload="images/Labyrinth3a.png"; */
-var imgLabyrinth = getImage("images/Labyrinth3a.png");
-/* @pjs preload="images/Walker44.png"; */
-var imgWalker = getImage("images/Walker44.png");
+var imgLabyrinth = getImage("cc0/Labyrinth3a.png");
+var imgWalker = getImage("cc0/Walker44.png");
 
 // Step in pixels.
 var s = 17;
@@ -5174,11 +5137,8 @@ function draw() {
 [前に戻る][LabyrinthBacktrace]
 
 ```example
-/* @pjs preload="images/Labyrinth2a.png"; */
-/* @pjs preload="images/Walker44.png"; */
-
-var imgLabyrinth = getImage("images/Labyrinth2a.png");
-var imgWalker = getImage("images/Walker44.png");
+var imgLabyrinth = getImage("cc0/Labyrinth2a.png");
+var imgWalker = getImage("cc0/Walker44.png");
 
 // Step in pixels.
 var s = 17;
@@ -5453,8 +5413,7 @@ fill(0); text(map.get(123), 10, 30);
 *   画像の場合は、ピクセルデートを読み込みます。
 
 ```prerender
-/* @pjs preload="images/Walker44.png" */
-var img = getImage("images/Walker44.png")
+var img = getImage("cc0/Walker44.png")
 image(img, 28, 28);
 
 // 画像データを抽出する。
@@ -6164,8 +6123,7 @@ function draw() {
 preload`の命令が 必要です。
 
 ```prerender
-/* @pjs preload="images/Walker44.png"; */
-var walker = getImage("images/Walker44.png");
+var walker = getImage("cc0/Walker44.png");
 image(walker, 10, 10, 80, 80);
 ```
 
@@ -6182,14 +6140,14 @@ image(walker, 10, 10, 80, 80);
 音のデータ。
 
 ```prerender
-var sound = getSound("images/explosion.ogg");
+var sound = getSound("cc0/explosion.ogg");
 
 function mouseClicked() {
   sound.play();
 }
 
 function draw() {
-  if (sound.isPlaying()) {
+  if (sound.audio.duration !== 0 && !sound.audio.paused) {
     background(50);
   } else {
     background(220);
@@ -6229,8 +6187,7 @@ image(img, 20, 20);
 関連項目: [getImage()], [image()].
 
 ```prerender
-/* @pjs preload="images/Walker44.png"; */
-var walker = getImage("images/Walker44.png");
+var walker = getImage("cc0/Walker44.png");
 image(walker, 10, 10, 80, 80);
 ```
 
@@ -6249,25 +6206,22 @@ Processing.jsのコンパイラーへの命令。
 *   `imageMode(CORNERS)`は画像の左上と右下の角を使う設定します。
 
 ```prerender
-/* @pjs preload="images/baloon1-170x200.png"; */
 // SpriteExample
-var img = getImage("images/baloon1-170x200.png");
+var img = getImage("cc0/baloon1-170x200.png");
 imageMode(CORNERS);
 image(img, 50, 50, 85, 100);
 ```
 
 ```prerender
-/* @pjs preload="images/baloon1-170x200.png"; */
 // SpriteExample
-var img = getImage("images/baloon1-170x200.png");
+var img = getImage("cc0/baloon1-170x200.png");
 imageMode(CORNER);
 image(img, 50, 50, 85, 100);
 ```
 
 ```prerender
-/* @pjs preload="images/baloon1-170x200.png"; */
 // SpriteExample
-var img = getImage("images/baloon1-170x200.png");
+var img = getImage("cc0/baloon1-170x200.png");
 imageMode(CENTER);
 image(img, 50, 50, 85, 100);
 ```

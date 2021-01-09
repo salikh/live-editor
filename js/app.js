@@ -155,18 +155,34 @@ function addProcessingIframes($el) {
     var iframe = (document.createElement("iframe"));
     // Create the iframe HTML.
     var iframeHtml = '<!DOCTYPE html>\n' +
+      '<link rel="stylesheet" href="css/live-editor.output.css">'+
       '<body style="height: 100%; margin: 0; overflow: hidden;">'+
-      '<canvas id="pjs"></canvas>'+
+      '<div id="live-editor-output"></div>'+
       '<script src="js/live-editor.core_deps.js"></script>'+
       '<script src="js/live-editor.shared.js"></script>'+
       '<script src="js/live-editor.output_pjs_deps.js"></script>'+
+      '<script src="js/live-editor.output.js"></script>'+
+      '<script src="js/live-editor.output_pjs.js"></script>'+
       '<script>'+
-      'var sketchProc = function(processingInstance) { with(processingInstance) {'+
-      source+
-      '}};'+
-      'var canvas = document.getElementById("pjs");'+
-      'var processingInstance = new Processing(canvas, sketchProc);'+
-      'processingInstance.loop();'+
+      'var code = '+JSON.stringify(source)+';'+
+      'window.liveEditorOutput = new LiveEditorOutput({'+
+      '  el: $("#live-editor-output")[0],'+
+      '  outputType: "pjs",'+
+      '  noLint: true,'+
+      '  code: code,'+
+      '  width: 400,'+
+      '  height: 400,'+
+      '  autoFocus: true,'+
+      '  workersDir: "workers/",'+
+      '  externalsDir: "external/",'+
+      '  imagesDir: "images/",'+
+      '  soundsDir: "../../sounds/",'+
+      '  execFile: "output.html",'+
+      '  jshintFile: "external/jshint/jshint.js",'+
+      '  newErrorExperience: true,'+
+      '});'+
+      'window.liveEditorOutput.firstLint = true;'+
+      'window.liveEditorOutput.runCode(code);'+
       '</script>'+
       '</body>';
     pre.appendChild(iframe);

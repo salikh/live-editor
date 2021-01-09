@@ -278,10 +278,10 @@ function draw() {
 
 <p>ゲームを作るにはユーザーからの入力を処理する必要があります。まずはマウスを使ってみましょう。プログラムの実行中にマウスがキャンバスの中に入ると、<code>mouseX</code>と<code>mouseY</code>の変数にマウスの位置が設定されます。</p>
 
-<pre><code class="language-prerender">draw = function() {
+<pre><code class="language-prerender">function draw() {
   background(255);  // 白
   ellipse(mouseX, mouseY, 10, 10);
-};
+}
 </code></pre>
 
 <p>マウスをキャンバス内で動かしてみましょう。丸がマウスについてくるのがわかるでしょう。</p>
@@ -289,13 +289,13 @@ function draw() {
 <p>では、ユーザーがマウスをクリックしたらキャンバスを黒くしてみましょう。
 ユーザーがマウスをクリックしたことに反応するためには、<code>mousePressed()</code>関数を定義します。この関数は、マウスのボタンが押されたときに呼ばれます。次のプログラムを実行して、マウスをキャンバス内でクリックすると、一瞬だけキャンバスが黒くなります。</p>
 
-<pre><code class="language-prerender">draw = function() {
+<pre><code class="language-prerender">function draw() {
   background(255);  // 白
   ellipse(mouseX, mouseY, 10, 10);
   frameRate(10);
-};
+}
 
-mousePressed = function() {
+function mousePressed() {
   background(0);  // 黒
 }
 </code></pre>
@@ -311,15 +311,15 @@ mousePressed = function() {
 
 <pre><code class="language-prerender">var c = 255;
 
-draw = function() {
+function draw() {
   background(c);
   ellipse(mouseX, mouseY, 10, 10);
   frameRate(10);
-};
+}
 
-mousePressed = function() {
+function mousePressed() {
   c = 0;
-};
+}
 </code></pre>
 
 <p>ここでは、プログラムの実行を始めた時に変数cが作られて、最初の値は255になっています。変数の値は255なので、<code>background(c);</code>はキャンバスを白く塗りつぶします。ユーザがマウスをクリックすると、<code>mousePressed()</code>が呼ばれて、変数cの値が0になります。その後は、<code>background(c);</code>という命令はキャンバスを黒く塗りつぶすことになります。</p>
@@ -470,29 +470,24 @@ function keyPressed() {
 
 <p>以前はゲーム作り基本を学びましたが、 楽しいゲームを作るために画像や音が欠かせないものです。 簡単な画像や音のエフェクトの使い方を紹介します。</p>
 
-<p>画像を使うにはそれをロードしなければいけません。 このプログラムでは、<code>@pjs preload=&#34;...&#34;;</code>と<code>loadImage(&#34;...&#34;)</code>
-二箇所で画像名を入れて、画像データを用意します。</p>
-
 <pre><code class="language-prerender">imageMode(CENTER);
-image(getImage(&#34;cc0/banana-200x113&#34;), 100, 100);
+image(getImage(&#34;cc0/banana-200x113&#34;), 50, 50, 100, 85);
 </code></pre>
 
 <p><code>imageMode</code>は画像の写し方を設定します。 <code>CENTER</code>(中心)を設定すると座標の(x,y)の点に画像の中心が写します。
 <code>CORNER</code>(角)を設定すると(x,y)の点に左上角が写します。</p>
 
-<pre><code class="language-render">/* @pjs preload=&#34;images/baloon1-170x200.png&#34;; */
-PImage img = loadImage(&#34;images/baloon1-170x200.png&#34;);
-function setup() {
-  size(300, 200);
-  frameRate(1);
-  textSize(16);
-  fill(0);
-  textAlign(LEFT, TOP);
-  strokeWeight(5);
-}
+<pre><code class="language-render">var img = getImage(&#34;cc0/baloon1-170x200.png&#34;);
+size(300, 200, &#34;2D&#34;);
+frameRate(1);
+textSize(16);
+fill(0);
+textAlign(LEFT, TOP);
+strokeWeight(5);
 function draw() {
   background(220);
-  if (frameCount % 2 == 0) {
+  fill(0);
+  if (frameCount % 2 === 0) {
     imageMode(CENTER);
     image(img, width/2, height/2, 85, 100);
     text(&#34;imageMode(CENTER);&#34;, 2, 5);
@@ -508,17 +503,17 @@ function draw() {
 
 <p>画像をいくつか用意しましたので、<a href="#ref-ImageLibrary">画像リスト</a>でご確認ください。</p>
 
-<p>音の場合も、音のデータを用意する必要があります。<code>loadSound()</code>を呼ぶことによって
+<p>音の場合も、音のデータを用意する必要があります。<code>getSound()</code>を呼ぶことによって
 音のデータを用意します。用意されたデータを<code>PAudio</code>の変数に保存しておきます。
 用意してから適切なときに<code>play()</code>命令を使って再生します。音の場合は、再生は 時間かかりますが、その家にプログラムは実行し続きます。
 次のプログラムを実行して、 キャンバス内でクリックしてみてください。</p>
 
-<pre><code class="language-prerender">PAudio sound = loadSound(&#34;images/meow.ogg&#34;);
+<pre><code class="language-prerender">var sound = getSound(&#34;cc0/meow.ogg&#34;);
 function mouseClicked() {
-  sound.play();
+  playSound(sound);
 }
 function draw() {
-  if (sound.isPlaying()) {
+  if (sound.audio.duration != 0 &amp;&amp; !sound.audio.paused) {
     background(220);
     fill(0); textSize(20);
     text(&#34;Meow&#34;, 5, 20);
@@ -538,9 +533,9 @@ function draw() {
 
 <pre><code class="language-example">// RocketLandingExample
 
-/* @pjs preload=&#34;images/fire2-134x200.png&#34;; */
-/* @pjs preload=&#34;images/rocket-168x300.png&#34;; */
-/* @pjs preload=&#34;images/rocket1-168x300.png&#34;; */
+/* @pjs preload=&#34;cc0/fire2-134x200.png&#34;; */
+/* @pjs preload=&#34;cc0/rocket-168x300.png&#34;; */
+/* @pjs preload=&#34;cc0/rocket1-168x300.png&#34;; */
 var fire = getImage(&#34;cc0/fire2-134x200&#34;);
 var rocket = getImage(&#34;cc0/rocket-168x300&#34;);
 var rocket_fire = getImage(&#34;cc0/rocket1-168x300&#34;);
@@ -823,105 +818,104 @@ function mouseReleased() {
 </div><div id="ref-SoundLibrary" class="section"><h1>音のリスト</h1>
 
 <pre><code class="language-prerender">// SoundExample
-PAudio sound = loadSound(&#34;images/explosion.ogg&#34;);
+var sound = getSound(&#34;cc0/explosion.ogg&#34;);
 function mousePressed() {
-  sound.play();
+  playSound(sound);
 }
 </code></pre>
 
 <ul>
-<li><code>images/coin.ogg</code> <audio src="images/coin.ogg" controls=""></audio></li>
-<li><code>images/tututun.ogg</code> <audio src="images/tututun.ogg" controls=""></audio></li>
-<li><code>images/didin.ogg</code> <audio src="images/didin.ogg" controls=""></audio></li>
-<li><code>images/rururun.ogg</code> <audio src="images/rururun.ogg" controls=""></audio></li>
-<li><code>images/bells.ogg</code> <audio src="images/bells.ogg" controls=""></audio></li>
-<li><code>images/strings.ogg</code> <audio src="images/strings.ogg" controls=""></audio></li>
-<li><code>images/ugh.ogg</code> <audio src="images/ugh.ogg" controls=""></audio></li>
-<li><code>images/bang.ogg</code> <audio src="images/bang.ogg" controls=""></audio></li>
-<li><code>images/ding.ogg</code> <audio src="images/ding.ogg" controls=""></audio></li>
-<li><code>images/cannon.ogg</code> <audio src="images/cannon.ogg" controls=""></audio></li>
-<li><code>images/growl.ogg</code> <audio src="images/growl.ogg" controls=""></audio></li>
-<li><code>images/explosion.ogg</code> <audio src="images/explosion.ogg" controls=""></audio></li>
-<li><code>images/clicks.ogg</code> <audio src="images/clicks.ogg" controls=""></audio></li>
-<li><code>images/fireworks.ogg</code> <audio src="images/fireworks.ogg" controls=""></audio></li>
-<li><code>images/meow.ogg</code> <audio src="images/meow.ogg" controls=""></audio></li>
-<li><code>images/dog.ogg</code> <audio src="images/dog.ogg" controls=""></audio></li>
-<li><code>images/frog.ogg</code> <audio src="images/frog.ogg" controls=""></audio></li>
-<li><code>images/roar.ogg</code> <audio src="images/roar.ogg" controls=""></audio></li>
-<li><code>images/launch.ogg</code> <audio src="images/launch.ogg" controls=""></audio></li>
-<li><code>images/shot.ogg</code> <audio src="images/shot.ogg" controls=""></audio></li>
-<li><code>images/win.ogg</code> <audio src="images/win.ogg" controls=""></audio></li>
+<li><code>cc0/coin.ogg</code> <audio src="sounds/cc0/coin.ogg" controls=""></audio></li>
+<li><code>cc0/tututun.ogg</code> <audio src="sounds/cc0/tututun.ogg" controls=""></audio></li>
+<li><code>cc0/didin.ogg</code> <audio src="sounds/cc0/didin.ogg" controls=""></audio></li>
+<li><code>cc0/rururun.ogg</code> <audio src="sounds/cc0/rururun.ogg" controls=""></audio></li>
+<li><code>cc0/bells.ogg</code> <audio src="sounds/cc0/bells.ogg" controls=""></audio></li>
+<li><code>cc0/strings.ogg</code> <audio src="sounds/cc0/strings.ogg" controls=""></audio></li>
+<li><code>cc0/ugh.ogg</code> <audio src="sounds/cc0/ugh.ogg" controls=""></audio></li>
+<li><code>cc0/bang.ogg</code> <audio src="sounds/cc0/bang.ogg" controls=""></audio></li>
+<li><code>cc0/ding.ogg</code> <audio src="sounds/cc0/ding.ogg" controls=""></audio></li>
+<li><code>cc0/cannon.ogg</code> <audio src="sounds/cc0/cannon.ogg" controls=""></audio></li>
+<li><code>cc0/growl.ogg</code> <audio src="sounds/cc0/growl.ogg" controls=""></audio></li>
+<li><code>cc0/explosion.ogg</code> <audio src="sounds/cc0/explosion.ogg" controls=""></audio></li>
+<li><code>cc0/clicks.ogg</code> <audio src="sounds/cc0/clicks.ogg" controls=""></audio></li>
+<li><code>cc0/fireworks.ogg</code> <audio src="sounds/cc0/fireworks.ogg" controls=""></audio></li>
+<li><code>cc0/meow.ogg</code> <audio src="sounds/cc0/meow.ogg" controls=""></audio></li>
+<li><code>cc0/dog.ogg</code> <audio src="sounds/cc0/dog.ogg" controls=""></audio></li>
+<li><code>cc0/frog.ogg</code> <audio src="sounds/cc0/frog.ogg" controls=""></audio></li>
+<li><code>cc0/roar.ogg</code> <audio src="sounds/cc0/roar.ogg" controls=""></audio></li>
+<li><code>cc0/launch.ogg</code> <audio src="sounds/cc0/launch.ogg" controls=""></audio></li>
+<li><code>cc0/shot.ogg</code> <audio src="sounds/cc0/shot.ogg" controls=""></audio></li>
+<li><code>cc0/win.ogg</code> <audio src="sounds/cc0/win.ogg" controls=""></audio></li>
 </ul>
 
 </div><div id="ref-ImageLibrary" class="section"><h1>画像リスト</h1>
 
 <pre><code class="language-prerender">// ImageExample
-/* @pjs preload=&#34;images/baloon1-170x200.png&#34;; */
-PImage img = loadImage(&#34;images/baloon1-170x200.png&#34;);
 imageMode(CENTER);
+var img = getImage(&#34;cc0/baloon1-170x200.png&#34;);
 image(img, 50, 50, 85, 100);
 </code></pre>
 
 <ul>
-<li>images/baloon1-170x200.png
-<img src="images/baloon1-170x200.png" alt="static/baloon1-170x200.png"/></li>
-<li>images/baloon2-158x200.png
-<img src="images/baloon2-158x200.png" alt="images/baloon2-158x200.png"/></li>
-<li>images/banana-200x113.png
-<img src="images/banana-200x113.png" alt="images/banana-200x113.png"/></li>
-<li>images/baseball-200x171.png
-<img src="images/baseball-200x171.png" alt="images/baseball-200x171.png"/></li>
-<li>images/cat1-200x134.png
-<img src="images/cat1-200x134.png" alt="images/cat1-200x134.png"/></li>
-<li>images/cat2-185x200.png
-<img src="images/cat2-185x200.png" alt="images/cat2-185x200.png"/></li>
-<li>images/cat3-134x200.png
-<img src="images/cat3-134x200.png" alt="images/cat3-134x200.png"/></li>
-<li>images/dog1-200x188.png
-<img src="images/dog1-200x188.png" alt="images/dog1-200x188.png"/></li>
-<li>images/dog2-180x200.png
-<img src="images/dog2-180x200.png" alt="images/dog2-180x200.png"/></li>
-<li>images/dog3-179x200.png
-<img src="images/dog3-179x200.png" alt="images/dog3-179x200.png"/></li>
-<li>images/face1-150x200.png
-<img src="images/face1-150x200.png" alt="images/face1-150x200.png"/></li>
-<li>images/face2-171x200.png
-<img src="images/face2-171x200.png" alt="images/face2-171x200.png"/></li>
-<li>images/face3-188x200.png
-<img src="images/face3-188x200.png" alt="images/face3-188x200.png"/></li>
-<li>images/face4-106x200.png
-<img src="images/face4-106x200.png" alt="images/face4-106x200.png"/></li>
-<li>images/face5-163x200.png
-<img src="images/face5-163x200.png" alt="images/face5-163x200.png"/></li>
-<li>images/face6-155x200.png
-<img src="images/face6-155x200.png" alt="images/face6-155x200.png"/></li>
-<li>images/fire1-200x123.png
-<img src="images/fire1-200x123.png" alt="images/fire1-200x123.png"/></li>
-<li>images/fire2-134x200.png
-<img src="images/fire2-134x200.png" alt="images/fire2-134x200.png"/></li>
-<li>images/football1-200x200.png
-<img src="images/football1-200x200.png" alt="images/football1-200x200.png"/></li>
-<li>images/football2-200x200.png
-<img src="images/football2-200x200.png" alt="images/football2-200x200.png"/></li>
-<li>images/kiwi-200x200.png
-<img src="images/kiwi-200x200.png" alt="images/kiwi-200x200.png"/></li>
-<li>images/rose-200x161.png
-<img src="images/rose-200x161.png" alt="images/rose-200x161.png"/></li>
-<li>images/rocket-168x300.png
-<img src="images/rocket-168x300.png" alt="images/rocket-168x300.png"/></li>
-<li>images/rocket1-168x300.png
-<img src="images/rocket1-168x300.png" alt="images/rocket1-168x300.png"/></li>
-<li>images/smoke-200x195.png
-<img src="images/smoke-200x195.png" alt="images/smoke-200x195.png"/></li>
-<li>images/sunflower-130x200.png
-<img src="images/sunflower-130x200.png" alt="images/sunflower-130x200.png"/></li>
-<li>images/tennisball-200x197.png
-<img src="images/tennisball-200x197.png" alt="images/tennisball-200x197.png"/></li>
-<li>images/Walker44.png <img src="images/Walker44.png" alt="images/Walker44.png"/></li>
-<li>images/fuzzy-white-64x64.png
-<img src="images/fuzzy-white-64x64.png" alt="images/fuzzy-white-64x64.png"/></li>
-<li>images/fuzzy-black-64x64.png
-<img src="images/fuzzy-black-64x64.png" alt="images/fuzzy-black-64x64.png"/></li>
+<li>cc0/baloon1-170x200.png
+<img src="images/cc0/baloon1-170x200.png" alt="cc0/baloon1-170x200.png"/></li>
+<li>cc0/baloon2-158x200.png
+<img src="images/cc0/baloon2-158x200.png" alt="cc0/baloon2-158x200.png"/></li>
+<li>cc0/banana-200x113.png
+<img src="images/cc0/banana-200x113.png" alt="cc0/banana-200x113.png"/></li>
+<li>cc0/baseball-200x171.png
+<img src="images/cc0/baseball-200x171.png" alt="cc0/baseball-200x171.png"/></li>
+<li>cc0/cat1-200x134.png
+<img src="images/cc0/cat1-200x134.png" alt="cc0/cat1-200x134.png"/></li>
+<li>cc0/cat2-185x200.png
+<img src="images/cc0/cat2-185x200.png" alt="cc0/cat2-185x200.png"/></li>
+<li>cc0/cat3-134x200.png
+<img src="images/cc0/cat3-134x200.png" alt="cc0/cat3-134x200.png"/></li>
+<li>cc0/dog1-200x188.png
+<img src="images/cc0/dog1-200x188.png" alt="cc0/dog1-200x188.png"/></li>
+<li>cc0/dog2-180x200.png
+<img src="images/cc0/dog2-180x200.png" alt="cc0/dog2-180x200.png"/></li>
+<li>cc0/dog3-179x200.png
+<img src="images/cc0/dog3-179x200.png" alt="cc0/dog3-179x200.png"/></li>
+<li>cc0/face1-150x200.png
+<img src="images/cc0/face1-150x200.png" alt="cc0/face1-150x200.png"/></li>
+<li>cc0/face2-171x200.png
+<img src="images/cc0/face2-171x200.png" alt="cc0/face2-171x200.png"/></li>
+<li>cc0/face3-188x200.png
+<img src="images/cc0/face3-188x200.png" alt="cc0/face3-188x200.png"/></li>
+<li>cc0/face4-106x200.png
+<img src="images/cc0/face4-106x200.png" alt="cc0/face4-106x200.png"/></li>
+<li>cc0/face5-163x200.png
+<img src="images/cc0/face5-163x200.png" alt="cc0/face5-163x200.png"/></li>
+<li>cc0/face6-155x200.png
+<img src="images/cc0/face6-155x200.png" alt="cc0/face6-155x200.png"/></li>
+<li>cc0/fire1-200x123.png
+<img src="images/cc0/fire1-200x123.png" alt="cc0/fire1-200x123.png"/></li>
+<li>cc0/fire2-134x200.png
+<img src="images/cc0/fire2-134x200.png" alt="cc0/fire2-134x200.png"/></li>
+<li>cc0/football1-200x200.png
+<img src="images/cc0/football1-200x200.png" alt="cc0/football1-200x200.png"/></li>
+<li>cc0/football2-200x200.png
+<img src="images/cc0/football2-200x200.png" alt="cc0/football2-200x200.png"/></li>
+<li>cc0/kiwi-200x200.png
+<img src="images/cc0/kiwi-200x200.png" alt="cc0/kiwi-200x200.png"/></li>
+<li>cc0/rose-200x161.png
+<img src="images/cc0/rose-200x161.png" alt="cc0/rose-200x161.png"/></li>
+<li>cc0/rocket-168x300.png
+<img src="images/cc0/rocket-168x300.png" alt="cc0/rocket-168x300.png"/></li>
+<li>cc0/rocket1-168x300.png
+<img src="images/cc0/rocket1-168x300.png" alt="cc0/rocket1-168x300.png"/></li>
+<li>cc0/smoke-200x195.png
+<img src="images/cc0/smoke-200x195.png" alt="cc0/smoke-200x195.png"/></li>
+<li>cc0/sunflower-130x200.png
+<img src="images/cc0/sunflower-130x200.png" alt="cc0/sunflower-130x200.png"/></li>
+<li>cc0/tennisball-200x197.png
+<img src="images/cc0/tennisball-200x197.png" alt="cc0/tennisball-200x197.png"/></li>
+<li>cc0/Walker44.png <img src="images/cc0/Walker44.png" alt="cc0/Walker44.png"/></li>
+<li>cc0/fuzzy-white-64x64.png
+<img src="images/cc0/fuzzy-white-64x64.png" alt="cc0/fuzzy-white-64x64.png"/></li>
+<li>cc0/fuzzy-black-64x64.png
+<img src="images/cc0/fuzzy-black-64x64.png" alt="cc0/fuzzy-black-64x64.png"/></li>
 </ul>
 
 </div><div id="ref-workshopSep" class="section"><h1>Processing.js 夏期ワークショップ</h1>
@@ -1757,8 +1751,7 @@ function mouseClicked() {
 <p>まずは迷路を表示しましょう。 下にある「読み込む」ボタンを押してから画面の左上にある 「実行」ボタンをおしましょう。</p>
 
 <pre><code class="language-example">// Maze1
-/* @pjs preload=&#34;images/labyrinth1.png&#34;; */
-PImage imgLabyrinth = loadImage(&#34;images/labyrinth1.png&#34;);
+var imgLabyrinth = getImage(&#34;cc0/labyrinth1.png&#34;);
 size(360, 360);  // キャンバスの大きさの設定
 image(imgLabyrinth, 1, 1, 360, 360); // 迷路の表示
 </code></pre>
@@ -1767,10 +1760,8 @@ image(imgLabyrinth, 1, 1, 360, 360); // 迷路の表示
 ではなく、スタンプのようなものです。なので、もともとの背景を壊さないように <a href="#ref-get">get()</a>を使って画像を保存して、あと背景を回復をしなければなりません。</p>
 
 <pre><code class="language-example">// Maze1
-/* @pjs preload=&#34;images/labyrinth1.png&#34;; */
-/* @pjs preload=&#34;images/Walker44.png&#34;; */
-PImage imgLabyrinth = loadImage(&#34;images/labyrinth1.png&#34;);
-PImage imgWalker = loadImage(&#34;images/Walker44.png&#34;);
+var imgLabyrinth = getImage(&#34;cc0/labyrinth1.png&#34;);
+var imgWalker = getImage(&#34;cc0/Walker44.png&#34;);
 function setup() {
   size(360, 360);  // キャンバスの大きさの設定
   image(imgLabyrinth, 1, 1, 360, 360); // 迷路の表示
@@ -1781,7 +1772,7 @@ function setup() {
 var s = 44;
 // キャラクターの座標。
 var x = 176, y = 314;
-PImage imgSave = null;
+var imgSave = null;
 function draw() {
   if (imgSave != null) {
     image(imgSave, x, y, s, s);
@@ -1815,10 +1806,8 @@ function draw() {  // この関数は繰り返し呼ばれている.
 <p>結果はこのようなスケッチになります。</p>
 
 <pre><code class="language-hidden">// Maze2
-/* @pjs preload=&#34;images/labyrinth1.png&#34;; */
-/* @pjs preload=&#34;images/Walker44.png&#34;; */
-PImage imgLabyrinth = loadImage(&#34;images/labyrinth1.png&#34;);
-PImage imgWalker = loadImage(&#34;images/Walker44.png&#34;);
+var imgLabyrinth = getImage(&#34;cc0/labyrinth1.png&#34;);
+var imgWalker = getImage(&#34;cc0/Walker44.png&#34;);
 function setup() {
   size(360, 360);  // キャンバスの大きさの設定
   image(imgLabyrinth, 1, 1, 360, 360); // 迷路の表示
@@ -1834,7 +1823,7 @@ var x = 176, y = 314;
 var dx = 0;
 var dy = -1;
 
-PImage imgSave = null;
+var imgSave = null;
 function draw() {  // この関数は繰り返し呼ばれている.
   if (imgSave != null) {
     image(imgSave, x, y, s, s);
@@ -1887,10 +1876,8 @@ function draw() {
 <p>スケッチこんな漢字になったでしょうか？</p>
 
 <pre><code class="language-hidden">// Maze3
-/* @pjs preload=&#34;images/labyrinth1.png&#34;; */
-/* @pjs preload=&#34;images/Walker44.png&#34;; */
-PImage imgLabyrinth = loadImage(&#34;images/labyrinth1.png&#34;);
-PImage imgWalker = loadImage(&#34;images/Walker44.png&#34;);
+var imgLabyrinth = getImage(&#34;cc0/labyrinth1.png&#34;);
+var imgWalker = getImage(&#34;cc0/Walker44.png&#34;);
 function setup() {
   size(360, 360);  // キャンバスの大きさの設定
   image(imgLabyrinth, 1, 1, 360, 360); // 迷路の表示
@@ -1907,7 +1894,7 @@ var x = 176, y = 314;
 var dx = 0;
 var dy = -1;
 
-PImage imgSave = null;
+var imgSave = null;
 function draw() {  // この関数は繰り返し呼ばれている.
   if (imgSave != null) {
     image(imgSave, x, y, s, s);
@@ -1966,10 +1953,8 @@ function draw() {
 <p>完成スケッチはこちらです。</p>
 
 <pre><code class="language-hidden">// Maze3
-/* @pjs preload=&#34;images/labyrinth1.png&#34;; */
-/* @pjs preload=&#34;images/Walker44.png&#34;; */
-PImage imgLabyrinth = loadImage(&#34;images/labyrinth1.png&#34;);
-PImage imgWalker = loadImage(&#34;images/Walker44.png&#34;);
+var imgLabyrinth = getImage(&#34;cc0/labyrinth1.png&#34;);
+var imgWalker = getImage(&#34;cc0/Walker44.png&#34;);
 function setup() {
   size(360, 360);  // キャンバスの大きさの設定
   image(imgLabyrinth, 1, 1, 360, 360); // 迷路の表示
@@ -1986,7 +1971,7 @@ var x = 176, y = 314;
 var dx = 0;
 var dy = -1;
 
-PImage imgSave = null;
+var imgSave = null;
 function draw() {  // この関数は繰り返し呼ばれている.
   if (imgSave != null) {
     image(imgSave, x, y, s, s);
@@ -2098,10 +2083,8 @@ function wallRight() {
 <p>完成スケッチこちらです。</p>
 
 <pre><code class="language-hidden">// Maze4
-/* @pjs preload=&#34;images/labyrinth1.png&#34;; */
-/* @pjs preload=&#34;images/Walker44.png&#34;; */
-PImage imgLabyrinth = loadImage(&#34;images/labyrinth1.png&#34;);
-PImage imgWalker = loadImage(&#34;images/Walker44.png&#34;);
+var imgLabyrinth = getImage(&#34;cc0/labyrinth1.png&#34;);
+var imgWalker = getImage(&#34;cc0/Walker44.png&#34;);
 function setup() {
   size(360, 360);  // キャンバスの大きさの設定
   image(imgLabyrinth, 1, 1, 360, 360); // 迷路の表示
@@ -2118,7 +2101,7 @@ var x = 176, y = 314;
 var dx = 0;
 var dy = -1;
 
-PImage imgSave = null;
+var imgSave = null;
 function draw() {  // この関数は繰り返し呼ばれている.
   if (imgSave != null) {
     image(imgSave, x, y, s, s);
@@ -2226,10 +2209,8 @@ function draw() {
 <p>完成させたプログラムは全ての迷路を解けるでしょうか？</p>
 
 <pre><code class="language-example">// Maze5
-/* @pjs preload=&#34;images/labyrinth1.png&#34;; */
-/* @pjs preload=&#34;images/Walker44.png&#34;; */
-PImage imgLabyrinth = loadImage(&#34;images/labyrinth1.png&#34;);
-PImage imgWalker = loadImage(&#34;images/Walker44.png&#34;);
+var imgLabyrinth = getImage(&#34;cc0/labyrinth1.png&#34;);
+var imgWalker = getImage(&#34;cc0/Walker44.png&#34;);
 function setup() {
   size(360, 360);  // キャンバスの大きさの設定
   image(imgLabyrinth, 1, 1, 360, 360); // 迷路の表示
@@ -2246,7 +2227,7 @@ var x = 176, y = 314;
 var dx = 0;
 var dy = -1;
 
-PImage imgSave = null;
+var imgSave = null;
 function draw() {  // この関数は繰り返し呼ばれている.
   if (imgSave != null) {
     image(imgSave, x, y, s, s);
@@ -2780,7 +2761,7 @@ function setup() {
 <ul>
 <li><a href="#ref-image">image()</a> 画像を写す</li>
 <li><a href="#ref-imageMode">imageMode()</a> 画像の写し方の設定</li>
-<li><a href="#ref-loadImage">loadImage()</a>, <a href="#ref-preload">@pjs preload</a> 画像データを読み込む</li>
+<li><a href="#ref-getImage">getImage()</a>, <a href="#ref-preload">@pjs preload</a> 画像データを読み込む</li>
 <li><a href="#ref-createImage">createImage()</a> 空画像を作る</li>
 <li><a href="#ref-get">get()</a> 画像データをキャンバスから抽出する</li>
 </ul>
@@ -2950,12 +2931,8 @@ background(255, 0, 0);
 <p>このプログラムは、画像を回しています。</p>
 
 <pre><code class="language-prerender">// ImageRotateExample
-/* @pjs preload=&#34;images/cat2-185x200.png&#34;; */
-PImage img = loadImage(&#34;images/cat2-185x200.png&#34;);
-
-function setup() {
-  imageMode(CENTER);
-}
+var img = getImage(&#34;cc0/cat2-185x200.png&#34;);
+imageMode(CENTER);
 
 function draw() {
   var angle = (mouseX+mouseY)/45*PI;
@@ -2974,14 +2951,13 @@ function draw() {
 <p>このプログラムでは、キャンバスを消すことなく、一部だけを保存して、後もとに戻すことで 綺麗なアニメーションが成り立っています。</p>
 
 <pre><code class="language-prerender">// ImageSaveExample
-/* @pjs preload=&#34;images/cat2-185x200.png&#34;; */
-PImage img = loadImage(&#34;images/cat2-185x200.png&#34;);
+var img = getImage(&#34;cc0/cat2-185x200.png&#34;);
 
 function setup() {
   imageMode(CENTER);
 }
 
-PImage imgSave = null;
+var imgSave = null;
 
 function draw() {
   if (imgSave != null) {
@@ -3095,15 +3071,12 @@ function draw() {
 </div><div id="ref-RocketLanding" class="section"><h1>RocketLanding</h1>
 
 <pre><code class="language-example">// RocketLanding
-/* @pjs preload=&#34;images/fire2-134x200.png&#34;; */
-/* @pjs preload=&#34;images/rocket-168x300.png&#34;; */
-/* @pjs preload=&#34;images/rocket1-168x300.png&#34;; */
-PImage fire = loadImage(&#34;images/fire2-134x200.png&#34;);
-PImage rocket = loadImage(&#34;images/rocket-168x300.png&#34;);
-PImage rocket_fire = loadImage(&#34;images/rocket1-168x300.png&#34;);
-PAudio explosion = loadSound(&#34;images/explosion.ogg&#34;);
-PAudio roar = loadSound(&#34;images/roar.ogg&#34;);
-PAudio win = loadSound(&#34;images/win.ogg&#34;);
+var fire = getImage(&#34;cc0/fire2-134x200.png&#34;);
+var rocket = getImage(&#34;cc0/rocket-168x300.png&#34;);
+var rocket_fire = getImage(&#34;cc0/rocket1-168x300.png&#34;);
+var explosion = getSound(&#34;cc0/explosion.ogg&#34;);
+var roar = getSound(&#34;cc0/roar.ogg&#34;);
+var win = getSound(&#34;cc0/win.ogg&#34;);
 
 var x;
 var y;
@@ -3556,10 +3529,8 @@ var walls = [];
 </div><div id="ref-JumpingBall2" class="section"><h1>JumpingBall2</h1>
 
 <pre><code class="language-example">// JumpingBall2
-/* @pjs preload=&#34;images/football1-200x200.png&#34;; */
-/* @pjs preload=&#34;images/fire1-200x123.png&#34;; */
-PImage img = loadImage(&#34;images/football1-200x200.png&#34;);
-PImage fire = loadImage(&#34;images/fire1-200x123.png&#34;);
+var img = getImage(&#34;cc0/football1-200x200.png&#34;);
+var fire = getImage(&#34;cc0/fire1-200x123.png&#34;);
 imageMode(CENTER);
 
 // 座標
@@ -4595,11 +4566,8 @@ switch (x) {
 
 </div><div id="ref-LabyrinthWalker" class="section"><h1>LabyrinthWalker</h1>
 
-<pre><code class="language-example">/* @pjs preload=&#34;images/Labyrinth2a.png&#34;; */
-/* @pjs preload=&#34;images/Walker44.png&#34;; */
-
-PImage imgLabyrinth = loadImage(&#34;images/Labyrinth2a.png&#34;);
-PImage imgWalker = loadImage(&#34;images/Walker44.png&#34;);
+<pre><code class="language-example">var imgLabyrinth = getImage(&#34;cc0/Labyrinth2a.png&#34;);
+var imgWalker = getImage(&#34;cc0/Walker44.png&#34;);
 
 var s = 44;
 
@@ -4695,10 +4663,8 @@ function draw() {
 
 <p>今回は、キャラクターの周りだけではなくて、動かす前に迷路全体を調べてみましょう。地図を作って、スタートやゴールの位置が判明してから、最短ルートを探します。プログラムは複雑になってくるので、アルゴリズムの面白い部分を見ることができます。以下のプログラムを読み込みしてから、「実行」のボタンを押してみましょう。</p>
 
-<pre><code class="language-example">/* @pjs preload=&#34;images/Labyrinth3a.png&#34;; */
-PImage imgLabyrinth = loadImage(&#34;images/Labyrinth3a.png&#34;);
-/* @pjs preload=&#34;images/Walker44.png&#34;; */
-PImage imgWalker = loadImage(&#34;images/Walker44.png&#34;);
+<pre><code class="language-example">var imgLabyrinth = getImage(&#34;cc0/Labyrinth3a.png&#34;);
+var imgWalker = getImage(&#34;cc0/Walker44.png&#34;);
 
 function setup() {  // this is run once.
     // Set up canvas size.
@@ -4707,7 +4673,7 @@ function setup() {  // this is run once.
     image(imgLabyrinth, 1, 1, 360, 360);
 }
 
-PImage imgSave = null;
+var imgSave = null;
 function draw() {
   if (imgSave != null) {
     image(imgSave, pmouseX, pmouseY, 44, 44);
@@ -4726,10 +4692,8 @@ function draw() {
 <p>このプログラムは迷路の画像を解析して地図を作っていきます。
 迷路の上に点をおいて、縦横にピクセルを調べながらグリッド形式で地図を作成します。迷路によってはもっと細かく地形を調べなければいけない場合があります。</p>
 
-<pre><code class="language-example">/* @pjs preload=&#34;images/Labyrinth3a.png&#34;; */
-PImage imgLabyrinth = loadImage(&#34;images/Labyrinth3a.png&#34;);
-/* @pjs preload=&#34;images/Walker44.png&#34;; */
-PImage imgWalker = loadImage(&#34;images/Walker44.png&#34;);
+<pre><code class="language-example">var imgLabyrinth = getImage(&#34;cc0/Labyrinth3a.png&#34;);
+var imgWalker = getImage(&#34;cc0/Walker44.png&#34;);
 
 // Step in pixels.
 var s = 17;
@@ -4817,10 +4781,8 @@ function draw() {
 
 <p>このプログラムは幅優先探索を使って最短の道を探しています。</p>
 
-<pre><code class="language-example">/* @pjs preload=&#34;images/Labyrinth3a.png&#34;; */
-PImage imgLabyrinth = loadImage(&#34;images/Labyrinth3a.png&#34;);
-/* @pjs preload=&#34;images/Walker44.png&#34;; */
-PImage imgWalker = loadImage(&#34;images/Walker44.png&#34;);
+<pre><code class="language-example">var imgLabyrinth = getImage(&#34;cc0/Labyrinth3a.png&#34;);
+var imgWalker = getImage(&#34;cc0/Walker44.png&#34;);
 
 // Step in pixels.
 var s = 17;
@@ -4987,10 +4949,8 @@ function draw() {
 
 <p>このプログラムは最短のルートを見つけてから後ろから道を作り直します。</p>
 
-<pre><code class="language-example">/* @pjs preload=&#34;images/Labyrinth3a.png&#34;; */
-PImage imgLabyrinth = loadImage(&#34;images/Labyrinth3a.png&#34;);
-/* @pjs preload=&#34;images/Walker44.png&#34;; */
-PImage imgWalker = loadImage(&#34;images/Walker44.png&#34;);
+<pre><code class="language-example">var imgLabyrinth = getImage(&#34;cc0/Labyrinth3a.png&#34;);
+var imgWalker = getImage(&#34;cc0/Walker44.png&#34;);
 
 // Step in pixels.
 var s = 17;
@@ -5181,11 +5141,8 @@ function draw() {
 
 <p><a href="#ref-LabyrinthBacktrace">前に戻る</a></p>
 
-<pre><code class="language-example">/* @pjs preload=&#34;images/Labyrinth2a.png&#34;; */
-/* @pjs preload=&#34;images/Walker44.png&#34;; */
-
-PImage imgLabyrinth = loadImage(&#34;images/Labyrinth2a.png&#34;);
-PImage imgWalker = loadImage(&#34;images/Walker44.png&#34;);
+<pre><code class="language-example">var imgLabyrinth = getImage(&#34;cc0/Labyrinth2a.png&#34;);
+var imgWalker = getImage(&#34;cc0/Walker44.png&#34;);
 
 // Step in pixels.
 var s = 17;
@@ -5455,12 +5412,11 @@ fill(0); text(map.get(123), 10, 30);
 <li>画像の場合は、ピクセルデートを読み込みます。</li>
 </ul>
 
-<pre><code class="language-prerender">/* @pjs preload=&#34;images/Walker44.png&#34; */
-PImage img = loadImage(&#34;images/Walker44.png&#34;)
+<pre><code class="language-prerender">var img = getImage(&#34;cc0/Walker44.png&#34;)
 image(img, 28, 28);
 
 // 画像データを抽出する。
-PImage frag = get(50, 50, 22, 22);
+var frag = get(50, 50, 22, 22);
 // 画像データ写す
 image(frag, 72, 72, 28, 28);
 
@@ -6143,14 +6099,13 @@ function draw() {
 
 <p>関連項目: <a href="#ref-key">key</a>, <a href="#ref-keyCodes">keyCodes</a>.</p>
 
-</div><div id="ref-loadImage" class="section"><h1>loadImage</h1>
+</div><div id="ref-getImage" class="section"><h1>getImage</h1>
 
-<p><code>loadImage()</code>は画像のデートを読み込んでいます。ないProcessing.jsでは
+<p><code>getImage()</code>は画像のデートを読み込んでいます。ないProcessing.jsでは
 ファイルシステムにアクセスできないので、画像データはサーバからダウンロード されます。ダウンロードは時間かかる場合があるので、<code>@pjs
 preload</code>の命令が 必要です。</p>
 
-<pre><code class="language-prerender">/* @pjs preload=&#34;images/Walker44.png&#34;; */
-PImage walker = loadImage(&#34;images/Walker44.png&#34;);
+<pre><code class="language-prerender">var walker = getImage(&#34;cc0/Walker44.png&#34;);
 image(walker, 10, 10, 80, 80);
 </code></pre>
 
@@ -6160,20 +6115,20 @@ image(walker, 10, 10, 80, 80);
 
 <p>画像の形。</p>
 
-<p>関連項目: <a href="#ref-loadImage">loadImage()</a>, <a href="#ref-image">image()</a>.</p>
+<p>関連項目: <a href="#ref-getImage">getImage()</a>, <a href="#ref-image">image()</a>.</p>
 
 </div><div id="ref-PAudio" class="section"><h1>PAudio</h1>
 
 <p>音のデータ。</p>
 
-<pre><code class="language-prerender">PAudio sound = loadSound(&#34;images/explosion.ogg&#34;);
+<pre><code class="language-prerender">var sound = getSound(&#34;cc0/explosion.ogg&#34;);
 
 function mouseClicked() {
   sound.play();
 }
 
 function draw() {
-  if (sound.isPlaying()) {
+  if (sound.audio.duration != 0 &amp;&amp; !sound.audio.paused) {
     background(50);
   } else {
     background(220);
@@ -6185,7 +6140,7 @@ function draw() {
 
 <p>関連項目: <a href="#ref-SoundGallery">音のギャラリー</a></p>
 
-</div><div id="ref-loadSound" class="section"><h1>loadSound</h1>
+</div><div id="ref-getSound" class="section"><h1>getSound</h1>
 
 <p>音のデータをロードする。 <a href="#ref-PAudio">PAudio</a>に参照</p>
 
@@ -6195,7 +6150,7 @@ function draw() {
 
 <p><strong>画像データ</strong>: <a href="#ref-PImage">PImage</a>のフィルドとして画像データを保存します。</p>
 
-<pre><code class="language-prerender">PImage img = createImage(60, 60, RGB);
+<pre><code class="language-prerender">var img = createImage(60, 60, RGB);
 for (var i = 0; i &lt; img.pixels.length; i++) {
   var x = int(i/60);
   var y = int(i % 60);
@@ -6207,12 +6162,11 @@ image(img, 20, 20);
 </div><div id="ref-preload" class="section"><h1>@pjs preload</h1>
 
 <p><code>@pjs preload</code>はProcessing.jsでは画像データを予めダウンロードするような
-命令です。<a href="#ref-loadImage">loadImage()</a>で読み込む画像のファイルが全て<code>@pjs preload</code>で ファイル名の記述が必要です。</p>
+命令です。<a href="#ref-getImage">getImage()</a>で読み込む画像のファイルが全て<code>@pjs preload</code>で ファイル名の記述が必要です。</p>
 
-<p>関連項目: <a href="#ref-loadImage">loadImage()</a>, <a href="#ref-image">image()</a>.</p>
+<p>関連項目: <a href="#ref-getImage">getImage()</a>, <a href="#ref-image">image()</a>.</p>
 
-<pre><code class="language-prerender">/* @pjs preload=&#34;images/Walker44.png&#34;; */
-PImage walker = loadImage(&#34;images/Walker44.png&#34;);
+<pre><code class="language-prerender">var walker = getImage(&#34;cc0/Walker44.png&#34;);
 image(walker, 10, 10, 80, 80);
 </code></pre>
 
@@ -6234,23 +6188,20 @@ image(walker, 10, 10, 80, 80);
 <li><code>imageMode(CORNERS)</code>は画像の左上と右下の角を使う設定します。</li>
 </ul>
 
-<pre><code class="language-prerender">/* @pjs preload=&#34;images/baloon1-170x200.png&#34;; */
-// SpriteExample
-PImage img = loadImage(&#34;images/baloon1-170x200.png&#34;);
+<pre><code class="language-prerender">// SpriteExample
+var img = getImage(&#34;cc0/baloon1-170x200.png&#34;);
 imageMode(CORNERS);
 image(img, 50, 50, 85, 100);
 </code></pre>
 
-<pre><code class="language-prerender">/* @pjs preload=&#34;images/baloon1-170x200.png&#34;; */
-// SpriteExample
-PImage img = loadImage(&#34;images/baloon1-170x200.png&#34;);
+<pre><code class="language-prerender">// SpriteExample
+var img = getImage(&#34;cc0/baloon1-170x200.png&#34;);
 imageMode(CORNER);
 image(img, 50, 50, 85, 100);
 </code></pre>
 
-<pre><code class="language-prerender">/* @pjs preload=&#34;images/baloon1-170x200.png&#34;; */
-// SpriteExample
-PImage img = loadImage(&#34;images/baloon1-170x200.png&#34;);
+<pre><code class="language-prerender">// SpriteExample
+var img = getImage(&#34;cc0/baloon1-170x200.png&#34;);
 imageMode(CENTER);
 image(img, 50, 50, 85, 100);
 </code></pre>
@@ -6268,13 +6219,13 @@ image(img, 50, 50, 85, 100);
 画像の縦幅や横幅。<code>imageMode</code>は<code>CORNERS</code>の場合は<code>width</code>と<code>height</code>ではなく、右下の角の座標として使われます。</li>
 </ul>
 
-<p>関連項目: <a href="#ref-loadImage">loadImage()</a>, <a href="#ref-createImage">createImage()</a>, <a href="#ref-imageMode">imageMode()</a>.</p>
+<p>関連項目: <a href="#ref-getImage">getImage()</a>, <a href="#ref-createImage">createImage()</a>, <a href="#ref-imageMode">imageMode()</a>.</p>
 
 </div><div id="ref-createImage" class="section"><h1>createImage</h1>
 
 <p><code>createImage()</code>は新しい空画像を作ります。</p>
 
-<pre><code class="language-prerender">PImage img = createImage(60, 60, RGB);
+<pre><code class="language-prerender">var img = createImage(60, 60, RGB);
 for (var i = 0; i &lt; img.pixels.length; i++) {
   var x = int(i/60);
   var y = int(i % 60);
