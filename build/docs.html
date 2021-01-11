@@ -2238,18 +2238,6 @@ var dx = 0;
 var dy = -1;
 
 var imgSave = null;
-function draw() {  // この関数は繰り返し呼ばれている.
-  if (imgSave !== null) {
-    image(imgSave, x, y, s, s);
-  }
-  if (wallAhead()) {
-    turnLeft();
-  }
-  moveForward();
-  imgSave = get(x-s/2, y-s/2, s, s);
-  image(imgWalker, x, y);
-}
-
 var wallAhead() {
   // キャラクターの３ピクセル前に調べよう.
   var c = get(x+dx*(s/2+3), y+dy*(s/2+3));
@@ -2266,6 +2254,18 @@ function turnLeft() {
   var tmp = dx;
   dx = dy;
   dy = -tmp;
+}
+
+function draw() {  // この関数は繰り返し呼ばれている.
+  if (imgSave !== null) {
+    image(imgSave, x, y, s, s);
+  }
+  if (wallAhead()) {
+    turnLeft();
+  }
+  moveForward();
+  imgSave = get(x-s/2, y-s/2, s, s);
+  image(imgWalker, x, y);
 }
 </code></pre>
 
@@ -2367,23 +2367,8 @@ var dx = 0;
 var dy = -1;
 
 var imgSave = null;
-function draw() {  // この関数は繰り返し呼ばれている.
-  if (imgSave !== null) {
-    image(imgSave, x, y, s, s);
-  }
-  if (!wallRight()) {
-    turnRight();
-    moveForward();
-    moveForward();
-  } else if (wallAhead()) {
-    turnLeft();
-  }
-  moveForward();
-  imgSave = get(x-s/2, y-s/2, s, s);
-  image(imgWalker, x, y);
-}
 
-var wallAhead() {
+function wallAhead() {
   var wallFound = false;
   var rx = -dy;
   var ry = dx;
@@ -2394,7 +2379,7 @@ var wallAhead() {
   return wallFound;
 }
 
-var wallRight() {
+function wallRight() {
   var rx = -dy;
   var ry = dx;
   var wallFound = false;
@@ -2404,6 +2389,8 @@ var wallRight() {
   }
   return wallFound;
 }
+
+
 
 function moveForward() {
   x += dx;
@@ -2420,6 +2407,22 @@ function turnRight() {
   var tmp = dx;
   dx = -dy;
   dy = tmp;
+}
+
+function draw() {  // この関数は繰り返し呼ばれている.
+  if (imgSave !== null) {
+    image(imgSave, x, y, s, s);
+  }
+  if (!wallRight()) {
+    turnRight();
+    moveForward();
+    moveForward();
+  } else if (wallAhead()) {
+    turnLeft();
+  }
+  moveForward();
+  imgSave = get(x-s/2, y-s/2, s, s);
+  image(imgWalker, x, y);
 }
 </code></pre>
 
@@ -2492,6 +2495,51 @@ var dx = 0;
 var dy = -1;
 
 var imgSave = null;
+
+function reachedGoal() {
+  var c = get(x+dx*(s/2+3), y+dy*(s/2+3));
+  return red(c) &lt; 50 &amp;&amp; green(c) &gt; 50;
+}
+
+function wallAhead() {
+  var wallFound = false;
+  var rx = -dy;
+  var ry = dx;
+  for (var i = -s/2-1; i &lt; s/2+1; i++) {
+    var c = get(x+dx*(s/2+3)+rx*i, y+dy*(s/2+3)+ry*i);
+    wallFound = wallFound || brightness(c) &lt; 50;
+  }
+  return wallFound;
+}
+
+function wallRight() {
+  var rx = -dy;
+  var ry = dx;
+  var wallFound = false;
+  for (var i = -s/2-1; i &lt;= s/2+1; i++) {
+    var c = get(x + rx*(s/2+3)+dx*i, y + ry*(s/2+3)+dy*i);
+    wallFound = wallFound || brightness(c) &lt; 50;
+  }
+  return wallFound;
+}
+
+function moveForward(c) {
+  x += c*dx;
+  y += c*dy;
+}
+
+function turnLeft() {
+  var tmp = dx;
+  dx = dy;
+  dy = -tmp;
+}
+
+function turnRight() {
+  var tmp = dx;
+  dx = -dy;
+  dy = tmp;
+}
+
 function draw() {  // この関数は繰り返し呼ばれている.
   if (imgSave !== null) {
     image(imgSave, x, y, s, s);
@@ -2522,50 +2570,6 @@ function draw() {  // この関数は繰り返し呼ばれている.
   moveForward(1);
   imgSave = get(x-s/2, y-s/2, s, s);
   image(imgWalker, x, y);
-}
-
-var reachedGoal() {
-  var c = get(x+dx*(s/2+3), y+dy*(s/2+3));
-  return red(c) &lt; 50 &amp;&amp; green(c) &gt; 50;
-}
-
-var wallAhead() {
-  var wallFound = false;
-  var rx = -dy;
-  var ry = dx;
-  for (var i = -s/2-1; i &lt; s/2+1; i++) {
-    var c = get(x+dx*(s/2+3)+rx*i, y+dy*(s/2+3)+ry*i);
-    wallFound = wallFound || brightness(c) &lt; 50;
-  }
-  return wallFound;
-}
-
-var wallRight() {
-  var rx = -dy;
-  var ry = dx;
-  var wallFound = false;
-  for (var i = -s/2-1; i &lt;= s/2+1; i++) {
-    var c = get(x + rx*(s/2+3)+dx*i, y + ry*(s/2+3)+dy*i);
-    wallFound = wallFound || brightness(c) &lt; 50;
-  }
-  return wallFound;
-}
-
-function moveForward(c) {
-  x += c*dx;
-  y += c*dy;
-}
-
-function turnLeft() {
-  var tmp = dx;
-  dx = dy;
-  dy = -tmp;
-}
-
-function turnRight() {
-  var tmp = dx;
-  dx = -dy;
-  dy = tmp;
 }
 </code></pre>
 
