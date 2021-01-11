@@ -2623,15 +2623,19 @@ ellipse(100, 160, 60, 15); // 口
 
 <p>同じ命令を何回も繰り返すためにループを使います。</p>
 
-<pre><code class="language-prerender">for (var i = 1; i &lt;= 5; i++) {　// 1から5まで数えます。
+<pre><code class="language-prerender">// LoopExample
+fill(0);
+for (var i = 1; i &lt;= 5; i++) {　// 1から5まで数えます。
   text(str(i), 10, 10+i*10);
 }
 </code></pre>
 
 <p>条件を調べることは「if」文でできます。</p>
 
-<pre><code class="language-prerender">for (var i = 1; i &lt;= 5; i++) {　// 1から5まで数えます。
-  if (i % 2 == 1) {  // 奇数かどうか調べます
+<pre><code class="language-prerender">// LoopExample
+fill(0);
+for (var i = 1; i &lt;= 5; i++) {　// 1から5まで数えます。
+  if (i % 2 === 1) {  // 奇数かどうか調べます
     text(str(i), 10, 10+i*10);
   }
 }
@@ -2821,7 +2825,6 @@ text(&#34;height: &#34; + height, 10, 80);
 <li><a href="#ref-size">size()</a> キャンバスの大きさを設定する</li>
 <li><a href="#ref-width">width</a>, <a href="#ref-height">height</a> 横幅、縦幅</li>
 <li><a href="#ref-dist">dist()</a> 2点間の距離を計算する</li>
-<li><a href="#ref-copy">copy()</a> 画像の一部を別の位置にコピーする</li>
 </ul>
 
 <h2>図形</h2>
@@ -2839,11 +2842,11 @@ text(&#34;height: &#34; + height, 10, 80);
 
 <ul>
 <li><a href="#ref-color">color()</a>は色を表す値を作る</li>
-<li><a href="#ref-fill">fill()</a> 塗りつぶしの色を設定する</li>
+<li><a href="#ref-fill">fill()</a>, <a href="#ref-noFill">noFill()</a> 塗りつぶしの色を設定する</li>
 <li><a href="#ref-stroke">stroke()</a>, <a href="#ref-noStroke">noStroke()</a> ペンの色を設定する</li>
 <li><a href="#ref-strokeCap">strokeCap()</a> ペンの端の形を設定する</li>
 <li><a href="#ref-strokeWeight">strokeWeight()</a> ペンの太さを設定する</li>
-<li><a href="#ref-red">red()</a>, <a href="#ref-green">green()</a>, <a href="#ref-blue">blue()</a>, <a href="#ref-hue">hue()</a>, <a href="#ref-saturation">saturation()</a>, <a href="#ref-brightness">brightness()</a>, <a href="#ref-colorMode">colorMode()</a></li>
+<li><a href="#ref-red">red()</a>, <a href="#ref-green">green()</a>, <a href="#ref-blue">blue()</a>, <a href="#ref-hue">hue()</a>, <a href="#ref-saturation">saturation()</a>, <a href="#ref-brightness">brightness()</a></li>
 </ul>
 
 <h2>画像</h2>
@@ -2863,12 +2866,6 @@ text(&#34;height: &#34; + height, 10, 80);
 <li><a href="#ref-textAlign">textAlign()</a> 文字の写し方を設定する</li>
 <li><a href="#ref-textFont">textFont()</a> 字体を設定する</li>
 <li><a href="#ref-loadFont">loadFont()</a> 字体を読み込みする</li>
-</ul>
-
-<h2>スピーチ</h2>
-
-<ul>
-<li><a href="#ref-speak">speak()</a> 声で話す</li>
 </ul>
 
 <h2><a href="#ref-Mouse">マウス</a></h2>
@@ -2913,12 +2910,6 @@ text(&#34;height: &#34; + height, 10, 80);
 <ul>
 <li><a href="#ref-switch">switch</a>, <a href="#ref-case">case</a>, <a href="#ref-default">default</a></li>
 </ul></li>
-<li>クラス
-
-<ul>
-<li><a href="#ref-class">class</a>, <a href="#ref-this">this</a></li>
-</ul></li>
-<li><a href="#ref-final">final</a></li>
 </ul>
 
 <h2>定数</h2>
@@ -2934,11 +2925,25 @@ text(&#34;height: &#34; + height, 10, 80);
 <li><a href="#ref-ceil">ceil()</a>, <a href="#ref-floor">floor()</a>, <a href="#ref-round">round()</a></li>
 <li><a href="#ref-sin">sin()</a>, <a href="#ref-cos">cos()</a>, <a href="#ref-tan">tan()</a></li>
 <li><a href="#ref-random">random()</a> 乱数</li>
+<li><a href="#ref-radians">radians()</a></li>
 </ul>
+
+</div><div id="ref-radians" class="section"><h1>radians</h1>
+
+<p><code>radians()</code>は与えられた角度を°からラジアンに変更する。</p>
+
+<pre><code class="language-prerender">// RadianExample
+size(200, 100, &#34;2D&#34;); fill(0); textSize(20);
+var x = 60;
+text(&#39;x = &#39; + x, 10, 30);
+text(&#39;radians(x) = &#39; + radians(x), 10, 60);
+</code></pre>
+
+<p>関連項目: <a href="#ref-sin">sin()</a>, <a href="#ref-cos">cos()</a>, <a href="#ref-tan">tan()</a></p>
 
 </div><div id="ref-size" class="section"><h1>size</h1>
 
-<p><code>size(x_size, y_size)</code>はキャンバスの大きさを定めます。スケッチの実行の最初に一回だけ呼ばなければいけない関数です。</p>
+<p><code>size(x_size, y_size, &#34;2D&#34;)</code>はキャンバスの大きさを定めます。スケッチの実行の最初に一回だけ呼ばなければいけない関数です。</p>
 
 <pre><code class="language-prerender">// キャンバスの大きさを300×200に設定します。
 size(300, 200, &#34;2D&#34;);
@@ -4310,6 +4315,24 @@ CODED</code>を確かめなければなりません。</p>
 
 <p><code>random(min, max)</code> は <code>min</code>, <code>max</code> で与えられた範囲のなかからランダムな値(乱数)を返します。 返された値 <code>r</code> は <code>min &lt;= r &lt; max</code> を満たします。</p>
 
+<p><strong>注意</strong>：返された値は整数ではありません。</p>
+
+<pre><code class="language-prerender">// RandomExample
+size(200, 100, &#34;2D&#34;); fill(0); textSize(20);
+var x = 60;
+text(&#39;random(0,5) = &#39; + random(0,5), 10, 30);
+text(&#39;random(0,5) = &#39; + random(0,5), 10, 60);
+</code></pre>
+
+<p><code>random(max)</code>は0から<code>max</code>の乱数を返します。</p>
+
+<pre><code class="language-prerender">// RandomExample
+size(200, 100, &#34;2D&#34;); fill(0); textSize(20);
+var x = 60;
+text(&#39;random(5) = &#39; + random(5), 10, 30);
+text(&#39;random(5) = &#39; + random(5), 10, 60);
+</code></pre>
+
 </div><div id="ref-rect" class="section"><h1>rect</h1>
 
 <p><code>rect()</code>は長方形を描きます。長方形の位置は2つの対角の頂点の座標で指定します。</p>
@@ -4607,7 +4630,7 @@ while (x &lt; 10) {
 <li>最後の部分は、{} の中を実行し終わった後、毎回呼ばれます。</li>
 </ul>
 
-<pre><code class="language-prernder">fill(0);
+<pre><code class="language-prerender">fill(0);
 for (var i = 0; i &lt; 10; i++) {
   text(str(i), 10, i*10);
 }
@@ -5515,11 +5538,11 @@ for (var x = 1; x &lt; 150; x += 1) {
 <p><code>get()</code>は複数の意味持っている。</p>
 
 <ul>
-<li><a href="#ref-HashMap">HashMap</a>の場合、キーに対して値を取り出す。</li>
-<li>画像の場合は、ピクセルデートを読み込みます。</li>
+<li>画像の場合は、ピクセルデータを読み込みます。</li>
 </ul>
 
-<pre><code class="language-prerender">var img = getImage(&#34;cc0/Walker44.png&#34;)
+<pre><code class="language-prerender">// GetExample
+var img = getImage(&#34;cc0/Walker44.png&#34;);
 image(img, 28, 28);
 
 // 画像データを抽出する。
@@ -5527,10 +5550,13 @@ var frag = get(50, 50, 22, 22);
 // 画像データ写す
 image(frag, 72, 72, 28, 28);
 
-// ピクセルの色を抽出する。
-var c = get(50, 50);
-// 抽出された色で長方形を描く。
-rect(72, 0, 28, 28);
+function mouseMoved() {
+    // ピクセルの色を抽出する。
+    var c = get(mouseX, mouseY);
+    // 抽出された色で長方形を描く。
+    fill(c);
+    rect(72, 0, 28, 28);
+}
 </code></pre>
 
 </div><div id="ref-put" class="section"><h1>put</h1>
@@ -5661,7 +5687,7 @@ rect(10, 10, 80, 80);
 
 <p>１つだけ数値を指定して、グレースケールで色を作ることもできます。0は黒、255は白、その中間は数値に応じた灰色を意味します。</p>
 
-<p>関連項目: <a href="#ref-fill">fill()</a>, <a href="#ref-background">background()</a>, <a href="#ref-red">red()</a>, <a href="#ref-green">green()</a>, <a href="#ref-blue">blue()</a>, <a href="#ref-hue">hue()</a>, <a href="#ref-saturation">saturation()</a>, <a href="#ref-brightness">brightness()</a>, <a href="#ref-colorMode">colorMode()</a></p>
+<p>関連項目: <a href="#ref-fill">fill()</a>, <a href="#ref-background">background()</a>, <a href="#ref-red">red()</a>, <a href="#ref-green">green()</a>, <a href="#ref-blue">blue()</a>, <a href="#ref-hue">hue()</a>, <a href="#ref-saturation">saturation()</a>, <a href="#ref-brightness">brightness()</a></p>
 
 </div><div id="ref-abs" class="section"><h1>abs</h1>
 
@@ -5757,7 +5783,9 @@ point(50, 50);
 while (i &lt; 10) {
   fill(0); text(str(i), 10, i*10);
   i++;
-  continue;
+  if (i &lt;= 10) {
+    continue;
+  }
   text(&#34;絶対実行しない&#34;, 50, 50);
 }
 </code></pre>
@@ -5892,12 +5920,6 @@ text(&#39;tan(x) = &#39; + tan(x), 10, 60);
 
 <p>関連項目: <a href="#ref-sin">sin()</a>, <a href="#ref-cos">cos()</a></p>
 
-</div><div id="ref-this" class="section"><h1>this</h1>
-
-<p><a href="#ref-class">class</a>の定義の中に自分自身のオブジェクトに参照する方法。</p>
-
-<p>関連項目: <a href="#ref-class">class</a>.</p>
-
 </div><div id="ref-dist" class="section"><h1>dist</h1>
 
 <p><code>dist()</code>は２つの点の間の距離を計算します。点はそれぞれ x, y 座標で指定します。</p>
@@ -5921,9 +5943,8 @@ function draw() {
 
 <p><code>cursor()</code>はマウスのカーソルの形を指定する。</p>
 
-<pre><code class="language-prerender">function setup() {
-  frameRate(2);
-}
+<pre><code class="language-prerender">// CursorExample
+frameRate(2);
 // マウスのカーソルをキャンバス内に置きましょう。
 var i = 0;
 function draw() {
@@ -5980,23 +6001,6 @@ function draw() {
 </div><div id="ref-exit" class="section"><h1>exit</h1>
 
 <p><code>exit()</code>はスケッチの実行を終了する。</p>
-
-</div><div id="ref-copy" class="section"><h1>copy</h1>
-
-<p><code>copy()</code>画像の指定された部分をキャンバスの別のところでコピーする。</p>
-
-<pre><code class="language-prerender">ellipse(50, 50, 40, 40);
-copy(50, 50, 24, 24, 0, 0, 50, 50);
-</code></pre>
-
-<p>呼び方: <code>copy(x, y, w, h, dx, dy, dw, dh)</code></p>
-
-<ul>
-<li>x, y — コピーの元の長方形の左上の角のX,Y座標</li>
-<li>w, h — コピーする資格の横幅と縦幅</li>
-<li>dx, dy — コピーの目的地の長方形の左上の角のX,Y座標</li>
-<li>dw, dh — コピーの目的地の横幅と縦幅</li>
-</ul>
 
 </div><div id="ref-key" class="section"><h1>key</h1>
 

@@ -2659,6 +2659,8 @@ ellipse(100, 160, 60, 15); // 口
 同じ命令を何回も繰り返すためにループを使います。
 
 ```prerender
+// LoopExample
+fill(0);
 for (var i = 1; i <= 5; i++) {　// 1から5まで数えます。
   text(str(i), 10, 10+i*10);
 }
@@ -2667,8 +2669,10 @@ for (var i = 1; i <= 5; i++) {　// 1から5まで数えます。
 条件を調べることは「if」文でできます。
 
 ```prerender
+// LoopExample
+fill(0);
 for (var i = 1; i <= 5; i++) {　// 1から5まで数えます。
-  if (i % 2 == 1) {  // 奇数かどうか調べます
+  if (i % 2 === 1) {  // 奇数かどうか調べます
     text(str(i), 10, 10+i*10);
   }
 }
@@ -2855,7 +2859,6 @@ text("height: " + height, 10, 80);
 *   [size()] キャンバスの大きさを設定する
 *   [width], [height] 横幅、縦幅
 *   [dist()] 2点間の距離を計算する
-*   [copy()] 画像の一部を別の位置にコピーする
 
 ## 図形
 
@@ -2869,11 +2872,11 @@ text("height: " + height, 10, 80);
 ## 筆の設定や色
 
 *   [color()]は色を表す値を作る
-*   [fill()] 塗りつぶしの色を設定する
+*   [fill()], [noFill()] 塗りつぶしの色を設定する
 *   [stroke()], [noStroke()] ペンの色を設定する
 *   [strokeCap()] ペンの端の形を設定する
 *   [strokeWeight()] ペンの太さを設定する
-*   [red()], [green()], [blue()], [hue()], [saturation()], [brightness()], [colorMode()]
+*   [red()], [green()], [blue()], [hue()], [saturation()], [brightness()]
 
 ## 画像
 
@@ -2889,10 +2892,6 @@ text("height: " + height, 10, 80);
 *   [textAlign()] 文字の写し方を設定する
 *   [textFont()] 字体を設定する
 *   [loadFont()] 字体を読み込みする
-
-## スピーチ
-
-*   [speak()] 声で話す
 
 ## [マウス][Mouse]
 
@@ -2922,9 +2921,6 @@ text("height: " + height, 10, 80);
     *   [continue], [break]
 *   switch文
     *   [switch], [case], [default]
-*   クラス
-    *   [class], [this]
-*   [final]
 
 ## 定数
 
@@ -2936,10 +2932,27 @@ text("height: " + height, 10, 80);
 *   [ceil()], [floor()], [round()]
 *   [sin()], [cos()], [tan()]
 *   [random()] 乱数
+*   [radians()]
+
+
+# radians
+
+`radians()`は与えられた角度を°からラジアンに変更する。
+
+```prerender
+// RadianExample
+size(200, 100, "2D"); fill(0); textSize(20);
+var x = 60;
+text('x = ' + x, 10, 30);
+text('radians(x) = ' + radians(x), 10, 60);
+```
+
+関連項目: [sin()], [cos()], [tan()]
+
 
 # size
 
-`size(x_size, y_size)`はキャンバスの大きさを定めます。スケッチの実行の最初に一回だけ呼ばなければいけない関数です。
+`size(x_size, y_size, "2D")`はキャンバスの大きさを定めます。スケッチの実行の最初に一回だけ呼ばなければいけない関数です。
 
 ```prerender
 // キャンバスの大きさを300×200に設定します。
@@ -4337,6 +4350,26 @@ CODED`を確かめなければなりません。
 
 `random(min, max)` は `min`, `max` で与えられた範囲のなかからランダムな値(乱数)を返します。 返された値 `r` は `min <= r < max` を満たします。
 
+**注意**：返された値は整数ではありません。
+
+```prerender
+// RandomExample
+size(200, 100, "2D"); fill(0); textSize(20);
+var x = 60;
+text('random(0,5) = ' + random(0,5), 10, 30);
+text('random(0,5) = ' + random(0,5), 10, 60);
+```
+
+`random(max)`は0から`max`の乱数を返します。
+
+```prerender
+// RandomExample
+size(200, 100, "2D"); fill(0); textSize(20);
+var x = 60;
+text('random(5) = ' + random(5), 10, 30);
+text('random(5) = ' + random(5), 10, 60);
+```
+
 # rect
 
 `rect()`は長方形を描きます。長方形の位置は2つの対角の頂点の座標で指定します。
@@ -4645,7 +4678,7 @@ while (x < 10) {
 * 真ん中の部分は、繰り返しの条件です。この条件が満たされている間、{} の中を繰り返し実行します。
 * 最後の部分は、{} の中を実行し終わった後、毎回呼ばれます。
 
-```prernder
+```prerender
 fill(0);
 for (var i = 0; i < 10; i++) {
   text(str(i), 10, i*10);
@@ -5566,11 +5599,11 @@ arc(50, 50, 45, 45, HALF_PI, TWO_PI);
 
 `get()`は複数の意味持っている。
 
-*   [HashMap]の場合、キーに対して値を取り出す。
-*   画像の場合は、ピクセルデートを読み込みます。
+*   画像の場合は、ピクセルデータを読み込みます。
 
 ```prerender
-var img = getImage("cc0/Walker44.png")
+// GetExample
+var img = getImage("cc0/Walker44.png");
 image(img, 28, 28);
 
 // 画像データを抽出する。
@@ -5578,10 +5611,13 @@ var frag = get(50, 50, 22, 22);
 // 画像データ写す
 image(frag, 72, 72, 28, 28);
 
-// ピクセルの色を抽出する。
-var c = get(50, 50);
-// 抽出された色で長方形を描く。
-rect(72, 0, 28, 28);
+function mouseMoved() {
+    // ピクセルの色を抽出する。
+    var c = get(mouseX, mouseY);
+    // 抽出された色で長方形を描く。
+    fill(c);
+    rect(72, 0, 28, 28);
+}
 ```
 
 # put
@@ -5717,7 +5753,7 @@ rect(10, 10, 80, 80);
 
 １つだけ数値を指定して、グレースケールで色を作ることもできます。0は黒、255は白、その中間は数値に応じた灰色を意味します。
 
-関連項目: [fill()], [background()], [red()], [green()], [blue()], [hue()], [saturation()], [brightness()], [colorMode()]
+関連項目: [fill()], [background()], [red()], [green()], [blue()], [hue()], [saturation()], [brightness()]
 
 # abs
 
@@ -5815,7 +5851,9 @@ var i = 0;
 while (i < 10) {
   fill(0); text(str(i), 10, i*10);
   i++;
-  continue;
+  if (i <= 10) {
+    continue;
+  }
   text("絶対実行しない", 50, 50);
 }
 ```
@@ -5955,12 +5993,6 @@ text('tan(x) = ' + tan(x), 10, 60);
 
 関連項目: [sin()], [cos()]
 
-# this
-
-[class]の定義の中に自分自身のオブジェクトに参照する方法。
-
-関連項目: [class].
-
 # dist
 
 
@@ -5988,9 +6020,8 @@ function draw() {
 `cursor()`はマウスのカーソルの形を指定する。
 
 ```prerender
-function setup() {
-  frameRate(2);
-}
+// CursorExample
+frameRate(2);
 // マウスのカーソルをキャンバス内に置きましょう。
 var i = 0;
 function draw() {
@@ -6047,22 +6078,6 @@ function draw() {
 # exit
 
 `exit()`はスケッチの実行を終了する。
-
-# copy
-
-`copy()`画像の指定された部分をキャンバスの別のところでコピーする。
-
-```prerender
-ellipse(50, 50, 40, 40);
-copy(50, 50, 24, 24, 0, 0, 50, 50);
-```
-
-呼び方: `copy(x, y, w, h, dx, dy, dw, dh)`
-
-*   x, y --- コピーの元の長方形の左上の角のX,Y座標
-*   w, h --- コピーする資格の横幅と縦幅
-*   dx, dy --- コピーの目的地の長方形の左上の角のX,Y座標
-*   dw, dh --- コピーの目的地の横幅と縦幅
 
 # key
 
