@@ -922,6 +922,11 @@ function draw() {
   textAlign(LEFT, BASELINE);
   text(&#34;color(&#34;+red(c)+&#34;,&#34;+green(c)+&#34;,&#34;+blue(c)+&#34;)&#34;, width/10, height*19/20);
 }
+
+function mouseClicked() {
+  var c = posToColor(mouseX, mouseY);
+  println(&#34;color(&#34;+red(c)+&#34;,&#34;+green(c)+&#34;,&#34;+blue(c)+&#34;)&#34;);
+}
 </code></pre>
 
 </div><div id="ref-EllipseTool" class="section"><h1>EllipseTool</h1>
@@ -929,7 +934,6 @@ function draw() {
 <p>このプログラムは楕円を書く命令をお見せします。キャンバス内でマウス・ドラッグしてみてください。</p>
 
 <pre><code class="language-prerender">// EllipseTool
-size(200, 200, &#34;2D&#34;);
 
 var x1, y1, x2, y2;
 var pressed = false;
@@ -962,6 +966,7 @@ function mouseReleased() {
     x2 = mouseX;
     y2 = mouseY;
     pressed = false;
+    println(&#34;ellipse(&#34;+x1+&#34;,&#34;+y1+&#34;,&#34;+((x2-x1)*2)+&#34;,&#34;+((y2-y1)*2)+&#34;)&#34;);
   }
 }
 </code></pre>
@@ -971,7 +976,6 @@ function mouseReleased() {
 <p>このプログラムは長方形を書く命令をお見せします。キャンバス内でマウス・ドラッグしてみてください。</p>
 
 <pre><code class="language-prerender">// RectangleTool
-size(200, 200, &#34;2D&#34;);
 
 var x1, y1, x2, y2;
 var pressed = false;
@@ -1004,6 +1008,7 @@ function mouseReleased() {
     x2 = mouseX;
     y2 = mouseY;
     pressed = false;
+    println(&#34;rect(&#34;+x1+&#34;,&#34;+y1+&#34;,&#34;+(x2-x1)+&#34;,&#34;+(y2-y1)+&#34;)&#34;);
   }
 }
 </code></pre>
@@ -2038,7 +2043,7 @@ var s = 44;
 var x = 176, y = 314;
 var imgSave = null;
 function draw() {
-  if (imgSave != null) {
+  if (imgSave !== null) {
     image(imgSave, x, y, s, s);
   }
   x = mouseX;
@@ -2088,7 +2093,7 @@ var dy = -1;
 
 var imgSave = null;
 function draw() {  // この関数は繰り返し呼ばれている.
-  if (imgSave != null) {
+  if (imgSave !== null) {
     image(imgSave, x, y, s, s);
   }
   x += dx;
@@ -2158,7 +2163,7 @@ var dy = -1;
 
 var imgSave = null;
 function draw() {  // この関数は繰り返し呼ばれている.
-  if (imgSave != null) {
+  if (imgSave !== null) {
     image(imgSave, x, y, s, s);
   }
   if (wallAhead()) {
@@ -2234,7 +2239,7 @@ var dy = -1;
 
 var imgSave = null;
 function draw() {  // この関数は繰り返し呼ばれている.
-  if (imgSave != null) {
+  if (imgSave !== null) {
     image(imgSave, x, y, s, s);
   }
   if (wallAhead()) {
@@ -2363,7 +2368,7 @@ var dy = -1;
 
 var imgSave = null;
 function draw() {  // この関数は繰り返し呼ばれている.
-  if (imgSave != null) {
+  if (imgSave !== null) {
     image(imgSave, x, y, s, s);
   }
   if (!wallRight()) {
@@ -2488,7 +2493,7 @@ var dy = -1;
 
 var imgSave = null;
 function draw() {  // この関数は繰り返し呼ばれている.
-  if (imgSave != null) {
+  if (imgSave !== null) {
     image(imgSave, x, y, s, s);
   }
   if (reachedGoal()) {
@@ -2928,6 +2933,7 @@ text(&#34;height: &#34; + height, 10, 80);
 <li><a href="#ref-abs">abs()</a></li>
 <li><a href="#ref-ceil">ceil()</a>, <a href="#ref-floor">floor()</a>, <a href="#ref-round">round()</a></li>
 <li><a href="#ref-sin">sin()</a>, <a href="#ref-cos">cos()</a>, <a href="#ref-tan">tan()</a></li>
+<li><a href="#ref-random">random()</a> 乱数</li>
 </ul>
 
 </div><div id="ref-size" class="section"><h1>size</h1>
@@ -3025,11 +3031,11 @@ var img = getImage(&#34;cc0/cat2-185x200.png&#34;);
 imageMode(CENTER);
 
 function draw() {
-  var angle = (mouseX+mouseY)/45*PI;
+  var angle = (mouseX+mouseY);
   var x = 50, y = 50;
   background(220);
   translate(x, y);
-  rotate(frameCount/180*PI);
+  rotate(angle);
   image(img, 0, 0, 92, 100);
   rotate(-angle);
   translate(-x, -y);
@@ -3047,7 +3053,7 @@ imageMode(CENTER);
 var imgSave = null;
 
 function draw() {
-  if (imgSave != null) {
+  if (imgSave !== null) {
     image(imgSave, pmouseX, pmouseY, 100, 100);
   }
   imgSave = get(mouseX-50, mouseY-50, 100, 100);
@@ -3060,7 +3066,6 @@ function draw() {
 <p>このスケッチでマウスで描くことができます。</p>
 
 <pre><code class="language-example">// Drawing
-size(300, 300, &#34;2D&#34;);
 stroke(200, 0, 0);
 strokeCap(ROUND);
 strokeWeight(10);
@@ -3084,7 +3089,7 @@ var prevY = 0;
 
 function draw() {
   if (penDown) {
-    if (prevX != 0) {
+    if (prevX !== 0) {
       line(prevX, prevY, mouseX, mouseY);
     }
   }
@@ -3138,11 +3143,8 @@ function draw() {
 </div><div id="ref-Games" class="section"><h1>ゲーム</h1>
 
 <ul>
-<li><a href="#ref-JumpingBall">JumpingBall</a>
-
-<ul>
+<li><a href="#ref-JumpingBall">JumpingBall</a></li>
 <li><a href="#ref-JumpingBall2">JumpingBall2</a></li>
-</ul></li>
 <li><a href="#ref-TouchTheNumber">TouchTheNumber</a></li>
 <li><a href="#ref-IslandHopper">IslandHopper</a></li>
 <li><a href="#ref-PingPong">PingPong</a></li>
@@ -3152,9 +3154,10 @@ function draw() {
 </div><div id="ref-RocketLanding" class="section"><h1>RocketLanding</h1>
 
 <pre><code class="language-example">// RocketLanding
-var fire = getImage(&#34;cc0/fire2-134x200.png&#34;);
-var rocket = getImage(&#34;cc0/rocket-168x300.png&#34;);
-var rocket_fire = getImage(&#34;cc0/rocket1-168x300.png&#34;);
+
+var fire = getImage(&#34;cc0/fire2-134x200&#34;);
+var rocket = getImage(&#34;cc0/rocket-168x300&#34;);
+var rocket_fire = getImage(&#34;cc0/rocket1-168x300&#34;);
 var explosion = getSound(&#34;cc0/explosion.ogg&#34;);
 var roar = getSound(&#34;cc0/roar.ogg&#34;);
 var win = getSound(&#34;cc0/win.ogg&#34;);
@@ -3174,32 +3177,35 @@ function initVars() {
   burning = false;
 }
 
-size(200, 200, &#34;2D&#34;);
 frameRate(20);
 imageMode(CENTER);
 initVars();
 
 function draw() {
   y = y + vy;
-  vy = vy + 0.2;
-
+  if (burning) {
+    vy = vy - 0.01;
+  } else {
+    vy = vy + 0.2;
+  }
+  
   if (y &gt; height - 30) {
     if (abs(vy) &gt; 3) {
       background(200);
       image(fire, x, y-25, 65, 100);
-      explosion.play();
+      playSound(explosion);
     } else {
-      win.play();
+      playSound(win);
+      image(rocket, x, y, 34, 60);
     }
     noLoop();
     gameOver = true;
     return;
   }
-
+  
   background(100);
   if (burning) {
     image(rocket_fire, x, y, 34, 60);
-    burning = false;
   } else {
     image(rocket, x, y, 34, 60);
   }
@@ -3208,7 +3214,7 @@ function draw() {
 function burn() {
   burning = true;
   vy -= 2;
-  roar.play();
+  playSound(roar);
 }
 
 function keyPressed() {
@@ -3228,12 +3234,15 @@ function mousePressed() {
   }
   burn();
 }
+
+function mouseReleased() {
+  burning = false;
+}
 </code></pre>
 
 </div><div id="ref-PingPong" class="section"><h1>PingPong</h1>
 
 <pre><code class="language-example">// PingPong
-size(360, 360, &#34;2D&#34;);
 background(250);
 frameRate(30);
 
@@ -3242,6 +3251,9 @@ var paddleWidth = 10;
 var paddleHeight = 90;
 
 var sleepUntil = 0;
+
+var y1 = 180;
+var y2 = 180;
 
 function drawBall(x, y) {
   fill(200);
@@ -3272,7 +3284,7 @@ var vx = 5, vy = 5;
 var lastPlayer1inputMs = 0;
 var lastPlayer2inputMs = 0;
 
-var updateBall() {
+function updateBall() {
   if (y &lt; 10 &amp;&amp; vy &lt; 0) {
     vy = -vy - 1 + random(2);
   }
@@ -3329,8 +3341,6 @@ function draw() {
   }
 }
 
-var y1 = 180;
-var y2 = 180;
 
 function mouseMoved() {
   y1 = mouseY;
@@ -3339,7 +3349,7 @@ function mouseMoved() {
 
 function keyPressed() {
   var ms = millis() - lastPlayer2inputMs;
-  if (keyCode == UP) {
+  if (keyCode === UP) {
     if (ms &lt; 100) {
       y2 -= 100;
     } else if (ms &lt; 200) {
@@ -3347,7 +3357,7 @@ function keyPressed() {
     } else {
       y2 -= 10;
     }
-  } else if (keyCode = DOWN) {
+  } else if (keyCode === DOWN) {
     if (ms &lt; 100) {
       y2 += 100;
     } else if (ms &lt; 200) {
@@ -3363,11 +3373,11 @@ function keyPressed() {
 </div><div id="ref-IslandHopper" class="section"><h1>IslandHopper</h1>
 
 <pre><code class="language-example">// IslandHopper
-var location = 0;
+var loc = 0;
 var sizes = [30, 30, 20, 30, 20, 10, 30];
 var N = sizes.length;
 
-frameRate(10);
+frameRate(5);
 stroke(0);
 fill(255);
 
@@ -3388,7 +3398,7 @@ var gameOver = false;
 var message = &#34;GAME OVER&#34;;
 
 function initialize() {
-  location = 0;
+  loc = 0;
   gameOver = false;
   humanY = islandH;
   message = &#34;GAME OVER&#34;;
@@ -3400,24 +3410,26 @@ function drawHuman(x, y) {
   line(x-humanWidth/2, y, x, y-humanHeight/3);
   line(x+humanWidth/2, y, x, y-humanHeight/3);
   line(x-humanWidth/2, y-humanHeight*4/5, x+humanWidth/2, y-humanHeight*4/5);
+  fill(255);
   ellipse(x, y-humanHeight-humanHeadR, humanHeadR*2, humanHeadR*2);
 }
 
 function drawIsland(x, s) {
-  ellipse(x, islandH, s, islandW);
+  fill(255, 255, 255);
+  ellipse(x, islandH, s, islandR);
 }
 
-function redraw() {
-  background(200);
-  drawHuman(margin + location*step, humanY);
+function redraw1() {
+  background(200); fill(0);
+  drawHuman(margin + loc*step, humanY);
   for (var i = 0; i &lt; N; i++) {
     var s = sizes[i];
     if (s &gt; 0) {
-      if (s &gt; islandR) s = islandR;
+      if (s &gt; islandR) { s = islandR; }
       ellipse(margin + i*step, islandH, s, s/islandAspect);
     }
   }
-  drawHuman(margin + location*step, humanY);
+  drawHuman(margin + loc*step, humanY);
   if (gameOver) {
     textSize(40);
     fill(0);
@@ -3427,8 +3439,8 @@ function redraw() {
 }
 
 function shrinkIslands() {
-  for (var i = 1; i &lt; N-1; i++) {
-    if (sizes[i] &gt; -random(negSizeThreshold)) {
+  for (var i = 0; i &lt; N; i++) {
+    if (sizes[i] &gt; -random(0, negSizeThreshold)) {
       sizes[i] -= 1;
     } else {
       sizes[i] = random(islandR) + islandR;
@@ -3451,46 +3463,43 @@ function advanceTime() {
 }
 
 function checkGround() {
-  var s = sizes[location];
-  if (humanY == islandH &amp;&amp; s &lt; humanWidth-2) {
+  var s = sizes[loc];
+  if (humanY === islandH &amp;&amp; s &lt; humanWidth-2) {
     humanY = height;
     gameOver = true;
-    redraw();
+    redraw1();
     noLoop();
     return;
   }
-  if (location == sizes.length-1 &amp;&amp; humanY == islandH) {
+  if (loc === sizes.length-1 &amp;&amp; humanY === islandH) {
     message = &#34;YOU WON&#34;;
     gameOver = true;
   }
 }
 
 function draw() {
-  if (gameOver) return;
+  if (gameOver) { return; }
   advanceTime();
   checkGround();
-  redraw();
+  redraw1();
+
 }
 
 function keyPressed() {
   if (gameOver) {
-    if (keyCode == &#39; &#39;) {
-      initialize();
-      loop();
-    }
+    initialize();
+    loop();
     return;
   }
-  switch (keyCode) {
-    case LEFT: if (location &gt; 0) location--; break;
-    case RIGHT: if (location &lt; sizes.length-1) location++; break;
-    case 32:
-      if (humanY == islandH) {
-        humanY -= humanHeight;
-      }
-      break;
+  if (keyCode === LEFT &amp;&amp; loc &gt; 0) {
+    loc--;
+  } else if (keyCode === RIGHT &amp;&amp; loc &lt; sizes.length-1) {
+    loc++;
+  } else if (keyCode === 32 &amp;&amp; humanY === islandH) {
+    humanY -= humanHeight;
   }
   checkGround();
-  redraw();
+  redraw1();
 }
 
 function mouseClicked() {
@@ -3623,11 +3632,12 @@ var fireVX = 0.5;
 var fireVY = -0.1;
 var fireAngle = 0;
 
-var goalX = 450;
-var goalY = 465;
+var goalX = width-50;
+var goalY = height-45;
+
 
 var gameOver = false;
-String gameMessage = &#34;&#34;;
+var gameMessage = &#34;&#34;;
 
 function initializeVars() {
   x = 100;
@@ -3638,17 +3648,11 @@ function initializeVars() {
 
 initializeVars();
 
-function draw() {
-  updatePosition();
-  drawFrame();
-}
-
-
 function updatePosition() {
   // 座標や速度の計算。
   x = x + vx;
   y = y + vy;
-  if (vx != 0) {
+  if (vx !== 0) {
     vx = vx*abs(vx*ax)/abs(vx);
   }
   vy = vy + ay;
@@ -3678,7 +3682,7 @@ function updatePosition() {
   }
   fireX += fireVX;
   fireY += fireVY;
-  fireAngle += 0.02;
+  fireAngle += 1;
   fireVX = fireV*cos(fireAngle) + fireV*sin(fireAngle);
   fireVY = fireV*sin(fireAngle) - fireV*cos(fireAngle);
 
@@ -3712,6 +3716,7 @@ function drawFrame() {
   translate(fireX, fireY);
   image(fire, 0, 0, 200, 130);
   translate(-fireX, -fireY);
+
 }
 
 function keyPressed() {
@@ -3747,6 +3752,10 @@ function keyPressed() {
   }
 }
 
+function draw() {
+  updatePosition();
+  drawFrame();
+}
 </code></pre>
 
 </div><div id="ref-TouchTheNumber" class="section"><h1>TouchTheNumber</h1>
@@ -3754,7 +3763,7 @@ function keyPressed() {
 <pre><code class="language-example">// TouchTheNumber
 
 var N = 3;
-var numbers[][];
+var numbers = [[],[],[]];
 
 // Draw the rectangles.
 function rectangles() {
@@ -3779,9 +3788,9 @@ function printNumbers() {
 function shuffle() {
   for (var i = 0; i &lt; N; i++) {
     for (var j = 0; j &lt; N; j++) {
-      var x = int(random(N));
-      var y = int(random(N));
-      if (x != i || y != j) {
+      var x = floor(random(0, N));
+      var y = floor(random(0, N));
+      if (x !== i || y !== j) {
         var tmp = numbers[i][j];
         numbers[i][j] = numbers[x][y];
         numbers[x][y] = tmp;
@@ -3792,9 +3801,9 @@ function shuffle() {
 
 background(240);
 textSize(50);
-numbers = new int[N][];
+numbers = [];
 for (var i = 0; i &lt; N; i++) {
-  numbers[i] = new int[N];
+  numbers[i] = [];
   for (var j = 0; j &lt; N; j++) {
     numbers[i][j] = i*3 + j + 1;
   }
@@ -3824,7 +3833,9 @@ var lastClickMs;
 
 function mouseClicked() {
   // Ignore click repeats (touch screen generates too many click events).
-  if (millis() - lastClickMs &lt; 50) return;
+  if (millis() - lastClickMs &lt; 50) {
+    return;
+  }
   lastClickMs = millis();
   if (!started) {
     started = true;
@@ -3832,7 +3843,7 @@ function mouseClicked() {
     rectangles();
     started_ms = millis();
   }
-  if (current == 10) {
+  if (current === 10) {
     background(240);
     rectangles();
     shuffle();
@@ -3841,26 +3852,26 @@ function mouseClicked() {
     started = false;
     return;
   }
-  var x = int((mouseX-60)/120);
-  var y = int((mouseY-60)/120);
-  if (x &lt; 0) x = 0;
-  if (x &gt;= N) x = N-1;
-  if (y &lt; 0) y = 0;
-  if (y &gt;= N) y = N-1;
+  var x = floor((mouseX-60)/120);
+  var y = floor((mouseY-60)/120);
+  if (x &lt; 0) { x = 0; }
+  if (x &gt;= N) { x = N-1; }
+  if (y &lt; 0) { y = 0; }
+  if (y &gt;= N) { y = N-1; }
   //fill(240); stroke(240);
   //rect(20, 20, 50, 20);
   //textSize(20); fill(0); stroke(0);
   //text(str(mouseX) + &#34; &#34; + str(mouseY)+&#34; : &#34; + str(x) + &#34; &#34; + str(y), 20, 20);
-  if (numbers[x][y] == current) {
+  if (numbers[x][y] === current) {
     textSize(50);
     fill(0);
     text(str(numbers[x][y]), 85+120*x, 118+120*y);
     current++;
-    if (current == 10) {
+    if (current === 10) {
       background(240);
       var t = millis() - started_ms;
       fill(0); textSize(50);
-      text(str(int(t/1000)) + &#34;.&#34; + str((int(t/100))%10) + str((int(t/10))%10) + &#34;s&#34;, 100, 100);
+      text(str(floor(t/1000)) + &#34;.&#34; + str((floor(t/100))%10) + str((floor(t/10))%10) + &#34;s&#34;, 100, 100);
     }
   }
 }
@@ -5450,10 +5461,10 @@ function draw() {
 
 <p><code>Array</code>は配列といい、データのリストを持っている。複数のデータを保存するとき、 番号を使って取り出せるのだ。</p>
 
-<pre><code class="language-prerender">var x[] = {1, 2, 3};  // 配列をつくる
+<pre><code class="language-prerender">var x = [1, 2, 3];  // 配列をつくる
 fill(0); text(x[0], 10, 20);
 text(x[2], 10, 40);
-var y[] = new int[10]; // 別の配列を作る
+var y[] = Array(10); // 別の配列を作る
 text(y[0], 10, 80);  // 最初は０が入っています。
 </code></pre>
 
@@ -5498,17 +5509,6 @@ for (var x = 1; x &lt; 150; x += 1) {
 </code></pre>
 
 <p>関連項目: <a href="#ref-PI">PI</a>, <a href="#ref-HALF_PI">HALF_PI</a>, <a href="#ref-QUARTER_PI">QUARTER_PI</a>.</p>
-
-</div><div id="ref-HashMap" class="section"><h1>HashMap</h1>
-
-<p><code>HashMap</code>はハッシュテーブルデータ構造である。データはキーと値の組で保存され、 キーに対して値を素早く参照できる。</p>
-
-<pre><code class="language-prerender">HashMap&lt;Integer, String&gt; map = new HashMap();
-map.put(123, &#34;XYZ&#34;);
-fill(0); text(map.get(123), 10, 30);
-</code></pre>
-
-<p>関連項目：<a href="#ref-get">get</a>, <a href="#ref-put">put</a>, <a href="#ref-entrySet">entrySet</a>.</p>
 
 </div><div id="ref-get" class="section"><h1>get</h1>
 
@@ -5586,7 +5586,7 @@ for (it = hm.entrySet().iterator(); it.hasNext(); ) {
 <p>変数はプログラムの中に様々なデートを覚える仕組みである。</p>
 
 <pre><code class="language-prerender">var nenrei = 12;
-String namae = &#34;たろう&#34;;
+var namae = &#34;たろう&#34;;
 fill(0); textSize(12);
 text(namae + nenrei + &#34;才&#34;, 20, 20);
 </code></pre>
@@ -5595,7 +5595,7 @@ text(namae + nenrei + &#34;才&#34;, 20, 20);
 
 <p><code>Object</code>は関連するデータを束ね、複雑のデータ構造を表現できる。<a href="#ref-Variable">変数</a>に<code>Object</code>の型を付けられたら、</p>
 
-<pre><code class="language-prerender">Object[] arr = {1, &#34;abc&#34;};
+<pre><code class="language-prerender">var arr = [1, &#34;abc&#34;];
 for (var i = 0; i &lt; arr.length; i++) {
   fill(0); text(str(arr[i]), 10, 20+i*20);
 }
@@ -5605,7 +5605,7 @@ for (var i = 0; i &lt; arr.length; i++) {
 
 <p><code>String</code>は文字列の型を表し、言葉を覚える変数を作る。</p>
 
-<pre><code class="language-prerender">String namae = &#34;たろう&#34;;
+<pre><code class="language-prerender">var namae = &#34;たろう&#34;;
 fill(0); text(namae, 20, 20);
 </code></pre>
 
@@ -6136,19 +6136,16 @@ function keyReleased() {
 <p><strong>注意</strong>: Processing.jsではブラウザの環境によって使えないキーコードがあります。 以下のスケッチで確認ください。</p>
 
 <pre><code class="language-example">// Keycodes
-function setup() {
-  size(400, 200, &#34;2D&#34;);
-  textSize(30);
-  textFont(loadFont(&#34;fixed&#34;));
-  fill(0);
-}
+textSize(30);
+textFont(loadFont(&#34;fixed&#34;, 15), 15);
+fill(0);
 
 function draw() {
   background(220);
-  if (keyPressed) {
+  if (keyIsPressed) {
     text(&#34;keyPressed&#34;, 10, 30);
-    String label;
-    if (key == CODED) {
+    var label;
+    if (Math.floor(key) === CODED) {
       label = &#34;keyCode &#34; + str(keyCode) + &#34; &#34;;
       switch (keyCode) {
         case UP: label = label + &#34;UP&#34;; break;

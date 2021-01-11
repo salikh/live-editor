@@ -964,6 +964,11 @@ function draw() {
   textAlign(LEFT, BASELINE);
   text("color("+red(c)+","+green(c)+","+blue(c)+")", width/10, height*19/20);
 }
+
+function mouseClicked() {
+  var c = posToColor(mouseX, mouseY);
+  println("color("+red(c)+","+green(c)+","+blue(c)+")");
+}
 ```
 
 # EllipseTool
@@ -972,7 +977,6 @@ function draw() {
 
 ```prerender
 // EllipseTool
-size(200, 200, "2D");
 
 var x1, y1, x2, y2;
 var pressed = false;
@@ -1005,6 +1009,7 @@ function mouseReleased() {
     x2 = mouseX;
     y2 = mouseY;
     pressed = false;
+    println("ellipse("+x1+","+y1+","+((x2-x1)*2)+","+((y2-y1)*2)+")");
   }
 }
 ```
@@ -1015,7 +1020,6 @@ function mouseReleased() {
 
 ```prerender
 // RectangleTool
-size(200, 200, "2D");
 
 var x1, y1, x2, y2;
 var pressed = false;
@@ -1048,6 +1052,7 @@ function mouseReleased() {
     x2 = mouseX;
     y2 = mouseY;
     pressed = false;
+    println("rect("+x1+","+y1+","+(x2-x1)+","+(y2-y1)+")");
   }
 }
 ```
@@ -2077,7 +2082,7 @@ var s = 44;
 var x = 176, y = 314;
 var imgSave = null;
 function draw() {
-  if (imgSave != null) {
+  if (imgSave !== null) {
     image(imgSave, x, y, s, s);
   }
   x = mouseX;
@@ -2127,7 +2132,7 @@ var dy = -1;
 
 var imgSave = null;
 function draw() {  // この関数は繰り返し呼ばれている.
-  if (imgSave != null) {
+  if (imgSave !== null) {
     image(imgSave, x, y, s, s);
   }
   x += dx;
@@ -2196,7 +2201,7 @@ var dy = -1;
 
 var imgSave = null;
 function draw() {  // この関数は繰り返し呼ばれている.
-  if (imgSave != null) {
+  if (imgSave !== null) {
     image(imgSave, x, y, s, s);
   }
   if (wallAhead()) {
@@ -2271,7 +2276,7 @@ var dy = -1;
 
 var imgSave = null;
 function draw() {  // この関数は繰り返し呼ばれている.
-  if (imgSave != null) {
+  if (imgSave !== null) {
     image(imgSave, x, y, s, s);
   }
   if (wallAhead()) {
@@ -2398,7 +2403,7 @@ var dy = -1;
 
 var imgSave = null;
 function draw() {  // この関数は繰り返し呼ばれている.
-  if (imgSave != null) {
+  if (imgSave !== null) {
     image(imgSave, x, y, s, s);
   }
   if (!wallRight()) {
@@ -2519,7 +2524,7 @@ var dy = -1;
 
 var imgSave = null;
 function draw() {  // この関数は繰り返し呼ばれている.
-  if (imgSave != null) {
+  if (imgSave !== null) {
     image(imgSave, x, y, s, s);
   }
   if (reachedGoal()) {
@@ -2930,6 +2935,7 @@ text("height: " + height, 10, 80);
 *   [abs()]
 *   [ceil()], [floor()], [round()]
 *   [sin()], [cos()], [tan()]
+*   [random()] 乱数
 
 # size
 
@@ -3028,11 +3034,11 @@ var img = getImage("cc0/cat2-185x200.png");
 imageMode(CENTER);
 
 function draw() {
-  var angle = (mouseX+mouseY)/45*PI;
+  var angle = (mouseX+mouseY);
   var x = 50, y = 50;
   background(220);
   translate(x, y);
-  rotate(frameCount/180*PI);
+  rotate(angle);
   image(img, 0, 0, 92, 100);
   rotate(-angle);
   translate(-x, -y);
@@ -3051,7 +3057,7 @@ imageMode(CENTER);
 var imgSave = null;
 
 function draw() {
-  if (imgSave != null) {
+  if (imgSave !== null) {
     image(imgSave, pmouseX, pmouseY, 100, 100);
   }
   imgSave = get(mouseX-50, mouseY-50, 100, 100);
@@ -3065,7 +3071,6 @@ function draw() {
 
 ```example
 // Drawing
-size(300, 300, "2D");
 stroke(200, 0, 0);
 strokeCap(ROUND);
 strokeWeight(10);
@@ -3089,7 +3094,7 @@ var prevY = 0;
 
 function draw() {
   if (penDown) {
-    if (prevX != 0) {
+    if (prevX !== 0) {
       line(prevX, prevY, mouseX, mouseY);
     }
   }
@@ -3144,7 +3149,7 @@ function draw() {
 # ゲーム {#ref-Games}
 
 *   [JumpingBall]
-    *   [JumpingBall2]
+*   [JumpingBall2]
 *   [TouchTheNumber]
 *   [IslandHopper]
 *   [PingPong]
@@ -3154,9 +3159,10 @@ function draw() {
 
 ```example
 // RocketLanding
-var fire = getImage("cc0/fire2-134x200.png");
-var rocket = getImage("cc0/rocket-168x300.png");
-var rocket_fire = getImage("cc0/rocket1-168x300.png");
+
+var fire = getImage("cc0/fire2-134x200");
+var rocket = getImage("cc0/rocket-168x300");
+var rocket_fire = getImage("cc0/rocket1-168x300");
 var explosion = getSound("cc0/explosion.ogg");
 var roar = getSound("cc0/roar.ogg");
 var win = getSound("cc0/win.ogg");
@@ -3176,35 +3182,35 @@ function initVars() {
   burning = false;
 }
 
-size(200, 200, "2D");
 frameRate(20);
 imageMode(CENTER);
 initVars();
 
 function draw() {
-  if (gameOver) {
-    return;
-  }
   y = y + vy;
-  vy = vy + 0.2;
-
+  if (burning) {
+    vy = vy - 0.01;
+  } else {
+    vy = vy + 0.2;
+  }
+  
   if (y > height - 30) {
     if (abs(vy) > 3) {
       background(200);
       image(fire, x, y-25, 65, 100);
-      explosion.play();
+      playSound(explosion);
     } else {
-      win.play();
+      playSound(win);
+      image(rocket, x, y, 34, 60);
     }
     noLoop();
     gameOver = true;
     return;
   }
-
+  
   background(100);
   if (burning) {
     image(rocket_fire, x, y, 34, 60);
-    burning = false;
   } else {
     image(rocket, x, y, 34, 60);
   }
@@ -3213,7 +3219,7 @@ function draw() {
 function burn() {
   burning = true;
   vy -= 2;
-  roar.play();
+  playSound(roar);
 }
 
 function keyPressed() {
@@ -3233,13 +3239,16 @@ function mousePressed() {
   }
   burn();
 }
+
+function mouseReleased() {
+  burning = false;
+}
 ```
 
 # PingPong
 
 ```example
 // PingPong
-size(360, 360, "2D");
 background(250);
 frameRate(30);
 
@@ -3248,6 +3257,9 @@ var paddleWidth = 10;
 var paddleHeight = 90;
 
 var sleepUntil = 0;
+
+var y1 = 180;
+var y2 = 180;
 
 function drawBall(x, y) {
   fill(200);
@@ -3278,7 +3290,7 @@ var vx = 5, vy = 5;
 var lastPlayer1inputMs = 0;
 var lastPlayer2inputMs = 0;
 
-var updateBall() {
+function updateBall() {
   if (y < 10 && vy < 0) {
     vy = -vy - 1 + random(2);
   }
@@ -3335,8 +3347,6 @@ function draw() {
   }
 }
 
-var y1 = 180;
-var y2 = 180;
 
 function mouseMoved() {
   y1 = mouseY;
@@ -3345,7 +3355,7 @@ function mouseMoved() {
 
 function keyPressed() {
   var ms = millis() - lastPlayer2inputMs;
-  if (keyCode == UP) {
+  if (keyCode === UP) {
     if (ms < 100) {
       y2 -= 100;
     } else if (ms < 200) {
@@ -3353,7 +3363,7 @@ function keyPressed() {
     } else {
       y2 -= 10;
     }
-  } else if (keyCode = DOWN) {
+  } else if (keyCode === DOWN) {
     if (ms < 100) {
       y2 += 100;
     } else if (ms < 200) {
@@ -3370,11 +3380,11 @@ function keyPressed() {
 
 ```example
 // IslandHopper
-var location = 0;
+var loc = 0;
 var sizes = [30, 30, 20, 30, 20, 10, 30];
 var N = sizes.length;
 
-frameRate(10);
+frameRate(5);
 stroke(0);
 fill(255);
 
@@ -3395,7 +3405,7 @@ var gameOver = false;
 var message = "GAME OVER";
 
 function initialize() {
-  location = 0;
+  loc = 0;
   gameOver = false;
   humanY = islandH;
   message = "GAME OVER";
@@ -3407,24 +3417,26 @@ function drawHuman(x, y) {
   line(x-humanWidth/2, y, x, y-humanHeight/3);
   line(x+humanWidth/2, y, x, y-humanHeight/3);
   line(x-humanWidth/2, y-humanHeight*4/5, x+humanWidth/2, y-humanHeight*4/5);
+  fill(255);
   ellipse(x, y-humanHeight-humanHeadR, humanHeadR*2, humanHeadR*2);
 }
 
 function drawIsland(x, s) {
-  ellipse(x, islandH, s, islandW);
+  fill(255, 255, 255);
+  ellipse(x, islandH, s, islandR);
 }
 
-function redraw() {
-  background(200);
-  drawHuman(margin + location*step, humanY);
+function redraw1() {
+  background(200); fill(0);
+  drawHuman(margin + loc*step, humanY);
   for (var i = 0; i < N; i++) {
     var s = sizes[i];
     if (s > 0) {
-      if (s > islandR) s = islandR;
+      if (s > islandR) { s = islandR; }
       ellipse(margin + i*step, islandH, s, s/islandAspect);
     }
   }
-  drawHuman(margin + location*step, humanY);
+  drawHuman(margin + loc*step, humanY);
   if (gameOver) {
     textSize(40);
     fill(0);
@@ -3434,8 +3446,8 @@ function redraw() {
 }
 
 function shrinkIslands() {
-  for (var i = 1; i < N-1; i++) {
-    if (sizes[i] > -random(negSizeThreshold)) {
+  for (var i = 0; i < N; i++) {
+    if (sizes[i] > -random(0, negSizeThreshold)) {
       sizes[i] -= 1;
     } else {
       sizes[i] = random(islandR) + islandR;
@@ -3458,46 +3470,43 @@ function advanceTime() {
 }
 
 function checkGround() {
-  var s = sizes[location];
-  if (humanY == islandH && s < humanWidth-2) {
+  var s = sizes[loc];
+  if (humanY === islandH && s < humanWidth-2) {
     humanY = height;
     gameOver = true;
-    redraw();
+    redraw1();
     noLoop();
     return;
   }
-  if (location == sizes.length-1 && humanY == islandH) {
+  if (loc === sizes.length-1 && humanY === islandH) {
     message = "YOU WON";
     gameOver = true;
   }
 }
 
 function draw() {
-  if (gameOver) return;
+  if (gameOver) { return; }
   advanceTime();
   checkGround();
-  redraw();
+  redraw1();
+
 }
 
 function keyPressed() {
   if (gameOver) {
-    if (keyCode == ' ') {
-      initialize();
-      loop();
-    }
+    initialize();
+    loop();
     return;
   }
-  switch (keyCode) {
-    case LEFT: if (location > 0) location--; break;
-    case RIGHT: if (location < sizes.length-1) location++; break;
-    case 32:
-      if (humanY == islandH) {
-        humanY -= humanHeight;
-      }
-      break;
+  if (keyCode === LEFT && loc > 0) {
+    loc--;
+  } else if (keyCode === RIGHT && loc < sizes.length-1) {
+    loc++;
+  } else if (keyCode === 32 && humanY === islandH) {
+    humanY -= humanHeight;
   }
   checkGround();
-  redraw();
+  redraw1();
 }
 
 function mouseClicked() {
@@ -3632,11 +3641,12 @@ var fireVX = 0.5;
 var fireVY = -0.1;
 var fireAngle = 0;
 
-var goalX = 450;
-var goalY = 465;
+var goalX = width-50;
+var goalY = height-45;
+
 
 var gameOver = false;
-String gameMessage = "";
+var gameMessage = "";
 
 function initializeVars() {
   x = 100;
@@ -3647,17 +3657,11 @@ function initializeVars() {
 
 initializeVars();
 
-function draw() {
-  updatePosition();
-  drawFrame();
-}
-
-
 function updatePosition() {
   // 座標や速度の計算。
   x = x + vx;
   y = y + vy;
-  if (vx != 0) {
+  if (vx !== 0) {
     vx = vx*abs(vx*ax)/abs(vx);
   }
   vy = vy + ay;
@@ -3687,7 +3691,7 @@ function updatePosition() {
   }
   fireX += fireVX;
   fireY += fireVY;
-  fireAngle += 0.02;
+  fireAngle += 1;
   fireVX = fireV*cos(fireAngle) + fireV*sin(fireAngle);
   fireVY = fireV*sin(fireAngle) - fireV*cos(fireAngle);
 
@@ -3721,6 +3725,7 @@ function drawFrame() {
   translate(fireX, fireY);
   image(fire, 0, 0, 200, 130);
   translate(-fireX, -fireY);
+
 }
 
 function keyPressed() {
@@ -3756,6 +3761,10 @@ function keyPressed() {
   }
 }
 
+function draw() {
+  updatePosition();
+  drawFrame();
+}
 ```
 
 # TouchTheNumber
@@ -3764,7 +3773,7 @@ function keyPressed() {
 // TouchTheNumber
 
 var N = 3;
-var numbers[][];
+var numbers = [[],[],[]];
 
 // Draw the rectangles.
 function rectangles() {
@@ -3789,9 +3798,9 @@ function printNumbers() {
 function shuffle() {
   for (var i = 0; i < N; i++) {
     for (var j = 0; j < N; j++) {
-      var x = int(random(N));
-      var y = int(random(N));
-      if (x != i || y != j) {
+      var x = floor(random(0, N));
+      var y = floor(random(0, N));
+      if (x !== i || y !== j) {
         var tmp = numbers[i][j];
         numbers[i][j] = numbers[x][y];
         numbers[x][y] = tmp;
@@ -3802,9 +3811,9 @@ function shuffle() {
 
 background(240);
 textSize(50);
-numbers = new int[N][];
+numbers = [];
 for (var i = 0; i < N; i++) {
-  numbers[i] = new int[N];
+  numbers[i] = [];
   for (var j = 0; j < N; j++) {
     numbers[i][j] = i*3 + j + 1;
   }
@@ -3834,7 +3843,9 @@ var lastClickMs;
 
 function mouseClicked() {
   // Ignore click repeats (touch screen generates too many click events).
-  if (millis() - lastClickMs < 50) return;
+  if (millis() - lastClickMs < 50) {
+    return;
+  }
   lastClickMs = millis();
   if (!started) {
     started = true;
@@ -3842,7 +3853,7 @@ function mouseClicked() {
     rectangles();
     started_ms = millis();
   }
-  if (current == 10) {
+  if (current === 10) {
     background(240);
     rectangles();
     shuffle();
@@ -3851,26 +3862,26 @@ function mouseClicked() {
     started = false;
     return;
   }
-  var x = int((mouseX-60)/120);
-  var y = int((mouseY-60)/120);
-  if (x < 0) x = 0;
-  if (x >= N) x = N-1;
-  if (y < 0) y = 0;
-  if (y >= N) y = N-1;
+  var x = floor((mouseX-60)/120);
+  var y = floor((mouseY-60)/120);
+  if (x < 0) { x = 0; }
+  if (x >= N) { x = N-1; }
+  if (y < 0) { y = 0; }
+  if (y >= N) { y = N-1; }
   //fill(240); stroke(240);
   //rect(20, 20, 50, 20);
   //textSize(20); fill(0); stroke(0);
   //text(str(mouseX) + " " + str(mouseY)+" : " + str(x) + " " + str(y), 20, 20);
-  if (numbers[x][y] == current) {
+  if (numbers[x][y] === current) {
     textSize(50);
     fill(0);
     text(str(numbers[x][y]), 85+120*x, 118+120*y);
     current++;
-    if (current == 10) {
+    if (current === 10) {
       background(240);
       var t = millis() - started_ms;
       fill(0); textSize(50);
-      text(str(int(t/1000)) + "." + str((int(t/100))%10) + str((int(t/10))%10) + "s", 100, 100);
+      text(str(floor(t/1000)) + "." + str((floor(t/100))%10) + str((floor(t/10))%10) + "s", 100, 100);
     }
   }
 }
@@ -5498,10 +5509,10 @@ function draw() {
 `Array`は配列といい、データのリストを持っている。複数のデータを保存するとき、 番号を使って取り出せるのだ。
 
 ```prerender
-var x[] = {1, 2, 3};  // 配列をつくる
+var x = [1, 2, 3];  // 配列をつくる
 fill(0); text(x[0], 10, 20);
 text(x[2], 10, 40);
-var y[] = new int[10]; // 別の配列を作る
+var y[] = Array(10); // 別の配列を作る
 text(y[0], 10, 80);  // 最初は０が入っています。
 ```
 
@@ -5550,18 +5561,6 @@ arc(50, 50, 45, 45, HALF_PI, TWO_PI);
 ```
 
 関連項目: [PI], [HALF_PI], [QUARTER_PI].
-
-# HashMap
-
-`HashMap`はハッシュテーブルデータ構造である。データはキーと値の組で保存され、 キーに対して値を素早く参照できる。
-
-```prerender
-HashMap<Integer, String> map = new HashMap();
-map.put(123, "XYZ");
-fill(0); text(map.get(123), 10, 30);
-```
-
-関連項目：[get], [put], [entrySet].
 
 # get
 
@@ -5638,7 +5637,7 @@ for (it = hm.entrySet().iterator(); it.hasNext(); ) {
 
 ```prerender
 var nenrei = 12;
-String namae = "たろう";
+var namae = "たろう";
 fill(0); textSize(12);
 text(namae + nenrei + "才", 20, 20);
 ```
@@ -5648,7 +5647,7 @@ text(namae + nenrei + "才", 20, 20);
 `Object`は関連するデータを束ね、複雑のデータ構造を表現できる。[変数][Variable]に`Object`の型を付けられたら、
 
 ```prerender
-Object[] arr = {1, "abc"};
+var arr = [1, "abc"];
 for (var i = 0; i < arr.length; i++) {
   fill(0); text(str(arr[i]), 10, 20+i*20);
 }
@@ -5659,7 +5658,7 @@ for (var i = 0; i < arr.length; i++) {
 `String`は文字列の型を表し、言葉を覚える変数を作る。
 
 ```prerender
-String namae = "たろう";
+var namae = "たろう";
 fill(0); text(namae, 20, 20);
 ```
 
@@ -6208,19 +6207,16 @@ function keyReleased() {
 
 ```example
 // Keycodes
-function setup() {
-  size(400, 200, "2D");
-  textSize(30);
-  textFont(loadFont("fixed"));
-  fill(0);
-}
+textSize(30);
+textFont(loadFont("fixed", 15), 15);
+fill(0);
 
 function draw() {
   background(220);
-  if (keyPressed) {
+  if (keyIsPressed) {
     text("keyPressed", 10, 30);
-    String label;
-    if (key == CODED) {
+    var label;
+    if (Math.floor(key) === CODED) {
       label = "keyCode " + str(keyCode) + " ";
       switch (keyCode) {
         case UP: label = label + "UP"; break;
