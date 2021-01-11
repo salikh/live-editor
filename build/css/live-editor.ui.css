@@ -524,6 +524,6 @@ pre.render {
   margin: 4px;
   padding: none;
 }
-p > code {
+p code {
   color: green;
 }

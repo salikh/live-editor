@@ -1,7 +1,8 @@
-# Processing.js 冬季ワークショップ {#ref-help}
+# Mind the Gap 冬季ワークショップ Javascript/Processing.js {#ref-help}
 
 *   [はじめに][PJSStep0]
-*   [Step 1: キャンバスと図形][PJSStep1]
+    *   [独立のワークショップ資料](http://bit.ly/mtg-winter-js)
+*   [Step 1: キャンバス][PJSStep1]
 *   [Step 2: 色][PJSStep2]
 *   [Step 3: アニメーション][PJSStep3]
 *   [Step 4: マウスの使い方][PJSStep4]
@@ -9,7 +10,8 @@
 *   [Step 6: シミュレーション][PJSStep6]
 *   [Step 7: 画像と音][PJSStep7]
 *   [Step 8: ゲームサンプル][PJSStep8]
-*   [アンケート](http://bit.ly/survey-8-26)
+*   [作品の提出フォーム](https://forms.gle/kqJvxbtT3UsX4muR8)
+*   [アンケート](http://bit.ly/mtg-survey-2021)
 *   ヘルプ
     *   [索引][index]
     *   [ツール][Tools]
@@ -20,82 +22,98 @@
 
 # はじめに {#ref-PJSStep0}
 
-このワークショップの目的は、皆さんにプログラミングを体験していただき、コンピューターサイエンスは誰でも気軽に楽しめるものだということを知っていただくことです。そこで、本日は皆さんに簡単なゲームを作っていただきます。
+このワークショップの目的は、皆さんにプログラミングを体験していただき、コンピューターサイエンスは誰でも気軽に楽しめるものだということを知っていただくことです。そこで、本日は皆さんに簡単なゲームかアニメーションを作っていただきます。
 
-今回はProcessingというプログラミング言語を使います。今回は本ワークショップ専用のページを使いますが、Processingには長い歴史があり、他の人の作ったプログラムがたくさんあります。
+今回はJavascriptというプログラミング言語を使います。プログラミング言語にはライブラリというものがあります。ライブラリとはプログラムの再利用できる部品をあつめたものです。Javascriptの場合は、他のプログラミング言語と比べて、ライブラリが特に豊富です。本日はProcessing.jsというJavascriptのライブラリを使ってプログラムを作ります。今回は本ワークショップ専用のページを使いますが、Javascriptはライブラリの種類も多く、様々な使い方があり、とても実用的なプログラミング言語です。
 
-プログラムに何か問題があると赤い波線が出てきます。この場合、プログラムの修正が必要です。何が問題なのか分からないときは、マウスを近づけると英語での説明が現れます。不明な点があれば、社員に遠慮なく質問してください。
+左側にプログラムを打ち込んで実行すると右側のキャンバスに結果が表示されます。
+
+機能の説明やサンプルプログラムはヘルプから見られます。プログラムを打ち込むと自動的に実行されて、すぐにキャンバスに結果がでます。右側キャンパス下のRestartボタンを押すことで再実行できます。
+
+
+プログラムに何か問題があるとキャンバスの上に「Oh noes!」というメッセージが出ます。この場合、プログラムの修正が必要です。「Show me where」をクリックすると、プログラムの問題がある部分を示してくれます。不明な点があれば、社員のTAに遠慮なく質問してください。
 
 ![oh-noes](images/oh-noes.png)
 
-ワークショップ中に出ているサンプルプログラムは全てヘルプに含まれています。タイピングが難しい場合や、いちいち入力していると講義に追い付けなくなりそうな場合は、ヘルプからサンプルを読み込むことができます。
+ワークショップ中に出ているサンプルプログラムは全てヘルプに含まれています。タイピングが難しい場合や、いちいち入力していると講義に追い付けなくなりそうな場合は、ヘルプから読み込むことができます。
 
-![images/sketch-load.png](images/sketch-load.png)
+![Help button](images/help1.png)
+![Help link](images/help2.png)
+![Load program](images/load1.png)
 
-プログラムを編集しながら別のサンプルを試したいときは、ブラウザで新しいタブを作ってみましょう。[ 新規作成 ]
-ボタンをクリックすると新しいタブが開きます。元のタブに戻ると、編集してきたプログラムを継続できます。
+開発中に別のサンプルプログラムを試したいときは、「New」 ボタンをクリックします。すると新しいタブが開いて新たにサンプルプログラムが表示されます。元のタブに戻ると、これまでのプログラムが継続して編集できます。
 
-![images/new-sketch-button-highlight.png](images/new-sketch-button-highlight.png)
+![New program](images/new1.png)
+
+「Program name」のところを使ってプログラムに名前をつけることができます。「My projects」をクリックすると、前に編集したプログラムのリストが出ますので、前に作ったプログラムに簡単に戻れます。
 
 プログラムの中に現れる単語や関数が分からないときは、ヘルプを使ってみましょう。
 
-![images/help-button-highlight.png](images/help-button-highlight.png)
-
 次は[ステップ1][PJSStep1]へ。
 
-# ステップ１: キャンバスと図形 {#ref-PJSStep1}
+# ステップ１: キャンバス {#ref-PJSStep1}
 
-コンピューターグラフィックでは、x座標は数学と同じように右に向かって増えますが、y座標は普通の数学と反対で下に向かって増えます。
+コンピューターグラフィックでは、x座標は数学と同じように右に向かって増えますが、y座標は普通の数学とは反対で下に向かって増えます。
+
+プログラムを書く画面のときはキャンバスはいつも約 400 × 400ですが、フルスクリーン（Fullscreen ボタンをクリック）でプログラムを実行するときはみなさんのパソコンの画面の大きさによってキャンパスのサイズが変わります。width や height の変数を使って大きさを調べることができます。
 
 ```render
-function arrow(x1, y1, x2, y2) {
-  line(x1, y1, x2, y2);
+function arrow(x1, y1, x2, y2) {                                                                    
+  line(x1, y1, x2, y2);                                                                             
   var x = x2-x1;
   var y = y2-y1;
-  var l = sqrt(x*x+y*y);
-  x = x / l * 10;
+  var l = sqrt(x*x+y*y);                                                                            
+  x = x / l * 10;                                                                                   
   y = y / l * 10;
-  alpha = PI/4;
-  line(x2, y2, x2 - x*cos(alpha) + y*sin(alpha), y2 - x*sin(alpha) - y*cos(alpha));
-  line(x2, y2, x2 - x*cos(-alpha) + y*sin(-alpha), y2 - x*sin(-alpha) - y*cos(-alpha));
-}
-
-arrow(10, 20, width-10, 20);
-arrow(20, 10, 20, height-10);
+  var alpha = 45;
+  line(x2, y2, x2 - x*cos(alpha) + y*sin(alpha), y2 - x*sin(alpha) - y*cos(alpha));                 
+  line(x2, y2, x2 - x*cos(-alpha) + y*sin(-alpha), y2 - x*sin(-alpha) - y*cos(-alpha));             
+} 
+  
+size(150, 150, "2D");
+arrow(10, 20, width-20, 20);                                                                        
+arrow(20, 10, 20, height-20);                                                                       
 fill(0);
 text("(0,0)", 1, 11);
-text("x", width-20, 37);
-text("y", 30, height-15);
+text("x", width-20, 37);                                                                            
+text("y", 30, height-15); 
 ```
 
-
 ```example
+// WidthAndHeightExample
 fill(0,0,0);
 textSize(15);
 text("width: " + width, 10, 50);
 text("height: " + height, 10, 80);
 ```
 
-座標の数字を使って様々な図形を描けます。 よく使うのはrect(), ellipse(), line()です。
+同じように、座標を使って様々な図形を描くことができます。
+よく使うのは rect(), ellipse(), line() です。
 
 ![images/rect.png](images/rect.png)
 ![images/ellipse.png](images/ellipse.png)
 ![images/line.png](images/line.png)
 
-例えば、こちらのプログラムを打ってみましょう。
+例えば、こちらのプログラムを打ち込んでみましょう。　または、ヘルプの中に「Step1」にクリックして、そのプログラムの「読み込む」ボタンを押しましょう。
 
 ```prerender
+// RectEllipseLine
 rect(10, 10, 80, 40);
 ellipse(50, 75, 80, 40);
 line(10, 60, 90, 90);
 ```
 
-実行してみましょう。キャンバスに右のような絵が出てきたでしょうか？
-プログラムを構成する一つ一つの行は命令といいます。Processingでは、各命令は必ずセミコロン(;)で終わらなければいけません。
+キャンバスに右のような絵が表示されたでしょうか？
+プログラムを構成する一つ一つの行を命令といいます。Javascriptでは、各命令は必ずセミコロン( ; )で終わらなければいけません。
+
+数字で絵を描くと不便なので、環境に一つの役に立つツール組み込んでいます。　プログラムの中に数字のところにクリックすると、スライダーが出てきます。スライダーをマウスで押しなら左右動かすと、数字が変わって、キャンバスの絵もすぐに反応します。
+
+![Adjust constant](images/adjust.png)
 
 それでは、今習ったことを使ってみましょう。
 
-**問題１**: 雪だるまを描きましょう。 例に限らず、好きなような形の雪だるまにしましょう。
+**問題１**：雪だるまを描きましょう。完成したプログラムに名前をつけましょう。
+例に限らず、好きなような形の雪だるまにしましょう。
 
 例として以下の雪だるまいかがでしょうか。
 
@@ -114,12 +132,15 @@ ellipse(150, 170, 80, 80);
 ellipse(150, 110, 60, 60);
 ```
 
+できましたか？
+
 次は、[ステップ2][PJSStep2]へ。
 
 # ステップ2: 色 {#ref-PJSStep2}
 
-今までの絵は白黒でしたが、それではつまらないので、色を加えてみましょう。ProcessingではRGBまたはRGBAカラーモデルを採用しています。RGBはR=Red
-(赤)、G=Green (緑)、B=Blue (青)から成り立っています。次の図はRGBのカラーミックスのイメージです。
+今までの絵は白黒でしたが、それではつまらないので、色を加えてみましょう。ProcessingではRGBまたはRGBAカラーモデルを採用しています。RGBはR=Red (赤)、G=Green (緑)、B=Blue (青)から成り立っています。右の図はRGBのカラーミックスのイメージです。RGBそれぞれに0から255の数字で色の強さを指定します。
+
+各図形はペンで図形の縁が描画され、内部を塗りつぶします。色を設定する命令はそれぞれにあり、ペンの色は stroke() で、塗りつぶす色は fill()で設定します。
 
 ```render
 function posToColor(x, y) {
@@ -164,37 +185,52 @@ textAlign(RIGHT, BOTTOM);
 text("(255,0,255)", width-2, height-2);
 ```
 
-自分のお好みの色選ぶときに[色ツール][ColorTool]を使ってみてください。
-
-色の設定は２つあります。各図形を描くときは外線や内部を別々の色で塗ります。外線の色は`stroke()`で設定し、内部の色は`fill()`で設定します。
-
-例えば、こちらのプログラムを打って実行してみましょう。
+例えば、こちらのプログラムを打ち込んでみましょう。
 
 ```prerender
-fill(0, 255, 0);  // 内部の色は緑
-stroke(0, 0, 255);  // 端の色は青
+// FillExample
+fill(0, 255, 0);  // 塗りつぶす色
+stroke(0, 0, 255);  // ペンの色
 ellipse(50, 50, 80, 80);
 ```
 
 右側にあるの絵のようになりましたか？
-このプログラムの中に出てくる、`//`から始まる文章は、コメントと呼びます。コンピューターはコメントを無視するので、プログラムについて説明を入れたいときに便利です。
 
-RGBAカラーモデルはRGBに加えてA=Alpha(透明度)を設定します。例えば、中を塗らない楕円を描くために使えます：
+色の設定は、数字だけではなくて、UIツールでもできます。コードの `fill()` や`stroke()`の中の数値（245や250など）をクリックしてみてください。
+
+![Color tool](images/color1.png)
+![Color tool](images/color2.png)
+
+プログラム中に出てくる、`//`から始まる文章は、コメントと呼びます。コンピューターはコメントを無視するので、プログラムの説明を入れたいときに便利です。
+
+RGBAカラーモデルはRGBに加えてA=Alpha(透明度)が設定できます。例えば、内部を塗らない楕円を描くことができます：
 
 ```prerender
-fill(0, 0, 0, 0);  // アルファは0だから、内部を塗らない
+// FillExampleAlpha
+fill(0, 0, 0, 0);  // アルファは0だから、塗りつぶさない
 ellipse(50, 50, 80, 80);
 ```
 
-色を使わないで、明るさだけの設定するときに3つの数は同じなので、略できます:
-`fill(50);`は`fill(50,50,50);`と同じ意味で、グレー色を設定します。また、`fill(60,60,60,150);`は
-`fill(60,150);`と同じ意味です。
+色を使わないで、明るさだけを設定するときは、RGB 3つの数は同じになるので、省略することができます:
+`fill(0);`は`fill(0,0,0);`と同じ意味です。 
 
-図形を塗りつぶしたくないときに`noFill();`も使えます。端を描かないように`noStroke();`を使えます。
+塗りつぶさないときは`noFill();`も使えます。
 
-では、雪だるまに色を加えましょう。
+では、雪だるまに色を着けてみましょう。
 
-**問題２**：前に作った雪だるまに色をつけたり、アイテムをあげたりしてみましょう。
+**問題２**：前に作った雪だるまに色を着けましょう。右に色付けの例を示します。好きな色にしてもいいです。　前に作った雪だるまのプログラムがなくなったら、「My projects」のボタンを押して戻ることができます。
+
+```render
+// SnowmanColor
+size(300, 300, "2D");
+strokeWeight(5);
+stroke(255, 100, 100);
+ellipse(150, 250, 100, 100);
+stroke(100, 255, 100);
+ellipse(150, 170, 80, 80);
+stroke(100, 100, 255);
+ellipse(150, 110, 60, 60);
+```
 
 ```hidden
 // SnowmanColor
@@ -215,14 +251,15 @@ ellipse(150, 110, 60, 60);
 
 そのためには、同じプログラムを何回も繰り返し実行する必要があります。Processingにはアニメーションを作るのための仕組みがすでに含まれています。
 
-一回だけ実行したいプログラムの部分は`function setup() { ... }` の中に書き、何回も繰り返しで実行したい部分は`function draw() {
-... }`の中に書くと、簡単なアニメーションを作れます。 このように`{}`で囲ったプログラムの部分は「関数」といいます。
+一回だけ実行したいプログラムの部分はそのまま書き、何回も繰り返し実行したい部分はfunction draw() { ... }の中に書くと、簡単なアニメーションを作れます。
+このように{}で囲ったプログラムの部分は「関数」といいます。 関数は自由に作れますが、draw()という関数は特別で、自動的に何回も繰り返して実行されます。
 
 ![execution diagram](images/execution-diagram.png)
 
 いくつかの例を見てみましょう。
 
-```example
+```prerender
+// FrameCountTooFast
 textSize(50); // 文字を大きくする
 fill(0);      // 文字を黒にする
 
@@ -231,12 +268,13 @@ function draw() {
 }
 ```
 
-早すぎて何が起きたかよくわかりません。実行をもう少し遅くするには`frameRate()`が便利です。`draw()`を一回実行されたときに一つのフレームとして考えると、フレーム・レートは一秒あたり何回`draw()`が呼ばれるかを示します。
+速すぎて何が起きたかよくわかりません。実行をもう少し遅くするには`frameRate()`を使います。`draw()`が一回実行されたときを一つのフレームとして考えると、フレーム・レートは一秒あたり何回`draw()`が呼ばれるかを示します。
 
-```example
-textSize(50);
-fill(0);
-frameRate(1);
+```prerender
+// FrameCountOverwrite
+textSize(50); // 文字を大きくする
+fill(0);      // 文字を黒にする
+frameRate(1); // フレームをゆっくり出す
 background(255);
 
 function draw() {
@@ -244,14 +282,15 @@ function draw() {
 }
 ```
 
-今回は分かりやすくなりましたね。同じところに連続で１、２、３などの数字を表示します。`frameCount`は毎回フレーム番号を表しています。`draw()`の実行ごとに違う数が表示されます。
+今回はわかりやすくなりましたね。同じところに連続で１、２、３などの数字を表示しています。`frameCount`はプログラムが開始されてから表示されたフレーム数を表しています。結果として`draw()`の実行ごとに0から1ずつ増えた数が重ねて描画されます。
 
-番号がはっきり見えるようにしましょう。新しい番号を見せる前にキャンバスを消すことで、新しい番号がはっきり見えます。キャンバスを消すためには`background()`を使います。`background()`には前と同様にRGBの形式色を指定できます。
+次は番号が重ならないようにしましょう。新しい番号を表示する前にキャンバスをクリアすることで、新しい番号がはっきり見えます。キャンバスをクリアするためにはbackground()を使います。background()には前と同様にRGBの形式で色を指定できます。
 
-```example
-textSize(50);
-fill(0);
-frameRate(1);
+```prerender
+// FrameCount
+textSize(50); // 文字を大きくする
+fill(0);      // 文字を黒にする
+frameRate(1); // フレームをゆっくり出す
 
 function draw() {
   background(200);  // キャンバスをグレーに塗りつぶす
@@ -259,13 +298,54 @@ function draw() {
 }
 ```
 
-この例で出てきた`frameCount`は変数といいます。
+この例で出てきた`frameCount`は変数といいます。他の変数の例をみてみましょう。
 
-**問題３**:
-`draw()`や`frameCount`や図形の命令を使って好きなように雪だるまのアニメーションを作りましょう。何か分からないことがあったら質問してください。
+```
+var x = 0;
+```
 
+`var`を使って新しい変数を作りました。変数を使って、アニメーションを作りましょう。以下のプログラムをヘルプから読み込みしましょう。
+
+```prerender
+// VariableExample
+
+var x = 0;
+
+function draw() {
+  background(255);
+  ellipse(x, 50, 80, 80);
+  x = x + 1;
+  if (x > width) {
+    x = 0;
+  }
+}
+```
+
+この例では、`draw()`を実行のたびにx変数の値を１づつ増やします。`if`文を使って、右側にたどり着いたら左側にもどします。`if`文は「条件分岐」と呼ぶこともあります。
+
+**問題３**：draw()やframeCountまたは自分で作った変数を使って好きなように雪だるまのアニメーションを作りましょう。何か分からないことがあったら質問してください。
+
+```render
+size(300, 300, "2D");
+frameRate(30);
+var x = 150, y = 170;
+
+function draw() {
+  background(220);
+  strokeWeight(5);
+  stroke(255, 100, 100);
+  ellipse(x, y+80, 100, 100);
+  stroke(100, 255, 100);
+  ellipse(x-10*cos(frameCount*5), y, 80, 80);
+  stroke(100, 100, 255);
+  ellipse(x+10*sin(frameCount*5), y-60, 60, 60);
+}
+```
+
+できましたか？　ヘルプのStep３の最後に「表示」のボタンを押して、一つのアニメーションの例を見てみましょう。
 
 ```hidden
+// WavingColoredSnowman
 size(300, 300, "2D");
 frameRate(30);
 var x = 150, y = 170;
@@ -286,24 +366,37 @@ function draw() {
 
 # ステップ4: マウスの使い方 {#ref-PJSStep4}
 
-ゲームを作るにはユーザーからの入力を処理する必要があります。まずはマウスを使ってみましょう。プログラムの実行中にマウスがキャンバスの中に入ると、`mouseX`と`mouseY`の変数にマウスの位置が設定されます。
+ゲームを作るにはユーザーからの入力を処理する必要があります。まずはマウスを使ってみましょう。プログラムの実行中にマウスがキャンバスの中に入ると、変数 mouseX と mouseY にマウスの位置が設定されます。
 
 ```prerender
+// CircleFollowsMouse
 function draw() {
   background(255);  // 白
-  ellipse(mouseX, mouseY, 10, 10);
+  ellipse(mouseX, mouseY, 20, 20);
 }
 ```
 
 マウスをキャンバス内で動かしてみましょう。丸がマウスについてくるのがわかるでしょう。
 
+ちなみに、Javascriptでは関数を定義する方法はいくつかあります。こちらのプログラムは前のプログラムと全く同じ意味です。
+
+```prerender
+// CircleFollowsMouse
+var draw = function() {
+  background(255);  // 白
+  ellipse(mouseX, mouseY, 20, 20);
+};
+```
+
 では、ユーザーがマウスをクリックしたらキャンバスを黒くしてみましょう。
 ユーザーがマウスをクリックしたことに反応するためには、`mousePressed()`関数を定義します。この関数は、マウスのボタンが押されたときに呼ばれます。次のプログラムを実行して、マウスをキャンバス内でクリックすると、一瞬だけキャンバスが黒くなります。
 
+
 ```prerender
+// ClickedTooShort
 function draw() {
   background(255);  // 白
-  ellipse(mouseX, mouseY, 10, 10);
+  ellipse(mouseX, mouseY, 20, 20);
   frameRate(10);
 }
 
@@ -312,21 +405,19 @@ function mousePressed() {
 }
 ```
 
-なぜキャンバスが黒のままにならないのでしょうか。それは、`draw()`関数が繰り返し実行され、`draw()`の中にキャンバスを白く塗りつぶす命令`background(255)`が入っているからです。
+なぜキャンバスが黒のままにならないのでしょうか。それは、`draw()`関数が繰り返し実行され、`draw()`の中にキャンバスを白く塗りつぶす命令`background(255, 255, 255)`があるからです。
 
 マウスをクリックした後、キャンバスを一瞬だけではなくずっと黒にするには、どうすればいいでしょうか。
 
-ここでは変数が役に立ちます。ただ、前と違って、Processingの標準の変数ではなくて、自分で新しい変数を作ります。変数を作るには、`var c =
-255;`のような文をプログラムに追加します。この中で`int`は変数の型を表しています：整数(integerの略)。 `=
-255`は変数の値を指定しています。`c`は変数の名前です。マウスがクリックされたときに`mousePressed()`が呼ばれるので、その中で変数の値を変えることができます。
-`c = 0;`は変数に新しい値(`0`)を与えます。
+ここで変数が役に立ちます。ただ前と違って、Processingの標準の変数ではなくて、自分で新しい変数を作ります。変数を作るには、var c = 255;のような文をプログラムに追加します。この = 255 は変数の値を指定しています。c は変数の名前です。マウスがクリックされたときに `mousePressed()` が呼ばれるので、その中で変数の値を変えることができます。
 
 ```prerender
+// ClickedBlack
 var c = 255;
 
 function draw() {
   background(c);
-  ellipse(mouseX, mouseY, 10, 10);
+  ellipse(mouseX, mouseY, 20, 20);
   frameRate(10);
 }
 
@@ -335,14 +426,12 @@ function mousePressed() {
 }
 ```
 
-ここでは、プログラムの実行を始めた時に変数cが作られて、最初の値は255になっています。変数の値は255なので、`background(c);`はキャンバスを白く塗りつぶします。ユーザがマウスをクリックすると、`mousePressed()`が呼ばれて、変数cの値が0になります。その後は、`background(c);`という命令はキャンバスを黒く塗りつぶすことになります。
+ここでは、プログラムの実行を始めた時に変数 c が作られて、最初の値は 255 になっています。変数の値が 255 なので、`background(c);` はキャンバスを白く塗りつぶします。ユーザがマウスをクリックすると、`mousePressed()` が呼ばれて、変数 c の値が 0 になります。その後は、`background(c);` という命令はキャンバスを黒く塗りつぶすことになります。
 
 **問題4**: 雪だるまをマウスと一緒に動かしてみましょう。
 
 ```hidden
-// SnowmanMouse
-size(300, 300, "2D");
-
+// SnowmanFollowsMouse
 draw = function() {
   background(220);
   ellipse(mouseX, mouseY+80, 100, 100);
@@ -355,9 +444,9 @@ draw = function() {
 
 # ステップ5: キーボードの使い方 {#ref-PJSStep5}
 
-ゲーム機には普通マウスはついてないので、キーパッドで遊ぶことが多いでしょう。では、ゲーム機のようにキーボードを使って遊べるようにするにはどうすればいいでしょう。
+ゲーム機には普通マウスはついてないので、キーパッドで遊ぶことが多いでしょう。では、ゲーム機のようにキーボードを使って遊べるようにするにはどうすればいいでしょうか。
 
-Processingでは、キーボードの使い方はマウスととても似ています。キーボードのボタンが押されるたびに`keyPressed()`関数が呼ばれます。次の例を見ましょう。その関数の中に`keyCode`を参照すれば、押されたキーが分かります。次のプログラムは丸を描いています。実行したら、キャンバス内をクリックして、左右の矢印キーを押してみましょう。
+Processingでは、キーボードの使い方はマウスととても似ています。キーボードのボタンが押されるたびに `keyPressed()` 関数が呼ばれます。次の例を見ましょう。その関数の中で`keyCode` を参照すると、押されたキーが分かります。
 
 ```prerender
 var x = 50;
@@ -377,16 +466,13 @@ function keyPressed() {
 }
 ```
 
+このプログラムでは丸を描いています。実行し、キャンバス内をクリックして、左右の矢印キーを押してみましょう。
+
 **問題5**: 雪だるまをキーボードの左右矢印キーで動かしてみましょう。
 
 ```hidden
 // SnowmanKeyboard
-
 var x = 150;
-
-function setup() {
-  size(300, 300);
-}
 
 function draw() {
   background(220);
@@ -396,10 +482,10 @@ function draw() {
 }
 
 function keyPressed() {
-  if (keyCode == LEFT) {
+  if (keyCode === LEFT) {
     x = x - 5;
   }
-  if (keyCode == RIGHT) {
+  if (keyCode === RIGHT) {
       x = x + 5;
   }
 }
@@ -409,9 +495,10 @@ function keyPressed() {
 
 # ステップ6: シミュレーション {#ref-PJSStep6}
 
-ゲームのなかのオブジェクトは馴染みがあると遊びやすくなります。たとえば、重力で落ちるボールはどのようにプログラムで表現するのでしょうか？それはシミュレーションを使って実装できます。ボールのシミュレーションにはボールの位置と速度が必要です。重力の場合は加速度は定数です。
+ゲームのなかのオブジェクトは動きが現実と近いと現実と近いと遊びやすくなります。たとえば、重力で落ちるボールはどのようにプログラムで表現すればよいのでしょうか？これはシミュレーションを使って実装できます。ボールのシミュレーションには位置と速度が必要です。重力の場合は加速度は定数です。
 
-```example
+```prerender
+// FallingBall
 var y = 10;
 var vy = 0;
 
@@ -425,12 +512,13 @@ function draw() {
 }
 ```
 
-ボールのシミュレーションに２つの変数を使います。`y`は縦位置と`vy`は縦速度を表しています。`draw()`は一秒で何回も呼ばれるので、毎回新しい位置や速度を計算します。シミュレーションの計算の後、キャンバスを書き直すことでアニメーションを実装します。この例では前と違って`float`の変数を使います。`float`は浮動小数点数といい、整数ではない数を保存できます。
+ボールのシミュレーションに２つの変数を使います。`y`は縦方向の位置、`vy`は縦方向の速度を表しています。`draw()`は一秒に10回呼ばれ、毎回新しい位置と速度を計算します。シミュレーションの計算の後、キャンバスを書き直すことでアニメーションを実装します。
 
-以上のシミュレーションでボールが一回キャンバスの下に落ちたらキャンバスから消えます。ボールをゲームから消えさせないようにキャンバスの端からバウンドさせることできます。
+以上のシミュレーションではボールが一回キャンバスの下に落ちたらキャンバスから消えてしまいます。ボールをゲームから消えさせないようにキャンバスの端からバウンドさせることもできます。
 プログラムの実行の世界では端というものが存在しないので、プログラムは「壁にぶつかったか」という条件を調べなければいけません。
 
-```example
+```prerender
+// BouncingBall
 var y = 10;
 var vy = 0;
 
@@ -439,19 +527,21 @@ function draw() {
   vy = vy + 0.1;  // 加速
   if (y > height) {  // 床に当たる条件
     y = height;
-    vy = -8;
+    vy = -6;
   }
   background(220);
   ellipse(50, y, 30, 30);
 }
 ```
 
-この例では、円が床に当たっているかどうかという条件を調べています。`y`軸は下向きなので、キャンバスの下の部分のY座標は`height`です。シミュレーションの計算の結果でボールは床下に行きそうの条件は
-`y > height`で調べます。
 
-ボールが床に当たったら、ボールに上向きの速度を与えれば、本物のボールのようにバウンドします。
 
-**問題6:** 雪だるまを飛びさせましょう。
+この例では、円が床に当たっているかどうかという条件を調べています。`y`軸は下向きなので、キャンバスの下の部分のY座標は`height`です。シミュレーションの計算の結果でボールが床に当たったかどうかの条件は `y > height`で調べられます。
+
+ボールが床に当たった時にボールに上向きの速度を与えれば、本物のボールのようにバウンドします。
+
+
+**問題6:** 雪だるまを飛ばせてみましょう。
 
 ```hidden
 // SnowmanBounce
@@ -490,12 +580,12 @@ function keyPressed() {
 以前はゲーム作り基本を学びましたが、 楽しいゲームを作るために画像や音が欠かせないものです。 簡単な画像や音のエフェクトの使い方を紹介します。
 
 ```prerender
+// BananaImage
 imageMode(CENTER);
-image(getImage("cc0/banana-200x113"), 50, 50, 100, 85);
+image(getImage("cc0/banana-200x113"), 50, 50, 100, 67);
 ```
 
-`imageMode`は画像の写し方を設定します。 `CENTER`(中心)を設定すると座標の(x,y)の点に画像の中心が写します。
-`CORNER`(角)を設定すると(x,y)の点に左上角が写します。
+`imageMode`は画像の写し方を設定します。 `CENTER`(中心)を設定すると座標の(x,y)の点に画像の中心が写します。 `CORNER`(角)を設定すると(x,y)の点に左上角が写します。
 
 ```render
 var img = getImage("cc0/baloon1-170x200.png");
@@ -524,18 +614,16 @@ function draw() {
 
 画像をいくつか用意しましたので、[画像リスト][ImageLibrary]でご確認ください。
 
-音の場合も、音のデータを用意する必要があります。`getSound()`を呼ぶことによって
-音のデータを用意します。用意されたデータを`PAudio`の変数に保存しておきます。
-用意してから適切なときに`play()`命令を使って再生します。音の場合は、再生は 時間かかりますが、その家にプログラムは実行し続きます。
-次のプログラムを実行して、 キャンバス内でクリックしてみてください。
+音の場合も、音のデータを用意する必要があります。`getSound()`を呼ぶことによって音のデータを用意します。用意されたデータを変数（ここでは`sound`）に保存しておき、適切なときに`playSound()`命令を使って再生します。音の場合は、再生に時間がかかりますが、その間もプログラムは実行し続ます。
 
 ```prerender
+// MeowExample
 var sound = getSound("cc0/meow.ogg");
 function mouseClicked() {
   playSound(sound);
 }
 function draw() {
-  if (sound.audio.duration !== 0 && !sound.audio.paused) {
+  if (!sound.audio.paused) {
     background(220);
     fill(0); textSize(20);
     text("Meow", 5, 20);
@@ -633,7 +721,141 @@ function mousePressed() {
 }
 ```
 
-次は[サンプルゲーム][Games]を参照。
+以下はサンプルゲームの簡単な説明です。
+
+
+まずは使う画像をロードします。
+
+```
+var fire = getImage("cc0/fire2-134x200");
+var rocket = getImage("cc0/rocket-168x300");
+var rocket_fire = getImage("cc0/rocket1-168x300");
+```
+
+次は音を用意します。
+
+```
+var explosion = getSound("cc0/explosion.ogg");
+var roar = getSound("cc0/roar.ogg");
+var win = getSound("cc0/win.ogg");
+```
+
+ゲームの状態を保つために変数を作ります。
+
+```
+var x;
+var y;
+var vy;
+
+var burning = false;
+var gameOver = false;
+```
+
+プログラムの一度の実行で、何回もゲームできるようにしますので、ゲームを最初の状態に戻す関数を用意します。（初期化する関数といいます）。
+
+```
+function initVars() {
+  x = 100;
+  y = 10;
+  vy = 0;
+  gameOver = false;
+  burning = false;
+}
+```
+
+プログラムの最初のところ、フレームレートと画像の表示方法を設定します。または、初期化の関数を呼びます。
+
+```
+frameRate(20);
+imageMode(CENTER);
+initVars();
+```
+
+フレームごとに呼ばれる`draw()`関数の中でシミュレーションを行います。
+
+```
+function draw() {
+  y = y + vy;
+  vy = vy + 0.2;
+```
+
+シミュレーションの後、ゲームが終わったかどうかを調べます。このゲームはロケットが着陸したらゲームが終わりますので、`y > height-30`の条件をチェックします。ロケットの位置を中心の座標を使ってあらわしているので、y が height - (画像の高さの半分) の時に、ちょうどロケットの下がキャンバスの一番下と一致(つまりロケットが着陸)します。この例ではロケットの画像の高さが 60 なので、その半分を引いた `height - 30` と y を比較します。
+
+```
+  if (y > height - 30) {
+    if (abs(vy) > 3) {
+      background(200);
+      image(fire, x, y-25, 65, 100);
+      playSound(explosion);
+    } else {
+      playSound(win);
+    }
+    noLoop();
+    gameOver = true;
+    return;
+  }
+```
+
+着陸条件を満たしていたら、安全に着陸できたかどうかしらべます。速度が速すぎたら(`abs(vy) > 3`), 着陸失敗として、ロケットが爆発するアニメーションを表示します。成功の場合も失敗の場合も、`noLoop()`を呼んでアニメ−ションを一旦止めます。なぜかというと、次のゲームが始まるまではアニメーションは必要ないからです。
+
+まだ着陸していない場合(上の`y > height - 30`の条件を満たしていない場合)は、アニメーションを行います。
+
+```
+  background(100);
+  if (burning) {
+    image(rocket_fire, x, y, 34, 60);
+    burning = false;
+  } else {
+    image(rocket, x, y, 34, 60);
+  }
+```
+
+ここでは、burningの変数をチェックして、ロケットの画像は炎付きの画像を表示するか、炎なしの画像を表示するかを決めます。
+
+ロケットのエンジンが掛かる場合のシミュレーションをする関数も作ります。
+
+```
+function burn() {
+  burning = true;
+  vy -= 2;
+  playSound(roar);
+}
+```
+
+なぜ関数が必要なのかというと、マウスでもキーボードでもゲームできるようにしたいからです。
+
+キーボードを使うためにkeyPressed()の関数を定義します。
+
+```
+function keyPressed() {
+  if (gameOver) {
+    initVars();
+    loop();
+    return;
+  }
+  burn();
+}
+```
+
+キーボードには２つの機能があります。ゲームが終わった状態であれば、ゲーム状態をイニシャライズして新しいゲームをスタートします。そのためにloop()を呼んでアニメーションも再開します。ゲームの最中の場合(`gameOver`は偽の場合)はエンジンを掛けるシミュレーションが呼ばれます(`burn();`)。
+
+
+同じように、マウスがクリックされたら、同じ対応します。
+
+```
+function mousePressed() {
+  if (gameOver) {
+    initVars();
+    loop();
+    return;
+  }
+  burn();
+}
+```
+
+これでゲームの完成です。
+
+他のゲームは[サンプルゲーム][Games]にご参照ください。
 
 # ツール {#ref-Tools}
 
@@ -657,7 +879,7 @@ function arrow(x1, y1, x2, y2) {
   var l = sqrt(x*x+y*y);
   x = x / l * 10;
   y = y / l * 10;
-  alpha = PI/4;
+  var alpha = 45;
   line(x2, y2, x2 - x*cos(alpha) + y*sin(alpha), y2 - x*sin(alpha) - y*cos(alpha));
   line(x2, y2, x2 - x*cos(-alpha) + y*sin(-alpha), y2 - x*sin(-alpha) - y*cos(-alpha));
 }
@@ -676,9 +898,7 @@ text("y", 30, 85);
 
 ```prerender
 // ShowCoordinates
-function setup() {
-  size(200, 200);
-}
+size(200, 200, "2D");
 
 function draw() {
   background(220);
@@ -694,7 +914,7 @@ function draw() {
 
 ```prerender
 // ColorsDemo2
-color posToColor(x, y) {
+function posToColor(x, y) {
   if (x < width/2 && y < height/2) {
     return color((width/2-x)/width*512, (height/2-y)/height*512, 0);
   } else if (x < width/2) {
@@ -706,36 +926,34 @@ color posToColor(x, y) {
   }
 }
 
-function setup() {
-  size(300, 300);
-  for (var x = 0; x < width; x++) {
-    for (var y = 0; y < height; y++) {
-      set(x, y, posToColor(x, y));
-    }
+size(300, 300, "2D");
+for (var x = 0; x < width; x++) {
+  for (var y = 0; y < height; y++) {
+    set(x, y, posToColor(x, y));
   }
-
-  fill(0);
-  textSize(height/20);
-  text("(255,0,0)", 5, height/2-5);
-  text("(255,255,0)", 5, 20);
-  textAlign(RIGHT, TOP);
-  text("(0,255,255)", width-5, 2);
-  textAlign(CENTER, TOP);
-  text("(0,255,0)", width/2, 2);
-  textAlign(LEFT, BASELINE);
-  fill(255);
-  text("(0,0,0)", width/2+2, height/2-2);
-  textAlign(RIGHT, BASELINE);
-  text("(0,0,255)", width-2, height/2);
-  fill(0);
-  textAlign(LEFT, BOTTOM);
-  text("(255,0,0)", width/2+2, height-2);
-  textAlign(RIGHT, BOTTOM);
-  text("(255,0,255)", width-2, height-2);
 }
 
+fill(0);
+textSize(height/20);
+text("(255,0,0)", 5, height/2-5);
+text("(255,255,0)", 5, 20);
+textAlign(RIGHT, TOP);
+text("(0,255,255)", width-5, 2);
+textAlign(CENTER, TOP);
+text("(0,255,0)", width/2, 2);
+textAlign(LEFT, BASELINE);
+fill(255);
+text("(0,0,0)", width/2+2, height/2-2);
+textAlign(RIGHT, BASELINE);
+text("(0,0,255)", width-2, height/2);
+fill(0);
+textAlign(LEFT, BOTTOM);
+text("(255,0,0)", width/2+2, height-2);
+textAlign(RIGHT, BOTTOM);
+text("(255,0,255)", width-2, height-2);
+
 function draw() {
-  color c = posToColor(mouseX, mouseY);
+  var c = posToColor(mouseX, mouseY);
   noStroke();
   fill(c);
   rect(width/10, 6*height/10, 3*width/10, 3*height/10);
@@ -754,9 +972,7 @@ function draw() {
 
 ```prerender
 // EllipseTool
-function setup() {
-  size(200, 200);
-}
+size(200, 200, "2D");
 
 var x1, y1, x2, y2;
 var pressed = false;
@@ -767,7 +983,7 @@ function draw() {
     x2 = mouseX;
     y2 = mouseY;
   }
-  if (x2 != x1) {
+  if (x2 !== x1) {
     fill(255);
     ellipse(x1, y1, (x2-x1)*2, (y2-y1)*2);
   }
@@ -799,9 +1015,7 @@ function mouseReleased() {
 
 ```prerender
 // RectangleTool
-function setup() {
-  size(200, 200);
-}
+size(200, 200, "2D");
 
 var x1, y1, x2, y2;
 var pressed = false;
@@ -812,7 +1026,7 @@ function draw() {
     x2 = mouseX;
     y2 = mouseY;
   }
-  if (x2 != x1) {
+  if (x2 !== x1) {
     fill(255);
     rect(x1, y1, (x2-x1), (y2-y1));
   }
@@ -1046,7 +1260,6 @@ image(img, 50, 50, 85, 100);
 *   landscapes/beach-at-dusk.png ![landscapes/beach-at-dusk.png](images/landscapes/beach-at-dusk.png)
 *   landscapes/lava.png ![landscapes/lava.png](images/landscapes/lava.png)
 *   landscapes/sand-dunes.png ![landscapes/sand-dunes.png](images/landscapes/sand-dunes.png)
-*   landscapes/mountain_matterhorn.png ![landscapes/mountain_matterhorn.png](images/landscapes/mountain_matterhorn.png)
 *   landscapes/fields-of-grain.png ![landscapes/fields-of-grain.png](images/landscapes/fields-of-grain.png)
 *   landscapes/lake-steam-rising.png ![landscapes/lake-steam-rising.png](images/landscapes/lake-steam-rising.png)
 *   landscapes/waterfall_niagara-falls.png ![landscapes/waterfall_niagara-falls.png](images/landscapes/waterfall_niagara-falls.png)
@@ -1131,19 +1344,19 @@ function maru(col, row) {
   strokeWeight(3);
   ellipse(margin + col*step, margin + row*step, radius, radius);
 }
-function setup() {
-  size(300, 300);
-  background(255);
-  maru(0, 0);
-  maru(1, 0);
-  maru(1, 1);
-  maru(2, 1);
-  maru(0, 2);
-  maru(2, 2);
-  fill(0);
-  textSize(18);
-  text("スコア:2", 10, 20);
-}
+
+size(300, 300, "2D");
+background(255);
+maru(0, 0);
+maru(1, 0);
+maru(1, 1);
+maru(2, 1);
+maru(0, 2);
+maru(2, 2);
+fill(0);
+textSize(18);
+text("スコア:2", 10, 20);
+
 function draw() {
   exit();
 }
@@ -1172,7 +1385,7 @@ Processing は絵などを描けるプログラミング言語です。アプリ
 
 ```prerender
 // Circle
-size(100, 100);
+size(100, 100, "2D");
 ellipse(50, 50, 10, 10);
 ```
 
@@ -1203,7 +1416,7 @@ ellipse(50, 50, 10, 10);
 ```example
 // WhackACircle11
 // キャンバスの大きさを 300 x 300 にする
-size(300, 300);
+size(300, 300, "2D");
 // 中心座標が (150, 150)、直径が 10 の円を描く
 ellipse(150, 150, 10, 10);
 ```
@@ -1221,7 +1434,7 @@ ellipse(150, 150, 10, 10);
 ```example
 // WhackACircle12
 // キャンバスの大きさを 300 × 300 にする
-size(300, 300);
+size(300, 300, "2D");
 // キャンバスを白で塗ります
 background(255, 255, 255);
 // 円の中身を緑色にする
@@ -1252,7 +1465,7 @@ ellipse(150, 150, 40, 40);
 ```example
 // RandomCircle
 // キャンバスの大きさを 300 × 300 にする
-size(300, 300);
+size(300, 300, "2D");
 // キャンバスを白で塗る
 background(255, 255, 255);
 // 円の中身を緑色にする
@@ -1295,14 +1508,12 @@ ellipse(x, y, 40, 40);
 ```example
 // WhackACircle15
 // 初期化・一回だけ実行される
-function setup() {
-  // キャンバスの大きさを 300 × 300 にする
-  size(300, 300);
-  // 滑らかに描く
-  smooth();
-  // 1 秒間に 30 回描く
-  frameRate(30);
-}
+// キャンバスの大きさを 300 × 300 にする
+size(300, 300, "2D");
+// 滑らかに描く
+smooth();
+// 1 秒間に 30 回描く
+frameRate(30);
 
 // ずっと実行される
 function draw() {
@@ -1385,11 +1596,9 @@ function mouseClicked() {
 // WhackACircle17
 var score = 0;
 
-function setup() {
-  size(300,300);
-  background(255, 255, 255);
-  frameRate(1);
-}
+size(300,300, "2D");
+background(255, 255, 255);
+frameRate(1);
 
 function draw() {
   // キャンバスを白で塗る
@@ -1434,16 +1643,14 @@ var radius = 20;
 var score = 0;
 
 // 初期化・一回だけ実行される
-function setup() {
-  // キャンバスの大きさを 300 × 300 にする
-  size(300, 300);
-  // キャンバスを白で塗ります
-  background(255, 255, 255);
-  // 滑らかに描く
-  smooth();
-  // 1 秒間、1 回描く
-  frameRate(1);
-}
+// キャンバスの大きさを 300 × 300 にする
+size(300, 300, "2D");
+// キャンバスを白で塗ります
+background(255, 255, 255);
+// 滑らかに描く
+smooth();
+// 1 秒間、1 回描く
+frameRate(1);
 
 // 座標 (x, y) に円を描く
 function drawCircle(x, y) {
@@ -1533,16 +1740,14 @@ var radius = 20;
 var score = 0;
 
 // 初期化・一回だけ実行される
-function setup() {
-  // キャンバスの大きさを 300 × 300 にする
-  size(300, 300);
-  // キャンバスを白で塗ります
-  background(255, 255, 255);
-  // 滑らかに描く
-  smooth();
-  // 1 秒間、1 回描く
-  frameRate(1);
-}
+// キャンバスの大きさを 300 × 300 にする
+size(300, 300, "2D");
+// キャンバスを白で塗ります
+background(255, 255, 255);
+// 滑らかに描く
+smooth();
+// 1 秒間、1 回描く
+frameRate(1);
 
 // 座標 (x, y) に円を描く
 function drawCircle(x, y) {
@@ -1654,16 +1859,15 @@ var radius = 20;
 var score = 0;
 
 // 初期化・一回だけ実行される
-function setup() {
-  // キャンバスの大きさを 300 × 300 にする
-  size(300, 300);
-  // キャンバスを白で塗ります
-  background(255, 255, 255);
-  // 滑らかに描く
-  smooth();
-  // 1 秒間、1 回描く
-  frameRate(1);
-}
+// キャンバスの大きさを 300 × 300 にする
+size(300, 300, "2D");
+// キャンバスを白で塗ります
+background(255, 255, 255);
+// 滑らかに描く
+smooth();
+// 1 秒間、1 回描く
+frameRate(1);
+
 
 // 座標 (x, y) に円を描く
 function drawCircle(x, y) {
@@ -1802,16 +2006,14 @@ var radius = 20;
 var score = 0;
 
 // 初期化・一回だけ実行される
-function setup() {
-  // キャンバスの大きさを 300 × 300 にする
-  size(300, 300);
-  // キャンバスを白で塗ります
-  background(255, 255, 255);
-  // 滑らかに描く
-  smooth();
-  // 1 秒間、1 回描く
-  frameRate(1);
-}
+// キャンバスの大きさを 300 × 300 にする
+size(300, 300, "2D");
+// キャンバスを白で塗ります
+background(255, 255, 255);
+// 滑らかに描く
+smooth();
+// 1 秒間、1 回描く
+frameRate(1);
 
 // 座標 (x, y) に円を描く
 function drawCircle(x, y) {
@@ -1907,7 +2109,7 @@ function mouseClicked() {
 ```example
 // Maze1
 var imgLabyrinth = getImage("cc0/labyrinth1.png");
-size(360, 360);  // キャンバスの大きさの設定
+size(360, 360, "2D");  // キャンバスの大きさの設定
 image(imgLabyrinth, 1, 1, 360, 360); // 迷路の表示
 ```
 
@@ -1918,11 +2120,10 @@ image(imgLabyrinth, 1, 1, 360, 360); // 迷路の表示
 // Maze1
 var imgLabyrinth = getImage("cc0/labyrinth1.png");
 var imgWalker = getImage("cc0/Walker44.png");
-function setup() {
-  size(360, 360);  // キャンバスの大きさの設定
-  image(imgLabyrinth, 1, 1, 360, 360); // 迷路の表示
-  imageMode(CENTER);
-}
+
+size(360, 360, "2D");  // キャンバスの大きさの設定
+image(imgLabyrinth, 1, 1, 360, 360); // 迷路の表示
+imageMode(CENTER);
 
 // キャラクターの大きさ、ピクセル単位
 var s = 44;
@@ -1964,11 +2165,10 @@ function draw() {
 // Maze2
 var imgLabyrinth = getImage("cc0/labyrinth1.png");
 var imgWalker = getImage("cc0/Walker44.png");
-function setup() {
-  size(360, 360);  // キャンバスの大きさの設定
-  image(imgLabyrinth, 1, 1, 360, 360); // 迷路の表示
-  imageMode(CENTER);
-}
+
+size(360, 360, "2D");  // キャンバスの大きさの設定
+image(imgLabyrinth, 1, 1, 360, 360); // 迷路の表示
+imageMode(CENTER);
 
 // キャラクターの大きさ、ピクセル単位
 var s = 44;
@@ -2014,7 +2214,7 @@ dyには常に０か１の値しか与えないようにします。たとえば
 
     function wallAhead() {
       // キャラクターの３ピクセル前に調べよう.
-      color c = get(x+dx*(s/2+3), y+dy*(s/2+3));
+      var c = get(x+dx*(s/2+3), y+dy*(s/2+3));
     　// 黒を検出しよう。
       return brightness(c) < 50;
     }
@@ -2033,11 +2233,10 @@ dyには常に０か１の値しか与えないようにします。たとえば
 // Maze3
 var imgLabyrinth = getImage("cc0/labyrinth1.png");
 var imgWalker = getImage("cc0/Walker44.png");
-function setup() {
-  size(360, 360);  // キャンバスの大きさの設定
-  image(imgLabyrinth, 1, 1, 360, 360); // 迷路の表示
-  imageMode(CENTER);
-}
+
+size(360, 360, "2D");  // キャンバスの大きさの設定
+image(imgLabyrinth, 1, 1, 360, 360); // 迷路の表示
+imageMode(CENTER);
 
 // キャラクターの大きさ、ピクセル単位
 var s = 44;
@@ -2065,7 +2264,7 @@ function draw() {  // この関数は繰り返し呼ばれている.
 
 var wallAhead() {
   // キャラクターの３ピクセル前に調べよう.
-  color c = get(x+dx*(s/2+3), y+dy*(s/2+3));
+  var c = get(x+dx*(s/2+3), y+dy*(s/2+3));
 　// 黒を検出しよう。
   return brightness(c) < 50;
 }
@@ -2109,11 +2308,10 @@ var wallAhead() {
 // Maze3
 var imgLabyrinth = getImage("cc0/labyrinth1.png");
 var imgWalker = getImage("cc0/Walker44.png");
-function setup() {
-  size(360, 360);  // キャンバスの大きさの設定
-  image(imgLabyrinth, 1, 1, 360, 360); // 迷路の表示
-  imageMode(CENTER);
-}
+
+size(360, 360, "2D");  // キャンバスの大きさの設定
+image(imgLabyrinth, 1, 1, 360, 360); // 迷路の表示
+imageMode(CENTER);
 
 // キャラクターの大きさ、ピクセル単位
 var s = 44;
@@ -2140,7 +2338,7 @@ function draw() {  // この関数は繰り返し呼ばれている.
 
 var wallAhead() {
   // キャラクターの３ピクセル前に調べよう.
-  color c = get(x+dx*(s/2+3), y+dy*(s/2+3));
+  var c = get(x+dx*(s/2+3), y+dy*(s/2+3));
 　// 黒を検出しよう。
   return brightness(c) < 50;
 }
@@ -2176,7 +2374,7 @@ function turnLeft() {
     function wallRight() {
       var rx = -dy;
       var ry = dx;
-      color c = get(x + rx*(s/2+4), y + ry*(s/2+4));
+      var c = get(x + rx*(s/2+4), y + ry*(s/2+4));
       return brightness(c) < 50;
     }
 
@@ -2201,7 +2399,7 @@ true を返してしまうからです。
       var rx = -dy;
       var ry = dx;
       for (var i = -s/2-1; i < s/2+1; i++) {
-        color c = get(x+dx*(s/2+3)+rx*i, y+dy*(s/2+3)+ry*i);
+        var c = get(x+dx*(s/2+3)+rx*i, y+dy*(s/2+3)+ry*i);
         wallFound = wallFound || brightness(c) < 50;
       }
       return wallFound;
@@ -2212,7 +2410,7 @@ true を返してしまうからです。
       var ry = dx;
       var wallFound = false;
       for (var i = -s/2-1; i <= s/2+1; i++) {
-        color c = get(x + rx*(s/2+3)+dx*i, y + ry*(s/2+3)+dy*i);
+        var c = get(x + rx*(s/2+3)+dx*i, y + ry*(s/2+3)+dy*i);
         wallFound = wallFound || brightness(c) < 50;
       }
       return wallFound;
@@ -2237,11 +2435,10 @@ true を返してしまうからです。
 // Maze4
 var imgLabyrinth = getImage("cc0/labyrinth1.png");
 var imgWalker = getImage("cc0/Walker44.png");
-function setup() {
-  size(360, 360);  // キャンバスの大きさの設定
-  image(imgLabyrinth, 1, 1, 360, 360); // 迷路の表示
-  imageMode(CENTER);
-}
+
+size(360, 360, "2D");  // キャンバスの大きさの設定
+image(imgLabyrinth, 1, 1, 360, 360); // 迷路の表示
+imageMode(CENTER);
 
 // キャラクターの大きさ、ピクセル単位
 var s = 44;
@@ -2275,7 +2472,7 @@ var wallAhead() {
   var rx = -dy;
   var ry = dx;
   for (var i = -s/2-1; i < s/2+1; i++) {
-    color c = get(x+dx*(s/2+3)+rx*i, y+dy*(s/2+3)+ry*i);
+    var c = get(x+dx*(s/2+3)+rx*i, y+dy*(s/2+3)+ry*i);
     wallFound = wallFound || brightness(c) < 50;
   }
   return wallFound;
@@ -2286,7 +2483,7 @@ var wallRight() {
   var ry = dx;
   var wallFound = false;
   for (var i = -s/2-1; i <= s/2+1; i++) {
-    color c = get(x + rx*(s/2+3)+dx*i, y + ry*(s/2+3)+dy*i);
+    var c = get(x + rx*(s/2+3)+dx*i, y + ry*(s/2+3)+dy*i);
     wallFound = wallFound || brightness(c) < 50;
   }
   return wallFound;
@@ -2324,7 +2521,7 @@ function turnRight() {
 最後にゴールの判定をする機能を加えてみましょう。ゴールの判定は壁の検出に似ていますが、黒の代わりに緑か調べなければなりません。
 
     function reachedGoal() {
-      color c = get(x+dx*(s/2+3), y+dy*(s/2+3));
+      var c = get(x+dx*(s/2+3), y+dy*(s/2+3));
       return red(c) < 50 && green(c) > 50;
     }
 
@@ -2359,11 +2556,10 @@ function turnRight() {
 // Maze5
 var imgLabyrinth = getImage("cc0/labyrinth1.png");
 var imgWalker = getImage("cc0/Walker44.png");
-function setup() {
-  size(360, 360);  // キャンバスの大きさの設定
-  image(imgLabyrinth, 1, 1, 360, 360); // 迷路の表示
-  imageMode(CENTER);
-}
+
+size(360, 360, "2D");  // キャンバスの大きさの設定
+image(imgLabyrinth, 1, 1, 360, 360); // 迷路の表示
+imageMode(CENTER);
 
 // キャラクターの大きさ、ピクセル単位
 var s = 44;
@@ -2409,7 +2605,7 @@ function draw() {  // この関数は繰り返し呼ばれている.
 }
 
 var reachedGoal() {
-  color c = get(x+dx*(s/2+3), y+dy*(s/2+3));
+  var c = get(x+dx*(s/2+3), y+dy*(s/2+3));
   return red(c) < 50 && green(c) > 50;
 }
 
@@ -2418,7 +2614,7 @@ var wallAhead() {
   var rx = -dy;
   var ry = dx;
   for (var i = -s/2-1; i < s/2+1; i++) {
-    color c = get(x+dx*(s/2+3)+rx*i, y+dy*(s/2+3)+ry*i);
+    var c = get(x+dx*(s/2+3)+rx*i, y+dy*(s/2+3)+ry*i);
     wallFound = wallFound || brightness(c) < 50;
   }
   return wallFound;
@@ -2429,7 +2625,7 @@ var wallRight() {
   var ry = dx;
   var wallFound = false;
   for (var i = -s/2-1; i <= s/2+1; i++) {
-    color c = get(x + rx*(s/2+3)+dx*i, y + ry*(s/2+3)+dy*i);
+    var c = get(x + rx*(s/2+3)+dx*i, y + ry*(s/2+3)+dy*i);
     wallFound = wallFound || brightness(c) < 50;
   }
   return wallFound;
@@ -2453,167 +2649,13 @@ function turnRight() {
 }
 ```
 
-# プログラミング体験ワークショップ {#ref-TTSWorkshop}
-
-*   プログラミング体験ワークショップ
-    *   [ステップ1][step1]
-    *   [ステップ2][step2]
-    *   [ステップ3][step3]
-    *   [ステップ4][step4]
-*   [補足][Addendum]
-*   [デモ][Demos]
-*   [ゲーム][Games]
-*   [その他ワークショップ][otherworkshops]
-
-# ステップ1 {#ref-step1}
-
-今回のワークショップのテーマはコンピューターに言葉を話させることです。こちらのプログラムを入力してみましょう。
-
-```example
-// 「こんにちは」と話して。
-speak("こんにちは");
-```
-
-ここに書いてある2行のうち、「//」
-から初めの行は人間への説明です。コンピュータはこちらを無視しますので入力を省略しても大丈夫です。コンピューターへの命令は２行目のみです。
-
-```
-speak("こんにちは");
-```
-
-実行してみましょう。
-
-「こんにちは」の部分を変えてみて、別の言葉を話させてみましょう。
-
-詳しく知りたい人へ：
-
-*   `speak(...)` は 「... の中の内容を話して」という命令です。
-*   “...” の **"** は言葉を囲む記号です。
-*   **;** は命令の区切りを意味します。
-
-次は[ステップ2][step2]に進みましょう。
-
-# ステップ2 {#ref-step2}
-
-[ステップ1][step1]に戻る。
-
-次にコンピューターに自分の名前を覚えさせてみましょう。プログラムの中で「記憶する」という役割をするのを[変数][Variable]と呼びます。変数はプログラムの実行中で様々のことを記憶することができます。こちらのプログラムにあなたの名前を入れてみましょう。
-
-```example
-// 変数を作ります。
-String namae = "太郎";
-// 変数を使うことによって、名前を思い出します。
-speak("こんにちは、" + namae);
-```
-
-挨拶を変えてみましょう。または、変数は名前を覚えてくれるので、別のところでも使えます。
-
-```example
-// 変数を作ります。
-String namae = "太郎";
-// 変数を使うことによって、名前を思い出します。
-speak("こんにちは、" + namae);
-// まだ覚えています。
-text("こんにちは、" + namae, 0, 50);
-```
-
-詳しく知りたい人へ：
-
-*   「String namae」 は 「言葉 (String) を記憶する変数を作ります、その変数の名前は 「namae」 です」 という意味です。
-*   「=」 は右にあるものを左の変数に記憶しなさいという命令です。全体で、「namae という言葉を格納する変数に “太郎” を記憶しなさい」
-    という命令になります。
-*   「+」 を使うと言葉をつなげることができます。
-*   「text(...)」はテキストを表示します。格好のなかの最初のものは表示する言葉です。その後のは2つの数字は表示する場所を表しています。
-    変数はコンピューターの記憶と考えてもいいです。変数を使うことによって、 コンピューターは様々な情報を覚えてくれます。
-
-次は[ステップ3][step3]に進みましょう。
-
-# ステップ3：配列（はいれつ） {#ref-step3}
-
-[ステップ2][step2]に戻る。
-
-次にいくつかのことをコンピューターに覚えさせてみましょう。もちろん、いくつかのの[変数][Variable]を作れます。
-
-```example
-String sei = "ぷろぷろ";
-String mei = "太郎";
-speak("こんにちは、" + sei + mei);
-```
-
-ただし、覚えさせたいことが多すぎたら、別の方法は必要になります。そこで、[配列][Array]（はいれつ）というものが役に立ちます。
-
-```example
-// 配列を作る。
-String yotei[] = {"顔洗い", "朝ゴハン", "歯磨き", "登校"};
-speak("明日の最初の予定は" + yotei[0] + "です。");
-speak("次は" + yotei[1] + "です。");
-speak("全部で" + yotei.length + "個の予定があります。");
-```
-
-詳しく知りたい人へ：
-
-*   「`String yotei[]`」 の「`[]`」は 「ふくすうの言葉 (String) を記憶する変数を作ります、その変数の名前は
-    「`yotei`」 です」 という意味です。
-*   「`{`」 と「`}`」で覚えてほしい言葉は囲まれています。
-*   「`yotei[0]`」と「`yotei[1]`」はふくすうの覚えてるのものから思い出す命令です。「`[0]`」は1つ目と「`[1]`」は二つ目を指します。というわけで、覚えているものは０から数えます。
-*   「`yotei.length`」は配列の長さといい、覚えているものの数という意味です。
-
-次は[ステップ4][step4]に進みましょう。
-
-# ステップ4：「いつだれがどこでどうした」ゲーム {#ref-step4}
-
-[ステップ3][step3]に戻る。
-
-今回はいままでのステップで学んだことを活かして「いつだれがどこでどうした」というゲームを作ってみましょう。プログラムは長くなりましたので、タイピング代わりにヘルプの画面で
-「トップ」→「ステップ4」を押してから「読み込む」ボタンを押してプログラムを読み込みましょう。
-
-```example
-// 「いつだれがどこでどうした」ゲーム
-String itsu[] = {"昨日", "2年前", "今朝"};
-String darega[] = {"太郎が", "花子が"};
-String dokode[] = {"外で", "学校で", "とつぜん", "大きく"};
-String doushita[] = {"起きました",  "叫びました",  "転びました",  "輝きました"};
-
-size(400, 200);
-fill(0);
-textSize(25);
-
-var itsuBangou = int(random(itsu.length));
-var daregaBangou = int(random(darega.length));
-var dokodeBangou = int(random(dokode.length));
-var doushitaBangou = int(random(doushita.length));
-
-String phrase = itsu[itsuBangou] + darega[daregaBangou] + dokode[dokodeBangou] + doushita[doushitaBangou];
-text(phrase, 10, 100);
-speak(phrase);
-```
-
-文しょうを作るのための部分を変えてみましょう。
-
-詳しく知りたい人へ：
-
-*   「random(...)」は乱数といい、実行するごとに違う数字を返します。例えば、「random(5)」は0から5までの数字を返します。
-*   「int(...)」は数字の整数部分を抽出します。例えば、「int(4.5)」=
-    4。「random」は整数ではない数字を返しますが、[配列][Array]にアクセスするには整数は必要です。
-
-それでプログラミング体験のステップ終わりです。 もし、時間の余裕と興味があったら、[補足][Addendum]を見てみてください。
-または、[デモ][Demos]や[ゲーム][Games]を実行してみましょう。
-
-# 補足 {#ref-Addendum}
-
-プログラミングに興味があったらこちらの補足情報もご覧ください。
-
-*   [顔を描く][DrawFace]
-*   [繰り返し（ループ）][Loop]
-*   [イベント][Events]
-
 # 補足：顔を描く {#ref-DrawFace}
 
 左側にあるプログラムを実行したら、右側にある実行キャンバスにさまざまな 絵や形状を描けます。位置を指定のために座標を使います。左上は(0,0)です。
 座標の最初の数は左右を表して、最後の数は上下を表しています。
 
 ```prerender
-size(200, 200);
+size(200, 200, "2D");
 fill(0);
 textSize(10);
 
@@ -2632,7 +2674,7 @@ text("(0, 200)", 10, 190);
 最後の2つの数は横幅と高さを表しています。例えば、縦の長い丸を描いてみましょう。 顔に似ているでしょうか？
 
 ```prerender
-size(200, 200);
+size(200, 200, "2D");
 fill(255, 200, 180); // 肌色
 ellipse(100, 100, 150, 180);
 ```
@@ -2642,14 +2684,14 @@ ellipse(100, 100, 150, 180);
 
 ```prerender
 fill(100, 255, 100); // 緑
-size(200, 200);
+size(200, 200, "2D");
 triangle(100, 90, 90, 120, 110, 120);
 ```
 
 口と目を前と同じように`ellipse()`を使いましょう。次の見本のプログラムに進む前に 自分で目と口を描いてみましょう。
 
 ```prerender
-size(200, 200);
+size(200, 200, "2D");
 fill(255, 200, 180); // 肌色
 ellipse(100, 100, 150, 180);  // 顔
 fill(100, 255, 100); // 緑
@@ -2699,12 +2741,10 @@ function mouseClicked() {　
 }
 
 // 設定。実行の最初に実行されます。
-function setup() {
-  size(200, 200);   // キャンバスの大きさを設定する。
-  background(200);　// 灰色に塗る。
-  stroke(0);　　　　 // 筆色を黒にする。
-  rect(60, 60, 80, 80);  // 長方形を描く。
-}
+size(200, 200, "2D");   // キャンバスの大きさを設定する。
+background(200);　// 灰色に塗る。
+stroke(0);　　　　 // 筆色を黒にする。
+rect(60, 60, 80, 80);  // 長方形を描く。
 ```
 
 マウスイベントについてもっと詳しくは[マウス][Mouse]に参考ください。
@@ -2723,64 +2763,6 @@ function setup() {
 *   [mouseX], [mouseY] マウスのXとY座標
 *   [mouseButton] マウスイベントの関数の中は押されたボタンを表す
 
-# 形状ゲーム {#ref-ShapeGame}
-
-ここまでに勉強してきたことを合わせて簡単のゲームを作ってみましょう。 キャンバスに形状を３つ書いて、英語で形状の名前を話して、ユーザー
-に形を当てましょう。正しければ「ピンポン」、間違っていれば「ぶぶ」と コンピューターに話させましょう。
-
-```example
-// ShapeGame
-String shapes[] = new String[3];
-shapes[0] = "circle";
-shapes[1] = "square";
-shapes[2] = "triangle";
-var next = -1;
-
-function mouseClicked() {
-  var x = int(mouseX/100);  // どっちの形状に近いか計算します。
-  if (x != next) {  // 間違った場合
-    speak("ぶぶ");
-    speak("もう一回いいます");
-    speak(shapes[next], "en");  // 英語でも話せます
-  } else {          // 正しくあたった場合
-    speak("ピンポン");
-    next = -1;
-  }
-}
-
-// 設定します。この関数は実行の頭で一回だけ実行されます。
-function setup() {
-  size(300, 210);  // 大きさの設定
-  background(200); // 灰色で塗ります。
-  stroke(0);  // 筆の色を黒にします。
-  ellipse(60, 125, 50, 50);　// 円形を描きます。
-  rect(120, 100, 50, 50);　// 長方形を描きます。
-  triangle(240, 100, 210, 150, 270, 150); // 三角を描きます。
-}
-
-function draw() {
-  if (next == -1) {
-    speak("つぎの問題");
-    next = int(random(3));　　// 次の問題を定めます。
-    speak(shapes[next], "en");
-  }
-}
-```
-
-# setup
-
-`setup()`はスケッチを実行すると最初に1回だけ呼ばれます。`setup()`関数の中でキャンバスの大きさの設定などをしましょう。
-
-スケッチの実行はこのように説明できます：
-
-```
-setup();
-while(noLoop()は呼ばれていない) {
-  // frameRate()で定められた頻度でdraw()を呼ぶ。
-  draw();
-}
-```
-
 ## 参考
 
 *   [draw()]
@@ -2789,38 +2771,63 @@ while(noLoop()は呼ばれていない) {
 
 # draw
 
-スケッチを実行すると、`setup()`関数が1回呼ばれた後、`draw()`関数が繰り返し呼ばれます。
-`draw()`関数の中で画面を更新することでアニメーションを実現することができます。
-`draw()`関数を1秒間に何回呼ぶかは[frameRate()]で設定できます。
+スケッチを実行すると、`setup()`関数が1回呼ばれた後、`draw()`関数が繰り返し呼ばれます。 `draw()`関数の中で画面を更新することでアニメーションを実現することができます。 `draw()`関数を1秒間に何回呼ぶかは`frameRate()`で設定できます。
 
 ```prerender
-var i = 0;
+// DrawExample
+frameRate(1);  // 1秒に1回呼ぶ
+fill(0);  // 描画色を黒に設定。
+textSize(30);
+
 function draw() {
   background(200);
-  text(str(int(millis()/1000)), 10, 30);
-  i++;
-}
-
-function setup() {
-  frameRate(1);
-  fill(0);  // 描画色を黒に設定。
-  textSize(30);
+  text(frameCount, 10, 30);
 }
 ```
 
-関連項目: [frameRate()]。
+関連項目: [frameRate()], [frameCount]
 
 # frameRate
 
-`frameRate(x)`は`setup()`の中で使える関数で、`draw()`が呼ばれる頻度を設定します。
-括弧の中には`draw()`関数を1秒間に何回呼ぶかを指定します。 たとえば、`frameRate(10)`を実行すると、`draw()`の実行が終わってから
-次に`draw()`を呼ぶまで0.1秒待ちます。`frameRate(1)`では1秒待ちます。
+`frameRate(x)`は`draw()`が呼ばれる頻度を設定します。 括弧の中には`draw()`関数を1秒間に何回呼ぶかを指定します。 たとえば、`frameRate(10)`を実行すると、`draw()`の実行が終わってから 次に`draw()`を呼ぶまで0.1秒待ちます。`frameRate(1)`では1秒待ちます。
+
+```prerender
+// FrameRateExample
+frameRate(1);  // 1秒に1回呼ぶ
+fill(0);  // 描画色を黒に設定。
+textSize(30);
+
+function draw() {
+  background(200);
+  text(frameCount, 10, 30);
+}
+
+function mousePressed() {
+    frameRate(5);
+}
+
+function mouseReleased() {
+    frameRate(1);
+}
+```
 
 関連項目: [frameCount], [draw()].
 
 # frameCount
 
-`frameCount`は`draw()`は何回呼ばれたかカウントします。
+`frameCount`は`draw()`が呼ばれた回数です。
+
+```prerender
+// FrameCountExample
+frameRate(1);  // 1秒に1回呼ぶ
+fill(0);  // 描画色を黒に設定。
+textSize(30);
+
+function draw() {
+  background(200);
+  text(frameCount, 10, 30);
+}
+```
 
 関連項目: [frameRate()], [draw()].
 
@@ -2828,13 +2835,37 @@ function setup() {
 
 `width`はキャンバスの横幅です。
 
+```prerender
+// WidthAndHeightExample
+fill(0);
+textSize(15);
+text("width: " + width, 10, 50);
+text("height: " + height, 10, 80);
+```
+
+普段は約400ですが、環境によって違います。例えば、フルスクリーン(全画面)モードだと、画面の大きさによります。
+
+関連項目: [size()], [height]
+
 # height
 
 `height`はキャンバスの縦幅です。
 
+```prerender
+// WidthAndHeightExample
+fill(0);
+textSize(15);
+text("width: " + width, 10, 50);
+text("height: " + height, 10, 80);
+```
+
+普段は約400ですが、環境によって違います。例えば、フルスクリーン(全画面)モードだと、画面の大きさによります。
+
+関連項目: [size()], [width]
+
 # print
 
-`print`はメッセージをプリントします。メッセージはキャンバス内で下のところにでてきます。`println()`と違って、メッセージのの後に改行しません。
+`print`はメッセージを表示します。メッセージはキャンバス内の下にでてきます。`println()`と違って、メッセージの後で改行しません。
 
 呼び方:`print(message);`
 
@@ -2842,7 +2873,7 @@ function setup() {
 
 # println
 
-`println`はメッセージをプリントします。メッセージはキャンバス内で下のところにでてきます。`print()`と違って、メッセージのの後に改行します。
+`println()`はメッセージを表示します。メッセージはキャンバス内の下にでてきます。`print()`と違って、メッセージの後で改行します。
 
 呼び方:`println(message);`
 
@@ -2851,14 +2882,12 @@ function setup() {
 # インデックス {#ref-index}
 
 正式なProcessing.jsのマニュアルはこちら:
-<a href='http://processingjs.org/reference/' target='_blank'>http://processingjs.org/reference/</a>.
+<a href='https://www.khanacademy.org/computer-programming/new/pjs#scratchpad-tabs' target='_blank'>https://www.khanacademy.org/computer-programming/new/pjs#scratchpad-tabs</a>.
 
 ## 実行
 
-`setup()`と`draw()`はプログラムの中で定義する必要があります。
-
-*   [function setup() {...}][setup] 設定するための関数
 *   [function draw() {...}][draw] アニメーションのフレームを描くための関数
+*   [noLoop()] `draw()`の実行を停止。マウスやキーボードの関数は実行されます。
 *   [exit()] 実行を終了する
 
 ## アニメーション
@@ -2873,6 +2902,7 @@ function setup() {
 
 *   [background()] キャンバスを色で塗る
 *   [size()] キャンバスの大きさを設定する
+*   [width], [height] 横幅、縦幅
 *   [dist()] 2点間の距離を計算する
 *   [copy()] 画像の一部を別の位置にコピーする
 
@@ -2885,19 +2915,20 @@ function setup() {
 *   [arc()] 円弧
 *   [point()] 点
 
-## 筆の設定
+## 筆の設定や色
 
+*   [color()]は色を表す値を作る
 *   [fill()] 塗りつぶしの色を設定する
-*   [stroke()] ペンの色を設定する
+*   [stroke()], [noStroke()] ペンの色を設定する
 *   [strokeCap()] ペンの端の形を設定する
 *   [strokeWeight()] ペンの太さを設定する
+*   [red()], [green()], [blue()], [hue()], [saturation()], [brightness()], [colorMode()]
 
 ## 画像
 
 *   [image()] 画像を写す
 *   [imageMode()] 画像の写し方の設定
 *   [getImage()]  画像データを読み込む
-*   [createImage()] 空画像を作る
 *   [get()] 画像データをキャンバスから抽出する
 
 ## 文字
@@ -2915,6 +2946,8 @@ function setup() {
 ## [マウス][Mouse]
 
 *   [mouseClicked()] マウスのボタンがクリックされたとき
+*   [mouseDragged()] マウスを押したまま動かしたときに呼ばれます
+*   [mouseMoved()] マウスカーソルを動かしたときに呼ばれます
 *   [mousePressed()] マウスのボタンが押されたとき
 *   [mouseReleased()] マウスのボタンが離されたとき
 *   [mouseOver()] マウスがキャンバス内に入ったとき
@@ -2926,18 +2959,8 @@ function setup() {
 ## キーボード
 
 *   [keyPressed()], [keyReleased()], [keyTyped()] キーボードのイベント関数
-*   [key], [keyCode], [keyPressed] 押されたキーの変数
+*   [key], [keyCode], [keyIsPressed] 押されたキーの変数
 *   [keyCodes] キーコードの一覧
-
-## データ
-
-*   単純な型
-    *   [int], [float], [boolean], [byte], [short], [double], [char]
-*   [Array]
-    *   [append()], [concat()]
-*   [HashMap]
-    *   [entrySet()]
-*   [PImage] 画像
 
 ## 言語の基礎
 
@@ -2968,24 +2991,26 @@ function setup() {
 
 ```prerender
 // キャンバスの大きさを300×200に設定します。
-size(300, 200);
+size(300, 200, "2D");
 // キャンバスをピンクで塗りつぶします。
 background(250, 200, 200);
 ```
 
 # background
 
-キャンバスを一つの色で塗りつぶます。色を指定する方法は2つあります。 1個の数値を指定した場合は、グレースケールで明るさを指定します。
-0は黒、255は白、その中間は数値に応じた灰色を意味します。例えば
+キャンバスを一つの色で塗りつぶします。色を指定する方法は2つあります。 1個の数値を指定した場合は、グレースケールで明るさを指定します。 0は黒、255は白、その中間は数値に応じた灰色を意味します。例えば
 
 ```prerender
+// BackgroundExample
 // キャンバスを灰色に塗ります。
 background(150);
 ```
 
-3個の数値を指定した場合は、RGBモデルで任意の色を指定できます。 R・G・Bそれぞれを0から255までの数値で指定します。
+3個の数値を指定した場合は、RGBモデルで任意の色を指定できます。 R (赤)・G (緑)・B (青)それぞれを0から255までの数値で指定します。
+
 
 ```prerender
+// BackgroundExample
 // キャンバスを赤で塗ります。
 background(255, 0, 0);
 ```
@@ -2994,28 +3019,58 @@ background(255, 0, 0);
 
 スケッチの実行ループが止まっているときに`loop()`を呼ぶと、実行ループを再開します。
 
-## 参考
+```prerender
+// NoLoopExample
+fill(0); textSize(20);
 
-*   [draw()]
-*   [noLoop()]
+function draw() {
+  background(220);
+  text(frameCount, 5, 25);
+}
+
+function mousePressed() {
+  noLoop();
+}
+
+function mouseReleased() {
+  loop();
+}
+```
+
+関連項目: [draw()], [noLoop()]
 
 # noLoop
 
 スケッチの実行ループを停止します。 なお、マウスなどのイベントが発生したときは対応する関数が呼ばれるので、 スケッチの実行が完全に停止するわけではありません。
 
-## 参考
+```prerender
+// NoLoopExample
+fill(0); textSize(20);
 
-*   [draw()]
-*   [loop()]
+function draw() {
+  background(220);
+  text(frameCount, 5, 25);
+}
+
+function mousePressed() {
+  noLoop();
+}
+
+function mouseReleased() {
+  loop();
+}
+```
+
+関連項目: [draw()], [loop()].
 
 # Demos
 
 *   簡単なデモ
     *   [ImageSave]
     *   [ImageRotate]
-*   [RandomSentenceGenerator]
 *   [Drawing]
 *   [ChaseTheCircle]
+*   [DrawFace]
 
 # ImageRotate
 
@@ -3045,10 +3100,7 @@ function draw() {
 ```prerender
 // ImageSaveExample
 var img = getImage("cc0/cat2-185x200.png");
-
-function setup() {
-  imageMode(CENTER);
-}
+imageMode(CENTER);
 
 var imgSave = null;
 
@@ -3067,17 +3119,15 @@ function draw() {
 
 ```example
 // Drawing
-function setup() {
-  size(300, 300);
-  stroke(200, 0, 0);
-  strokeCap(ROUND);
-  strokeWeight(10);
-}
+size(300, 300, "2D");
+stroke(200, 0, 0);
+strokeCap(ROUND);
+strokeWeight(10);
 
 var penDown = false;
 
 function mousePressed() {
-  if (mouseButton == RIGHT) {
+  if (mouseButton === RIGHT) {
     background(200);
     return;
   }
@@ -3116,11 +3166,8 @@ var y2 = 250;
 // Larger -> faster.
 var easing = 0.1;
 
-function setup() {
-  size(500, 500);
-  frameRate(60);
-  stroke(0);
-}
+frameRate(60);
+stroke(0);
 
 function draw() {
   // Paint the background.
@@ -3153,7 +3200,6 @@ function draw() {
 *   [JumpingBall]
     *   [JumpingBall2]
 *   [TouchTheNumber]
-*   [形状ゲーム][ShapeGame]
 *   [IslandHopper]
 *   [PingPong]
 *   [RocketLanding]
@@ -3184,12 +3230,10 @@ function initVars() {
   burning = false;
 }
 
-function setup() {
-  size(200, 200);
-  frameRate(20);
-  imageMode(CENTER);
-  initVars();
-}
+size(200, 200, "2D");
+frameRate(20);
+imageMode(CENTER);
+initVars();
 
 function draw() {
   y = y + vy;
@@ -3246,11 +3290,9 @@ function mousePressed() {
 
 ```example
 // PingPong
-function setup() {
-  size(360, 360, P2D);
-  background(250);
-  frameRate(30);
-}
+size(360, 360, "2D");
+background(250);
+frameRate(30);
 
 var ballDiameter = 30;
 var paddleWidth = 10;
@@ -3313,10 +3355,8 @@ var updateBall() {
     fill(0);
     if (x < 10) {
       text("Player B won!", 100, 180);
-       speak("Player B won!", "en");
     } else {
       text("Player A won!", 100, 180);
-       speak("Player A won!", "en");
     }
     x = 180;
     y = 0;
@@ -3385,11 +3425,9 @@ var location = 0;
 var sizes = [30, 30, 20, 30, 20, 10, 30];
 var N = sizes.length;
 
-function setup() {
-  frameRate(10);
-  stroke(0);
-  fill(255);
-}
+frameRate(10);
+stroke(0);
+fill(255);
 
 var margin = 30;
 var islandR = 30;
@@ -3405,7 +3443,7 @@ var humanHeadR = 10;
 var humanY = islandH;
 
 var gameOver = false;
-String message = "GAME OVER";
+var message = "GAME OVER";
 
 function initialize() {
   location = 0;
@@ -3658,10 +3696,7 @@ function initializeVars() {
   vy = 0;
 }
 
-function setup() {
-  size(500, 500);
-  initializeVars();
-}
+initializeVars();
 
 function draw() {
   updatePosition();
@@ -3816,21 +3851,18 @@ function shuffle() {
   }
 }
 
-function setup() {
-  size(440, 440);
-  background(240);
-  textSize(50);
-  numbers = new int[N][];
-  for (var i = 0; i < N; i++) {
-    numbers[i] = new int[N];
-    for (var j = 0; j < N; j++) {
-      numbers[i][j] = i*3 + j + 1;
-    }
+background(240);
+textSize(50);
+numbers = new int[N][];
+for (var i = 0; i < N; i++) {
+  numbers[i] = new int[N];
+  for (var j = 0; j < N; j++) {
+    numbers[i][j] = i*3 + j + 1;
   }
-  shuffle();
-  rectangles();
-  printNumbers();
 }
+shuffle();
+rectangles();
+printNumbers();
 
 var current = 1;
 var started = false;
@@ -3900,11 +3932,12 @@ function mouseClicked() {
 円または楕円を描きます。
 
 ```prerender
-size(100, 50);
+// EllipseExample
 ellipse(50, 25, 90, 20);
 ```
 
 ```prerender
+// EllipsesExample
 fill(255, 0, 0); // 赤
 // 横に細長い赤い楕円を描きます。
 ellipse(50, 10, 100, 20);
@@ -3917,58 +3950,14 @@ ellipse(50, 50, 40, 40);
 
 呼び方: `ellipse(x, y, width, height)`
 
-*   x --- 中心のX座標
-*   y --- 中心のY座標
-*   width --- 楕円の幅
-*   height --- 楕円の高さ
+* `x` — 中心のX座標
+* `y` — 中心のY座標
+* `width` — 楕円の幅
+* `height` — 楕円の高さ
 
-weightとheightを等しくすれば円になります。
+`weight`と`height`を等しくすれば円を描くことができます。
 
-関連項目: [arc()], [triangle()], [rect()], [ellipse()].
-
-# speak
-
-テキストを読み上げます。
-
-```example
-// こんにちはと言います。
-speak("こんにちは");
-```
-
-他の言語のテキストを話させたいときは、テキストの後に`"en"`, `"it"`などの言語コードを指定します。
-
-```example
-speak("Ciao!", "it");
-speak("Hallo!", "en-GB");
-speak("Hello!", "en-US");
-```
-
-### 注意
-
-`speak()`は標準的なProcessing.jsの一部ではありません。このシステム以外のProcessing.jsの環境では使えません。
-
-# RandomSentenceGenerator
-
-```example
-// RandomSentenceGenerator
-String itsu[] = {"昨日", "2年前", "今朝"};
-String darega[] = {"太郎が", "花子が"};
-String dokode[] = {"外で", "学校で", "とつぜん", "大きく"};
-String doushita[] = {"起きました",  "叫びました",  "転びました",  "輝きました"};
-
-size(400, 200);
-fill(0);
-textSize(25);
-
-var itsuBangou = int(random(itsu.length));
-var daregaBangou = int(random(darega.length));
-var dokodeBangou = int(random(dokode.length));
-var doushitaBangou = int(random(doushita.length));
-
-String phrase = itsu[itsuBangou] + darega[daregaBangou] + dokode[dokodeBangou] + doushita[doushitaBangou];
-text(phrase, 10, 100);
-speak(phrase);
-```
+関連項目: [arc()], [triangle()], [rect()], [ellipse()]
 
 # Ball
 
@@ -3992,14 +3981,19 @@ Wall: 壁
 
 # fill
 
-`fill()`は筆の中の色を設定する。筆には２つの色が設定できます。中の色は形状の中に塗ります。 端の色は形状の堺麺を描く時に使います。
+`fill()`は図形の中を塗りつぶす色を設定します。`fill()` を呼んだ後に `ellipse()` や `rect()` などで楕円や四角形を描くと、その中が`fill()`で指定した色で塗りつぶされます。
 
 ```prerender
-fill(0, 255, 0);  // 緑
+// FillExample
+fill(0, 255, 0);  // 緑
 ellipse(50, 50, 50, 25);
 ```
 
-他に[stroke()]を見てみてください。
+色の指定の仕方については color() の説明を見てください。
+
+塗りつぶす色ではなく図形の外側の線の色を指定するには、stroke() の説明を見てください。
+
+関連項目: [noFill()], [stroke()], [noStroke()]
 
 # hit
 
@@ -4071,31 +4065,33 @@ text(str(x), 10, 30);
 `line()`はキャンバスに直線を描きます。
 
 ```prerender
+// LineExample
 var x1 = 10, y1 = 10, y2 = 100, x2 = 50;
 // (x1, y1)から(x2, y2)までの直線を描きます。
 line(x1, y1, x2, y2);
 ```
 
-関連項目: [triangle], [rect], [ellipse], [arc].
+関連項目: [triangle()], [rect()], [ellipse()], [arc()].
 
 # millis
 
 プログラム開始から現在までの経過時間をミリ秒単位で返します。
+注意：プログラムの編集のときは、プログラムをそのまま実行し続ける場合がありますので、
+`millis()`は0にならないで、そのまま増え続きます。
 
 例えば、このプログラムは実行を始めてから2秒後に赤い円を描きます。
 
 ```prerender
-// millis
-function setup() {
-  size(150, 100);
-  background(255);  // キャンバスを白で塗ります
-  fill(0);
-  textSize(20);
-  text("2秒待って", 10, 50);
-}
+// MillisExample
+size(150, 100, "2D");
+background(255);  // キャンバスを白で塗ります
+fill(0);
+textSize(20);
+text("2秒待って", 10, 50);
+var start = millis();
 
 function draw() {
-  if (millis() > 2000) {  // 2000ミリ秒=2秒
+  if (millis() - start > 2000) {  // 2000ミリ秒=2秒
     background(255);
     fill(255, 0, 0); // 赤
     ellipse(75, 50, 55, 55);
@@ -4106,15 +4102,13 @@ function draw() {
 
 # mouseClicked
 
-ユーザがマウスをクリックすると`mouseClicked()`関数が呼ばれます。
-マウスのクリックに反応するプログラムを作るにはこの関数を定義しなければなりません。
-カーソルの位置は`mouseX`と`mouseY`変数を使って調べることができます。
-クリックされたボタンは[mouseButton]変数を使って調べることができます。クリックされたボタンによって`mouseButton`の値は[LEFT]か[RIGHT]かになります。
+`mouseClicked()` を定義すると、ユーザがマウスをクリックしたときに呼ばれます。 マウスのクリックに反応するプログラムを作るにはこの関数を定義しなければなりません。カーソルの位置は`mouseX`と`mouseY`変数を使って調べることができます。 クリックされたボタンは`mouseButton`変数を使って調べることができます。クリックされたボタンによって`mouseButton`の値は`LEFT`か`RIGHT`かになります。
 
-```example
-function setup() {
-  background(255);
-}
+右側のキャンバスにマウスクリックしてください。
+
+```prerender
+// MouseClickedExample
+background(255);
 
 function mouseClicked() {
   fill(0);
@@ -4122,79 +4116,106 @@ function mouseClicked() {
 }
 ```
 
+関連項目: [mousePressed()], [mouseReleased()], [mouseX], [mouseY].
+
 # mouseMoved
 
-**マウスイベント**: `mouseMoved()`を定義すれば、マウスカーソルが動いたときに呼ばれる関数。
+[マウスイベント][Mouse]: `mouseMoved()`を定義すると、マウスカーソルを動かしたときに呼ばれます。
+
+
+右側のキャンバスにマウスを動かしてみてください。
+
+```prerender
+// MouseMovedExample
+
+function mouseMoved() {
+  line(pmouseX, pmouseY, mouseX, mouseY);
+}
+```
 
 関連項目: [mouseClicked()], [mouseDragged()], [mouseOver()], [mouseOut()].
 
 # mouseDragged
 
-**マウスイベント**: `mouseDragged()`を定義すれば、マウスが押されたままに動いたときに呼ばれる関数。
+[マウスイベント][Mouse]: mouseDragged()を定義すると、マウスを押したまま動かしたときに呼ばれます。
+
+右側のキャンバスにマウスをクリックして、押したまま動かしてみてください。
+
+```prerender
+// MouseDraggedExample
+
+function mouseDragged() {
+  line(pmouseX, pmouseY, mouseX, mouseY);
+}
+```
 
 関連項目: [mouseClicked()], [mouseMoved()], [mouseOver()], [mouseOut()].
 
 # mouseOver
 
-ユーザがマウスをキャンバスの外から中に動かすと`mouseOver()`関数が呼ばれます。
+`mouseOver()` を定義すると、ユーザがマウスをキャンバスの外から中に動かしたときに呼ばれます。
 
-```example
-function setup() {
-  background(0);
-  text("待っています", 20, 20);
-}
+```prerender
+// MouseOverExample
+background(220);
+fill(0); textSize(15);
+text("待っています", 5, 20);
 
 function mouseOver() {
-  background(80);
+  background(80); fill(255);
   text("スタート", 20, 20);
 }
 
 function mouseOut() {
-  background(0);
+  background(0); fill(255);
   text("終わり", 20, 20);
 }
 ```
+
+関連項目: [mouseOut()], [mouseMoved()].
 
 # mouseOut
 
-ユーザがマウスをキャンバスの中から外に動かすと`mouseOut()`関数が呼ばれます。
+`mouseOut()` を定義すると、ユーザがマウスをキャンバスの中から外に動かした時に呼ばれます。
 
-```example
-function setup() {
-  background(0);
-  text("待っています", 20, 20);
-}
+```prerender
+// MouseOutExample
+background(220);
+fill(0); textSize(15);
+text("待っています", 5, 20);
 
 function mouseOver() {
-  background(80);
+  background(80); fill(255);
   text("スタート", 20, 20);
 }
 
 function mouseOut() {
-  background(0);
+  background(0); fill(255);
   text("終わり", 20, 20);
 }
 ```
 
+関連項目: [mouseOver()], [mouseMoved()].
+
 # mousePressed
 
-ユーザがマウスのボタンを押すと`mousePressed()`関数が呼ばれます。 この関数を定義すれば、「マウスで絵を描く」のような操作が実装できます。
+`mousePressed()` を定義すると、ユーザがマウスのボタンを押したときに呼ばれます。この関数を定義すると、「マウスで絵を描く」のような操作が実装できます。
 
-```example
-function setup() {
-  background(20);
-  fill(240);
-}
 
-bool pressed = false;
+```prerender
+// MousePressedExample
+background(128);
+fill(240);
+
+var pressed = false;
 
 // キャンバスの中でマウスの左ボタンか右ボタンが押されたら、
 // それに対応して塗りつぶしとペンの色を設定する。
 function mousePressed() {
   pressed = true;
-  if (mouseButton == LEFT) {
+  if (mouseButton === LEFT) {
     fill(0); stroke(0);
-  } else if (mouseButton == RIGHT) {
+  } else if (mouseButton === RIGHT) {
     fill(255); stroke(255);
   }
 }
@@ -4210,24 +4231,25 @@ function draw() {
 }
 ```
 
+関連項目: [mouseReleased()], [mouseMoved()].
+
 # mouseReleased
 
-ユーザがマウスのボタンを離すと`mouseReleased()`関数が呼ばれます。 この関数を定義すれば、「マウスで絵を描く」のような操作が実装できます。
+`mouseReleased()` を定義すると、ユーザがマウスのボタンを離したときに呼ばれます。この関数を定義すれば、「マウスで絵を描く」のような操作が実装できます。
 
-```example
-function setup() {
-  background(20);
-  fill(240);
-}
+```prerender
+// MouseReleasedExample
+background(128);
+fill(240); noStroke();
 
-bool pressed = false;
+var pressed = false;
 
 function mousePressed() {
   pressed = true;
 }
 
 function mouseReleased() {
-  pressed = true;
+  pressed = false;
 }
 
 function draw() {
@@ -4237,17 +4259,21 @@ function draw() {
 }
 ```
 
+関連項目: [mousePressed()], [mouseMoved()].
+
 # mouseButton
 
-[マウスイベント][Mouse]の中で使い、押されたボタンを表す。 押されたボタンが左ボタンのときは[LEFT]に、右ボタンがときは[RIGHT]になる。
+[マウスイベント][Mouse]の中で使い、押されたボタンを表します。 押されたボタンが左ボタンのときは`LEFT`に、右ボタンがときは`RIGHT`になります。
 
 ```prerender
+// MouseButtonExample
 // キャンバスの中でマウスボタンが押してみましょう。
+background(220);
 function mousePressed() {
-  if (mouseButton == LEFT) {
+  if (mouseButton === LEFT) {
     fill(0);
     rect(5,5,40,90);
-  } else if (mouseButton == RIGHT) {
+  } else if (mouseButton === RIGHT) {
     fill(0);
     rect(55,5,40,90);
   } else {
@@ -4265,30 +4291,39 @@ function mouseReleased() {
 
 マウスのX座標。[draw()]からも[マウスイベント][Mouse]からも参照できます。
 
-関連項目: [mouseX], [pmouseX], [pmouseY], [mousePressed()], [mouseReleased()],
-[mouseClicked()].
-
 ```prerender
+// MouseExample
 function draw() {
   ellipse(mouseX, mouseY, 5, 5);
 }
 ```
 
+関連項目: [mouseY], [pmouseX], [pmouseY], [mousePressed()], [mouseReleased()],
+[mouseClicked()].
+
 # pmouseX
 
-前のフレームでの[mouseX]の値。
-
-関連項目: [mouseX], [mouseY], [pmouseY].
+前のフレームでの[mouseX]の値です。
 
 ```prerender
+// MouseExample
 function draw() {
   line(pmouseX, pmouseY, mouseX, mouseY);
 }
 ```
 
+関連項目: [mouseX], [mouseY], [pmouseY].
+
 # pmouseY
 
-前のフレームでの[mouseY]の値。
+前のフレームでの[mouseY]の値です。
+
+```prerender
+// MouseExample
+function draw() {
+  line(pmouseX, pmouseY, mouseX, mouseY);
+}
+```
 
 関連項目: [mouseX], [mouseY], [pmouseX].
 
@@ -4296,14 +4331,15 @@ function draw() {
 
 マウスのY座標。[draw()]からも[マウスイベント][Mouse]からも参照できます。
 
-関連項目: [mouseX], [pmouseX], [pmouseY], [mousePressed()], [mouseReleased()],
-[mouseClicked()].
-
 ```prerender
+// MouseExample
 function draw() {
   ellipse(mouseX, mouseY, 5, 5);
 }
 ```
+
+関連項目: [mouseY], [pmouseX], [pmouseY], [mousePressed()], [mouseReleased()],
+[mouseClicked()].
 
 # LEFT
 
@@ -4311,7 +4347,7 @@ function draw() {
 
 関連項目: [mouseButton], [mousePressed()], [mouseReleased()], [mouseClicked()].
 
-**キーボード**: 左の矢印キーのコード。一覧は[keyCodes]に参照。 `keyCode == LEFT`を調べる先に`key ==
+**キーボード**: 左の矢印キーのコード。一覧は[keyCodes]に参照。 `keyCode === LEFT`を調べる先に`key ==
 CODED`を確かめなければなりません。
 
 関連項目: [keyCode], [keyCodes].
@@ -4328,7 +4364,7 @@ CODED`を確かめなければなりません。
 
 関連項目: [mouseButton], [mousePressed()], [mouseReleased()], [mouseClicked()].
 
-**キーボード**: 右の矢印キーのコード。一覧は[keyCodes]に参照。 `keyCode == RIGHT`を調べる先に`key ==
+**キーボード**: 右の矢印キーのコード。一覧は[keyCodes]に参照。 `keyCode === RIGHT`を調べる先に`key ==
 CODED`を確かめなければなりません。
 
 関連項目: [keyCode], [keyCodes].
@@ -4339,14 +4375,19 @@ CODED`を確かめなければなりません。
 
 # random
 
+`random(min, max)` は `min`, `max` で与えられた範囲のなかからランダムな値(乱数)を返します。 返された値 `r` は `min <= r < max` を満たします。
+
 # rect
 
-`rect()`は長方形を描きます。長方形の位置は2つの頂点の座標で指定します。
+`rect()`は長方形を描きます。長方形の位置は2つの対角の頂点の座標で指定します。
 
 ```prerender
-fill(0);
+// RectExample
+fill(100);
 rect(20, 30, 60, 40);
 ```
+
+関連項目: [fill()], [stroke()], [line()], [triangle()], [point()]
 
 # remove
 
@@ -4358,7 +4399,15 @@ rect(20, 30, 60, 40);
 
 # sqrt
 
-`sqrt()`は数の平方根を計算します。例えば、`sqrt(4.0)`は2.0を返します。
+`sqrt()`は与えられた数の平方根を計算します。例えば、`sqrt(4.0)`は2.0を返します。
+
+```prerender
+// SqrtExample
+size(200, 100, "2D"); fill(0); textSize(30);
+var x = 36;
+text('x = ' + x, 10, 30);
+text('sqrt(x) = ' + sqrt(x), 10, 60);
+```
 
 # str
 
@@ -4366,25 +4415,38 @@ rect(20, 30, 60, 40);
 
 # stroke
 
-`stroke()`はペンの色を設定します。次の線や図形を描く命令に反映されます。
+`stroke()`はペンの色を設定します。以降の線や図形を描く命令に反映されます。
 
 ```prerender
-stroke(255, 180, 0);  // オレンジ
+// StrokeExample
 strokeWeight(5);
-line(20, 20, 80, 80);
-rect(20, 55, 60, 25);
+stroke(255, 180, 0);  // オレンジ
+line(20, 20, 80, 20);
+stroke(180, 255, 0);  // 黄緑
+line(20, 40, 80, 40);
+stroke(0, 255, 180);  // 青
+line(20, 60, 80, 60);
 ```
 
-関連項目: [strokeCap], [fill].
+関連項目: [noStroke()], [strokeCap()], [fill()].
 
 # strokeCap
 
 `strokeCap()`はペンの端の形を設定します。次の[line()]命令に反映されます。
 
 ```prerender
+size(200, 100, "2D");
+fill(0); textSize(15);
+strokeWeight(16);
 strokeCap(ROUND);
-strokeWeight(20);
-line(20, 20, 80, 80);
+line(20, 20, 80, 20);
+text("ROUND", 100, 20);
+strokeCap(SQUARE);
+line(20, 50, 80, 50);
+text("SQUARE", 100, 50);
+strokeCap(PROJECT);
+line(20, 80, 80, 80);
+text("PROJECT", 100, 80);
 ```
 
 関連項目: [stroke], [fill], [ROUND], [SQUARE], [PROJECT].
@@ -4433,35 +4495,55 @@ line(20, 20, 80, 80);
 
 # strokeWeight
 
-`strokeWeight()`はペンの太さを設定します。次の線や図形を描く命令に反映されます。
+`strokeWeight()`はペンの太さを設定します。以降の線や図形を描く命令に反映されます。
 
 ```prerender
-strokeCap(SQUARE);
-strokeWeight(5);
-line(15, 20, 85, 20);
+// StrokeWeightExample
+size(200, 100, "2D");
+strokeWeight(5); fill(0); textSize(15);
+line(15, 20, 65, 20);
+text("strokeWeight(5)", 80, 20);
 strokeWeight(10);
-line(15, 40, 85, 40);
+line(15, 40, 65, 40);
+text("strokeWeight(10)", 80, 40);
 strokeWeight(20);
-line(15, 70, 85, 70);
+line(15, 70, 65, 70);
+text("strokeWeight(20)", 80, 70);
 ```
 
-関連項目: [stroke], [strokeWeight], [SQUARE].
+関連項目: [stroke()], [strokeWeight()], [SQUARE].
 
-# noStroke
+# noFill
 
-`noStroke()`は端を書かないように設定する。
+`noFill()`は図形の内蔵を塗りつぶさないように設定します。
 
 ```prerender
-noStroke();
+// NoFillExample
+noFill(); stroke(150);
 rect(20, 20, 60, 60);
 ```
 
-# text
+関連項目: [stroke()], [noStroke()], [fill()]
 
-`text()`はキャンバスに言葉を表示します。表示する位置を座標で指定します。
+# noStroke
+
+`noStroke()`は図形の縁を書かないように設定します。
 
 ```prerender
-size(150, 100); fill(0); textSize(20);
+// NoStrokeExample
+noStroke(); fill(100);
+rect(20, 20, 60, 60);
+```
+
+関連項目: [stroke()], [fill()], [noFill()]
+
+# text
+
+`text()`はキャンバスに文字列を表示します。表示する位置を座標で指定します。
+
+```prerender
+// TextExample
+size(150, 100, "2D"); fill(0); textSize(20);
 text("こんにちは", 20, 50);
 ```
 
@@ -4472,15 +4554,13 @@ text("こんにちは", 20, 50);
 `textAlign()`は文字を移り方を設定する。
 
 ```render
-function setup() {
-  size(300, 130);
-  stroke(0);
-  fill(0);
-  textSize(15);
-  strokeWeight(5);
-  point(width/2, height/2);
-  frameRate(1);
-}
+size(300, 130, "2D");
+stroke(0);
+fill(0);
+textSize(15);
+strokeWeight(5);
+point(width/2, height/2);
+frameRate(1);
 
 function draw() {
   background(220);
@@ -4553,9 +4633,10 @@ function draw() {
 
 # textSize
 
-`textSize()`は文字の大きさを設定します。この関数を呼んでから次の[text()]の命令に反映されます。
+`textSize()`は以降の `text()` での文字の大きさを設定します。
 
 ```prerender
+// TextSizeExample
 fill(0);
 textSize(50);
 text("あ", 20, 80);
@@ -4563,18 +4644,18 @@ textSize(20);
 text("か", 70, 30);
 ```
 
-関連項目: [text], [textFont].
+関連項目: [text()], [textFont()].
 
 # triangle
 
 `triangle()`は三角形を描きます。3つの頂点を座標で指定します。
 
 ```prerender
+// TriangleExample
 triangle(50, 10, 10, 80, 90, 80);
 ```
 
-三角形の辺は現在のペンの色と太さで描きます。[stroke()]と[strokeWeigth()]を見てください。
-三角形の内部は現在の塗りつぶしの色で塗りつぶします。[fill()]を見てください。
+三角形の辺は現在のペンの色と太さで描きます。`stroke()`と`strokeWeigth()`を見てください。 三角形の内部は現在の塗りつぶしの色で塗りつぶします。`fill()`を見てください。
 
 # update
 
@@ -4582,9 +4663,10 @@ triangle(50, 10, 10, 80, 90, 80);
 
 # while
 
-指定された条件が真である間、 { ... } の間に書いた文を繰り返します。
+指定された条件が真である間、 { … } の間に書いた文を繰り返します。
 
 ```prerender
+// WhileExample
 fill(0);
 var x = 0;
 while (x < 10) {
@@ -4597,9 +4679,13 @@ while (x < 10) {
 
 # for
 
-ループといい、ある条件を満たすまでの繰り返し命令である。
+ループ文といい、ある条件を満たすまで {} の中を繰り返します。丸括弧の中はセミコロン “;” で 3 つの部分に区切られ、以下の通りに実行されます。
 
-```prerender
+* 最初の部分は、繰り返しの始まる前に1度だけ実行されます
+* 真ん中の部分は、繰り返しの条件です。この条件が満たされている間、{} の中を繰り返し実行します。
+* 最後の部分は、{} の中を実行し終わった後、毎回呼ばれます。
+
+```prernder
 fill(0);
 for (var i = 0; i < 10; i++) {
   text(str(i), 10, i*10);
@@ -4623,10 +4709,10 @@ do {
 
 # if
 
-条件付き実行する。条件が満たされたら、条件付きのブロックを実行する。 条件は満たさなければ、[else]のブロックを実行する。[else]のブロックはなければ、
-何も実行しない。
+続く丸括弧内の条件が満たされた場合、直後のブロック({} の中)を実行します。 条件を満たさなかった場合は、`else`のブロックを実行します。もし`else`のブロックがない場合は、 何も実行しません。
 
 ```prerender
+// IfExample
 fill(0);
 if (10 > 5) {
   text("10 > 5", 10, 50);
@@ -4639,7 +4725,7 @@ if (10 > 5) {
 
 # else
 
-条件付きの実行の[if]のブロックに条件が満たされないときに実行するブロック 指定する。
+条件付きの実行の`if`のブロックに条件が満たされないときに実行するブロック 指定する。
 
 ```prerender
 fill(0);
@@ -4703,24 +4789,22 @@ var y = 310;
 var dx = 0;
 var dy = -1;
 
-function setup() {  // this is run once.
-    // canvas size (Variable aren't evaluated. Integers only, please.)
-    size(360, 360);
+// canvas size (Variable aren't evaluated. Integers only, please.)
+size(360, 360, "2D");
 
-    // Display the background (labyrinth).
-    image(imgLabyrinth, 1, 1, 360, 360);
-
+// Display the background (labyrinth).
+image(imgLabyrinth, 1, 1, 360, 360);
 
 
-    // Use white fill color for drawing rectangles.
-    fill(255,255,255);
-    // Use white stroke color for drawing rectangles.
-    noStroke();
-    // Show image centered at (x,y).
-    imageMode(CENTER);
-    // Display the starting position of the walker.
-    image(imgWalker, x, y, s, s);
-}
+
+// Use white fill color for drawing rectangles.
+fill(255,255,255);
+// Use white stroke color for drawing rectangles.
+noStroke();
+// Show image centered at (x,y).
+imageMode(CENTER);
+// Display the starting position of the walker.
+image(imgWalker, x, y, s, s);
 
 function turnLeft() {
   var tmp = dx;
@@ -4733,7 +4817,7 @@ var wallAhead() {
     var rx = -dy;
     var ry = dx;
     for (var i = -s/2-1; i <= s/2+1; i++) {
-        color c = get(x+dx*(s/2+3)+rx*i, y+dy*(s/2+3)+ry*i);
+        var c = get(x+dx*(s/2+3)+rx*i, y+dy*(s/2+3)+ry*i);
         wallFound = wallFound || brightness(c) < 50;
     }
     return wallFound;
@@ -4757,14 +4841,14 @@ var wallRight() {
   var ry = dx;
   var wallFound = false;
   for (var i = -s/2-1; i <= s/2+1; i++) {
-      color c = get(x + rx*(s/2+3)+dx*i, y + ry*(s/2+3)+dy*i);
+      var c = get(x + rx*(s/2+3)+dx*i, y + ry*(s/2+3)+dy*i);
       wallFound = wallFound || brightness(c) < 50;
   }
   return wallFound;
 }
 
 var reachedGoal() {
-  color c = get(x+dx*(s/2+3), y+dy*(s/2+3));
+  var c = get(x+dx*(s/2+3), y+dy*(s/2+3));
   return red(c) < 50 && green(c) > 50;
 }
 
@@ -4793,12 +4877,10 @@ function draw() {
 var imgLabyrinth = getImage("cc0/Labyrinth3a.png");
 var imgWalker = getImage("cc0/Walker44.png");
 
-function setup() {  // this is run once.
-    // Set up canvas size.
-    size(360, 360);
-    // Display the background (labyrinth).
-    image(imgLabyrinth, 1, 1, 360, 360);
-}
+// Set up canvas size.
+size(360, 360, "2D");
+// Display the background (labyrinth).
+image(imgLabyrinth, 1, 1, 360, 360);
 
 var imgSave = null;
 function draw() {
@@ -4837,25 +4919,23 @@ var sx = 0, sy = 0;
 // The goal.
 var gx = 0, gy = 0;
 
-function setup() {  // this is run once.
-    // canvas size (Variable aren't evaluated. Integers only, please.)
-    size(360, 360);
+// canvas size (Variable aren't evaluated. Integers only, please.)
+size(360, 360, "2D");
 
-    // Display the background (labyrinth).
-    image(imgLabyrinth, 1, 1, 360, 360);
+// Display the background (labyrinth).
+image(imgLabyrinth, 1, 1, 360, 360);
 
-    // Allocate 2-dimensional array in 2 steps.
-    grid = new boolean[n][];
-    for (var i = 0; i < n; i++) {
-        grid[i] = new boolean[n];
-    }
+// Allocate 2-dimensional array in 2 steps.
+grid = new boolean[n][];
+for (var i = 0; i < n; i++) {
+    grid[i] = new boolean[n];
 }
 
 // The loop counters that live across multiple mapStep invocations.
 var i = 0, j = 0;
 
 function mapStep() {
-            color c = get(i*s+s/2, j*s+s/2);
+            var c = get(i*s+s/2, j*s+s/2);
             if (brightness(c) > 200) {
                 grid[i][j] = 999;
                 if (showMap) {
@@ -4930,7 +5010,7 @@ var gx = 0, gy = 0;
 function CreateMap() {
     for (var i = 0; i < n; i++) {
         for (var j = 0; j < n; j++) {
-            color c = get(i*s+s/2, j*s+s/2);
+            var c = get(i*s+s/2, j*s+s/2);
             if (brightness(c) > 200) {
                 grid[i][j] = 999;
             }
@@ -5007,26 +5087,24 @@ function StartSearch() {
     grid[gx][gy] = 1;
 }
 
-function setup() {  // this is run once.
-    // canvas size (Variable aren't evaluated. Integers only, please.)
-    size(360, 360);
+// canvas size (Variable aren't evaluated. Integers only, please.)
+size(360, 360, "2D");
 
-    // Display the background (labyrinth).
-    image(imgLabyrinth, 1, 1, 360, 360);
+// Display the background (labyrinth).
+image(imgLabyrinth, 1, 1, 360, 360);
 
-    // Allocate 2-dimensional array in 2 steps.
-    grid = new boolean[n][];
-    for (var i = 0; i < n; i++) {
-        grid[i] = new boolean[n];
-    }
-
-    CreateMap();
-    StartSearch();
+// Allocate 2-dimensional array in 2 steps.
+grid = new boolean[n][];
+for (var i = 0; i < n; i++) {
+    grid[i] = new boolean[n];
 }
+
+CreateMap();
+StartSearch();
 
 var next = 0;
 var step = 250;
-bool found = false;
+var found = false;
 
 // The position during backtracing.
 var bx, by;
@@ -5099,7 +5177,7 @@ var gx = 0, gy = 0;
 function CreateMap() {
     for (var i = 0; i < n; i++) {
         for (var j = 0; j < n; j++) {
-            color c = get(i*s+s/2, j*s+s/2);
+            var c = get(i*s+s/2, j*s+s/2);
             if (brightness(c) > 200) {
                 grid[i][j] = 999;
             }
@@ -5169,26 +5247,24 @@ function StartSearch() {
     grid[gx][gy] = 1;
 }
 
-function setup() {  // this is run once.
-    // canvas size (Variable aren't evaluated. Integers only, please.)
-    size(360, 360);
+// canvas size (Variable aren't evaluated. Integers only, please.)
+size(360, 360, "2D");
 
-    // Display the background (labyrinth).
-    image(imgLabyrinth, 1, 1, 360, 360);
+// Display the background (labyrinth).
+image(imgLabyrinth, 1, 1, 360, 360);
 
-    // Allocate 2-dimensional array in 2 steps.
-    grid = new boolean[n][];
-    for (var i = 0; i < n; i++) {
-        grid[i] = new boolean[n];
-    }
-
-    CreateMap();
-    StartSearch();
+// Allocate 2-dimensional array in 2 steps.
+grid = new boolean[n][];
+for (var i = 0; i < n; i++) {
+    grid[i] = new boolean[n];
 }
+
+CreateMap();
+StartSearch();
 
 var next = 0;
 var step = 250;
-bool found = false;
+var found = false;
 
 // The position during backtracing.
 var bx, by;
@@ -5292,7 +5368,7 @@ var gx = 0, gy = 0;
 function CreateMap() {
     for (var i = 0; i < n; i++) {
         for (var j = 0; j < n; j++) {
-            color c = get(i*s+s/2, j*s+s/2);
+            var c = get(i*s+s/2, j*s+s/2);
             if (brightness(c) > 200) {
                 grid[i][j] = 999;
                 if (showMap) {
@@ -5374,26 +5450,24 @@ function StartSearch() {
     grid[gx][gy] = 1;
 }
 
-function setup() {  // this is run once.
-    // canvas size (Variable aren't evaluated. Integers only, please.)
-    size(360, 360);
+// canvas size (Variable aren't evaluated. Integers only, please.)
+size(360, 360, "2D");
 
-    // Display the background (labyrinth).
-    image(imgLabyrinth, 1, 1, 360, 360);
+// Display the background (labyrinth).
+image(imgLabyrinth, 1, 1, 360, 360);
 
-    // Allocate 2-dimensional array in 2 steps.
-    grid = new boolean[n][];
-    for (var i = 0; i < n; i++) {
-        grid[i] = new boolean[n];
-    }
-
-    CreateMap();
-    StartSearch();
+// Allocate 2-dimensional array in 2 steps.
+grid = new boolean[n][];
+for (var i = 0; i < n; i++) {
+    grid[i] = new boolean[n];
 }
+
+CreateMap();
+StartSearch();
 
 var next = 0;
 var step = 10;
-bool found = false;
+var found = false;
 
 // The position during backtracing.
 var bx, by;
@@ -5507,7 +5581,7 @@ arc(50, 50, 45, 45, 0, QUARTER_PI, HALF_PI);
 `PI`は円周率である。`3.141592653589793`.
 
 ```prerender
-size(150, 150);
+size(150, 150, "2D");
 var ps = 0;
 for (var x = 1; x < 150; x += 1) {
   var s = sin(x/150*2*PI);
@@ -5557,7 +5631,7 @@ var frag = get(50, 50, 22, 22);
 image(frag, 72, 72, 28, 28);
 
 // ピクセルの色を抽出する。
-color c = get(50, 50);
+var c = get(50, 50);
 // 抽出された色で長方形を描く。
 rect(72, 0, 28, 28);
 ```
@@ -5573,7 +5647,7 @@ rect(72, 0, 28, 28);
 [HashMap]の場合、キーと値の組のセットを返す。そのセットはイテレータによって全ての組を取り出せる。
 
 ```prerender
-size(90, 200); fill(0);
+size(90, 200, "2D"); fill(0);
 HashMap hm = new HashMap();
 hm.put(1, "one");
 hm.put(12, "one two");
@@ -5651,59 +5725,71 @@ fill(0); text(namae, 20, 20);
 `loadFont`は書体データ(フォント)を読み込みする。
 
 ```prerender
+// TextFontExample
 fill(0);
-textFont(loadFont("Courier New"), 12);
+textFont(loadFont("Courier New", null), 12);
 text("Courier New", 10, 20);
-textFont(loadFont("Verdana"), 15);
+textFont(loadFont("Verdana", null), 15);
 text("Verdana", 10, 40);
-textFont(loadFont("Arial"), 15);
+textFont(loadFont("Arial", null), 15);
 text("Arial", 10, 60);
 ```
 
-関連項目: [textFont], [textSize], [text].
+関連項目: [textFont()], [textSize()], [text()].
 
 # textFont
 
-`textFont`は書体デート(フォント)を設定する。すぐは見える効果はないが、 次の[text]の呼び出しに影響を与える。
+`textFont()`は以降の `text()` で使われるフォントを設定します。
 
 ```prerender
+// TextFontExample
 fill(0);
-textFont(loadFont("Courier New"), 12);
+textFont(loadFont("Courier New", null), 12);
 text("Courier New", 10, 20);
-textFont(loadFont("Verdana"), 15);
+textFont(loadFont("Verdana", null), 15);
 text("Verdana", 10, 40);
-textFont(loadFont("Arial"), 15);
+textFont(loadFont("Arial", null), 15);
 text("Arial", 10, 60);
 ```
 
-関連項目: [text], [loadFont], [textSize].
+関連項目: [text()], [loadFont()], [textSize()].
 
 # color
 
-`color`は色を表す。
+`color`は色を表す値を作ります。R (赤)・G (緑)・B (青)それぞれを0から255までの３個の数値で指定して色を作り、その色をいろいろな API で使うことができます。
 
 ```prerender
-color red = color(255, 0, 0);
-color blue = color(0, 0, 255);
-fill(red);
-stroke(blue);
+// ColorExample
+var redColor = color(255, 0, 0);
+var blueColor = color(0, 0, 255);
+fill(redColor);
+stroke(blueColor); strokeWeight(10);
 rect(10, 10, 80, 80);
 ```
 
-関連項目: [fill()], [background()], [red()], [green()], [blue()], [hue()],
-[saturation()], [brightness()], [colorMode()].
+１つだけ数値を指定して、グレースケールで色を作ることもできます。0は黒、255は白、その中間は数値に応じた灰色を意味します。
+
+関連項目: [fill()], [background()], [red()], [green()], [blue()], [hue()], [saturation()], [brightness()], [colorMode()]
 
 # abs
 
-`abs`は数の絶対値を返す。
+`abs`は与えられた数の絶対値を返します。
+
+```prerender
+// AbsExample
+size(200, 100, "2D"); fill(0); textSize(30);
+var x = -10;
+text('x = ' + x, 10, 30);
+text('abs(x) = ' + abs(x), 10, 60);
+```
 
 # alpha
 
 `alpha`は色から透明度を抽出する。
 
 ```prerender
-color opaque = color(255, 0, 0);
-color transparent = color(255, 0, 0, 10);
+var opaque = color(255, 0, 0);
+var transparent = color(255, 0, 0, 10);
 fill(0); text(alpha(opaque), 10, 20); // 255
 text(alpha(transparent), 20, 40); // 10
 fill(opaque);
@@ -5731,30 +5817,38 @@ for (var i = 0; i < namae.length; i++) {
 
 # arc
 
-`arc`は弧を描く。
+`arc`は円弧を描きます。
 
 ```prerender
-arc(50, 50, 40, 20, PI/4, 2*PI);
+// ArcExample
+arc(50, 50, 40, 20, 90, 360);
 ```
 
-呼び方:`arc(x, y, width, height, start, stop);`
+呼び方: 
+```
+arc(x, y, width, height, start, stop);
+```
 
-*   x, y --- 楕円の中心の座標。
-*   width, height --- 楕円の横幅と縦幅。
-*   start, stop --- 弧の角度を指定する。
+* `x`, `y` --— 楕円の中心の座標
+* `width`, `height` --- 楕円の横幅と縦幅
+* `start`, `stop` --- 弧を描き始める角度と終わりの角度
 
 関連項目: [ellipse()].
 
 # point
 
-`point`は一点を描く。
+`point`は点を描きます。
 
 ```prerender
-strokeWeight(5);
+// PointExample
+strokeWeight(10);
 point(50, 50);
 ```
 
-呼び方:`point(x,y);`
+呼び方:
+```
+point(x,y);
+```
 
 *   x, y --- 点の座標。
 
@@ -5831,62 +5925,87 @@ text(binary(x, 5), 10, 40);
 
 # ceil
 
-`ceil()`は数に対してそれ以上である最も近い整数を返す。
+`ceil()` は与えられた数に対してそれより大きい最も近い整数を返します。
 
-```
+```prerender
+// CeilExample
+size(200, 100, "2D"); fill(0); textSize(30);
 var x = 9.3;
-var c = ceil(x); // 10.0
+text('x = ' + x, 10, 30);
+text('ceil(x) = ' + ceil(x), 10, 60);
 ```
+
+関連項目: [floor()], [round()]
 
 # floor
 
-`floor()`は数に対してそれ以下である最も近い整数を返す。
+`floor()`は与えられた数に対してそれより小さいある最も近い整数を返します。
 
-```
+```prerender
+// FloorExample
+size(200, 100, "2D"); fill(0); textSize(30);
 var x = 9.3;
-var c = floor(x);  // 9.0
+text('x = ' + x, 10, 30);
+text('floor(x) = ' + floor(x), 10, 60);
 ```
+
+関連項目: [ceil()], [round()]
 
 # round
 
-`round()`は数に対して最も近い整数を返す。
+`round()`は与えられた数に対して最も近い整数を返します。
 
-```
+```prerender
+// RoundExample
+size(200, 100, "2D"); fill(0); textSize(30);
 var x = 9.3;
-var c = round(x);  // 9.0
+text('x = ' + x, 10, 30);
+text('round(x) = ' + round(x), 10, 60);
 ```
+
+関連項目: [ceil()], [floor()]
 
 # sin
 
-`sin()`は角度のサイン関数を計算する。
+`sin()`は与えられた角度のサインを計算します。
+
+```prerender
+// SinExample
+size(200, 100, "2D"); fill(0); textSize(30);
+var x = 30;
+text('x = ' + x, 10, 30);
+text('sin(x) = ' + sin(x), 10, 60);
+```
+
+関連項目: [cos()], [tan()]
 
 # cos
 
-`cos()`は角度のコサイン関数を計算する。
+`cos()`は与えられた角度のコサインを計算します。
+
+```prerender
+// CosExample
+size(200, 100, "2D"); fill(0); textSize(30);
+var x = 60;
+text('x = ' + x, 10, 30);
+text('cos(x) = ' + cos(x), 10, 60);
+```
+
+関連項目: [sin()], [tan()]
 
 # tan
 
-`tan()`は角度のサインとコサインの比率を計算する。
-
-# class
-
-`class`はオブジェクト指向のクラスの定義を表す。
+`tan()`は与えられた角度のタンジェントを計算します。
 
 ```prerender
-class Doubutsu {
-  Doubutsu(String namae, nenrei) {
-    this.namae = namae;
-    this.nenrei = nenrei;
-  }
-
-  String toString() {
-    return this.namae + ", " + this.nenrei + "才";
-  }
-}
-
-Doubutsu wanwan = new Doubutsu("ワンワン", 3);
-fill(0); text(wanwan, 10, 30);
+// Tanxample
+size(200, 100, "2D"); fill(0); textSize(30);
+var x = 45;
+text('x = ' + x, 10, 30);
+text('tan(x) = ' + tan(x), 10, 60);
 ```
+
+関連項目: [sin()], [cos()]
 
 # this
 
@@ -5894,36 +6013,25 @@ fill(0); text(wanwan, 10, 30);
 
 関連項目: [class].
 
-# toString
-
-オブジェクトに対して、文字列を期待する文脈で呼ばれるメソッド。 例えば、`str()`にオブジェクトを渡されたとき。
-
-```prerender
-class Inu {
-  Inu(String namae) {
-    this.namae = namae;
-  }
-  String toString() {
-    return "犬、名前:" + this.namae;
-  }
-}
-
-size(150, 100); fill(0);
-fill(0); text(str(new Inu("ワンワン")), 10, 30);
-```
-
-# final
-
-`final`は変数の値が固定して変えられないことを表す。
-
 # dist
 
-`dist()`は２つの点に対して距離を計算する。
+
+`dist()`は２つの点の間の距離を計算します。点はそれぞれ x, y 座標で指定します。
+
+```
+dist(x1, y1, x2, y2);
+```
+
+マウスが (50, 50) の点からどれくらい離れているかを表示する例は以下のようになります。
 
 ```prerender
+// DistExample
+var x1 = 50, y1 = 50;
 function draw() {
   background(255); fill(0);
-  text(dist(50, 50, mouseX, mouseY), 50, 50);
+  var x2 = mouseX, y2 = mouseY;
+  line(x1, y1, x2, y2);
+  text(dist(x1, y1, x2, y2), 50, 50);
 }
 ```
 
@@ -6010,124 +6118,135 @@ copy(50, 50, 24, 24, 0, 0, 50, 50);
 
 # key
 
-最後に押された文字または記号を文字列として保存している変数。 矢印などの文字ではないキーの判断
+最後に押されたキーの文字または記号を文字列として保存している変数。 矢印などの文字ではないキーの判断には `keyCode` を使います。
 
-関連項目: [keyReleased()], [keyTyped()], [key], [keyCode], [keyCodes].
+```prerender
+// KeyCodeExample
+size(200, 100, "2D");
+fill(0);
+textSize(15);
 
-```example
-function setup() {
-  size(200, 200);
-  fill(0);
-  textSize(30);
-}
 function draw() {
-  text("key " + str(key), 10, 60);
+  background(220);
+  text("key " + key, 10, 60);
+  text("keyCode " + keyCode, 10, 90);
 }
 ```
+
+関連項目: [keyReleased()], [keyTyped()], [key], [keyCode], [keyCodes].
 
 # keyCode
 
-最後に押されたキーのコード。通常イベント関数で使います。 コードの一覧は[keyCodes]に参照。
-
-関連項目: [keyPressed()], [keyReleased()], [keyTyped()].
+最後に押されたキーのコード。通常イベント関数で使います。 コードの一覧は[keyCodes]を参照してください。
 
 ```example
-function setup() {
-  size(400, 200);
-  fill(0);
-  textSize(30);
-}
+// KeyCodeExample
+size(200, 100, "2D");
+fill(0);
+textSize(15);
+
 function draw() {
   background(220);
-  text("keyCode " + keyCode, 10, 60);
+  text("key " + key, 10, 60);
+  text("keyCode " + keyCode, 10, 90);
 }
 ```
+
+関連項目: [key], [keyPressed()], [keyReleased()], [keyTyped()], [keyCodes].
+
+# keyIsPressed
+
+Key が押されている場合は `true`, 離されている場合は `false` になります。
+
+```prerender
+// KeyIsPressedExample
+size(200, 100, "2D");
+
+function draw() {
+  if (keyIsPressed) {
+    background(60);
+    fill(255);
+  } else {
+    background(220);
+    fill(0);
+  }
+  text("keyIsPressed " + keyIsPressed, 10, 60);
+}
+```
+
+関連項目: [key], [keyCode], [keyPressed()], [keyReleased()], [keyTyped()], [keyCodes].
 
 # keyPressed
 
-**関数**: `keyPressed()`を定義すれば、キーが押されたたび に呼ばれる関数です。
+`keyPressed()`を定義すると、キーが押されたたびに呼ばれます。
 
-**変数**: `keyPressed`は最後に押されたキーのコードです。
+```prerender
+// KeyPressedExample
+size(200, 100, "2D");
+fill(0);
+textSize(10);
+background(220);
 
-関連項目: [keyReleased()], [keyTyped()], [key], [keyCode], [keyCodes].
-
-```example
-function setup() {
-  size(400, 200);
-  fill(0);
-  textSize(20);
-}
-function draw() {
-  background(220);
-  text("keyPressed " + keyPressed, 10, 60);
-}
-```
-
-```example
-function setup() {
-  size(400, 200);
-  fill(0);
-  textSize(10);
-  background(220);
-}
 var y = 10;
 function keyPressed() {
   text("keyPressed() key " + str(key) + " keyCode " + keyCode, 10, y);
   y += 10;
-  if (y > 200) {
+  if (y > height) {
     background(220);
     y = 10;
   }
 }
 ```
 
+関連項目: [keyReleased()], [keyTyped()], [key], [keyCode], [keyCodes], [keyIsPressed].
+
 # keyTyped
 
-`keyTyped()`を定義すれば、キーボードの文字または数字や記号のキー 押されたときに呼ばれる関数です。
+`keyTyped()`を定義すると、キーボードの文字または数字や記号のキーが押されたときに呼ばれます。
 
-関連項目: [keyPressed()], [keyReleased()], [key], [keyCode], [keyCodes].
+```prerender
+// KeyTypedExample
+size(200, 100, "2D");
+fill(0);
+textSize(10);
+background(220);
 
-```example
-function setup() {
-  size(400, 200);
-  fill(0);
-  textSize(10);
-  background(220);
-}
 var y = 10;
 function keyTyped() {
   text("keyTyped() key " + str(key) + " keyCode " + keyCode, 10, y);
   y += 10;
-  if (y > 200) {
+  if (y > height) {
     background(220);
     y = 10;
   }
 }
 ```
 
+関連項目: [keyPressed()], [keyReleased()], [key], [keyCode], [keyCodes].
+
 # keyReleased
 
-`keyReleased()`を定義すれば、キーが話されたたびに 呼ばれる関数です。
+`keyReleased()`を定義すると、キーが離されるたびに呼ばれます。
 
-関連項目: [keyPressed()], [keyTyped()], [key], [keyCode], [keyCodes].
+```prerender
+// KeyReleasedExample
+size(200, 100, "2D");
+fill(0);
+textSize(10);
+background(220);
 
-```example
-function setup() {
-  size(400, 200);
-  fill(0);
-  textSize(10);
-  background(220);
-}
 var y = 10;
 function keyReleased() {
   text("keyReleased() key " + str(key) + " keyCode " + keyCode, 10, y);
   y += 10;
-  if (y > 200) {
+  if (y > height) {
     background(220);
     y = 10;
   }
 }
 ```
+
+関連項目: [keyPressed()], [keyTyped()], [key], [keyCode], [keyCodes].
 
 # keyCodes
 
@@ -6141,7 +6260,7 @@ function keyReleased() {
 ```example
 // Keycodes
 function setup() {
-  size(400, 200);
+  size(400, 200, "2D");
   textSize(30);
   textFont(loadFont("fixed"));
   fill(0);
@@ -6262,7 +6381,7 @@ var walker = getImage("cc0/Walker44.png");
 image(walker, 10, 10, 80, 80);
 ```
 
-関連項目: [image()], [createImage()].
+関連項目: [image()].
 
 # PImage
 
@@ -6282,7 +6401,7 @@ function mouseClicked() {
 }
 
 function draw() {
-  if (sound.audio.duration !== 0 && !sound.audio.paused) {
+  if (!sound.audio.paused) {
     background(50);
   } else {
     background(220);
@@ -6299,20 +6418,6 @@ function draw() {
 音のデータをロードする。 [PAudio]に参照
 
 **注意**：標準のProcessing.jsに存在しない。
-
-# pixels
-
-**画像データ**: [PImage]のフィルドとして画像データを保存します。
-
-```prerender
-var img = createImage(60, 60, RGB);
-for (var i = 0; i < img.pixels.length; i++) {
-  var x = int(i/60);
-  var y = int(i % 60);
-  img.pixels[i] = color(dist(x, y, 0, 0)/sqrt(2*60*60)*255);
-}
-image(img, 20, 20);
-```
 
 # imageMode
 
@@ -6345,27 +6450,24 @@ image(img, 50, 50, 85, 100);
 
 # image
 
-`image()`は画像データをキャンバスにスタンプのように写します。
+`image()`は画像データをキャンバスにスタンプのように表示します。
 
-呼び方:`image(img, x, y, width, height);`
+呼び方:
+```
+image(img, x, y, width, height);
+```
 
-*   x, y ---
-    画像を写す座標。`imageMode`は`CENTER`の設定の場合、画像の中心の座標。`imageMode`は`CORNER`または`CORNERS`の設定の場合、画像の左上の角の座標。
-*   width, height ---
-    画像の縦幅や横幅。`imageMode`は`CORNERS`の場合は`width`と`height`ではなく、右下の角の座標として使われます。
-
-関連項目: [getImage()], [createImage()], [imageMode()].
-
-# createImage
-
-`createImage()`は新しい空画像を作ります。
+* x, y — 画像を表示する座標。
+  * imageModeでCENTERを指定した場合、画像の中心の座標。
+  * imageModeでCORNERまたはCORNERSを指定した場合、画像の左上の角の座標。
+* width, height — 画像の横幅と高さ。
+  * imageModeでCORNERSを指定の場合は横幅と高さではなく、右下の角の座標として扱われます。
 
 ```prerender
-var img = createImage(60, 60, RGB);
-for (var i = 0; i < img.pixels.length; i++) {
-  var x = int(i/60);
-  var y = int(i % 60);
-  img.pixels[i] = color(dist(x, y, 0, 0)/sqrt(2*60*60)*255);
-}
-image(img, 20, 20);
+// ImageExample
+imageMode(CENTER);
+image(getImage("cc0/banana-200x113"), 50, 50, 100, 67);
 ```
+
+関連項目: [getImage()], [imageMode()].
+
