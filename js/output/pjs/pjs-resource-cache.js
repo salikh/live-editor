@@ -68,7 +68,7 @@ PJSResourceCache.prototype.loadSound = function(filename) {
         var parts = filename.split("/");
 	var basename = parts[1];
         if (basename.endsWith(".mp3")) {
-	  basename = filename.replace(".mp3", "")
+	  basename = basename.replace(".mp3", "")
 	}
 
         var group = _.findWhere(OutputSounds[0].groups, { groupName: parts[0] });
@@ -81,6 +81,7 @@ PJSResourceCache.prototype.loadSound = function(filename) {
 
         audio.preload = "auto";
         audio.oncanplaythrough = () => {
+	    window.console.log("preloaded sound ", filename);
             this.cache[filename] = {
                 audio: audio,
                 __id: function () {
@@ -94,6 +95,7 @@ PJSResourceCache.prototype.loadSound = function(filename) {
         };
 
         audio.src = this.output.soundsDir + filename;
+	window.console.log("preloaded sound ", filename, "src:", audio.src);
     });
 };
 
@@ -128,7 +130,10 @@ PJSResourceCache.prototype.getImage = function(filename) {
 };
 
 PJSResourceCache.prototype.getSound = function(filename) {
-    var fullname = filename.endsWith(".ogg") ? filename : filename + ".mp3";
+    var fullname = filename + ".mp3";
+    if (filename.endsWith(".ogg") || filename.endsWith(".mp3")) {
+      fullname = filename;
+    }
     var sound = this.cache[fullname];
 
     if (!sound) {
